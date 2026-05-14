@@ -1,0 +1,17 @@
+# Python dependencies for face extraction scripts
+
+# For process_testimonial_images.py (Haar + Pillow only; no face_recognition):
+#   pip install opencv-python Pillow numpy
+
+# Option 1: Using face_recognition (better accuracy, may require dlib)
+face-recognition>=1.3.0
+opencv-python>=4.8.0
+Pillow>=10.0.0
+numpy>=1.24.0
+
+# Option 2: Using MediaPipe (easier installation, cross-platform)
+# Uncomment if using extract_faces_mediapipe.py instead
+# mediapipe>=0.10.0
+# opencv-python>=4.8.0
+# Pillow>=10.0.0
+# numpy>=1.24.0

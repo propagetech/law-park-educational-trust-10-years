@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700;800;900&family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  /* Custom Colors — Navy primary, Gold accent (matches magazine design) */
+  --color-primary-50:  #eeeef3;
+  --color-primary-100: #d0d0de;
+  --color-primary-200: #a9a9c1;
+  --color-primary-300: #7b7b9d;
+  --color-primary-400: #585880;
+  --color-primary-500: #3d3d62;
+  --color-primary-600: #2d2d44;
+  --color-primary-700: #1c1c2e;
+  --color-primary-800: #13131f;
+  --color-primary-900: #0a0a12;
+
+  --color-gold-50:  #fdf6ea;
+  --color-gold-100: #f8e8c8;
+  --color-gold-200: #f0ce8e;
+  --color-gold-300: #e8b460;
+  --color-gold-400: #e0b06a;
+  --color-gold-500: #c9903e;
+  --color-gold-600: #b07830;
+  --color-gold-700: #8c5e22;
+  --color-gold-800: #6a4518;
+  --color-gold-900: #4a2e0e;
+  
+  --color-title: rgb(28 28 46);
+  --color-secondary-50: #fff7ed;
+  --color-secondary-100: #ffedd5;
+  --color-secondary-200: #fed7aa;
+  --color-secondary-300: #fdba74;
+  --color-secondary-400: #fb923c;
+  --color-secondary-500: #f97316;
+  --color-secondary-600: #ea580c;
+  --color-secondary-700: #c2410c;
+  --color-secondary-800: #9a3412;
+  --color-secondary-900: #7c2d12;
+  
+  /* Custom Fonts */
+  --font-family-sans: 'Quicksand', sans-serif;
+  --font-family-serif: 'Playfair Display', serif;
+  --font-family-display: 'Playfair Display', serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    background-color: white;
+    font-family: 'Quicksand', sans-serif;
+    color: rgb(17 24 39 / var(--tw-text-opacity, 1));
+    --tw-text-opacity: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: rgb(28 28 46 / var(--tw-text-opacity, 1));
+    --tw-text-opacity: 1;
+  }
+
+  *:focus-visible {
+    outline: 2px solid #c9903e;
+    outline-offset: 2px;
+  }
+  
+  /* Skip link for accessibility */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+  }
+  
+  .sr-only:focus {
+    position: absolute;
+    width: auto;
+    height: auto;
+    padding: 0.5rem 1rem;
+    margin: 0;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+}
+
+@layer components {
+  .section-padding {
+    @apply py-16 md:py-24;
+  }
+  
+  .container-custom {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* A4 letter page: print on letterhead / Save as PDF */
+.a4-letter-page {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+}
+
+@media print {
+  /* Hide site chrome when printing so only letter content appears */
+  header,
+  footer,
+  a[aria-label="Contact us on WhatsApp"] {
+    display: none !important;
+  }
+
+  /* A4 letter: one page, no extra margins from layout */
+  .a4-letter-page {
+    box-shadow: none;
+    max-width: 100%;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .sudha-invite-letter {
+    max-width: 100%;
+  }
+
+  .a4-letter-page {
+    page-break-inside: avoid;
+  }
+}

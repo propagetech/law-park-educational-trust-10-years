@@ -1,0 +1,3377 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="light" />
+  <meta name="theme-color" content="#faf8f3" />
+  <title>Law Park Educational Trust – 10-Year Anniversary Magazine (Template 6 · 22 pages, no filler)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@24,400,1,0" rel="stylesheet" />
+  <style>
+    /* ============================================================
+    Print-ready A4 magazine – Template 6
+    Editorial · Navy + Gold + Cream · Jony Ive / Vogue-inspired
+
+    PRINT SPECS (print agency — confirm before export):
+    - Final size: A4 portrait (210 × 297 mm), no bleed
+    - Binding: saddle stitch / centre staple (“middle pin”)
+    - Page count: 22 PDF pages here → 11 sheets if 2-sided; confirm “sheets” vs “pages” with printer
+    - Colour: CMYK PDF at handoff (convert from sRGB in Acrobat / InDesign / printer ICC)
+    - Margins: 10 mm from trim edge; 12 mm inside (binding)
+
+    VERTICAL BUDGET (297 mm total per page):
+    - Running head: top 6 mm, ~4 mm height (≈10 mm zone)
+    - Page content: 10 mm top padding + body + 10 mm bottom padding
+    - Running foot: bottom 5 mm, ~4 mm height (≈9 mm zone)
+    - Content safe height ≈ 277 mm (keep main content within to avoid overlap)
+    ============================================================ */
+    :root {
+      color-scheme: light;
+      --navy: #1c1c2e;
+      --navy-mid: #2d2d44;
+      --navy-light: #3d3d5c;
+      --gold: #c9903e;
+      --gold-light: #e0b06a;
+      --gold-pale: #fdf6ea;
+      --gold-soft: #f5e8cc;
+      --cream: #faf8f3;
+      --blush: #f5ede8;
+      --ink: #111118;
+      --ink-mid: #2e2e3a;
+      --ink-muted: #6b6b7a;
+      --ink-faint: #a0a0b0;
+      --rule: #dddde0;
+      --rule-warm: #e8e0d0;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    @page {
+      size: 210mm 297mm;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 13.5px;
+      line-height: 1.72;
+      color: var(--ink-mid);
+      background: var(--white);
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .magazine {
+      width: 210mm;
+      margin: 0 auto;
+      background: var(--white);
+    }
+
+    /* ── Every interior page ── (fixed 297 mm so header + content + footer fit A4) */
+    .page {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      position: relative;
+      overflow: hidden;
+      background: var(--cream);
+      padding: 0;
+      page-break-after: always;
+    }
+
+    .page:last-child {
+      page-break-after: auto;
+    }
+
+    .page-inner {
+      padding: 10mm 12mm;
+      /* 10 mm from trim; 12 mm inside for binding */
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Running header ── */
+    .running-head {
+      position: absolute;
+      top: 6mm;
+      left: 12mm;
+      right: 12mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      font-size: 8.5px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--ink-faint);
+      border-bottom: 0.5px solid var(--rule-warm);
+      padding-bottom: 3px;
+    }
+
+    .running-head .rh-dot {
+      width: 4px;
+      height: 4px;
+      background: var(--gold);
+      border-radius: 50%;
+      display: inline-block;
+      margin: 0 6px;
+    }
+
+    /* ── Running footer ── */
+    .running-foot {
+      position: absolute;
+      bottom: 5mm;
+      left: 12mm;
+      right: 12mm;
+      display: flex;
+      justify-content: space-between;
+      font-family: 'Inter', sans-serif;
+      gap: 2mm;
+      font-size: 8.5px;
+      color: var(--ink-faint);
+      border-top: 0.5px solid var(--rule-warm);
+      padding-top: 3px;
+    }
+
+    /* ── Section image banner ── */
+    .section-banner {
+      width: calc(100% + 24mm);
+      margin-left: -12mm;
+      margin-top: -2mm;
+      margin-bottom: 0;
+      height: 52mm;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .section-banner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 30%;
+      display: block;
+    }
+
+    .section-banner::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(28, 28, 46, .25) 0%, rgba(28, 28, 46, .55) 100%);
+    }
+
+    /* ── Section header strip (dark) ── */
+    .section-header {
+      background: var(--navy);
+      width: calc(100% + 24mm);
+      margin-left: -12mm;
+      padding: 5mm 12mm 4.5mm;
+      margin-bottom: 6mm;
+    }
+
+    .section-header .kicker {
+      color: var(--gold-light);
+      margin-bottom: 2px;
+    }
+
+    .section-header h2 {
+      color: var(--white);
+      font-size: 26px;
+    }
+
+    /* ── Typography ── */
+    h1,
+    h2,
+    h3,
+    h4,
+    h5 {
+      font-family: 'Playfair Display', Georgia, serif;
+      page-break-after: avoid;
+      line-height: 1.2;
+    }
+
+    h1 {
+      font-size: 36px;
+      color: var(--navy);
+    }
+
+    h2 {
+      font-size: 24px;
+      color: var(--navy);
+      margin-bottom: 0.35em;
+    }
+
+    h3 {
+      font-size: 17px;
+      color: var(--navy);
+      margin-bottom: 0.3em;
+    }
+
+    h4 {
+      font-size: 13.5px;
+      color: var(--navy-mid);
+      margin-bottom: 0.2em;
+      font-weight: 700;
+    }
+
+    h5 {
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 0.15em;
+    }
+
+    p {
+      font-size: 13.5px;
+      margin-bottom: 0.85em;
+      color: var(--ink-mid);
+      line-height: 1.72;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      padding-left: 1.4em;
+      margin-bottom: 0.8em;
+    }
+
+    li {
+      font-size: 13.5px;
+      margin-bottom: 0.38em;
+      color: var(--ink-mid);
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    strong {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* ── Kicker (section label) ── */
+    .kicker {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.4em;
+      display: block;
+    }
+
+    /* ── Rules ── */
+    .rule {
+      border: none;
+      border-top: 1px solid var(--rule-warm);
+      margin: 1em 0;
+    }
+
+    .rule-gold {
+      border: none;
+      border-top: 2px solid var(--gold-light);
+      margin: 1em 0;
+    }
+
+    .rule-bold {
+      border: none;
+      border-top: 3px solid var(--navy);
+      margin: 0.8em 0;
+    }
+
+    /* ── Gold accent line (decorative) ── */
+    .gold-line {
+      width: 36px;
+      height: 3px;
+      background: var(--gold);
+      margin: 0.6em 0 1em;
+      display: block;
+    }
+
+    /* ── PULL QUOTE – Vogue-style ── */
+    .pull {
+      margin: 1.6em 0;
+      padding: 1em 2em;
+      background: var(--navy);
+      text-align: center;
+      break-inside: avoid;
+    }
+
+    .pull q {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 18px;
+      font-style: italic;
+      color: var(--gold-light);
+      line-height: 1.5;
+      quotes: "\201C" "\201D";
+    }
+
+    .pull q::before {
+      content: open-quote;
+    }
+
+    .pull q::after {
+      content: close-quote;
+    }
+
+    /* ── Inline pull (side-float) ── */
+    .aside-quote {
+      float: right;
+      width: 42%;
+      margin: 0 0 0.8em 1.2em;
+      padding: 0.8em 0 0.8em 1em;
+      border-left: 4px solid var(--gold);
+      break-inside: avoid;
+      background: var(--gold-pale);
+    }
+
+    .aside-quote p {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 13.5px;
+      font-style: italic;
+      color: var(--navy-mid);
+      line-height: 1.5;
+      margin: 0;
+    }
+
+    /* ── Callouts ── */
+    .callout {
+      padding: 0.75em 1.1em;
+      margin: 0.9em 0;
+      break-inside: avoid;
+    }
+
+    .callout-gold {
+      background: var(--gold-soft);
+      border-left: 4px solid var(--gold);
+    }
+
+    .callout-navy {
+      background: var(--navy);
+      border-left: 4px solid var(--gold);
+    }
+
+    .callout-navy .callout-label {
+      color: var(--gold-light);
+    }
+
+    .callout-navy p {
+      color: rgba(255, 255, 255, .9);
+      font-size: 13px;
+      margin: 0;
+    }
+
+    .callout .callout-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.25em;
+      display: block;
+    }
+
+    .callout p {
+      font-size: 13px;
+      color: var(--ink-mid);
+      margin: 0;
+    }
+
+    /* ── Two-column grid ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.1em;
+    }
+
+    .col-item {
+      break-inside: avoid;
+    }
+
+    /* ── Activity card ── */
+    .act-card {
+      border-top: 3px solid var(--gold);
+      padding-top: 0.6em;
+      break-inside: avoid;
+      background: var(--white);
+      padding: 0.7em 0.9em;
+      border-radius: 0;
+    }
+
+    .act-card-icon {
+      font-size: 20px;
+      margin-right: 0.3em;
+      vertical-align: middle;
+    }
+
+    /* ── Material Symbols Rounded ── */
+    .ms {
+      font-family: 'Material Symbols Rounded', sans-serif;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      display: inline-block;
+      vertical-align: middle;
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+    }
+
+    .ms-card {
+      font-size: 18px;
+      color: var(--gold);
+      margin-right: 0.35em;
+      flex-shrink: 0;
+    }
+
+    .ms-way {
+      font-size: 20px;
+      color: var(--gold-light);
+    }
+
+    .act-card h4 {
+      color: var(--navy);
+      font-size: 13px;
+      margin-bottom: 0.25em;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      font-family: 'Inter', sans-serif;
+      font-weight: 600;
+    }
+
+    .act-card p {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      margin: 0;
+      line-height: 1.6;
+    }
+
+    /* ── STATS – editorial oversized numbers ── */
+    .stats-banner {
+      background: var(--navy);
+      width: calc(100% + 24mm);
+      margin-left: -12mm;
+      padding: 7mm 12mm;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      break-inside: avoid;
+      margin-top: 1em;
+    }
+
+    .stat-cell {
+      text-align: center;
+      padding: 0.5em 0.4em;
+      border-right: 1px solid rgba(255, 255, 255, .12);
+    }
+
+    .stat-cell:last-child {
+      border-right: none;
+    }
+
+    .stat-cell .num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 32px;
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+      display: block;
+    }
+
+    .stat-cell .lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 500;
+      color: rgba(255, 255, 255, .65);
+      margin-top: 0.3em;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      display: block;
+    }
+
+    /* ── Timeline ── */
+    .tl-entry {
+      display: flex;
+      gap: 0;
+      margin-bottom: 0;
+      break-inside: avoid;
+    }
+
+    .tl-year-col {
+      flex-shrink: 0;
+      width: 18mm;
+      padding-top: 2px;
+    }
+
+    .tl-year-badge {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      color: var(--white);
+      background: var(--navy);
+      padding: 0.25em 0.5em;
+      display: inline-block;
+      letter-spacing: 0.04em;
+    }
+
+    .tl-connector {
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 20px;
+      margin-right: 10px;
+    }
+
+    .tl-dot {
+      width: 10px;
+      height: 10px;
+      background: var(--gold);
+      border-radius: 50%;
+      flex-shrink: 0;
+      margin-top: 4px;
+    }
+
+    .tl-spine {
+      width: 1.5px;
+      flex: 1;
+      background: var(--rule-warm);
+      margin-top: 3px;
+    }
+
+    .tl-body {
+      display: flex;
+      flex-direction: column;
+      gap: 0.2em;
+      flex: 1;
+      padding-bottom: 0.6em;
+    }
+
+    .tl-body h4 {
+      color: var(--navy);
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 700;
+      margin-bottom: 0.2em;
+    }
+
+    .tl-body p {
+      font-size: 12.5px;
+      margin-bottom: 0.2em;
+    }
+
+    .tl-body .loc {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: var(--gold);
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+
+    .tl-body .loc::before {
+      content: '\e0c8';
+      font-family: 'Material Symbols Rounded';
+      font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+      font-size: 13px;
+      color: var(--gold);
+      font-weight: normal;
+      letter-spacing: 0;
+      line-height: 1;
+    }
+
+    /* ── Image styles ── */
+    .mag-img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      break-inside: avoid;
+    }
+
+    .img-wrap {
+      margin: 0.7em 0;
+      break-inside: avoid;
+      overflow: hidden;
+    }
+
+    .img-wrap img {
+      width: 100%;
+      display: block;
+      object-fit: cover;
+      height: 294px !important;
+    }
+
+    .img-wrap .cap {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 500;
+      color: var(--ink-faint);
+      margin-top: 0.3em;
+      letter-spacing: 0.02em;
+    }
+
+    .img-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.6em;
+      margin: 0.8em 0;
+      break-inside: avoid;
+    }
+
+    .img-grid .img-wrap {
+      margin: 0;
+    }
+
+    /* ── Smiles gallery (masonry: full width, computed to fit one page) ── */
+    .gallery-smiles {
+      display: flex;
+      flex-direction: row;
+      gap: 2mm;
+      margin: 6mm 0 0;
+      width: 100%;
+      max-height: 244mm;
+      break-inside: avoid;
+    }
+
+    .gallery-smiles__col {
+      display: flex;
+      flex-direction: column;
+      gap: 2mm;
+      flex: 0 0 calc((100% - 6mm) / 4);
+      min-width: 0;
+    }
+
+    .gallery-smiles__item {
+      break-inside: avoid;
+      page-break-inside: avoid;
+      overflow: hidden;
+      line-height: 0;
+    }
+
+    .gallery-smiles__item img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    /* ── Testimonial ── */
+    .testi {
+      break-inside: avoid;
+      margin-bottom: .5em;
+      background: var(--white);
+      padding: 0.8em 1em;
+      border-bottom: 2px solid var(--gold-pale);
+      position: relative;
+    }
+
+    .testi::before {
+      content: '\201C';
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 48px;
+      color: var(--gold-light);
+      opacity: 0.6;
+      position: absolute;
+      top: 0.05em;
+      left: 0.3em;
+      line-height: 1;
+    }
+
+    .testi blockquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 13px;
+      font-style: italic;
+      color: var(--ink-mid);
+      padding-left: 2em;
+      padding-right: 0.5em;
+      border: none;
+      background: none;
+      margin: 0 0 0.4em;
+      line-height: 1.65;
+    }
+
+    .testi cite {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      font-style: normal;
+      font-weight: 600;
+      color: var(--navy-mid);
+      padding-left: 2em;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+    }
+
+    .testi cite::before {
+      content: '';
+      display: inline-block;
+      width: 20px;
+      height: 2px;
+      background: var(--gold);
+      flex-shrink: 0;
+      border-radius: 1px;
+    }
+
+    /* Testimonial with partner mark — editorial lockup */
+    .testi__footer img {}
+
+    .testi--brand .testi__footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.85em;
+      padding-left: 2em;
+      margin-top: 0.15em;
+      flex-wrap: wrap;
+    }
+
+    .testi--brand cite {
+      padding-left: 0;
+      flex: 1;
+      min-width: 12em;
+    }
+
+    .testi__brand-mark {
+      flex-shrink: 0;
+      padding: 0.4em 0.65em;
+      border: 1px solid var(--gold-pale);
+      background: var(--cream);
+      line-height: 0;
+
+    }
+
+    .testi__brand-mark img {
+      display: block;
+      height: 28px;
+      width: auto;
+      max-width: 132px;
+      object-fit: cover;
+      position: absolute;
+      bottom: 0;
+      right: 0;
+    }
+
+    .testi__brand-mark--portrait {
+      padding: 2px;
+    }
+
+    .testi__brand-mark--portrait img {
+      height: 46px;
+      width: auto !important;
+      max-width: none;
+      object-fit: cover;
+      object-position: center 22%;
+    }
+
+    /* ── Story box ── */
+    .story {
+      break-inside: avoid;
+      margin-bottom: 1.1em;
+      padding-bottom: 0.9em;
+      border-bottom: 1px solid var(--rule-warm);
+    }
+
+    .story:last-of-type {
+      border-bottom: none;
+    }
+
+    /* ── Stories of the Children (anon): two-column, more space ── */
+    .stories-anon-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25em 1.8em;
+      margin-top: 1.2em;
+    }
+
+    .stories-anon-wrap .story-anon {
+      break-inside: avoid;
+      padding: 0.85em 0 0.85em 1em;
+      border-left: 3px solid var(--gold-soft);
+      font-size: 10.5px;
+      line-height: 1.52;
+      color: var(--ink-mid);
+      background: linear-gradient(to right, var(--gold-pale) 0%, transparent 0.4em);
+    }
+
+    .stories-anon-wrap .story-anon p {
+      margin-bottom: 0;
+      font-size: inherit;
+      line-height: inherit;
+    }
+
+    .stories-anon-wrap .story-anon strong {
+      color: var(--navy);
+    }
+
+    .story-deck {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 0.3em;
+    }
+
+    .story h3 {
+      color: var(--navy);
+      font-size: 16px;
+      margin-bottom: 0.35em;
+    }
+
+    /* ── Trustee card ── */
+    .trustee {
+      break-inside: avoid;
+      margin-bottom: 1em;
+      padding: 0.9em 1em;
+      background: var(--white);
+      border-top: 3px solid var(--gold);
+    }
+
+    .trustee h4 {
+      color: var(--navy);
+      font-size: 14px;
+      font-family: 'Playfair Display', Georgia, serif;
+      margin-bottom: 0.15em;
+    }
+
+    .role-tag {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 0.35em;
+      display: block;
+    }
+
+    .trustee p {
+      font-size: 12.5px;
+      color: var(--ink-muted);
+      margin-top: 0.3em;
+    }
+
+    /* ── Team chips ── */
+    .chip-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.38em;
+    }
+
+    .chip {
+      font-family: 'Inter', sans-serif;
+      font-size: 10.5px;
+      font-weight: 500;
+      padding: 0.22em 0.75em;
+      border-radius: 2px;
+      display: inline-flex;
+      align-items: center;
+      background: var(--white);
+      border: 1px solid var(--rule);
+      color: var(--navy-mid);
+    }
+
+    /* ── Award layout (side-by-side) ── */
+    .award-layout {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2em;
+      margin: 0.8em 0;
+      break-inside: avoid;
+      align-items: center;
+    }
+
+    .award-layout .img-wrap {
+      margin: 0;
+      border: 3px solid var(--gold);
+      padding: 3px;
+      align-self: stretch;
+    }
+
+    .award-layout .img-wrap img {
+      width: 100%;
+      height: 454px !important;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* ── Award panel ── */
+    .award-panel {
+      background: var(--navy);
+      color: var(--white);
+      padding: 1.3em 1.6em;
+      margin: 0;
+      break-inside: avoid;
+    }
+
+    .award-panel h3 {
+      color: var(--gold-light);
+      font-size: 16px;
+      margin-bottom: 0.5em;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .award-panel .award-row {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 0.35em;
+      margin-top: 0.4em;
+    }
+
+    .award-panel .award-row div {
+      font-size: 11px;
+      font-family: 'Inter', sans-serif;
+      color: rgba(255, 255, 255, .85);
+      line-height: 1.45;
+    }
+
+    .award-panel .award-row span {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    .award-panel p {
+      color: rgba(255, 255, 255, .85);
+      font-size: 11.5px;
+      margin-top: 0.6em;
+      line-height: 1.55;
+    }
+
+    /* ── Process steps ── */
+    .step-row {
+      display: flex;
+      gap: 0.9em;
+      align-items: flex-start;
+      margin-bottom: 0.75em;
+      break-inside: avoid;
+    }
+
+    .step-circle {
+      flex-shrink: 0;
+      width: 28px;
+      height: 28px;
+      background: var(--gold);
+      color: var(--white);
+      border-radius: 50%;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-weight: 700;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .step-text h4 {
+      color: var(--navy);
+      margin-bottom: 0.12em;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .step-text p {
+      font-size: 12.5px;
+      margin: 0;
+    }
+
+    /* ── Ways to help ── */
+    .way {
+      display: flex;
+      gap: 0.9em;
+      align-items: flex-start;
+      padding: 0.75em 0;
+      border-bottom: 1px solid var(--rule-warm);
+      break-inside: avoid;
+    }
+
+    .way:last-of-type {
+      border-bottom: none;
+    }
+
+    .way-icon {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      background: var(--navy);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      margin-top: 2px;
+    }
+
+    .way-icon span {
+      color: var(--gold-light);
+      font-size: 18px;
+    }
+
+    .way-body h4 {
+      color: var(--navy);
+      margin-bottom: 0.1em;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .way-body p {
+      font-size: 13px;
+      margin: 0;
+    }
+
+    /* ── Contact grid ── */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1em;
+      margin-top: 1em;
+      font-family: 'Inter', sans-serif;
+      font-size: 12px;
+      color: var(--ink-mid);
+      background: var(--white);
+      padding: 1em 1.2em;
+      border-top: 3px solid var(--navy);
+    }
+
+    .contact-grid strong {
+      color: var(--navy);
+      display: block;
+      margin-bottom: 0.2em;
+      font-size: 10.5px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── Info URL block ── */
+    .info-block {
+      background: var(--gold-pale);
+      border: 1.5px solid var(--gold-light);
+      padding: 0.9em 1.3em;
+      text-align: center;
+      break-inside: avoid;
+      margin: 0.9em 0;
+    }
+
+    .info-block h4 {
+      color: var(--navy);
+      font-size: 14px;
+      margin-bottom: 0.3em;
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    .info-block .url {
+      font-family: 'Inter', sans-serif;
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.01em;
+    }
+
+    .info-block p {
+      font-size: 11.5px;
+      color: var(--ink-muted);
+      margin-top: 0.25em;
+    }
+
+    /* ══════════════════════════════
+    COVER (fixed 297 mm A4 height)
+    ══════════════════════════════ */
+    .cover-page {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+      overflow: hidden;
+      position: relative;
+      page-break-after: always;
+    }
+
+    /* Real <img> cover photo — guaranteed to print regardless of browser settings */
+    .cover-img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 25%;
+      z-index: 0;
+    }
+
+    /* Lighter overlay – lets cover image and logo show through */
+    .cover-page::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(165deg, rgba(28, 28, 46, .35) 0%, rgba(28, 28, 46, .5) 50%, rgba(28, 28, 46, .65) 100%);
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    /* Elegant border inset */
+    .cover-page::after {
+      content: '';
+      position: absolute;
+      inset: 8mm;
+      border: 1.5px solid rgba(201, 144, 62, .35);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .cover-top {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 24mm 22mm 14mm;
+      position: relative;
+      z-index: 3;
+    }
+
+    .cover-logo-wrap {
+      margin-bottom: 14mm;
+      padding: 10px 14px;
+      /* background: rgb(255 255 255 / 70%); */
+      border-radius: 6px;
+      display: inline-block;
+      /* box-shadow: 0 2px 12px rgba(0, 0, 0, .15); */
+      width: fit-content;
+      margin-top: 13mm;
+      position: absolute;
+      top: -16px;
+      left: 14mm;
+    }
+
+    .cover-logo {
+      width: 200px;
+      height: auto;
+      object-fit: contain;
+      display: block;
+    }
+
+    /* Gold decorative rule above title */
+    .cover-pre-rule {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6mm;
+      background: rgb(20 38 40 / 70%);
+      padding: 10px;
+      border-radius: 6px;
+    }
+
+    .cover-pre-rule span {
+      display: block;
+      height: 1.5px;
+      background: var(--gold);
+      flex: 1;
+    }
+
+    .cover-pre-rule .pre-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      white-space: nowrap;
+      flex: none;
+    }
+
+    .cover-overline {
+      font-family: 'Inter', sans-serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 5mm;
+    }
+
+    .cover-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 52px;
+      font-weight: 900;
+      color: var(--white);
+      line-height: 1.05;
+      margin-bottom: 5mm;
+      letter-spacing: -0.01em;
+    }
+
+    .cover-gold-rule {
+      width: 54px;
+      height: 3px;
+      background: var(--gold);
+      margin-bottom: 5mm;
+    }
+
+    .cover-subtitle {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 17px;
+      color: var(--gold-light);
+      font-style: italic;
+      margin-bottom: 5mm;
+      line-height: 1.45;
+    }
+
+    .cover-tagline {
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      font-weight: 300;
+      color: rgba(255, 255, 255, .75);
+      max-width: 340px;
+      line-height: 1.75;
+      font-style: italic;
+    }
+
+    /* Decade badge */
+    .cover-decade {
+      position: absolute;
+      bottom: 32mm;
+      right: 22mm;
+      z-index: 3;
+      width: 56px;
+      height: 56px;
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .cover-decade .d-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 22px;
+      font-weight: 900;
+      color: var(--gold-light);
+      line-height: 1;
+    }
+
+    .cover-decade .d-lbl {
+      font-family: 'Inter', sans-serif;
+      font-size: 7.5px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, .7);
+      line-height: 1.2;
+    }
+
+    .cover-bottom {
+      background: var(--gold);
+      padding: 7mm 22mm;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative;
+      z-index: 3;
+    }
+
+    .cover-bottom .cover-loc {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: var(--navy);
+    }
+
+    .cover-bottom .cover-web {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+      opacity: .85;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    /* ── Folio (page number) ── */
+    .folio {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 9.5px;
+      font-weight: 700;
+      color: var(--ink-faint);
+      letter-spacing: 0.04em;
+      margin-left: auto;
+    }
+
+    /* ── Table of Contents ── */
+    .toc-entry {
+      display: flex;
+      padding: 0.55em 0;
+      border-bottom: 1px solid var(--rule-warm);
+    }
+
+    .toc-entry:last-child {
+      border-bottom: none;
+    }
+
+    .toc-left {
+      flex: 1;
+    }
+
+    .toc-section {
+      font-family: 'Inter', sans-serif;
+      font-size: 8.5px;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      display: block;
+      margin-bottom: 0.08em;
+    }
+
+    .toc-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 14px;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .toc-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 20px;
+      font-weight: 900;
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-left: 1em;
+      min-width: 22px;
+      text-align: right;
+    }
+
+    /* ── Back-cover contact block ── */
+    .back-cover .bc-contact {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px;
+      color: rgba(255, 255, 255, .55);
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+      text-align: center;
+      margin-bottom: 5mm;
+    }
+
+    .back-cover .bc-contact a {
+      color: rgba(255, 255, 255, .55);
+      text-decoration: none;
+    }
+
+    .back-cover .bc-qr {
+      text-align: center;
+      margin-bottom: 4mm;
+    }
+
+    .back-cover .bc-qr img {
+      width: 160px;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+      border-radius: 6px;
+    }
+
+    .back-cover .bc-qr span {
+      display: block;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      color: rgba(255, 255, 255, .35);
+      margin-top: 3px;
+      letter-spacing: 0.03em;
+    }
+
+    .back-cover .bc-legal {
+      font-family: 'Inter', sans-serif;
+      font-size: 8px;
+      color: rgba(255, 255, 255, .28);
+      text-align: center;
+      letter-spacing: 0.02em;
+      margin-bottom: 6mm;
+    }
+
+    /* ── Back cover ── */
+    .back-cover {
+      width: 210mm;
+      height: 297mm;
+      min-height: 297mm;
+      max-height: 297mm;
+      background: var(--navy);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      page-break-after: auto;
+    }
+
+    .back-cover::before {
+      content: '';
+      position: absolute;
+      inset: 8mm;
+      border: 1.5px solid rgba(201, 144, 62, .25);
+      pointer-events: none;
+    }
+
+    /* ── Printer preflight strip: visible only when printing (on cover, no extra page) ── */
+    @media screen {
+      .print-preflight {
+        display: none !important;
+      }
+    }
+
+    @media print {
+      .print-preflight {
+        display: block !important;
+        position: absolute;
+        left: 10mm;
+        right: 10mm;
+        bottom: 22mm;
+        margin: 0;
+        padding: 0;
+        font-family: 'Inter', sans-serif;
+        font-size: 5.5pt;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(255, 255, 255, .92);
+        text-align: center;
+        text-shadow: 0 1px 3px rgba(28, 28, 46, .85);
+        z-index: 25;
+        line-height: 1.4;
+        max-width: 150mm;
+        margin-left: auto;
+        margin-right: auto;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Print agency: this file is the 22-page export (no collage filler). Use template-06.html for 24 pages (saddle-stitch ÷4). -->
+  <div class="magazine">
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 1 COVER
+   ═══════════════════════════════════════════════ -->
+    <div class="cover-page">
+      <!-- Real image element — prints reliably without "Background graphics" setting -->
+      <img src="/images/cover-bg.webp" alt="Children at a school event, Law Park Educational Trust" class="cover-img" />
+
+      <div class="cover-top">
+        <div class="cover-logo-wrap">
+          <img src="/images/logo-copy.png" alt="Law Park Educational Trust" class="cover-logo" />
+        </div>
+
+        <div class="cover-pre-rule">
+          <span></span>
+          <div class="pre-label">10-Year Anniversary · 2016 – 2025</div>
+          <span></span>
+        </div>
+
+        <div class="cover-title">Law Park<br>Educational<br>Trust</div>
+        <div class="cover-gold-rule"></div>
+        <div class="cover-subtitle">A Decade of Education,<br>Hope &amp; Change</div>
+        <div class="cover-tagline">"When it comes to education, no child deserves to be left behind."</div>
+      </div>
+
+      <div class="cover-decade">
+        <div class="d-num">10</div>
+        <div class="d-lbl">Years</div>
+      </div>
+
+      <div class="cover-bottom">
+        <div class="cover-loc">HSR Layout, Bengaluru · Registered Trust</div>
+        <div class="cover-web">lawparkeducationaltrust.org</div>
+      </div>
+
+      <p class="print-preflight" aria-hidden="true">Preflight · A4 · No bleed · 22 pages · Saddle stitch (centre pin) · Hand off CMYK PDF · Law Park Educational Trust · Template 6 (no collage)</p>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 2 CONTENTS
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Law Park Educational Trust</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">10-Year Anniversary · 2016 – 2025</span>
+          <h2 style="color:var(--white); font-size:25px;">Inside This Issue</h2>
+        </div>
+
+        <div style="margin-top: 1.2em;">
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">A Note from Our Trustees</span>
+              <div class="toc-title">To Every Child, Every Donor, Every Well-Wisher</div>
+            </div>
+            <span class="toc-num">3</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Our Story</span>
+              <div class="toc-title">10 Years of Believing in Every Child</div>
+            </div>
+            <span class="toc-num">4</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Ten Years, One Timeline</span>
+              <div class="toc-title">2016 – 2019 · The Roots Grow Deep</div>
+            </div>
+            <span class="toc-num">5–6</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Ten Years, One Timeline</span>
+              <div class="toc-title">2020 – 2022 · Through Challenge, Growth</div>
+            </div>
+            <span class="toc-num">7–8</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Ten Years, One Timeline</span>
+              <div class="toc-title">2023 – 2025 · New Places, Bigger Dreams</div>
+            </div>
+            <span class="toc-num">9–10</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">What We Do</span>
+              <div class="toc-title">A Full Circle of Support</div>
+            </div>
+            <span class="toc-num">11</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Children's Voices</span>
+              <div class="toc-title">Three Stories of Hope</div>
+            </div>
+            <span class="toc-num">12</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Stories of the Children</span>
+              <div class="toc-title">Real Lives, Names Withheld</div>
+            </div>
+            <span class="toc-num">13</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">In Their Smiles</span>
+              <div class="toc-title">Moments of Joy</div>
+            </div>
+            <span class="toc-num">14</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Donor &amp; Volunteer Voices</span>
+              <div class="toc-title">In Their Own Words</div>
+            </div>
+            <span class="toc-num">15–17</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Recognition &amp; Awards</span>
+              <div class="toc-title">The Bharat Shiksha Ratan Award</div>
+            </div>
+            <span class="toc-num">18</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Our Team &amp; Partners</span>
+              <div class="toc-title">The People Behind the Work</div>
+            </div>
+            <span class="toc-num">19</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Our Donors</span>
+              <div class="toc-title">With Gratitude</div>
+            </div>
+            <span class="toc-num">20</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Connect With Us</span>
+              <div class="toc-title">Walk a Little Further With Us</div>
+            </div>
+            <span class="toc-num">21</span>
+          </div>
+
+          <div class="toc-entry">
+            <div class="toc-left">
+              <span class="toc-section">Back Cover</span>
+              <div class="toc-title">Contact details &amp; QR</div>
+            </div>
+            <span class="toc-num">22</span>
+          </div>
+
+        </div>
+
+
+
+        <div class="pull" style="margin-top: 1.2em;">
+          <q>When it comes to education, no child deserves to be left behind.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">2</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 3 NOTE FROM TRUSTEES
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Law Park Educational Trust</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <!-- Full-width hero image -->
+        <div style="width: calc(100% + 24mm); margin-left: -12mm; margin-top: -2mm; margin-bottom: 6mm; height: 60mm; overflow: hidden; position: relative;">
+          <img src="/images/hero.png" alt="Children and community at a school distribution event" style="width:100%; height:100%; object-fit:cover; object-position:center 35%; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to bottom, transparent 40%, rgba(28,28,46,.55) 100%);"></div>
+          <div style="position:absolute; bottom:8px; left:12mm; font-family:'Inter',sans-serif; font-size:9.5px; color:rgba(255,255,255,.8); letter-spacing:0.04em;">
+            Community and children at a school distribution event
+          </div>
+        </div>
+
+        <span class="kicker">A Note from Our Trustees</span>
+        <h2>To Every Child, Every Donor,<br>Every Well-Wisher</h2>
+        <span class="gold-line"></span>
+
+        <div class="aside-quote">
+          <p>"Education is not a gift we give to children. It is a right that belongs to them. Our only job is to make sure nothing stands in the way."</p>
+        </div>
+
+        <p>Ten years ago, this journey began with a simple belief: every child, no matter where they are born or how much money their family has, deserves a chance to learn.</p>
+
+        <p>We started small one child, one scholarship, one village visit. We drove to Chickaballapur, sat with children and their parents under open skies, and listened to stories of dreams that just needed a little
+          help to come true.</p>
+
+        <p>Today, as we mark a decade of this work, we are filled with gratitude. Gratitude for the children who trusted us. Gratitude for the parents who believed us. Gratitude for every donor, volunteer, and partner
+          who said: <em>"Yes, let's do this together."</em></p>
+
+        <p>This magazine is our way of saying thank you and of reminding ourselves why we started.</p>
+
+        <p>We hope these pages make you smile, make you proud, and inspire you to walk a little further with us.</p>
+
+        <hr class="rule" style="clear:both; margin-top:1.2em;" />
+
+        <div class="two-col" style="margin-top: 0.8em;">
+          <div class="trustee">
+            <span class="role-tag">Founder &amp; Managing Trustee</span>
+            <h4>Charulatha M. R.</h4>
+            <p>Law Park Educational Trust, Bengaluru</p>
+          </div>
+          <div class="trustee">
+            <span class="role-tag">Trustee</span>
+            <h4>S. M. Manjunatha</h4>
+            <p>Law Park Educational Trust, Bengaluru</p>
+          </div>
+        </div>
+        <div class="img-grid">
+          <div class="img-wrap" style="margin:0;">
+            <img src="/images/slide_23_Picture_3_02.webp" alt="Children learning together" style="width:100%;height: 200px !important;object-fit: cover;display:block;object-position: bottom;">
+          </div>
+          <div class="img-wrap" style="margin:0;">
+            <img src="/images/slide_10_Picture_1_00.webp" alt="Community event" style="width: 100%;height: 200px !important;object-fit: cover;display: block;object-position: bottom;
+">
+          </div>
+        </div>
+
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">3</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 4 OUR STORY
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Our Story</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">Who We Are &amp; How We Work</span>
+          <h2 style="color:var(--white); font-size:25px;">10 Years of Believing in Every Child</h2>
+        </div>
+
+        <div style="display: flex;gap:0.7em;margin-bottom:0.8em;flex-direction: row;">
+          <div class="img-wrap" style="margin:0;display: flex;flex-direction: column;justify-content: flex-start;">
+            <img src="/images/FB_IMG_1558335171738.jpeg" alt="Steel plates and glasses distributed to students, Chickaballapur 2016"
+              style="object-fit: cover;display: block;height: 211px !important;object-position: center;">
+            <div class="cap">Steel plates and glasses distributed to students, Chickaballapur 2016</div>
+          </div>
+          <div class="img-wrap" style="margin:0;">
+            <img src="/images/slide_06_Picture_3_01.webp" alt="Children learning together" style="/* width: auto !important; */object-fit: cover;display:block;height: 211px !important;object-position: center;">
+            <div class="cap">Education opens doors</div>
+          </div>
+        </div>
+
+        <p>Across India's villages and small towns, millions of children want to go to school. They are bright, curious, and ready to learn. But somewhere between that dream and the classroom, money gets in the way.
+          Families are forced to make impossible choices. Quietly, one by one, children drop out not because they don't want to study, but because nobody stepped in at the right moment.</p>
+
+        <p><strong>Law Park Educational Trust was born to be that step.</strong> We are a registered educational trust based in HSR Layout, Bengaluru. Since 2016, we have been travelling to rural areas across India
+          from Chickaballapur to MM Hills tribal villages to find children who need partial scholarship support to stay in school.</p>
+
+        <hr class="rule-gold" />
+        <h3 style="margin-bottom:0.7em;">Our Four-Step Process</h3>
+
+        <div class="step-row">
+          <div class="step-circle">1</div>
+          <div class="step-text">
+            <h4>Identify</h4>
+            <p>School principals, well-wishers, and community members nominate deserving students from income-deprived backgrounds who need support to continue their education.</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-circle">2</div>
+          <div class="step-text">
+            <h4>Validate</h4>
+            <p>We visit the location, gather students and parents, and interview each family to verify their situation with care, respect, and no shortcuts.</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-circle">3</div>
+          <div class="step-text">
+            <h4>Embrace</h4>
+            <p>We cover up to <strong>75% of a child's tuition fees</strong> at their current school. Parents contribute the remaining part because involvement creates ownership.</p>
+          </div>
+        </div>
+
+        <div class="step-row">
+          <div class="step-circle">4</div>
+          <div class="step-text">
+            <h4>Incubate</h4>
+            <p>Fees are paid <strong>directly to the school</strong> not through parents so children can focus solely on their studies and tap their fullest potential.</p>
+          </div>
+        </div>
+
+        <div class="stats-banner">
+          <div class="stat-cell">
+            <span class="num">1000+</span>
+            <span class="lbl">Students Supported</span>
+          </div>
+          <div class="stat-cell">
+            <span class="num">10</span>
+            <span class="lbl">Years of Impact</span>
+          </div>
+          <div class="stat-cell">
+            <span class="num">150+</span>
+            <span class="lbl">Villages Reached</span>
+          </div>
+          <div class="stat-cell">
+            <span class="num">10+</span>
+            <span class="lbl">Districts Reached</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">4</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 5 TIMELINE 2016–2019 (part 1)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2016 – 2019 &nbsp;·&nbsp; The Roots Grow Deep</h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2016</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <div>
+              <h4>Our First Scholarship</h4>
+              <p>Every journey begins somewhere. Ours began in Chickaballapur with one child receiving our very first scholarship. On that same visit, we distributed <strong>steel plates and steel glasses to 150
+                  students</strong> small things that meant the world.</p>
+            </div>
+            <div>
+              <span class="loc">Chickaballapur</span>
+              <div class="img-wrap" style="margin-top:0.45em;">
+                <img src="/images/slide_03_Picture_1_00.webp" alt="First school visit, Chickaballapur 2016" style="width:100%; height:90px; object-fit:cover; display:block;" />
+                <div class="cap">2016 Chickaballapur</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2017</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Growing Support</h4>
+            <p>One became ten. <strong>10 students</strong> received scholarships in Chickaballapur. With each new child, our resolve grew stronger.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-wrap" style="margin-top:0.45em;">
+              <img src="/images/2017-3.jpeg" alt="Growing support 2017" style="width:100%; height:90px; object-fit:cover; display:block;" />
+              <div class="cap">2017 Chickaballapur</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">5</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 6 TIMELINE 2016–2019 (part 2)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2016 – 2019 &nbsp;·&nbsp; The Roots Grow Deep <span style="font-weight:500; font-size:0.85em; color:var(--ink-muted);">(continued)</span></h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2018</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Building the Foundation</h4>
+            <p>Our team returned to Chickaballapur, renewing scholarships for every continuing student. New applications were carefully validated through personal home visits and parent interviews — building a process we
+              would follow for the next decade.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-wrap" style="margin-top:0.45em;">
+              <img src="/images/slide_05_Picture_2_01.webp" alt="Building the foundation 2018" style="width:100%; height:90px; object-fit:cover; display:block;" />
+              <div class="cap">2018 Chickaballapur</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2019</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Growing Impact</h4>
+            <p>Scholarship coverage expanded across Chickaballapur district, with a renewed focus on students from single-parent and daily-wage families. Each validation visit reinforced how one year of fee support can
+              redirect a child's entire trajectory.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-wrap" style="margin-top:0.45em;">
+              <img src="/images/slide_06_Picture_1_00.webp" alt="Growing impact 2019" style="width:100%; height:240px !important; object-fit:cover; display:block;" />
+              <div class="cap">2019 Chickaballapur</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="pull" style="margin-top:1.2em;">
+          <q>From one child to many — every year deepened our roots in Chickaballapur.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">6</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 7 TIMELINE 2020–2022 (part 1)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2020 – 2022 &nbsp;·&nbsp; Through Challenge, Growth</h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2020</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Pandemic Resilience</h4>
+            <p>Schools closed. Families lost livelihoods. And yet our scholarship commitments did not stop. We ensured fees were honoured for every enrolled child, so that when schools reopened, no child had to start
+              over from zero.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-wrap" style="margin-top:0.45em;">
+              <img src="/images/slide_07_Picture_1_00.webp" alt="Pandemic resilience 2020" style="width:100%; height:100px; object-fit:contain; display:block;" />
+              <div class="cap">2020 Continuing through the pandemic</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2021</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>A Significant Milestone</h4>
+            <p>As schools reopened fully, we renewed and expanded our scholarship roster. The relationships forged during the pandemic — phone calls with parents, follow-ups with principals — had created a deeper, more
+              resilient network of trust and care.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-wrap" style="margin-top:0.45em;">
+              <img src="/images/slide_08_Picture_5_00.webp" alt="Significant milestone 2021" style="width:100%; height:100px; object-fit:cover; display:block;" />
+              <div class="cap">2021 Renewed and expanded</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">7</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 8 TIMELINE 2020–2022 (part 2)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2020 – 2022 &nbsp;·&nbsp; Through Challenge, Growth <span style="font-weight:500; font-size:0.85em; color:var(--ink-muted);">(continued)</span></h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2022</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Opening the Doors of Libraries</h4>
+            <p>Books open worlds. We set up <strong>libraries in several rural schools</strong>, filling shelves with story books, academic books, and unused notebooks donated by generous supporters. A rural scholarship
+              event was also held at the Law Park office premises.</p>
+            <span class="loc">Chickaballapur</span>
+            <div class="img-grid" style="margin-top:0.45em;">
+
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_09_Picture_1_00.webp" alt="Library in a rural school 2022" style="width:100%;height: 369px !important; object-position: left;object-fit: contain;display:block;">
+                <div class="cap">2022 Library initiative</div>
+              </div>
+              <div class="img-grid" style="margin-top:0.45em;grid-template-columns: 1fr !important;">
+                <div class="img-wrap" style="margin:0;">
+                  <img src="/images/slide_09_Picture_3_01.webp" alt="Books and library setup 2022" style="width:100%;height: auto !important;object-fit: contain;display:block;">
+                  <div class="cap">2022 Books for rural schools</div>
+                </div>
+                <div class="img-wrap" style="margin:0;">
+                  <img src="/images/slide_09_Picture_4_02.webp" alt="Books and library setup 2022" style="width:100%;height: auto !important;object-fit: contain;display:block;">
+                  <div class="cap">2022 Books for rural schools</div>
+                </div>
+              </div>
+            </div>
+            <div class="callout callout-navy" style="margin-top:0.55em;">
+              <div class="callout-label">From a village to a classroom</div>
+              <p style="color: #dbe2f9;">"A library in your school means a world of stories that were never available before."</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="pull" style="margin-top:1.2em;">
+          <q>When schools closed, our promise did not. That is what a decade of trust looks like.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">8</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 9 TIMELINE 2023–2025 (part 1)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2023 – 2025 &nbsp;·&nbsp; New Places, Bigger Dreams</h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2023</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>New Places, New Dreams</h4>
+            <p>Our reach expanded to <strong>Mysore and H.D. Kote</strong>. We conducted <strong>career counselling sessions for 9th and 10th standard students</strong> — helping young people think beyond today and plan
+              for tomorrow.</p>
+            <span class="loc">Mysore · H.D. Kote</span>
+            <div class="img-grid" style="margin-top:0.45em;">
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_11_Picture_1_00.webp" alt="Career counselling, Mysore 2023" style="width:100%; height:95px; object-fit:cover; display:block;" />
+                <div class="cap">2023 Mysore · H.D. Kote</div>
+              </div>
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_13_Picture_1_00.webp" alt="Student interactions 2023" style="width:100%; height:95px; object-fit:cover; display:block;" />
+                <div class="cap">2023 Student interactions</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2024</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Going Further, Giving More</h4>
+            <p>Visited <strong>DMS Jnana Kuteera School</strong> for interviews and career counselling. Conducted scholarship interviews in <strong>Mulbagal</strong>. Distributed <strong>200 school bags, notebooks and
+                stationeries</strong> to tribal children at MM Hills. Extended support to <strong>HIV-affected children</strong>.</p>
+            <span class="loc">Pandavapura · Mulbagal · MM Hills · H.D. Kote</span>
+            <div class="img-grid" style="margin-top:0">
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_14_Picture_1_00.webp" alt="Going further 2024" style="width:100%;h;height: 363px !important;object-fit: cover;display:block;">
+                <div class="cap">2024 Multi-location expansion</div>
+              </div>
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_16_Picture_1_00.webp" alt="School visits 2024" style="width:100%;height: 371px !important;object-fit: contain;display:block;object-position: left;">
+                <div class="cap">2024 School visits</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">9</span>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 10 TIMELINE 2023–2025 (part 2)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Ten Years, One Timeline</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Ten Years, One Timeline</span>
+        <h2>2023 – 2025 &nbsp;·&nbsp; New Places, Bigger Dreams <span style="font-weight:500; font-size:0.85em; color:var(--ink-muted);">(continued)</span></h2>
+        <span class="gold-line"></span>
+
+        <div class="tl-entry" style="margin-bottom:0;">
+          <div class="tl-year-col">
+            <div class="tl-year-badge">2025</div>
+          </div>
+          <div class="tl-connector">
+            <div class="tl-dot"></div>
+            <div class="tl-spine"></div>
+          </div>
+          <div class="tl-body">
+            <h4>Our Biggest Year Yet</h4>
+            <ul>
+              <li>Distributed <strong>300 school bags, notebooks &amp; stationeries</strong> to tribal children in H.D. Kote in association with <strong>Nisarga Foundation</strong></li>
+              <li>Conducted scholarship interviews in <strong>KGF and Kolar</strong></li>
+              <li>Distributed supplies to <strong>HIV-affected children and children with chronic health conditions</strong></li>
+              <li><strong>20 students</strong> received scholarships at DMS Jnana Kuteera School</li>
+              <li>Received the prestigious <strong>Bharat Shiksha Ratan Award</strong> in New Delhi — one of 25 national awardees</li>
+            </ul>
+            <span class="loc" style="margin-top:0.3em; display:block;">H.D. Kote · KGF · Kolar · Pandavapura · New Delhi</span>
+            <div class="img-grid" style="margin-top:0.55em;">
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_27_Picture_1_00.webp" alt="H.D. Kote school bag distribution 2025" style="width:100%; height:90px; object-fit:cover; display:block;" />
+                <div class="cap">H.D. Kote 300 school bags, 2025</div>
+              </div>
+              <div class="img-wrap" style="margin:0;">
+                <img src="/images/slide_27_Picture_3_02.webp" alt="Scholarship interview 2025" style="width:100%; height:90px; object-fit:cover; display:block;" />
+                <div class="cap">Scholarship interviews, 2025</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <div class="pull" style="margin-top:1.2em;">
+          <q>Ten years. Hundreds of children. Countless stories of hope — and the journey continues.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">10</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 11 WHAT WE DO
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>What We Do</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">What We Do</span>
+          <h2 style="color:var(--white);">A Full Circle of Support</h2>
+        </div>
+
+        <div class="img-wrap" style="margin-bottom:0.8em;">
+          <img src="/images/slide_24_Picture_1_00.webp" alt="Learning together" style="width:100%; height:260px !important; object-fit:cover; display:block;" />
+          <div class="cap">Community and learning</div>
+        </div>
+
+        <p>When we say we support a child's education, we mean it fully. Here is everything we bring to a child's journey.</p>
+
+        <div class="two-col" style="margin-top: 0.8em; gap:0.65em;">
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">school</span> Funded Scholarships</h4>
+              <p>We cover up to 75% of tuition fees for children from income-deprived families allowing them to stay in school without constant financial worry.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">directions_car</span> We Travel to Meet the Kids</h4>
+              <p>Our team travels personally to villages and schools. We don't wait for children to come to us we go to them.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">backpack</span> Essential Supplies Distribution</h4>
+              <p>School bags, notebooks, pens, stationery, sanitary pads, drawing kits whatever a child needs to walk into school with confidence.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">extension</span> Educational Games &amp; Activities</h4>
+              <p>We organise fun, interactive activities that make children think, laugh, and discover because curiosity is the best teacher.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">auto_stories</span> Cultural Awareness Programmes</h4>
+              <p>We share stories of language and culture, helping children understand their history. Children leave knowing their roots better.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">psychology</span> Career Counselling</h4>
+              <p>For 9th and 10th standard students, our sessions help them see what is possible and make confident choices about their future.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">local_library</span> Library Setup in Rural Schools</h4>
+              <p>We establish libraries with donated books story books, academic texts creating quiet corners where imagination can grow.</p>
+            </div>
+          </div>
+
+          <div class="col-item">
+            <div class="act-card">
+              <h4><span class="ms ms-card">diversity_3</span> Community Events &amp; Talent Showcases</h4>
+              <p>We organise events where children sing, dance, and show their talents reminding every child: <em>you are seen, you are valued.</em></p>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="callout callout-gold" style="margin-top: 0.9em;">
+          <div class="callout-label">Did you know?</div>
+          <p>In 2024 we distributed 200 school bags to tribal school children in MM Hills. In 2025, that number grew to 300.</p>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">11</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 12 CHILDREN'S VOICES
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Children's Voices</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Children's Voices</span>
+        <h2>Three Stories of Hope</h2>
+        <span class="gold-line"></span>
+        <p style="font-family:'Inter',sans-serif; font-size:10.5px; color:var(--ink-muted); margin-bottom:0.8em; font-style:italic;">Stories inspired by the real children we have met and supported. Names have been
+          changed to protect privacy.</p>
+
+        <div class="img-grid" style="margin-bottom:0.8em;">
+          <div class="img-wrap" style="margin:0;">
+            <img src="/images/slide_28_Picture_3_00.webp" alt="Children celebrating together" style="width:100%; height:200px !important; object-fit:cover; display:block;" />
+            <div class="cap">Celebrating learning together</div>
+          </div>
+          <div class="img-wrap" style="margin:0;">
+            <img src="/images/slide_29_Picture_5_00.webp" alt="Library and books" style="width:100%; height:200px !important; object-fit:cover; display:block;" />
+            <div class="cap">Library in a rural school</div>
+          </div>
+        </div>
+
+        <div class="story">
+          <div class="story-deck">"I Almost Stopped Going to School"</div>
+          <h3>Meena's Story</h3>
+          <p>Meena was twelve when her father lost his daily wage work for two months. The school sent home a reminder about unpaid fees. She sat outside her house, wondering if she would have to stop studying.</p>
+          <p>Her teacher knew about Law Park Educational Trust. A few weeks later, a team visited her village, met her family, and asked Meena what she wanted to become. <em>"A teacher,"</em> she said quietly. Her fees
+            were taken care of. She is now in the 9th standard and attended a career counselling session organised by the Trust. She knows exactly which stream she wants to take after 10th.</p>
+        </div>
+
+        <div class="story">
+          <div class="story-deck">"The School Bag Changed Everything"</div>
+          <h3>Raju's Story</h3>
+          <p>Raju lives near MM Hills. Until last year, he carried his books in a torn plastic bag. When the Trust visited with 200 school bags, Raju got a new one. For a
+            ten-year-old boy, that bag meant he <em>belonged</em> just like every other child. His mother says he now wakes up early every morning, packs his bag the night before, and never misses a day of school.</p>
+        </div>
+
+        <div class="story">
+          <div class="story-deck">"A Library in My School"</div>
+          <h3>Sunita's Story</h3>
+          <p>Sunita had never read a storybook. Her school had no library just textbooks and chalk. When Law Park set up a small library, she picked up a story about a girl who becomes a doctor. She read it three
+            times. Today she visits the library every week. She wants to be a doctor because she read about one in a book that someone donated.</p>
+        </div>
+
+        <div class="pull">
+          <q>A donated book is not just paper and ink. It is someone's dream, passed on to a child who needed it.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">12</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 13 STORIES OF THE CHILDREN (real anonymized stories)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Stories of the Children</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 12mm;">
+        <span class="kicker">Stories of the Children</span>
+        <h2>Real Lives, Names Withheld</h2>
+        <span class="gold-line"></span>
+        <p style="font-family:'Inter',sans-serif; font-size:10px; color:var(--ink-muted); margin-bottom:0;">Names have been withheld to protect privacy.</p>
+        <div class="stories-anon-wrap">
+          <div class="story-anon">
+            <p><strong>Child (Female).</strong> Father expired when she was 8. When she was to write her 10th final exams, her mother was diagnosed with stroke and later brain tumour. No financial help from
+              relatives. We helped her study till 12th. May 2025 her mother expired. We brought her completely under our care despite relatives pressing for marriage. She is now doing her under graduation happily.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Children (one female, one male).</strong> Mother expired due to illness; same year father expired due to depression. Their uncle (mother's younger brother) cares for them and chose
+              not to marry. His poverty is a challenge. They are now under our care.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Female).</strong> Cared by her grandmother. Mother left and married another. Father stays away. Grandmother at old age earns for the child's future.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Children (4 female).</strong> Husband expired due to HIV. Mother is HIV-positive, on heavy medication and dizzy, still works as coolie. Their house collapsed; they now live in a
+              shelter.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Female).</strong> She discontinued education to take care of her siblings and works as coolie. They lost their parents at a very young age. We thought the scholarship was for her; she
+              pointed it to her siblings. Now all three are in school.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Male).</strong> Mother died in gas cylinder burst. Father remarried and left the child. Grandparents expired. An extended relative in poverty takes care of him.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Male).</strong> Well-wishers arranged his mother's marriage to an elderly physically challenged man. He harassed her; one day he hit her so hard she became mentally challenged
+              and he absconded. She no longer recognises her own son.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Female).</strong> Mother expired. Father is a heart patient, lost one leg, still drives auto for livelihood. Father of 4 daughters; he does household chores in every gap. All
+              four children are very good at studies.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Male).</strong> Mother is blind. Father left the family. They survive with grandmother's idli shop.</p>
+          </div>
+          <div class="story-anon">
+            <p><strong>Child (Female).</strong> A tender coconut seller (father) accidentally chopped his hand; severe infection led to his death. Mother is suffering; we support the family.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">13</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 14 IN THEIR SMILES (Magazine photos gallery)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>In Their Smiles</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 12mm;">
+        <span class="kicker">In Their Smiles</span>
+        <h2>Moments of Joy</h2>
+        <span class="gold-line"></span>
+        <p style="font-size: 12px; color: var(--ink-muted); margin-bottom: 0;">The happiness of the children we support is at the heart of everything we do. Here are some of those moments.</p>
+
+        <div class="gallery-smiles">
+          <div class="gallery-smiles__col">
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_01.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_06.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_12.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_17.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+          </div>
+          <div class="gallery-smiles__col">
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_02.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_10.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_03.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_16.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+          </div>
+
+          <div class="gallery-smiles__col">
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_19.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_04.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_07.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_15.jpeg" alt="Children with Law Park" style="width: 100%; height: 218px; object-fit: cover; display: block; object-position: bottom;">
+            </div>
+          </div>
+          <div class="gallery-smiles__col">
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_05.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_09.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_13.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+            <div class="gallery-smiles__item"><img src="/images/Magazine photos/mag_18.jpeg" alt="Children with Law Park" style="width:100%;height:auto;object-fit:contain;display:block;"></div>
+          </div>
+        </div>
+
+        <div class="running-foot">
+          <span>lawparkeducationaltrust.org</span>
+          <span>journey.lawparkeducationaltrust.org</span>
+          <span class="folio">14</span>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 15 DONOR & VOLUNTEER VOICES (1/3)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Donor &amp; Volunteer Voices</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">Donor &amp; Volunteer Voices</span>
+          <h2 style="color:var(--white);">In Their Own Words</h2>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Thank you so much for the amazing job that you do. Knowing that you care for the kids giving them the confidence and reassurance. I just hope Law Park Educational Trust will continue to be
+            hardworking and helpful to many children as possible. I am just humbled to volunteer for the organization.</blockquote>
+          <div class="testi__footer">
+            <cite>Dr. Adarsh Babu, Bengaluru</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Dr.-Adarsh-Babu,.jpeg" width="68" height="46" alt="Dr. Adarsh Babu" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center 41%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Law Park Education Trust is doing a phenomenal work by facilitating the provision of basic right of education to the underprivileged children of our society and country at large.</blockquote>
+          <div class="testi__footer">
+            <cite>Aishwarya K, Director, Versalis International</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Aishwarya-K.jpeg" width="68" height="46" alt="Aishwarya K" style=" width: 80px !important; height: 57px !important; object-position: center 4%;">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Law Park is striving to bring a smile on the face of many young kids and parents. I am enthralled with the team members working towards making this society a better place and happier by
+            educating the next generation. I am delighted to be associated with Law Park and support their cause in making difference in people's lives.</blockquote>
+          <div class="testi__footer">
+            <cite>Anand Gopi, USA</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Anand-Gopi.jpeg" width="68" height="46" alt="Anand Gopi">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Kudos to your efforts in investing your time &amp; energy in creating better lives for the needy and deserving children. You are not only impacting the children but on a whole your efforts will
+            create a better society for next generation to live. Truly appreciate your efforts and good luck to LAW PARK EDUCATIONAL TRUST in this journey. We will be glad to support you in this wonderful journey in any
+            way possible.</blockquote>
+          <div class="testi__footer">
+            <cite>Arun AK, CEO, INFINPRO CONSULTANTS</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Arun-AK.jpeg" width="68" height="46" alt="Arun AK" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center 0;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>We are glad to meet a Team like yours and we are happy for the Charitable Trust that you are running for all those children who deserve. I congratulate entire team for being identified by the
+            great people and its all because of your hard work, interest and concern on the children and the importance of education for the children. Let you Trust achieve more blessings by serving the needy and my
+            support will always be with you throughout the journey.</blockquote>
+          <div class="testi__footer">
+            <cite>Bhavya Shravanth, Bengaluru</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Bhavya-Shravanth.jpeg" width="68" height="46" alt="Bhavya Shravanth" style="
+              width: 68px !important;
+              height: 57px !important;
+              object-position: center 102%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Really awesome job you guys doing and I appreciate you. Good luck for your journey.</blockquote>
+          <div class="testi__footer">
+            <cite>Damodaran, Chennai</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Damodaran,.jpeg" width="68" height="46" alt="Damodaran" style="
+              width: 68px !important;
+              height: 66px !important;
+              object-position: center 0;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Ms. Charulatha, Appreciation for the value of routine, ordinary, mundane rhythms of doing work each day each week with care. Keep up the good work.</blockquote>
+          <div class="testi__footer">
+            <cite>R. Guru Subramanian, HCL Technologies, Delhi</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/R.-Guru-Subramanian.jpeg" width="68" height="46" alt="R. Guru Subramanian" style="
+              width: 63px !important;
+              height: 59px !important;
+              object-position: center 3%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>First of all congratulations to you and your team. Amazing! You have got an incredible message as blessings from a legendary person. Have a growth wherein you serve the people in need even more
+            better. My support and wishes undoubtedly will travel with you.</blockquote>
+          <div class="testi__footer">
+            <cite>Kavitha Hari, Skybloo, Chennai</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Kavitha-Hari.jpeg" width="68" height="46" alt="Kavitha Hari" style="
+              width: 80px !important;
+              height: 50px !important;
+              object-position: center 40%;
+          ">
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">15</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 16 DONOR & VOLUNTEER VOICES (2/3)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Donor &amp; Volunteer Voices</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Donor &amp; Volunteer Voices · Continued</span>
+        <h2 style="font-size:20px;">More Words of Support</h2>
+        <span class="gold-line"></span>
+
+
+
+        <div class="testi testi--brand">
+          <blockquote>I am proud of you for the mission you have started in providing education to the poor and needy. This is such an incredible job you are doing to the society. I am happy to support and join with you
+            in this journey of your service. My best wishes to you and your team for all success to accomplish your mission.</blockquote>
+          <div class="testi__footer">
+            <cite>Krishnapriya, Customer Support Leader, French MNC Company</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Krishnapriya,.jpeg" width="68" height="46" alt="Krishnapriya" style="
+              width: 80px !important;
+              height: 57px !important;
+              object-position: center 4%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Charulata ji and Manjunath ji, you are highly motivated to do good for underprivileged children through Law Park Educational Trust. They make the effort to know each of the children personally and
+            understand their problems and needs.</blockquote>
+          <div class="testi__footer">
+            <cite>Nihar Panigrahi, Senior Software Engineer</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Mr.-Nihar-Panigrahi.jpeg" width="68" height="46" alt="Mr. Nihar Panigrahi" style="
+              width: 60px !important;
+              height: 57px !important;
+              object-position: center 22%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Charu and Manjunatha — You are doing an outstanding service by providing education to these children. This is the contribution to people and society. Best wishes to continue your excellent services.
+          </blockquote>
+          <div class="testi__footer">
+            <cite>K.V. Ramani, Founder and Chancellor of SAI UNIVERSITY, <br />Chairman Managing Director, Digital Holdings Pvt. Ltd.</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/K.V.-Ramani.jpeg" width="68" height="46" alt="K.V. Ramani" style="
+              width: 88px !important;
+              height: 64px !important;
+              object-position: center 7%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>I am amazed at the level of commitment the Law Park Education Trust puts into responding to a certain community of the society. It's a privilege to be a part of a trust that provides free education,
+            fitness programs, books, gadgets, apparels, monetary and other benefits to economically backward students in rural areas.</blockquote>
+          <div class="testi__footer">
+            <cite>Ramya Balaji, Music Instructor</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Ramya-Balaji.jpeg" width="68" height="46" alt="Ramya Balaji" style=" width: 80px !important; height: 57px !important; object-position: center 4%; ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Your service to needy children for education is noble. I am happy to donate to the cause. I am impressed by your help to poor children longing for education. I join you by my contribution.
+          </blockquote>
+          <div class="testi__footer">
+            <cite>P.V. Rangaiah, Retired Senior Manager, UB Group, Chennai</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/P.V.-Rangaiah..jpeg" width="68" height="46" alt="P.V. Rangaiah" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center 34%;
+              /* object-fit: none; */
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <blockquote>We wish to extend our sincere appreciation of your gesture of helping the needy children through scholarship in pursuing their education through the Law Park Educational Trust in the greater
+            interest of serving the society. Thanking you once again and looking forward for your partnership in helping deserving children in the coming years for education.</blockquote>
+          <cite>Rajan Varghese T, Supporter</cite>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>I think the organization has done an amazing job. I know how challenging it is running a small centre like ours and appreciate the enormous effort put in by you and your team.
+            It takes effort to organize such programs.</blockquote>
+          <div class="testi__footer">
+            <cite>Rajesh Reddy, Advocate, Bengaluru</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Rajesh-Reddy.jpeg" width="68" height="46" alt="Rajesh Reddy" style="
+              width: 80px !important;
+              height: 60px !important;
+              object-position: 51% 14%;
+              object-fit: cover;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Good work very proud of you and I should thank you for making me a part in your good work.</blockquote>
+          <div class="testi__footer">
+            <cite>Reshma, Rainbow Properties</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Reshma.jpeg" width="68" height="46" alt="Reshma" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center 34%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <!-- <div class="testi">
+          <blockquote>Very happy to hear that your trust is doing good.</blockquote>
+          <cite>Chandrashekar, Supporter</cite>
+        </div> -->
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">16</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 17 DONOR & VOLUNTEER VOICES (3/3)
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Donor &amp; Volunteer Voices</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Donor &amp; Volunteer Voices · Continued</span>
+        <h2 style="font-size:20px;">More Words of Support</h2>
+        <span class="gold-line"></span>
+
+
+
+        <!-- <div class="testi">
+          <blockquote>Thank you very much charulatha madam, you are doing very great and noble service to deserving and financially poor students who are unable to continue their studies. I once again thank you and your
+            noble service.</blockquote>
+          <cite>Madhav Reddy, Supporter</cite>
+        </div> -->
+        <div class="testi testi--brand">
+          <blockquote>Congratulations and proud of what you guys are doing. So proud to be associated with this organization.</blockquote>
+          <div class="testi__footer">
+            <cite>Sai Prasanth, Hong Kong</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Sai-Prasanth.jpeg" width="68" height="46" alt="Sai Prasanth" style="
+              width: 87px !important;
+              height: 66px !important;
+              object-position: center 71%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>Way to Go!! Kudos.. When people find it demanding to educate one student, you are enlightening a BUNCH of underprivileged but well-deserved students. Hats off.</blockquote>
+          <div class="testi__footer">
+            <cite>Sathyabrata, Software Engineer, Orissa</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Sathyabrata,.jpeg" width="68" height="46" alt="Sathyabrata" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center -1%;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <blockquote>Great to hear, let me know if you need any help- anytime. I would be more than happy to be part of great work you guys are doing. Count me in as well – let me know if you have more kids.
+          </blockquote>
+          <cite>Shoban, USA</cite>
+        </div>
+        <div class="testi testi--brand">
+          <blockquote>I'm impressed with the dedication &amp; focus in bringing back the children to school, I echo their thoughts &amp; approach in short listing each student to ensure their success is unparalleled.
+            Appreciate this CSR initiative from Law Park Educational Trust!!</blockquote>
+          <div class="testi__footer">
+            <cite>Sreekanth, Director, Tech Hat Pvt., Ltd.</cite>
+            <div class="testi__brand-mark">
+              <img src="/images/tech-hat-pvt-ltd-logo.svg" width="120" height="40" alt="Tech Hat Pvt. Ltd.">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote style="width: 580px;">Appreciate the efforts of Ms. Charulatha and the trust in helping children's education and myself and my husband are very grateful to be part of this. Many thanks!</blockquote>
+          <div class="testi__footer">
+            <cite>Srividya Vinod, Program Manager, USA</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Srividya-Vinod.jpeg" width="68" height="46" alt="Srividya Vinod" style="
+                     width: 124px !important;
+    height: 88px !important;
+    object-position: center 0px;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <blockquote>Real proud moment and we are all in to support you charu.</blockquote>
+          <cite>Sridhya Mahalingam, USA</cite>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>I am deeply appreciative of your support to take care deserving students for the education and financial support, your generosity has inspired me to help others, I was very happy and appreciative.
+          </blockquote>
+          <div class="testi__footer">
+            <cite>S. Sumesh, Supporter</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/S.-Sumesh.jpeg" width="68" height="46" alt="S. Sumesh" style="
+              width: 103px !important;
+              height: 53px !important;
+              object-position: center 0;
+          ">
+            </div>
+          </div>
+        </div>
+
+        <div class="testi">
+          <blockquote>Great work Charu, very easy to think good things but only few progress to implement the good thoughts. Salute to work of Charu.</blockquote>
+          <cite>Thirunarayanan, Chartered Accountant, Dubai</cite>
+        </div>
+
+        <div class="testi testi--brand">
+          <blockquote>We have known Law Park Educational Trust for few years. It is a genuine and selfless effort of the Trustees to provide financial and other educational resources to children in need with the main
+            goal of right to education regardless of socioeconomic background.</blockquote>
+          <div class="testi__footer">
+            <cite>Dr. Varalakshmi and Dr. Nandakumar, Hershey, USA</cite>
+            <div class="testi__brand-mark testi__brand-mark--portrait">
+              <img src="/magazine/print/Dr.-Varalakshmi-and-Dr.-Nandakumar,.jpeg" width="68" height="46" alt="Dr. Varalakshmi and Dr. Nandakumar"
+                style=" width: 80px !important; height: 57px !important; object-position: center 4%; ">
+            </div>
+          </div>
+        </div>
+
+        <div class="pull" style="margin-top:0.8em;">
+          <q>Every voice here is proof that kindness travels — from hand to hand, city to village, person to child.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">17</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 18 BHARAT SHIKSHA RATAN AWARD
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Recognition &amp; Awards</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <span class="kicker">Recognition &amp; Awards</span>
+        <h2>The Bharat Shiksha Ratan Award</h2>
+        <span class="gold-line"></span>
+
+        <p>This is not just an award. It is confirmation of what hundreds of children, parents, donors, and volunteers have known for ten years: <strong>this work matters.</strong></p>
+
+
+
+        <div class="award-layout">
+          <div class="img-wrap">
+            <img src="/images/Bharat-Shiksha-Ratan-Award-Certificate.webp" alt="Bharat Shiksha Ratan Award certificate" />
+          </div>
+
+          <div class="award-panel">
+            <h3><span class="ms" style="font-size:18px; color:var(--gold-light); margin-right:0.3em;">military_tech</span> Bharat Shiksha Ratan Award</h3>
+            <div class="award-row">
+              <div><span>Date:</span> 19th December 2025</div>
+              <div><span>Location:</span> New Delhi</div>
+              <div><span>Awarded by:</span> Economic and Social Development Foundation (E.S.D.F.)</div>
+              <div><span>Recipient:</span> Charulatha M. R., Founder</div>
+              <div><span>Presented by:</span> Mr. Kamal Singh Negi (Cabinet Minister) &amp; Mr. Dinesh Upadhyay (Ayush Minister)</div>
+              <div><span>Distinction:</span> Selected from 25 awardees at the National Summit</div>
+            </div>
+            <p>This recognition honoured a decade-long commitment to transforming lives through education — representing every child we have supported, every volunteer who gave their time, and every donor who believed
+              in
+              us.</p>
+          </div>
+        </div>
+
+        <div class="pull">
+          <q>This award belongs to every child who dared to dream, every parent who trusted us, and every well-wisher who said yes.</q>
+        </div>
+
+        <p style="text-align:right; color:var(--ink-muted); font-family:'Inter',sans-serif; font-size:11px; font-style:italic; display:flex; align-items:center; justify-content:flex-end; gap:0.5em;"><span
+            style="display:inline-block; width:16px; height:1.5px; background:var(--gold); border-radius:1px;"></span> Charulatha M. R., Founder</p>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">18</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 19 OUR TEAM & PARTNERS
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Our Team &amp; Partners</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">Our Team &amp; Partners</span>
+          <h2 style="color:var(--white);">The People Behind the Work</h2>
+        </div>
+
+        <h3 style="margin-bottom:0.6em;">The Trustees</h3>
+        <div class="two-col" style="margin-bottom:1em;">
+          <div class="trustee">
+            <span class="role-tag">Founder &amp; Managing Trustee</span>
+            <h4>Charulatha M. R.</h4>
+            <p>In her young age she used to teach poor children in her locality free of cost that was the foundation for this Trust. Holds a B.A. Economics, LLB, and PGDIPRL from National Law School of India
+              University. Long before the Trust was registered, she was already paying school fees for children who needed help.</p>
+          </div>
+          <div class="trustee">
+            <span class="role-tag">Trustee</span>
+            <h4>S. M. Manjunatha</h4>
+            <p>Hailing from the village of Sadenahalli, Karnataka, he was the first in his family to study in the city. He graduated in Law from Bengaluru, and funded many children from his village who have now grown
+              into well-settled members of society.</p>
+          </div>
+        </div>
+
+        <hr class="rule-gold" />
+        <h3 style="margin-bottom:0.5em;">Our Team</h3>
+        <div class="chip-grid" style="margin: 0.5em 0 1em;">
+          <span class="chip">Adarsh</span>
+          <span class="chip">Anand</span>
+          <span class="chip">Ankitha</span>
+          <span class="chip">Bhavya</span>
+          <span class="chip">Charulatha M. R.</span>
+          <span class="chip">Chetan</span>
+          <span class="chip">Geetha</span>
+          <span class="chip">Jeevitha</span>
+          <span class="chip">Kajol</span>
+          <span class="chip">Kavitha</span>
+          <span class="chip">Krishnapriya</span>
+          <span class="chip">Lavanya</span>
+          <span class="chip">Mamtha</span>
+          <span class="chip">Manjunatha</span>
+          <span class="chip">Nandini</span>
+          <span class="chip">Nagendran</span>
+          <span class="chip">Navya</span>
+          <span class="chip">Neha</span>
+          <span class="chip">Nithin</span>
+          <span class="chip">Pragya</span>
+          <span class="chip">Rajesh</span>
+          <span class="chip">Roopa</span>
+          <span class="chip">Sai Prashanth</span>
+          <span class="chip">Shivani</span>
+          <span class="chip">Sreekanth</span>
+          <span class="chip">Sumithra</span>
+          <span class="chip">Venkat</span>
+        </div>
+
+        <hr class="rule-gold" style="margin-top:0.8em;" />
+        <h3 style="margin-bottom:0.5em;">Partner NGOs</h3>
+        <div class="callout callout-gold" style="margin-top:0.5em;">
+          <div class="callout-label">Nisarga Foundation</div>
+          <p>In 2025, we partnered with Nisarga Foundation to distribute 300 school bags, notebooks, and stationeries to tribal children in H.D. Kote.</p>
+        </div>
+        <div class="callout callout-gold" style="margin-top:0.5em;">
+          <div style="display: flex;justify-content: space-between;">
+            <div style="width: 90mm;display: flex;flex-direction: column;">
+              <div class="callout-label">Healthcare Partners</div>
+              <div style="width: 90mm;gap: 5mm;display: flex;flex-direction: column;">
+                <p><strong>Belaku Trust</strong> (Bangarpet):<br>Works with vulnerable and HIV-affected<br /> families in the region.</p>
+                <p><strong>Soukhya Samrudhi Samsthe</strong> (Kolar):<br>Partners with us to support children <br />from these families.</p>
+                <p><strong>District Health &amp; Family Welfare Department</strong> (Kolar):<br>Joins these NGOs to deliver healthcare<br /> and welfare support.</p>
+              </div>
+            </div>
+            <div class="img-wrap" style="margin-top:0.6em;">
+              <img src="/images/HIV.jpeg" alt="Community programme with Law Park, Belaku Trust, District Health &amp; Family Welfare Kolar, Soukhya Samsthe"
+                style="width:100%; height:140px; object-fit:cover; display:block;">
+              <div class="cap">Community programme with healthcare partners, Kolar</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">19</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 20 OUR DONORS
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Our Donors</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <div class="section-header">
+          <span class="kicker" style="color:var(--gold-light);">With Gratitude</span>
+          <h2 style="color:var(--white);">Our Donors</h2>
+        </div>
+
+        <p style="font-family:'Inter',sans-serif; font-size:10.5px; color:var(--ink-muted); margin-bottom:0.8em; font-style:italic;">Every name here represents a person or organisation that believed in a child's right
+          to
+          learn. We are grateful to each one of you.</p>
+
+        <div class="chip-grid" style="margin: 0.5em 0 1em;">
+          <span class="chip">Adarsh · Infinpro consultant, Chennai</span>
+          <span class="chip">Aishwarya Jain · Bengaluru</span>
+          <span class="chip">Amar · Bengaluru</span>
+          <span class="chip">Amara Ram · Bengaluru</span>
+          <span class="chip">Arpan Kaur</span>
+          <span class="chip">Arun · Chennai</span>
+          <span class="chip">Baba Fakrudin · Bengaluru</span>
+          <span class="chip">Babu · Bengaluru</span>
+          <span class="chip">ChandraShekar · Bengaluru</span>
+          <span class="chip">Chetan Kumar N · Bengaluru</span>
+          <span class="chip">Chetan · Bengaluru</span>
+          <span class="chip">Damodharan · Chennai</span>
+          <span class="chip">DESIGNX · Bengaluru</span>
+          <span class="chip">Dhananjay · Bengaluru</span>
+          <span class="chip">Dinesh · Bengaluru</span>
+          <span class="chip">Durga Steel Industries · Bengaluru</span>
+          <span class="chip">Gagan Karthik Sripuram · Bengaluru</span>
+          <span class="chip">Ganpat · Somvarpet</span>
+          <span class="chip">Ganesh · Tirunelveli</span>
+          <span class="chip">Ganesh · USA</span>
+          <span class="chip">Ganesh Ram · Chennai</span>
+          <span class="chip">Gandat Devaramji · Bengaluru</span>
+          <span class="chip">Geetha Jayaram · Bengaluru</span>
+          <span class="chip">Girish · Bengaluru</span>
+          <span class="chip">Guru Subramanian · Delhi</span>
+          <span class="chip">Indumathi · Chennai</span>
+          <span class="chip">J. Shanthi · Chennai</span>
+          <span class="chip">Jaganath A.S. · Abu Dhabi</span>
+          <span class="chip">Janardhan · Bengaluru</span>
+          <span class="chip">Jayanthai · Chennai</span>
+          <span class="chip">Johnson Andrews · USA</span>
+          <span class="chip">Kamalesh · Bengaluru</span>
+          <span class="chip">Kiran · Bengaluru</span>
+          <span class="chip">Krishnapriya · Bengaluru</span>
+          <span class="chip">Madhu · Chennai</span>
+          <span class="chip">Malithama B.V. · Bengaluru</span>
+          <span class="chip">Mamatha · Bengaluru</span>
+          <span class="chip">Mamatha Nagaraj · Bengaluru</span>
+          <span class="chip">Mamatha Prasanna · Bengaluru</span>
+          <span class="chip">Manish · Bengaluru</span>
+          <span class="chip">Manivanan · Bengaluru</span>
+          <span class="chip">Menaka · Bengaluru</span>
+          <span class="chip">Meyyappan · Chennai</span>
+          <span class="chip">Mohammed Moin · Chennai</span>
+          <span class="chip">Modran Spaace Ventures · Bengaluru</span>
+          <span class="chip">Monash Molding Solution · Bengaluru</span>
+          <span class="chip">Mukesh · Bengaluru</span>
+          <span class="chip">Murugavel Kuthaiyan · Bengaluru</span>
+          <span class="chip">Nanda Kumar · Bengaluru</span>
+          <span class="chip">Nagadev Amruthnath · USA</span>
+          <span class="chip">Nagendra · Bengaluru</span>
+          <span class="chip">Naveen · Bengaluru</span>
+          <span class="chip">Nihar Panigrahi · Bengaluru</span>
+          <span class="chip">P.C. Gopi · Chennai</span>
+          <span class="chip">PG Anand · USA</span>
+          <span class="chip">PG Baskar · Germany</span>
+          <span class="chip">Pavana · Bengaluru</span>
+          <span class="chip">Pavan · USA</span>
+          <span class="chip">Pinto · Bengaluru</span>
+          <span class="chip">Pooja · Bengaluru</span>
+          <span class="chip">Prabhagaran · Bengaluru</span>
+          <span class="chip">Prashansa Meyn · Denmark</span>
+          <span class="chip">Ragul Raja · Bengaluru</span>
+          <span class="chip">Raman Chandra Shekar · Bengaluru</span>
+          <span class="chip">Raman ChandraShekar · Bengaluru</span>
+          <span class="chip">Rashmi · Bengaluru</span>
+          <span class="chip">Reenu · Bengaluru</span>
+          <span class="chip">Reshma Krish Rainbow Builders · Bengaluru</span>
+          <span class="chip">Revanna · Bengaluru</span>
+          <span class="chip">Rita ChandraShekar · Chennai</span>
+          <span class="chip">Roshan · Bengaluru</span>
+          <span class="chip">Roopa · Bengaluru</span>
+          <span class="chip">Sai Prashanth · Chennai</span>
+          <span class="chip">Sandeep · Bengaluru</span>
+          <span class="chip">Sangeetha · Chennai</span>
+          <span class="chip">Sanjay · Chennai</span>
+          <span class="chip">Sasidhar · USA</span>
+          <span class="chip">Sasidhar Narayana · USA</span>
+          <span class="chip">Shabnam · Chennai</span>
+          <span class="chip">Shanthi · Chennai</span>
+          <span class="chip">Shoban · USA</span>
+          <span class="chip">Shruchikitchen · USA</span>
+          <span class="chip">Sireesh Auto Pvt Ltd · Bengaluru</span>
+          <span class="chip">Soniyajoby · Bengaluru</span>
+          <span class="chip">Sridhar Chakravarthy · Bengaluru</span>
+          <span class="chip">Subham Enterprises</span>
+          <span class="chip">Sumithra · Bengaluru</span>
+          <span class="chip">Sunita Ram Kumar · Chennai</span>
+          <span class="chip">Sunitha and Raj · USA</span>
+          <span class="chip">Supreeth Vimala Suresh · Bengaluru</span>
+          <span class="chip">Surana · Bengaluru</span>
+          <span class="chip">Swapna Sreedhar Murthy · Bengaluru</span>
+          <span class="chip">Swapna Sridhar Murthy · Bengaluru</span>
+          <span class="chip">Swapnil Saloni · Bengaluru</span>
+          <span class="chip">Sushmitha · UK</span>
+          <span class="chip">Theja · Bengaluru</span>
+          <span class="chip">Thirunarayanan · Dubai</span>
+          <span class="chip">Thilak Narayanan · Chennai</span>
+          <span class="chip">V. Saravanan · Chennai</span>
+          <span class="chip">Vanitha Girish · Bengaluru</span>
+          <span class="chip">Veena · Bengaluru</span>
+          <span class="chip">Veena Reddy · Bengaluru</span>
+          <span class="chip">Venu Motors · Bengaluru</span>
+          <span class="chip">Vidya and Vinod · USA</span>
+          <span class="chip">Vijay Kumar · Kerala</span>
+          <span class="chip">Vimara Devaramji · Bengaluru</span>
+          <span class="chip">Vishal Mohan Bhoj · Bengaluru</span>
+          <span class="chip">Yathish · Bengaluru</span>
+          <span class="chip">Yavanthi Shivakumar · Bengaluru</span>
+          <span class="chip">Zoho Corp</span>
+        </div>
+
+        <div class="pull" style="margin-top:0.6em;">
+          <q>Every name here is a child who stayed in school.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>lawparkeducationaltrust.org</span>
+        <span>journey.lawparkeducationaltrust.org</span>
+        <span class="folio">20</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   PAGE 21 CONNECT WITH US
+   ═══════════════════════════════════════════════ -->
+    <div class="page">
+      <div class="running-head">
+        <span>Connect With Us</span>
+        <span class="rh-dot"></span>
+        <span>10-Year Anniversary Magazine</span>
+      </div>
+
+      <div class="page-inner" style="padding-top: 14mm;">
+
+        <!-- Full-width image -->
+        <div style="width: calc(100% + 24mm); margin-left: -12mm; margin-top: -2mm; margin-bottom: 6mm; height: 52mm; overflow: hidden; position: relative;">
+          <img src="/images/slide_24_Picture_3_02.webp" alt="Community and learning" style="width:100%; height:100%; object-fit:cover; object-position:center; display:block;" />
+          <div style="position:absolute; inset:0; background:linear-gradient(to bottom, transparent 30%, rgba(28,28,46,.65) 100%);"></div>
+          <div style="position:absolute; bottom:12px; left:12mm; right:12mm;">
+            <p style="font-family:'Playfair Display',Georgia,serif; font-size:18px; font-style:italic; color:var(--white); margin:0; line-height:1.4;">Together, we keep every child in school.</p>
+          </div>
+        </div>
+
+        <span class="kicker">Stay Connected</span>
+        <h2>Walk a Little Further With Us</h2>
+        <span class="gold-line"></span>
+
+        <p>Ten years in, we are still driven by the same belief: a child's right to education should never depend on how much money their family has. There are many ways to be part of this work.</p>
+
+        <div style="margin-top: 0.8em;">
+          <div class="way">
+            <div class="way-icon"><span class="ms ms-way">child_care</span></div>
+            <div class="way-body">
+              <h4>Nominate a Child</h4>
+              <p>Do you know a child in a rural school who needs support to continue their education? Tell us. Our team visits every family personally and ensures help reaches those who need it most.</p>
+            </div>
+          </div>
+          <div class="way">
+            <div class="way-icon"><span class="ms ms-way">groups</span></div>
+            <div class="way-body">
+              <h4>Volunteer</h4>
+              <p>Skills in education, counselling, technology, legal support, or community outreach? We welcome volunteers who can give their time and expertise.</p>
+            </div>
+          </div>
+          <div class="way">
+            <div class="way-icon"><span class="ms ms-way">handshake</span></div>
+            <div class="way-body">
+              <h4>Partner With Us</h4>
+              <p>If you represent a company, school, or organisation that shares our values, let's explore CSR programmes, supply drives, or joint events together.</p>
+            </div>
+          </div>
+          <div class="way">
+            <div class="way-icon"><span class="ms ms-way">campaign</span></div>
+            <div class="way-body">
+              <h4>Spread the Word</h4>
+              <p>Share our story. Post about our work. Introduce us to someone who might care. Sometimes the most powerful thing you can do is tell one more person.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="callout callout-navy" style="margin-top: 0.8em;">
+          <div class="callout-label">Looking Ahead · The Next Decade</div>
+          <p style="color: #dbe2f9;">Ten years taught us that one child at a time is not a limitation — it is a philosophy. In the years ahead, we aim to extend our scholarship model to more districts, deepen career
+            counselling for senior students, and strengthen our library programme so that every rural school we work with has a reading corner its children can call their own.</p>
+        </div>
+
+        <div class="info-block">
+          <h4>Find Us Online</h4>
+          <div class="url">lawparkeducationaltrust.org</div>
+          <p>To nominate a child, volunteer, or partner with us — reach out through our website or write to us directly.</p>
+        </div>
+
+
+
+        <div class="pull" style="margin-top: 0.8em;">
+          <q>When it comes to education, no child deserves to be left behind.</q>
+        </div>
+      </div>
+
+      <div class="running-foot">
+        <span>Law Park Educational Trust · 10-Year Anniversary Magazine · 2016–2025</span>
+        <span>lawparkeducationaltrust.org</span>
+        <span class="folio">21</span>
+      </div>
+    </div>
+
+
+    <!-- ═══════════════════════════════════════════════
+   BACK COVER
+   ═══════════════════════════════════════════════ -->
+    <div class="back-cover">
+      <div style="position:relative; z-index:1; padding: 0 30mm;">
+
+        <div style="margin-bottom: 12mm;">
+          <div style="background: rgb(255 255 255 / 70%); padding: 10px 14px; border-radius: 6px; display: inline-block; box-shadow: 0 2px 12px rgba(0,0,0,.15);">
+            <img src="/images/logo-copy.png" alt="Law Park Educational Trust" style="width: 160px; height: auto; object-fit: contain; display: block;" />
+          </div>
+        </div>
+
+        <div style="width: 44px; height: 3px; background: var(--gold); margin: 0 auto 8mm;"></div>
+
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 28px; font-weight: 900; color: var(--white); line-height: 1.15; margin-bottom: 6mm;">
+          A Decade of Education,<br>Hope &amp; Change
+        </div>
+
+        <div style="font-family: 'Playfair Display', Georgia, serif; font-size: 15px; font-style: italic; color: var(--gold-light); margin-bottom: 8mm; line-height: 1.5;">
+          "When it comes to education, no child<br>deserves to be left behind."
+        </div>
+
+        <div style="width: 44px; height: 3px; background: var(--gold); margin: 0 auto 8mm;"></div>
+
+        <div class="bc-contact">
+          No 19/A-1, 14th 'B' Cross, 2nd A Main Rd, 6th Sector<br>
+          HSR Layout, Bengaluru 560102<br>
+          +91 99456 65379 · lawparktrust@gmail.com<br>
+          lawparkeducationaltrust.org · journey.lawparkeducationaltrust.org
+        </div>
+
+        <div class="bc-qr">
+          <img src="/images/mhaks.16@oksbi.jpg" alt="UPI QR code" />
+          <span>mhaks.16@oksbi</span>
+        </div>
+
+        <p class="bc-legal">Registered Educational Trust · Eligible for tax benefits under Section 80G of the Income Tax Act</p>
+
+        <div style="display: flex; align-items: center; justify-content: center; gap: 8px;">
+          <span style="display:block; height:1px; width:32px; background:var(--gold); opacity:0.5;"></span>
+          <span style="font-family:'Inter',sans-serif; font-size:8px; font-weight:700; letter-spacing:0.25em; text-transform:uppercase; color:var(--gold-light);">2016 – 2025</span>
+          <span style="display:block; height:1px; width:32px; background:var(--gold); opacity:0.5;"></span>
+        </div>
+
+        <div style="margin-top: 6mm; font-family:'Inter',sans-serif; font-size: 7.5px; color: rgba(255,255,255,.3); letter-spacing: 0.04em;">
+          Design: Propage · Printed in India
+        </div>
+
+      </div>
+    </div>
+
+  </div><!-- /.magazine -->
+</body>
+
+</html>

@@ -1,0 +1,1235 @@
+{
+  "totalSourceFiles": 243,
+  "categories": {
+    "awards": 4,
+    "brand": 8,
+    "children-stories": 6,
+    "featured": 6,
+    "icons": 13,
+    "illustrations": 13,
+    "magazine-gallery": 19,
+    "partners": 1,
+    "payments": 2,
+    "testimonial-portraits": 25,
+    "testimonials": 1,
+    "testimonials-processed": 25,
+    "timeline": 120
+  },
+  "files": [
+    {
+      "originalPath": "public/android-chrome-192x192.png",
+      "centralizedPath": "assets/images/icons/android-chrome-icon-192.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/android-chrome-192x192.webp",
+      "centralizedPath": "assets/images/icons/android-chrome-icon-192.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/android-chrome-512x512.png",
+      "centralizedPath": "assets/images/icons/android-chrome-icon-512.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/android-chrome-512x512.webp",
+      "centralizedPath": "assets/images/icons/android-chrome-icon-512.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/apple-touch-icon.png",
+      "centralizedPath": "assets/images/icons/apple-touch-icon.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/apple-touch-icon.webp",
+      "centralizedPath": "assets/images/icons/apple-touch-icon.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/favicon-16x16.png",
+      "centralizedPath": "assets/images/icons/favicon-16.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/favicon-16x16.webp",
+      "centralizedPath": "assets/images/icons/favicon-16.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/favicon-32x32.png",
+      "centralizedPath": "assets/images/icons/favicon-32.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/favicon-32x32.webp",
+      "centralizedPath": "assets/images/icons/favicon-32.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/illustrations/books.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-books.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/children.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-children.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/community.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-community.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/donation.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-donation.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/educator.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-educator.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/gifts.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-gifts.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/graduation.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-graduation.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/growth.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-growth.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/team.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-team.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/way-donate.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-way-donate.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/way-partner.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-way-partner.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/way-spread.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-way-spread.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/illustrations/way-volunteer.svg",
+      "centralizedPath": "assets/images/illustrations/illustration-way-volunteer.svg",
+      "category": "illustrations"
+    },
+    {
+      "originalPath": "public/images/1st-Child-1.jpeg",
+      "centralizedPath": "assets/images/children-stories/scholarship-interview-with-girl-and-guardian.jpeg",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/1st-Child-1.webp",
+      "centralizedPath": "assets/images/children-stories/scholarship-interview-with-girl-and-guardian.webp",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/1st-Child-2.jpeg",
+      "centralizedPath": "assets/images/children-stories/scholarship-interview-at-classroom-desk.jpeg",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/1st-Child-2.webp",
+      "centralizedPath": "assets/images/children-stories/scholarship-interview-at-classroom-desk.webp",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/1st-Child-3.jpeg",
+      "centralizedPath": "assets/images/children-stories/children-seated-in-hall-with-water-bottles.jpeg",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/1st-Child-3.webp",
+      "centralizedPath": "assets/images/children-stories/children-seated-in-hall-with-water-bottles.webp",
+      "category": "children-stories"
+    },
+    {
+      "originalPath": "public/images/2017-1.jpeg",
+      "centralizedPath": "assets/images/timeline/2017-classroom-talk-with-students.jpeg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/2017-1.webp",
+      "centralizedPath": "assets/images/timeline/2017-classroom-talk-with-students.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/2017-2.jpeg",
+      "centralizedPath": "assets/images/timeline/2017-students-seated-in-classroom.jpeg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/2017-2.webp",
+      "centralizedPath": "assets/images/timeline/2017-students-seated-in-classroom.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/2017.jpeg",
+      "centralizedPath": "assets/images/timeline/2017-school-group-photo.jpeg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/2017.webp",
+      "centralizedPath": "assets/images/timeline/2017-school-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/Bharat-Shiksha-Ratan-Award-Certificate.jpeg",
+      "centralizedPath": "assets/images/awards/bharat-shiksha-ratan-award-certificate-scan.jpeg",
+      "category": "awards"
+    },
+    {
+      "originalPath": "public/images/Bharat-Shiksha-Ratan-Award-Certificate.webp",
+      "centralizedPath": "assets/images/awards/bharat-shiksha-ratan-award-certificate-scan.webp",
+      "category": "awards"
+    },
+    {
+      "originalPath": "public/images/Bharat-Shiksha-Ratan-Award.jpg",
+      "centralizedPath": "assets/images/awards/framed-bharat-shiksha-ratan-award-certificate.jpg",
+      "category": "awards"
+    },
+    {
+      "originalPath": "public/images/Bharat-Shiksha-Ratan-Award.webp",
+      "centralizedPath": "assets/images/awards/framed-bharat-shiksha-ratan-award-certificate.webp",
+      "category": "awards"
+    },
+    {
+      "originalPath": "public/images/HIV.jpeg",
+      "centralizedPath": "assets/images/featured/support-session-for-hiv-affected-children.jpeg",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_01.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-waving-with-school-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_02.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/group-of-children-with-school-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_03.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/smiling-child-close-up.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_04.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-studying-at-desk.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_05.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/boy-holding-school-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_06.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-gathered-outside-school.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_07.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-showing-school-bags-on-veranda.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_08.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/child-opening-school-bag.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_09.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-sitting-on-grass.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_10.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/girl-holding-school-bag-in-corridor.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_11.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/hands-reaching-for-school-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_12.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-waving-with-school-bags.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_13.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-reaching-for-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_14.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/group-reaching-hands-for-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_15.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-sitting-with-school-bags.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_16.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/children-opening-school-bags-at-desk.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_17.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/two-children-outdoors-close-up.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_18.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/schoolchildren-seated-with-supplies.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/Magazine photos/mag_19.jpeg",
+      "centralizedPath": "assets/images/magazine-gallery/girls-opening-school-bags-outdoors.jpeg",
+      "category": "magazine-gallery"
+    },
+    {
+      "originalPath": "public/images/cover-bg.jpg",
+      "centralizedPath": "assets/images/featured/children-at-school-event-cover.jpg",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/cover-bg.png",
+      "centralizedPath": "assets/images/featured/children-at-school-event-cover.png",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/cover-bg.webp",
+      "centralizedPath": "assets/images/featured/children-at-school-event-cover.webp",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/hero.png",
+      "centralizedPath": "assets/images/featured/children-community-distribution-event-hero.png",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/hero.webp",
+      "centralizedPath": "assets/images/featured/children-community-distribution-event-hero.webp",
+      "category": "featured"
+    },
+    {
+      "originalPath": "public/images/logo-copy.png",
+      "centralizedPath": "assets/images/brand/law-park-logo-copy-public.png",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/logo-copy.webp",
+      "centralizedPath": "assets/images/brand/law-park-logo-copy-public.webp",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/logo-purple.png",
+      "centralizedPath": "assets/images/brand/law-park-logo-purple-public.png",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/logo-purple.webp",
+      "centralizedPath": "assets/images/brand/law-park-logo-purple-public.webp",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/logo.png",
+      "centralizedPath": "assets/images/brand/law-park-logo-public.png",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/logo.webp",
+      "centralizedPath": "assets/images/brand/law-park-logo-public.webp",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/mhaks.16@oksbi.jpeg",
+      "centralizedPath": "assets/images/payments/law-park-upi-qr-code.jpeg",
+      "category": "payments"
+    },
+    {
+      "originalPath": "public/images/mhaks.16@oksbi.jpg",
+      "centralizedPath": "assets/images/payments/law-park-upi-qr-code.jpg",
+      "category": "payments"
+    },
+    {
+      "originalPath": "public/images/slide_01_Picture_5_00.jpg",
+      "centralizedPath": "assets/images/brand/law-park-educational-trust-logo-mark.jpg",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/slide_01_Picture_5_00.webp",
+      "centralizedPath": "assets/images/brand/law-park-educational-trust-logo-mark.webp",
+      "category": "brand"
+    },
+    {
+      "originalPath": "public/images/slide_03_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2016-first-scholarship-home-visit.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_03_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2016-first-scholarship-home-visit.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_04_Picture_4_00.jpg",
+      "centralizedPath": "assets/images/timeline/2016-classroom-session-with-students.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_04_Picture_4_00.webp",
+      "centralizedPath": "assets/images/timeline/2016-classroom-session-with-students.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2017-scholarship-group-photo-on-school-veranda.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2017-scholarship-group-photo-on-school-veranda.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2018-classroom-presentation-session.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2018-classroom-presentation-session.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_4_02.jpg",
+      "centralizedPath": "assets/images/timeline/2018-students-lined-up-at-school-event.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_05_Picture_4_02.webp",
+      "centralizedPath": "assets/images/timeline/2018-students-lined-up-at-school-event.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_06_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2019-community-group-photo-outdoors.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_06_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2019-community-group-photo-outdoors.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_06_Picture_3_01.jpg",
+      "centralizedPath": "assets/images/timeline/2019-children-group-photo-at-blue-house.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_06_Picture_3_01.webp",
+      "centralizedPath": "assets/images/timeline/2019-children-group-photo-at-blue-house.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_07_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2020-pandemic-relief-announcement-poster.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_07_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2020-pandemic-relief-announcement-poster.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_08_Picture_5_00.jpg",
+      "centralizedPath": "assets/images/timeline/2021-scholarship-distribution-crowd.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_08_Picture_5_00.webp",
+      "centralizedPath": "assets/images/timeline/2021-scholarship-distribution-crowd.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2022-library-donation-poster.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2022-library-donation-poster.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_3_01.jpg",
+      "centralizedPath": "assets/images/timeline/2022-students-in-school-library.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_3_01.webp",
+      "centralizedPath": "assets/images/timeline/2022-students-in-school-library.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_4_02.jpg",
+      "centralizedPath": "assets/images/timeline/2022-library-bookshelves.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_09_Picture_4_02.webp",
+      "centralizedPath": "assets/images/timeline/2022-library-bookshelves.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_10_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2022-children-group-photo-indoors.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_10_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2022-children-group-photo-indoors.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_11_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2023-dms-jnana-kuteera-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_11_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2023-dms-jnana-kuteera-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_11_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2023-school-front-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_11_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2023-school-front-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_12_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2023-students-in-tribal-school-hall.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_12_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2023-students-in-tribal-school-hall.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_13_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2023-students-seated-in-corridor.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_13_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2023-students-seated-in-corridor.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_13_Picture_3_01.jpg",
+      "centralizedPath": "assets/images/timeline/2023-school-event-backdrop-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_13_Picture_3_01.webp",
+      "centralizedPath": "assets/images/timeline/2023-school-event-backdrop-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_14_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-dms-jnana-kuteera-front-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_14_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-dms-jnana-kuteera-front-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_15_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-group-photo-with-banners.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_15_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-group-photo-with-banners.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_16_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-newspaper-coverage-clipping.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_16_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-newspaper-coverage-clipping.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_17_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-home-support-meeting-with-students.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_17_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-home-support-meeting-with-students.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_2_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-car-trunk-filled-with-school-bags.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_2_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-car-trunk-filled-with-school-bags.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_3_01.jpg",
+      "centralizedPath": "assets/images/timeline/2024-school-supply-kit-on-floor.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_3_01.webp",
+      "centralizedPath": "assets/images/timeline/2024-school-supply-kit-on-floor.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_4_02.jpg",
+      "centralizedPath": "assets/images/timeline/2024-snack-packets-for-distribution.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_4_02.webp",
+      "centralizedPath": "assets/images/timeline/2024-snack-packets-for-distribution.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_5_03.jpg",
+      "centralizedPath": "assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_18_Picture_5_03.webp",
+      "centralizedPath": "assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-students-with-school-bags-at-rural-school.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-students-with-school-bags-at-rural-school.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2024-children-holding-school-bags.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2024-children-holding-school-bags.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_3_02.jpg",
+      "centralizedPath": "assets/images/timeline/2024-children-with-supplies-outdoors.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_3_02.webp",
+      "centralizedPath": "assets/images/timeline/2024-children-with-supplies-outdoors.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_4_03.jpg",
+      "centralizedPath": "assets/images/timeline/2024-school-front-bag-distribution.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_19_Picture_4_03.webp",
+      "centralizedPath": "assets/images/timeline/2024-school-front-bag-distribution.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_20_Picture_3_00.jpg",
+      "centralizedPath": "assets/images/timeline/2024-classroom-career-counselling-session.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_20_Picture_3_00.webp",
+      "centralizedPath": "assets/images/timeline/2024-classroom-career-counselling-session.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_21_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-school-front-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_21_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-school-front-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-saraswati-primary-school-sign.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-saraswati-primary-school-sign.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2025-government-primary-school-sign.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2025-government-primary-school-sign.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_3_02.jpg",
+      "centralizedPath": "assets/images/timeline/2025-colorful-school-building.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_3_02.webp",
+      "centralizedPath": "assets/images/timeline/2025-colorful-school-building.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_5_03.jpg",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-group-at-school-garden.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_23_Picture_5_03.webp",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-group-at-school-garden.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-with-volunteers-under-tree.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-with-volunteers-under-tree.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-showing-school-bags-outdoors.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-showing-school-bags-outdoors.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_3_02.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-holding-supplies-outdoors.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_3_02.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-holding-supplies-outdoors.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_4_03.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-with-notebooks-and-volunteers.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_4_03.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-with-notebooks-and-volunteers.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_5_04.jpg",
+      "centralizedPath": "assets/images/timeline/2025-classroom-full-of-children-with-supplies.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_5_04.webp",
+      "centralizedPath": "assets/images/timeline/2025-classroom-full-of-children-with-supplies.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_6_05.jpg",
+      "centralizedPath": "assets/images/timeline/2025-schoolchildren-showing-school-bags-on-veranda.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_24_Picture_6_05.webp",
+      "centralizedPath": "assets/images/timeline/2025-schoolchildren-showing-school-bags-on-veranda.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_25_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-stacked-school-bags-close-up.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_25_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-stacked-school-bags-close-up.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_25_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2025-students-carrying-backpacks.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_25_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2025-students-carrying-backpacks.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_10_07.jpg",
+      "centralizedPath": "assets/images/timeline/2025-child-with-school-kit-close-up.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_10_07.webp",
+      "centralizedPath": "assets/images/timeline/2025-child-with-school-kit-close-up.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-tying-shoe-for-child.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-tying-shoe-for-child.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_2_01.jpg",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-giving-supplies-to-child.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_2_01.webp",
+      "centralizedPath": "assets/images/timeline/2025-volunteer-giving-supplies-to-child.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_3_02.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-receiving-school-kits.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_3_02.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-receiving-school-kits.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_4_03.jpg",
+      "centralizedPath": "assets/images/timeline/2025-stationery-and-snacks-arranged.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_4_03.webp",
+      "centralizedPath": "assets/images/timeline/2025-stationery-and-snacks-arranged.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_5_04.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-seated-outdoors-in-circle.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_5_04.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-seated-outdoors-in-circle.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_6_05.jpg",
+      "centralizedPath": "assets/images/timeline/2025-children-reaching-for-supplies.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_6_05.webp",
+      "centralizedPath": "assets/images/timeline/2025-children-reaching-for-supplies.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_8_06.jpg",
+      "centralizedPath": "assets/images/timeline/2025-schoolwide-supplies-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_27_Picture_8_06.webp",
+      "centralizedPath": "assets/images/timeline/2025-schoolwide-supplies-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_28_Picture_3_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-large-community-celebration-group-photo.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_28_Picture_3_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-large-community-celebration-group-photo.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_29_Picture_5_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-hall-full-of-volunteers-and-children.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_29_Picture_5_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-hall-full-of-volunteers-and-children.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_30_Picture_1_00.jpg",
+      "centralizedPath": "assets/images/timeline/2025-classroom-full-of-beneficiary-families.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_30_Picture_1_00.webp",
+      "centralizedPath": "assets/images/timeline/2025-classroom-full-of-beneficiary-families.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_32_Picture_2_00.jpg",
+      "centralizedPath": "assets/images/timeline/thank-you-volunteers-card.jpg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/slide_32_Picture_2_00.webp",
+      "centralizedPath": "assets/images/timeline/thank-you-volunteers-card.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/steel-plate-and-glass-distributed-to-these-children.jpeg",
+      "centralizedPath": "assets/images/timeline/children-with-steel-plates-and-glasses-distribution.jpeg",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/steel-plate-and-glass-distributed-to-these-children.webp",
+      "centralizedPath": "assets/images/timeline/children-with-steel-plates-and-glasses-distribution.webp",
+      "category": "timeline"
+    },
+    {
+      "originalPath": "public/images/tech-hat-pvt-ltd-logo.svg",
+      "centralizedPath": "assets/images/partners/tech-hat-pvt-ltd-logo.svg",
+      "category": "partners"
+    },
+    {
+      "originalPath": "public/images/varalakshmianddrnandakumar.webp",
+      "centralizedPath": "assets/images/testimonials/dr-varalakshmi-and-dr-nandakumar-portrait.webp",
+      "category": "testimonials"
+    },
+    {
+      "originalPath": "public/logo.png",
+      "centralizedPath": "assets/images/icons/logo.png",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/logo.webp",
+      "centralizedPath": "assets/images/icons/logo.webp",
+      "category": "icons"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image1.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/tech-hat-pvt-ltd-logo-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image10.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-suit-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image11.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/sky-bloo-smart-school-logo-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image12.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-grey-tshirt-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image13.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-blue-shirt-outdoor-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image14.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-beige-saree-office-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image15.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-blue-kurta-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image16.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-hilltop-view-photo-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image17.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/k-v-ramani-certificate-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image18.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/man-id-photo-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image19.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/couple-selfie-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image2.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/smiling-couple-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image20.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/mustached-man-red-background-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image21.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/bearded-man-plaid-shirt-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image22.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/infinpro-consultants-logo-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image23.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/smiling-man-bridge-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image24.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-white-top-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image25.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-bindi-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image3.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-yellow-salwar-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image4.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/smiling-couple-festival-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image5.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-saree-glasses-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image6.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-blue-saree-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image7.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/smiling-man-glasses-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image8.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-brown-jacket-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/NGO_Processed_Images/image9.jpg",
+      "centralizedPath": "assets/images/testimonials-processed/woman-black-blazer-portrait-processed.jpg",
+      "category": "testimonials-processed"
+    },
+    {
+      "originalPath": "public/magazine/print/Aishwarya-K.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-aishwarya-k.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Anand-Gopi.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-anand-gopi.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Arun-AK.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-arun-ak.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Bhavya-Shravanth.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-bhavya-shravanth.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Damodaran,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-damodaran.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Dr.-Adarsh-Babu,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-dr-adarsh-babu.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Dr.-Varalakshmi-and-Dr.-Nandakumar,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-dr-varalakshmi-and-dr-nandakumar.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Jayanthi-Subramanian,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-jayanthi-subramanian.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/K.V.-Ramani.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-k-v-ramani.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Kavitha-Hari.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-kavitha-hari.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Krishnapriya,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-krishnapriya.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Latha-s.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-latha-s.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Mr.-Nihar-Panigrahi.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-mr-nihar-panigrahi.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Ms.-Pooja-Banadka.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-ms-pooja-banadka.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/P.V.-Rangaiah..jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-p-v-rangaiah.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/R.-Guru-Subramanian.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-r-guru-subramanian.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Rajesh-Reddy.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-rajesh-reddy.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Ramya-Balaji.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-ramya-balaji.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Reshma.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-reshma.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/S.-Sumesh.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-s-sumesh.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Sai-Prasanth.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-sai-prasanth.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Sangeetha-Arun.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-sangeetha-arun.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Sathyabrata,.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-sathyabrata.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Sreekanth.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-sreekanth.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/magazine/print/Srividya-Vinod.jpeg",
+      "centralizedPath": "assets/images/testimonial-portraits/portrait-srividya-vinod.jpeg",
+      "category": "testimonial-portraits"
+    },
+    {
+      "originalPath": "public/vite.svg",
+      "centralizedPath": "assets/images/icons/vite.svg",
+      "category": "icons"
+    }
+  ]
+}

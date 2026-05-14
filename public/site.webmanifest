@@ -1,0 +1,24 @@
+{
+  "name": "Law Park Educational Trust",
+  "short_name": "LPET",
+  "description": "10 Years of Transforming Lives - Helping children from rural areas across India get their right to education through funded scholarships.",
+  "icons": [
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#15803d",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "orientation": "portrait-primary"
+}

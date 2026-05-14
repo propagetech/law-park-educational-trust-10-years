@@ -1,0 +1,78 @@
+import type { Milestone } from '../types'
+
+export const milestones: Milestone[] = [
+  {
+    year: 2016,
+    title: 'Our First Scholarship',
+    description: 'It was the first child to whom we gave scholarship and this was our first school visit. We distributed steel plates and steel glass to 150 students in Chickaballapur.',
+    location: 'Chickaballapur',
+    images: ['slide_03_Picture_1_00.webp', 'slide_04_Picture_4_00.webp', 'steel-plate-and-glass-distributed-to-these-children.webp'],
+    impact: '1 scholarship, 150 students received supplies',
+  },
+  {
+    year: 2017,
+    title: 'Growing Support',
+    description: '10 students were given scholarship, marking our continued commitment to supporting education in rural areas.',
+    location: 'Chickaballapur',
+    images: ['slide_05_Picture_1_00.webp', '2017.webp', '2017-1.webp', '2017-2.webp'],
+    impact: '10 students',
+  },
+  {
+    year: 2018,
+    title: 'Expanding Reach',
+    description: 'Continued support in Chickaballapur, building on our foundation.',
+    location: 'Chickaballapur',
+    images: ['slide_05_Picture_2_01.webp', 'slide_05_Picture_4_02.webp'],
+  },
+  {
+    year: 2019,
+    title: 'Growing Impact',
+    description: 'Scholarships were given to more children, expanding our reach.',
+    location: 'KGF',
+    images: ['slide_06_Picture_1_00.webp', 'slide_06_Picture_3_01.webp'],
+  },
+  {
+    year: 2020,
+    title: 'Pandemic Resilience',
+    description: 'Continued support during challenging times.',
+    location: 'Chickaballapur, KGF',
+    images: ['slide_07_Picture_1_00.webp'],
+  },
+  {
+    year: 2021,
+    title: 'Significant Milestone',
+    description: 'Children were given scholarship, marking a significant milestone in our journey.',
+    location: 'KGF',
+    images: ['slide_08_Picture_5_00.webp'],
+  },
+  {
+    year: 2022,
+    title: 'Library Initiative',
+    description: 'Libraries were setup in few rural schools with donated books (Story books, acedemic books related to engineering, NEET, unused note books). Rural sector scholarship conducted at Law park office premises.',
+    location: 'Mandya, Kolar',
+    images: ['slide_09_Picture_1_00.webp', 'slide_09_Picture_3_01.webp', 'slide_09_Picture_4_02.webp', 'slide_10_Picture_1_00.webp'],
+  },
+  {
+    year: 2023,
+    title: 'Multi-Location Expansion',
+    description: 'Expanded to Mysore and H.D. Kote. Conducted career counselling for 10th and 9th standard students.',
+    location: 'Mysore, H.D. Kote',
+    images: ['slide_11_Picture_1_00.webp', 'slide_11_Picture_2_01.webp', 'slide_12_Picture_1_00.webp', 'slide_13_Picture_1_00.webp', 'slide_13_Picture_3_01.webp'],
+  },
+  {
+    year: 2024,
+    title: 'Continued Growth',
+    description: 'Visited DMS Jnana Kuteera School for interviews and career counselling. Conducted scholarship interviews in Mulbagal. Started academic year 2024-25 with visit to MM Hills tribal schools to distribute 200 school bags, notebooks and stationeries. Extended support to HIV affected children.',
+    location: 'Pandavapura, Mulbagal, MM Hills, H.D. Kote',
+    images: ['slide_14_Picture_1_00.webp', 'slide_15_Picture_1_00.webp', 'slide_16_Picture_1_00.webp', 'slide_17_Picture_1_00.webp', 'slide_18_Picture_2_00.webp', 'slide_18_Picture_3_01.webp', 'slide_18_Picture_4_02.webp', 'slide_18_Picture_5_03.webp', 'slide_19_Picture_1_00.webp', 'slide_19_Picture_2_01.webp', 'slide_19_Picture_3_02.webp', 'slide_19_Picture_4_03.webp', 'slide_20_Picture_3_00.webp'],
+    impact: '200+ students',
+  },
+  {
+    year: 2025,
+    title: 'Record Impact',
+    description: 'Distributed 300 school bags, notebooks and stationeries to H.D. Kote tribal kids in association with Nisarga foundation. Conducted interviews in KGF and Kolar. Distributed supplies to HIV affected children and other Chronic Health Condition kids. 20 students received scholarship at DMS Jnana Kuteera School.',
+    location: 'H.D. Kote, KGF, Kolar, Pandavapura',
+    images: ['slide_21_Picture_1_00.webp', 'slide_23_Picture_1_00.webp', 'slide_23_Picture_2_01.webp', 'slide_23_Picture_3_02.webp', 'slide_23_Picture_5_03.webp', 'slide_24_Picture_1_00.webp', 'slide_24_Picture_2_01.webp', 'slide_24_Picture_3_02.webp', 'slide_24_Picture_4_03.webp', 'slide_24_Picture_5_04.webp', 'slide_24_Picture_6_05.webp', 'slide_25_Picture_1_00.webp', 'slide_25_Picture_2_01.webp', 'slide_27_Picture_1_00.webp', 'slide_27_Picture_2_01.webp', 'slide_27_Picture_3_02.webp', 'slide_27_Picture_4_03.webp', 'slide_27_Picture_5_04.webp', 'slide_27_Picture_6_05.webp', 'slide_27_Picture_8_06.webp', 'slide_27_Picture_10_07.webp', 'slide_28_Picture_3_00.webp', 'slide_29_Picture_5_00.webp'],
+    impact: '300+ students',
+  },
+]

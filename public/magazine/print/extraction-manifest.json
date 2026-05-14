@@ -1,0 +1,227 @@
+[
+  {
+    "file": "Sreekanth.jpeg",
+    "source_paragraph_index": 6,
+    "relationship_id": "rId5",
+    "docx_media": "media/image1.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Sreekanth",
+    "bytes": 7438
+  },
+  {
+    "file": "Dr.-Varalakshmi-and-Dr.-Nandakumar,.jpeg",
+    "source_paragraph_index": 15,
+    "relationship_id": "rId6",
+    "docx_media": "media/image2.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Dr. Varalakshmi and Dr. Nandakumar,",
+    "bytes": 34424
+  },
+  {
+    "file": "Aishwarya-K.jpeg",
+    "source_paragraph_index": 25,
+    "relationship_id": "rId7",
+    "docx_media": "media/image3.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Aishwarya K",
+    "bytes": 18655
+  },
+  {
+    "file": "Srividya-Vinod.jpeg",
+    "source_paragraph_index": 29,
+    "relationship_id": "rId8",
+    "docx_media": "media/image4.jpeg",
+    "name_source": "after",
+    "label_from_doc": "Srividya Vinod",
+    "bytes": 52946
+  },
+  {
+    "file": "Sangeetha-Arun.jpeg",
+    "source_paragraph_index": 40,
+    "relationship_id": "rId9",
+    "docx_media": "media/image5.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Sangeetha Arun",
+    "bytes": 37377
+  },
+  {
+    "file": "Ramya-Balaji.jpeg",
+    "source_paragraph_index": 49,
+    "relationship_id": "rId10",
+    "docx_media": "media/image6.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Ramya Balaji",
+    "bytes": 20984
+  },
+  {
+    "file": "Mr.-Nihar-Panigrahi.jpeg",
+    "source_paragraph_index": 54,
+    "relationship_id": "rId11",
+    "docx_media": "media/image7.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Mr. Nihar Panigrahi",
+    "bytes": 18758
+  },
+  {
+    "file": "Ms.-Pooja-Banadka.jpeg",
+    "source_paragraph_index": 60,
+    "relationship_id": "rId12",
+    "docx_media": "media/image8.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Ms. Pooja Banadka",
+    "bytes": 23910
+  },
+  {
+    "file": "Krishnapriya,.jpeg",
+    "source_paragraph_index": 71,
+    "relationship_id": "rId13",
+    "docx_media": "media/image9.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Krishnapriya,",
+    "bytes": 26167
+  },
+  {
+    "file": "Rajesh-Reddy.jpeg",
+    "source_paragraph_index": 79,
+    "relationship_id": "rId14",
+    "docx_media": "media/image10.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Rajesh Reddy",
+    "bytes": 17833
+  },
+  {
+    "file": "Kavitha-Hari.jpeg",
+    "source_paragraph_index": 89,
+    "relationship_id": "rId15",
+    "docx_media": "media/image11.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Kavitha Hari",
+    "bytes": 13843
+  },
+  {
+    "file": "P.V.-Rangaiah..jpeg",
+    "source_paragraph_index": 98,
+    "relationship_id": "rId16",
+    "docx_media": "media/image12.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "P.V. Rangaiah.",
+    "bytes": 40620
+  },
+  {
+    "file": "S.-Sumesh.jpeg",
+    "source_paragraph_index": 110,
+    "relationship_id": "rId17",
+    "docx_media": "media/image13.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "S. Sumesh",
+    "bytes": 24646
+  },
+  {
+    "file": "Reshma.jpeg",
+    "source_paragraph_index": 117,
+    "relationship_id": "rId18",
+    "docx_media": "media/image14.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Reshma",
+    "bytes": 40502
+  },
+  {
+    "file": "Sathyabrata,.jpeg",
+    "source_paragraph_index": 130,
+    "relationship_id": "rId19",
+    "docx_media": "media/image15.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Sathyabrata,",
+    "bytes": 41891
+  },
+  {
+    "file": "Sai-Prasanth.jpeg",
+    "source_paragraph_index": 156,
+    "relationship_id": "rId20",
+    "docx_media": "media/image16.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Sai Prasanth",
+    "bytes": 20662
+  },
+  {
+    "file": "K.V.-Ramani.jpeg",
+    "source_paragraph_index": 168,
+    "relationship_id": "rId21",
+    "docx_media": "media/image17.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "K.V. Ramani",
+    "bytes": 40050
+  },
+  {
+    "file": "R.-Guru-Subramanian.jpeg",
+    "source_paragraph_index": 179,
+    "relationship_id": "rId22",
+    "docx_media": "media/image18.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "R. Guru Subramanian",
+    "bytes": 23582
+  },
+  {
+    "file": "Bhavya-Shravanth.jpeg",
+    "source_paragraph_index": 189,
+    "relationship_id": "rId23",
+    "docx_media": "media/image19.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Bhavya Shravanth",
+    "bytes": 25467
+  },
+  {
+    "file": "Damodaran,.jpeg",
+    "source_paragraph_index": 193,
+    "relationship_id": "rId24",
+    "docx_media": "media/image20.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Damodaran,",
+    "bytes": 13445
+  },
+  {
+    "file": "Dr.-Adarsh-Babu,.jpeg",
+    "source_paragraph_index": 201,
+    "relationship_id": "rId25",
+    "docx_media": "media/image21.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Dr. Adarsh Babu,",
+    "bytes": 32915
+  },
+  {
+    "file": "Arun-AK.jpeg",
+    "source_paragraph_index": 211,
+    "relationship_id": "rId26",
+    "docx_media": "media/image22.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Arun AK",
+    "bytes": 10253
+  },
+  {
+    "file": "Anand-Gopi.jpeg",
+    "source_paragraph_index": 220,
+    "relationship_id": "rId27",
+    "docx_media": "media/image23.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Anand Gopi",
+    "bytes": 24822
+  },
+  {
+    "file": "Latha-s.jpeg",
+    "source_paragraph_index": 249,
+    "relationship_id": "rId28",
+    "docx_media": "media/image24.jpeg",
+    "name_source": "before-block",
+    "label_from_doc": "Latha s",
+    "bytes": 19332
+  },
+  {
+    "file": "Jayanthi-Subramanian,.jpeg",
+    "source_paragraph_index": 257,
+    "relationship_id": "rId29",
+    "docx_media": "media/image25.jpeg",
+    "name_source": "after",
+    "label_from_doc": "Jayanthi Subramanian,",
+    "bytes": 6363
+  }
+]

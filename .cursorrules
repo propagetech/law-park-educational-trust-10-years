@@ -1,0 +1,124 @@
+# Law Park Educational Trust - Cursor Rules
+
+## Tech Stack
+- **Next.js 16.1.1+** - React framework with App Router
+- **React 19.2.3+** - UI library
+- **TypeScript 5.9.3** - Type safety
+- **Tailwind CSS 4.1.18+** - Utility-first CSS framework
+- **Node.js >=20.9.0** - Runtime requirement (CRITICAL)
+
+## Critical Version Requirements
+
+### Node.js Version Requirement
+**IMPORTANT**: This project requires Node.js version **>=20.9.0**. Next.js 16+ requires Node.js 20.9.0 or higher.
+
+#### Common Build Error
+If you encounter this error:
+```
+You are using Node.js 18.20.8. For Next.js, Node.js version ">=20.9.0" is required.
+Error: Process completed with exit code 1.
+```
+
+**Solution:**
+1. Update `.github/workflows/deploy.yml` to use Node.js 20:
+   ```yaml
+   - name: Setup Node.js
+     uses: actions/setup-node@v4
+     with:
+       node-version: '20'  # Must be 20 or higher
+   ```
+
+2. Ensure `package.json` has engines field:
+   ```json
+   "engines": {
+     "node": ">=20.9.0"
+   }
+   ```
+
+3. Create/update `.nvmrc` file with:
+   ```
+   20
+   ```
+
+4. For local development, use Node.js 20+:
+   ```bash
+   nvm use  # If .nvmrc exists
+   # or
+   nvm install 20
+   nvm use 20
+   ```
+
+#### Version Management Checklist
+When setting up CI/CD or local environments:
+- ✅ Check `package.json` engines field matches Next.js requirements
+- ✅ Verify `.github/workflows/*.yml` uses Node.js 20+
+- ✅ Ensure `.nvmrc` file exists and specifies Node.js 20
+- ✅ Update any Dockerfiles or deployment configs to use Node.js 20+
+
+## Code Style and Best Practices
+
+### TypeScript
+- Use TypeScript for all code
+- Prefer interfaces over types
+- Avoid enums; use maps instead
+- Use functional components with TypeScript interfaces
+
+### React/Next.js
+- Use functional components
+- Use Next.js `Link` component for navigation (not `<a>` tags)
+- Use Next.js `Image` component for optimized images
+- Follow Next.js App Router conventions
+- Use server components by default, client components when needed
+
+### Styling
+- Use Tailwind CSS for all styling
+- Follow utility-first approach
+- Use responsive design utilities (sm:, md:, lg:, xl:)
+- Maintain consistent spacing and typography
+
+### File Structure
+- Components in `components/` directory
+- Data in `data/` directory
+- Types in `types/` directory
+- Utils in `utils/` directory
+- Use lowercase with dashes for directories (e.g., `components/auth-wizard`)
+
+### Naming Conventions
+- Use lowercase with dashes for directories
+- Favor named exports for components
+- Use descriptive variable names with auxiliary verbs (e.g., `isLoading`, `hasError`)
+
+## Build and Deployment
+
+### Build Commands
+- `npm run dev` - Start development server
+- `npm run build` - Build for production (static export for GitHub Pages)
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+
+### Deployment
+- Static export configured for GitHub Pages
+- Output directory: `out/`
+- GitHub Actions workflow: `.github/workflows/deploy.yml`
+- Ensure Node.js 20+ is used in CI/CD pipeline
+
+## Common Issues and Solutions
+
+### Build Errors
+1. **Node.js version mismatch**: Always verify Node.js >=20.9.0
+2. **TypeScript errors**: Run `npm run lint` to check for issues
+3. **Image optimization**: Use Next.js Image component or Sharp for optimization
+
+### Performance
+- Use Next.js Image component for automatic optimization
+- Implement lazy loading for images
+- Use static generation where possible
+- Optimize bundle size with proper imports
+
+## Project-Specific Notes
+
+- This is a static site deployed to GitHub Pages
+- Uses Next.js static export (`output: 'export'` in `next.config.js`)
+- All images should be in `public/` directory
+- Gallery images are in `public/images/` directory
+

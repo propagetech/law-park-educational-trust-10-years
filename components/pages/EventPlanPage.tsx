@@ -4,7 +4,6 @@ import Card from '../ui/Card'
 
 const NAVY = '#1c1c2e'
 const GOLD = '#c9903e'
-
 const programmeFlow = [
   {
     time: '~30 min',

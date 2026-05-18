@@ -45,7 +45,7 @@ function Hero() {
               className="text-xs font-semibold tracking-widest uppercase"
               style={{ color: GOLD_LIGHT, fontFamily: 'Quicksand, sans-serif', letterSpacing: '0.22em' }}
             >
-              10-Year Anniversary · 2016 – 2025
+              10-Year Anniversary · 2016 – 2026
             </span>
           </div>
 

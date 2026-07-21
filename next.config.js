@@ -1,6 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'export', // Static export for GitHub Pages
+  output: 'export', // Static export for Cloudflare Pages
   turbopack: {
     root: __dirname, // Silence "inferred workspace root" when multiple lockfiles exist
   },

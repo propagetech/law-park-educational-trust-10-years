@@ -254,6 +254,72 @@ def zoom_at(g, u):
         u = 0.0 if u * dur < wait else (u * dur - wait) / (dur - wait)
     return z0 + (z1 - z0) * ease(max(0.0, min(1.0, u)))
 
+# ---------------------------------------------------------------- sharpening
+# WHY, AND WHY ONLY ON THE PHOTOGRAPHY
+# Nothing in this library is large. tools/frame_audit.py reports the worst
+# enlargement per shot and five of the 37 photographic shots run over 2.0x, K11
+# hardest at 2.65x on a 747x1328 source. That source is not a bad copy: matching
+# every in-use photograph against the 81 images embedded in the magazine PDF
+# they were cut from finds each one at byte-identical dimensions, so there is no
+# larger original in the repository to go back to.
+#
+# What is left is finishing. Lanczos is a soft-by-design resampler and a mild
+# unsharp mask recovers most of the apparent detail it gives up. The amount is
+# tied to how hard each shot is actually being enlarged, so a shot at 1.25x is
+# left alone and only the ones that need it are touched.
+#
+# It is applied to the PHOTOGRAPHY ONLY, before any graphic is composited. The
+# Kannada is drawn by Chrome at the output resolution and is already exactly as
+# crisp as it is going to be; sharpening it would put halos on glyph edges and
+# on the gold rules, which is the usual way this goes wrong.
+SHARPEN_FLOOR = 1.20      # below this, an enlargement costs nothing worth fixing
+SHARPEN_PER_X = 60.0      # percent of unsharp per 1.0x of enlargement past the floor
+SHARPEN_MAX = 90.0        # halos start to show above this on skin and sky
+SHARPEN_THRESHOLD = 3     # leave flat areas alone rather than lifting their grain
+
+
+def sharpened(im, enlarge):
+    """Unsharp in proportion to how far the source was pushed."""
+    pct = min(SHARPEN_MAX, max(0.0, (enlarge - SHARPEN_FLOOR) * SHARPEN_PER_X))
+    if pct < 4.0:
+        return im
+    return im.filter(ImageFilter.UnsharpMask(
+        radius=o(1.0), percent=int(round(pct)), threshold=SHARPEN_THRESHOLD))
+
+
+_enlarge = {}
+
+
+def enlargement(sid):
+    """How far this shot's worst frame pushes its source. Cached, measured once."""
+    if sid in _enlarge:
+        return _enlarge[sid]
+    g = G[sid]
+    z = max(g.get("push", (1.0, 1.0)))
+    sh = next(x for x in TL if x["sid"] == sid)
+    if g["mode"] == "collage":
+        cols = g.get("cols", len(g["tiles"]))
+        rows = (len(g["tiles"]) + cols - 1) // cols
+        cw, ch = W / cols, H / rows
+        v = max(cw / cover(src(p), b, aspect=cw / ch).size[0] for p, b in g["tiles"])
+    elif g["mode"] == "panel":
+        pw = o(g.get("panel_w", 760))
+        v = (W - pw) / cover(src(sh["path"]), g.get("box"),
+                             aspect=(W - pw) / H).size[0]
+    elif g["mode"] == "card":
+        im = src(sh["path"])
+        if g.get("box"):
+            im = im.crop(g["box"])
+        kind, px = g["fit"]
+        v = o(px) / (im.size[0] if kind == "w" else im.size[1])
+    elif g["mode"] == "chain":
+        v = max(W / cover(src(p), b).size[0] for p, b in g["parts"])
+    else:
+        v = W / cover(src(sh["path"]), g.get("box")).size[0]
+    _enlarge[sid] = v * z
+    return _enlarge[sid]
+
+
 # ---------------------------------------------------------------- collage
 # WHY A COLLAGE RATHER THAN A BIGGER CROP
 # Five of this cut's photographs are portrait or square and none of them is
@@ -395,6 +461,9 @@ def card_frame(sh, u):
     if abs(z - 1.0) > 1e-3:
         pw, phh = ph.size
         ph = ph.resize((int(round(pw * z)), int(round(phh * z))), Image.LANCZOS)
+    # The clipping only. card_ground is a deliberately blurred backdrop and
+    # sharpening it would undo the one thing it is for.
+    ph = sharpened(ph, enlargement(sid))
     base = card_ground(sh, g)
     pw, phh = ph.size
     align = g.get("align", "center")
@@ -429,7 +498,8 @@ def clean(sh, t):
         base.paste(im.convert("RGB"), (0, 0))
         return base
     if g["mode"] == "collage":
-        return zoomed(collage_plate(sid, g), zoom_at(g, u))
+        return sharpened(zoomed(collage_plate(sid, g), zoom_at(g, u)),
+                         enlargement(sid))
     if g["mode"] == "card":
         return card_frame(sh, u)
     if g["mode"] == "panel":
@@ -441,7 +511,8 @@ def clean(sh, t):
         pw = o(g.get("panel_w", 760))
         base = Image.new("RGB", (W, H), NAVY)
         photo = cover(src(sh["path"]), g.get("box"), aspect=(W - pw) / H)
-        base.paste(photo.resize((W - pw, H), Image.LANCZOS), (pw, 0))
+        base.paste(sharpened(photo.resize((W - pw, H), Image.LANCZOS),
+                             enlargement(sid)), (pw, 0))
         ov = gfx(gfx_state(g, t))
         base = Image.alpha_composite(base.convert("RGBA"), ov).convert("RGB")
         return base
@@ -456,8 +527,8 @@ def clean(sh, t):
         if i > 0 and lt < xf:
             prev = zoomed(parts[i - 1], z)
             cur = Image.blend(prev, cur, lt / xf)
-        return cur
-    return zoomed(plate(sh), zoom_at(g, u))
+        return sharpened(cur, enlargement(sid))
+    return sharpened(zoomed(plate(sh), zoom_at(g, u)), enlargement(sid))
 
 def with_overlays(sh, t, img):
     out = img.convert("RGBA")

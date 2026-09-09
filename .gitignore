@@ -73,3 +73,13 @@ anniversary-video-production/**/tools/vo_eleven/
 # and the cue sheet and licence log beside the pack are the record of what is in
 # them. `tools/*.wav` above does not reach a subdirectory, so it is named here.
 anniversary-video-production/**/tools/mix/
+
+# Local env (never commit API keys)
+.env
+.env.*
+!.env.example
+
+# ElevenLabs Kannada voice pipeline artefacts
+anniversary-video-production/kannada-voice/audition-audio/
+anniversary-video-production/kannada-voice/final-narration/
+anniversary-video-production/kannada-voice/manifests/narration-generation-log.csv

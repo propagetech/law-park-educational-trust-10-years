@@ -3,6 +3,9 @@
 import Link from 'next/link'
 import Card from '../ui/Card'
 
+const TEAM_HANDOFF_URL =
+  'https://journey.lawparkeducationaltrust.org/anniversary-video-production/kannada/team-handoff'
+
 function ContentLandingPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -16,7 +19,71 @@ function ContentLandingPage() {
           </p>
         </div>
 
+        <div className="max-w-6xl mx-auto mb-8 rounded-lg border border-primary-200 bg-primary-50 px-5 py-4 text-left">
+          <p className="text-sm font-semibold text-primary-900 mb-1">Creative team · Kannada film (no repo)</p>
+          <p className="text-sm text-primary-800 break-all">
+            Handoff:{' '}
+            <a
+              href={TEAM_HANDOFF_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-medium"
+            >
+              {TEAM_HANDOFF_URL}
+            </a>
+          </p>
+        </div>
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+          <a
+            href={TEAM_HANDOFF_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg"
+          >
+            <Card className="p-8 h-full" hover>
+              <div className="flex flex-col h-full">
+                <div className="mb-4 text-4xl" aria-hidden>
+                  📋
+                </div>
+                <h2 className="text-2xl font-bold mb-3 text-gray-900">
+                  Kannada Film · Team Handoff
+                </h2>
+                <p className="text-gray-600 flex-1 mb-6">
+                  Full production handoff: watch the cut, trustee feedback, rights gates, scripts, and file list.
+                </p>
+                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
+                  Open handoff
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </span>
+              </div>
+            </Card>
+          </a>
+
+          <Link href="/content/kannada-anniversary-video" className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg">
+            <Card className="p-8 h-full" hover>
+              <div className="flex flex-col h-full">
+                <div className="mb-4 text-4xl" aria-hidden>
+                  🎬
+                </div>
+                <h2 className="text-2xl font-bold mb-3 text-gray-900">
+                  Kannada Anniversary Video
+                </h2>
+                <p className="text-gray-600 flex-1 mb-6">
+                  Five-and-a-half-minute Kannada film for the celebration: YouTube captions, WhatsApp share text, hall AV notes, and the team handoff.
+                </p>
+                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
+                  View content
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </span>
+              </div>
+            </Card>
+          </Link>
+
           <Link href="/content/magazine" className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg">
             <Card className="p-8 h-full" hover>
               <div className="flex flex-col h-full">
@@ -148,54 +215,6 @@ function ContentLandingPage() {
               </div>
             </Card>
           </Link>
-
-          <Link href="/content/kannada-anniversary-video" className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg">
-            <Card className="p-8 h-full" hover>
-              <div className="flex flex-col h-full">
-                <div className="mb-4 text-4xl" aria-hidden>
-                  🎬
-                </div>
-                <h2 className="text-2xl font-bold mb-3 text-gray-900">
-                  Kannada Anniversary Video
-                </h2>
-                <p className="text-gray-600 flex-1 mb-6">
-                  Five-and-a-half-minute Kannada film for the celebration: YouTube captions, WhatsApp share text, hall AV notes, and the team handoff.
-                </p>
-                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
-                  View content
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                  </svg>
-                </span>
-              </div>
-            </Card>
-          </Link>
-          <a
-            href="/anniversary-video-production/kannada/team-handoff.html"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg"
-          >
-            <Card className="p-8 h-full" hover>
-              <div className="flex flex-col h-full">
-                <div className="mb-4 text-4xl" aria-hidden>
-                  📋
-                </div>
-                <h2 className="text-2xl font-bold mb-3 text-gray-900">
-                  Kannada Film · Team Handoff
-                </h2>
-                <p className="text-gray-600 flex-1 mb-6">
-                  Full production handoff HTML: watch the cut, trustee feedback, rights gates, scripts, and file list.
-                </p>
-                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
-                  Open team-handoff.html
-                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                  </svg>
-                </span>
-              </div>
-            </Card>
-          </a>
 
           <Link href="/content/sudha-murthy-invite" className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg">
             <Card className="p-8 h-full" hover>

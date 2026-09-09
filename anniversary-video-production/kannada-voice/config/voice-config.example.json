@@ -1,0 +1,42 @@
+{
+  "model_id": "eleven_v3",
+  "language_code": "kn",
+  "output_format": "mp3_44100_128",
+  "notes": [
+    "Kannada is supported by eleven_v3 only. Do not use multilingual_v2 / turbo / flash for this film.",
+    "eleven_v3 does not reliably honour speed; speed fields are editorial intent and are omitted from API requests.",
+    "Copy selected-voice.example → selected-voice.json after trustee approval of auditions.",
+    "Never put ELEVENLABS_API_KEY in this file."
+  ],
+  "takes": {
+    "a": {
+      "label": "Balanced documentary",
+      "stability": 0.52,
+      "similarity_boost": 0.75,
+      "style": 0.1,
+      "speed": 0.95
+    },
+    "b": {
+      "label": "Cinematic and intimate",
+      "stability": 0.42,
+      "similarity_boost": 0.78,
+      "style": 0.2,
+      "speed": 0.92
+    },
+    "c": {
+      "label": "Clear event-hall narration",
+      "stability": 0.6,
+      "similarity_boost": 0.75,
+      "style": 0.08,
+      "speed": 0.97
+    }
+  },
+  "scene_settings": {
+    "opening": { "stability": 0.45, "similarity_boost": 0.78, "style": 0.18, "speed": 0.92 },
+    "origin": { "stability": 0.5, "similarity_boost": 0.76, "style": 0.13, "speed": 0.93 },
+    "timeline": { "stability": 0.56, "similarity_boost": 0.75, "style": 0.1, "speed": 0.96 },
+    "scholarship": { "stability": 0.58, "similarity_boost": 0.75, "style": 0.08, "speed": 0.91 },
+    "community": { "stability": 0.48, "similarity_boost": 0.77, "style": 0.15, "speed": 0.93 },
+    "closing": { "stability": 0.46, "similarity_boost": 0.78, "style": 0.18, "speed": 0.91 }
+  }
+}

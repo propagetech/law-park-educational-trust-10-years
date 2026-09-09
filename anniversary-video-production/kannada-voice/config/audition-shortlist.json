@@ -1,0 +1,75 @@
+{
+  "generated_for": "Law Park Educational Trust 10th Anniversary Welcome Film",
+  "model_id": "eleven_v3",
+  "selection_order": [
+    "Explicit Kannada-labelled Voice Library voices",
+    "Female middle-aged narrative (primary brief)",
+    "Male middle-aged narrative (alternative brief)",
+    "Reject radio/FM, animated/children, ad, and overly energetic documentary voices"
+  ],
+  "voices": [
+    {
+      "voice_id": "1yebI4wPatIbQgkzinlP",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Aisiri - Warm Kannada Narration",
+      "gender": "female",
+      "age": "middle_aged",
+      "use_case": "narrative_story",
+      "role": "primary_candidate",
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1yebI4wPatIbQgkzinlP/HDIGGM8mntjNGQWZzPY1.mp3"
+    },
+    {
+      "voice_id": "eESo8CL7VOqMtWCh1ikK",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Padhma - Calm Kannada Audiobook",
+      "gender": "female",
+      "age": "middle_aged",
+      "use_case": "narrative_story",
+      "role": "intimate_candidate",
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3"
+    },
+    {
+      "voice_id": "7B4TkucyQHy3r9hvAnhg",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Sharadhi - Natural Kannada Conversation",
+      "gender": "female",
+      "age": "middle_aged",
+      "use_case": "conversational",
+      "role": "warmth_candidate",
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/7B4TkucyQHy3r9hvAnhg/OQwcAxItAsy4PvvPonit.mp3"
+    },
+    {
+      "voice_id": "imphBib61OiJ8r9IfSGe",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Varalaxmi - Natural Kannada Conversation",
+      "gender": "female",
+      "age": "middle_aged",
+      "use_case": "conversational",
+      "role": "backup_female",
+      "preview_url": null
+    },
+    {
+      "voice_id": "1dRM7GYsStGPro8wPFGA",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Mani - Steady Kannada Storyteller",
+      "gender": "male",
+      "age": "middle_aged",
+      "use_case": "narrative_story",
+      "role": "male_alternative",
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1dRM7GYsStGPro8wPFGA/gPqZkWzLSfVnGYB9n2ro.mp3"
+    },
+    {
+      "voice_id": "UeUC009F3NYPIArcZmq0",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Srivatsa - Kannada Narration",
+      "gender": "male",
+      "age": "middle_aged",
+      "use_case": "narrative_story",
+      "role": "male_fallback",
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/UeUC009F3NYPIArcZmq0/YT9phlJSSPdwve8X565g.mp3"
+    }
+  ],
+  "listen_before_commit": [
+    "XrExE9yKIg1WjnnlVkGX (Matilda) already has a prior eleven_v3 Kannada render in kannada/tools/vo_eleven/. Treat as human-review-only baseline, not a native Kannada voice."
+  ]
+}

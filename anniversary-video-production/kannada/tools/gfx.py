@@ -212,7 +212,7 @@ for n in range(4):
        opacity:{1 if n >= 1 else 0}">ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ · 2016 ರಿಂದ 2026</div>
   <div class="kn600" style="font-size:48px;line-height:1.55;color:{GOLDL};margin-top:38px;
        opacity:{1 if n >= 2 else 0}">ಒಂದು ಮಗುವಿನ ಹೆಸರು ಸೂಚಿಸಿ&nbsp;&nbsp;·&nbsp;&nbsp;ಸ್ವಯಂಸೇವಕರಾಗಿ&nbsp;&nbsp;·&nbsp;&nbsp;ಸಹಭಾಗಿಯಾಗಿ</div>
-  <div style="font-family:{SANS};font-weight:500;font-size:40px;line-height:1.5;color:{WHITE};
+  <div style="font-family:{SANS};font-weight:500;font-size:46px;line-height:1.5;color:{WHITE};
        margin-top:34px;opacity:{1 if n >= 3 else 0}">
     journey.lawparkeducationaltrust.org<br>
     lawparktrust@gmail.com&nbsp;&nbsp;·&nbsp;&nbsp;+91&nbsp;99456&nbsp;65379</div>
@@ -260,7 +260,7 @@ def year_card(name, year, caption):
     <div class="lat" style="font-size:130px;line-height:.85;color:{GOLD}">{year}</div>
     <div>
       <div class="kn600" style="font-size:52px;line-height:1.5;color:{WHITE}">{caption[0]}</div>
-      {f'<div class="kn500" style="font-size:42px;line-height:1.55;color:{GOLDL};margin-top:8px">{caption[1]}</div>' if len(caption) > 1 else ''}
+      {f'<div class="kn500" style="font-size:44px;line-height:1.55;color:{GOLDL};margin-top:8px">{caption[1]}</div>' if len(caption) > 1 else ''}
     </div>
   </div>
 </div>""", extra="html,body{background:transparent}.ltbar{border-top:3px solid " + GOLD + "}")

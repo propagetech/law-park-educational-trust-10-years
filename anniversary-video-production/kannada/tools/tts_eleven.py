@@ -38,6 +38,38 @@ STABILITY = {"creative": 0.0, "natural": 0.5, "robust": 1.0}
 # one-word sentences, a six-syllable term twice, and the two-word turn.
 AUDITION = ["K11", "K12", "K13", "K27", "K29"]
 
+# Arabic years in the script must be spoken as Kannada number words (09 §3.4 /
+# 09-elevenlabs guide). ElevenLabs v3 otherwise reads "2016" as English digits.
+# Subtitles and on-screen text stay Arabic; only the TTS payload is rewritten.
+# Replace full year+case forms so sandhi is correct (ಹದಿನಾರರಲ್ಲಿ, not ಹದಿನಾರುರಲ್ಲಿ).
+YEAR_SPEAK = [
+    ("2016ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಹದಿನಾರರಲ್ಲಿ"),
+    ("2017ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಹದಿನೇಳರಲ್ಲಿ"),
+    ("2020ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತರಲ್ಲಿ"),
+    ("2022ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತೆರಡರಲ್ಲಿ"),
+    ("2023ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತಮೂರರಲ್ಲಿ"),
+    ("2024ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತನಾಲ್ಕರಲ್ಲಿ"),
+    ("2025ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತೈದರಲ್ಲಿ"),
+    ("2026ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತಾರರಲ್ಲಿ"),
+    ("2012ರಲ್ಲಿ", "ಎರಡು ಸಾವಿರದ ಹನ್ನೆರಡರಲ್ಲಿ"),
+    ("2016ರ", "ಎರಡು ಸಾವಿರದ ಹದಿನಾರರ"),
+    ("2017ರ", "ಎರಡು ಸಾವಿರದ ಹದಿನೇಳರ"),
+    ("2020ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತರ"),
+    ("2022ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತೆರಡರ"),
+    ("2023ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತಮೂರರ"),
+    ("2024ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತನಾಲ್ಕರ"),
+    ("2025ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತೈದರ"),
+    ("2026ರ", "ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತಾರರ"),
+]
+
+
+def speak_text(text):
+    """Rewrite year numerals for TTS. Longer forms first (ರಲ್ಲಿ before ರ)."""
+    out = text
+    for src, dst in YEAR_SPEAK:
+        out = out.replace(src, dst)
+    return out
+
 
 KEYFILE = os.path.expanduser("~/.elevenlabs_key")
 
@@ -136,6 +168,8 @@ def main():
                     choices=["creative", "natural", "robust"])
     ap.add_argument("--similarity", type=float, default=0.75)
     ap.add_argument("--dry-run", action="store_true")
+    ap.add_argument("--only", nargs="+", metavar="SID",
+                    help="re-render only these shot IDs (e.g. K11 K14 K23)")
     a = ap.parse_args()
 
     if a.voices:
@@ -145,18 +179,32 @@ def main():
     if not voice:
         ap.print_help(); return
     want = AUDITION if a.audition else None
+    if a.only:
+        want = set(a.only)
 
     L = [(s, t, sp) for s, t, sp in lines() if want is None or s in want]
-    chars = sum(len(t) for _, t, _ in L)
+    chars = sum(len(speak_text(t)) for _, t, _ in L)
     outdir = os.path.join("vo_eleven", voice)
     os.makedirs(outdir, exist_ok=True)
     print(f"{MODEL} · voice {voice} · stability {a.stability} · "
-          f"{len(L)} lines · {chars} characters"
+          f"{len(L)} lines · {chars} characters (after year rewrite)"
           f"{' · DRY RUN' if a.dry_run else ''}\n")
 
     measured, drift = {}, []
+    # Preserve prior durations when re-rendering a subset.
+    dur_path = os.path.join(outdir, "durations.json")
+    if os.path.exists(dur_path):
+        try:
+            measured = json.load(open(dur_path, encoding="utf-8"))
+        except ValueError:
+            measured = {}
+
     for sid, text, alloc in L:
-        p = synth(voice, sid, text, outdir, a.stability, a.similarity, a.dry_run)
+        spoken = speak_text(text)
+        if spoken != text:
+            print(f"  {sid:4} year-rewrite: {text[:48]}…")
+            print(f"        -> {spoken[:64]}…")
+        p = synth(voice, sid, spoken, outdir, a.stability, a.similarity, a.dry_run)
         if not p:
             continue
         d = dur(p)
@@ -166,17 +214,20 @@ def main():
         print(f"  {sid:4} allotted {alloc:5.2f}s   spoken {d:5.2f}s   "
               f"{100*(d-alloc)/alloc:+5.1f}%{flag}")
 
-    if a.dry_run or not measured:
+    if a.dry_run or not drift:
         return
 
-    json.dump(measured, open(os.path.join(outdir, "durations.json"), "w"), indent=1)
+    json.dump(measured, open(dur_path, "w"), indent=1)
     tot_a = sum(x[1] for x in drift); tot_d = sum(x[2] for x in drift)
     print(f"\nallotted {tot_a:.1f}s   spoken {tot_d:.1f}s   "
           f"{100*(tot_d-tot_a)/tot_a:+.1f}%")
-    print(f"wrote {outdir}/durations.json")
-    if want:
+    print(f"wrote {dur_path}")
+    if a.audition:
         print("\nAudition only. Play these five files, score them with 02 section 6,\n"
               "and get trustee approval before spending the full 3,585 characters.")
+    elif a.only:
+        print("\nSubset re-render. Re-run stem.py, then build_timeline.py --from-audio")
+        print("if any line drifted more than ~12%, then remux.")
     else:
         print("\nNext, re-time the picture to this read:\n"
               f"  python3 build_timeline.py timeline.json --from-audio {outdir}/durations.json\n"

@@ -1,0 +1,13 @@
+key,file,shot,offset_s,level_rel_narr_db,gain_db,in_s,dur_s,fade_in,fade_out,note
+k01-bell,universfield-school-bell-199584.mp3,K01,1.20,-16,-15.30,0.30,2.20,0.05,1.20,"ACT 1. Distant bell over the opening board, under no narration. The only bell in the film"
+k05-riser,black_kumizhi-dreamy-cinematic-riser-523158.mp3,K05,0.10,-16,-21.10,7.10,2.20,0.60,0.40,Warm tonal riser resolving into the wordmark reveal at K05 +0.6s
+k05-impact,submority-boom-geomorphism-cinematic-trailer-sound-effects-123876.mp3,K05,1.60,-20,-31.33,0.20,1.40,0.05,0.60,"Soft low impact on the 2016 ರಿಂದ 2026 line. Impact 1 of 2. PLACEHOLDER, trailer-class file"
+k07-whoosh,lesiakower-gentle-amp-echoing-whoosh-sound-effect-451056.mp3,K07,0.15,-18,-6.49,0,2.60,0,0.80,ACT 2. Gold rule on the organisation card. Whoosh 1 of 3
+k11-page,creatorshome-turn-a-page-336933.mp3,K11,0.15,-14,-9.17,0,0,0,0,"2016 first school visit. One dry page turn, the archive beat"
+k15-whoosh,lesiakower-gentle-amp-echoing-whoosh-sound-effect-451056.mp3,K15,7.80,-18,-0.35,0,2.00,0.20,0.80,"ACT 3 transition, into the 2s pause across the thin years. Whoosh 2 of 3"
+k18-book,creatorshome-turn-a-page-336933.mp3,K18,0.40,-18,-13.17,0,0,0,0,Library shelves. Page used as the book proxy until a book file is auditioned
+k22-zip,freesound_community-backpack-34942.mp3,K22,0.40,-16,-10.25,3.20,2.00,0.10,0.60,Two hundred school bags at MM Hills
+k23-impact,submority-boom-geomorphism-cinematic-trailer-sound-effects-123876.mp3,K23,3.80,-18,-29.33,0.20,1.40,0.05,0.60,"Soft low land under ಮುನ್ನೂರು, then the 2.5s hold stays clean. Impact 2 of 2. PLACEHOLDER, trailer-class file"
+k35-whoosh,lesiakower-gentle-amp-echoing-whoosh-sound-effect-451056.mp3,K35,0.15,-20,-8.49,0,2.60,0,0.80,"ACT 4. Partners card reveal. Whoosh 3 of 3, lower than K07"
+k36-page,creatorshome-turn-a-page-336933.mp3,K36,0.30,-15,-10.17,0,0,0,0,"Udayavani clipping, 19 June 2024. One page turn"
+k41-riser,black_kumizhi-dreamy-cinematic-riser-523158.mp3,K41,0.00,-22,-9.47,2.00,1.80,0.60,0.50,ACT 5. Understated lift into the future section. First to cut if it fights the line

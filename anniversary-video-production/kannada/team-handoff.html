@@ -294,6 +294,131 @@ footer {
 }
 footer strong { color: var(--gold); }
 
+/* Kannada by attribute, not only by class. The .kn class covers the hand
+   written markup, but the feedback form and the generated review document
+   carry lang="kn" on fields and on text the trustees type, and an attribute
+   alone does not pick a font family. Without this, Kannada in the review
+   document renders through the Latin stack, per-glyph fallback decides what
+   it looks like, and html2canvas paints whatever that fallback was into the
+   PDF. Same stack as .kn, deliberately. */
+[lang="kn"] { font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif; }
+
+/* ---------------------------------------------------------------- Notices */
+.notice {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  background: #fffdf7;
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 1rem 0;
+}
+.notice.block { border-left-color: var(--block); background: #fdf6f6; }
+.notice h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--navy); }
+.notice p { margin: 0 0 0.5rem; font-size: 0.92rem; }
+.notice p:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------- Feedback form */
+.fb-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.fb-field { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1.1rem; }
+.fb-field > label, .fb-set > legend {
+  font-weight: 600; font-size: 0.92rem; color: var(--navy);
+}
+.fb-hint { font-size: 0.82rem; color: var(--muted); }
+.fb-field input[type=text], .fb-field input[type=date], .fb-field input[type=tel],
+.fb-field select, .fb-field textarea {
+  font: inherit; font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+  min-height: 2.75rem;
+}
+.fb-field textarea { min-height: 5.5rem; resize: vertical; line-height: 1.55; }
+/* `font: inherit` above is a shorthand and resets font-family, so it outruns
+   the [lang="kn"] rule on the fields the trustees actually type Kannada into.
+   Restate the family for those, at matching specificity. */
+.fb-field input[lang="kn"], .fb-field textarea[lang="kn"] {
+  font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif;
+}
+.fb-field input:invalid, .fb-field textarea:invalid { border-color: var(--line); }
+.fb-field.bad input, .fb-field.bad textarea, .fb-set.bad { border-color: var(--block); }
+.fb-field.bad > label, .fb-set.bad > legend { color: var(--block); }
+.fb-set {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem 0.6rem;
+  margin: 0 0 1.1rem;
+  background: #fff;
+}
+.fb-set legend { padding: 0 0.4rem; }
+.fb-radio { display: flex; gap: 0.55rem; align-items: flex-start; padding: 0.4rem 0; font-size: 0.93rem; cursor: pointer; }
+.fb-radio input { margin-top: 0.25rem; flex: 0 0 auto; min-height: 0; width: auto; }
+.fb-radio span { flex: 1; }
+.fb-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.5rem; }
+.btn {
+  font: inherit; font-size: 0.95rem; font-weight: 600;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--navy);
+  background: var(--navy); color: #fff;
+  cursor: pointer;
+  min-height: 2.75rem;
+}
+.btn:hover { background: var(--navy-mid); }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.btn.ghost { background: #fff; color: var(--navy); }
+.btn.ghost:hover { background: #f4f1ea; }
+.btn.gold { background: var(--gold); border-color: var(--gold-dim); color: var(--navy); }
+.btn.gold:hover { background: var(--gold-dim); }
+.fb-status { font-size: 0.9rem; color: var(--muted); flex: 1 1 14rem; margin: 0; }
+.fb-status.err { color: var(--block); font-weight: 600; }
+
+/* The review step: what the PDF will contain, shown before it is made. */
+#fbReview[hidden] { display: none; }
+/* The rounded card border belongs on screen, not inside a PDF page that
+   already has its own margin. Dropped for the duration of the capture. */
+.fb-doc.capturing { border-color: transparent; border-radius: 0; }
+.fb-doc {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.75rem;
+  max-width: 46rem;
+}
+.fb-doc h3 { font-family: "Source Serif 4", Georgia, serif; font-size: 1.3rem; margin: 0 0 0.2rem; color: var(--navy); }
+.fb-doc .fb-doc-sub { color: var(--muted); font-size: 0.86rem; margin: 0 0 1.2rem; }
+.fb-doc dl { margin: 0; }
+.fb-doc dt {
+  font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--gold-dim);
+  margin-top: 1.1rem; padding-top: 0.7rem; border-top: 1px solid var(--line);
+}
+.fb-doc dl > div:first-child dt { margin-top: 0; padding-top: 0; border-top: 0; }
+.fb-doc dd { margin: 0.3rem 0 0; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; }
+.fb-doc dd:empty::after { content: "no comment"; color: var(--muted); font-style: italic; }
+.fb-doc .fb-verdict { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+.fb-doc .fb-foot { margin: 1.5rem 0 0; padding-top: 0.8rem; border-top: 2px solid var(--gold); font-size: 0.8rem; color: var(--muted); }
+
+/* ------------------------------------------------- Creative resources */
+.res-group { margin-bottom: 1.4rem; }
+.res-group h4 {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--gold-dim);
+  margin: 0 0 0.5rem;
+}
+.res-list { display: grid; gap: 0.35rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+.res-list a {
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 0.55rem 0.7rem; background: #fff;
+  font-size: 0.9rem;
+}
+.res-list a:hover { border-color: var(--gold-dim); background: #fffdf7; }
+.res-list a strong { display: block; color: var(--navy); font-weight: 600; }
+.res-list a span { color: var(--muted); font-size: 0.82rem; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -301,6 +426,16 @@ footer strong { color: var(--gold); }
 
 @media print {
   .top, .tabs, .filter-row, .no-print, .skip-link, video, .player { display: none !important; }
+  .fb-form, .fb-actions, .notice.no-print { display: none !important; }
+
+  /* Print-to-PDF fallback for the feedback document: when the page is in
+     this state, everything except the review document is suppressed, so the
+     browser's own Save as PDF produces the same one-document PDF that
+     jsPDF would have. It needs no network and renders Kannada correctly. */
+  body.printing-feedback > *:not(#feedback) { display: none !important; }
+  body.printing-feedback #feedback :not(#fbReview):not(#fbReview *):not(.wrap):not(.fb-doc) { display: none !important; }
+  body.printing-feedback #feedback .wrap { padding: 0; }
+  body.printing-feedback .fb-doc { border: 0; padding: 0; max-width: none; }
   .panel[hidden] { display: block !important; }
   body { background: #fff; }
   .hero { background: var(--navy); print-color-adjust: exact; }
@@ -325,6 +460,8 @@ footer strong { color: var(--gold); }
     <div class="brand">Law Park Educational Trust <span>10-year Kannada welcome film</span></div>
     <nav class="nav" aria-label="Sections">
       <a href="#watch">Watch</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#resources">Resources</a>
       <a href="#delivery">Formats</a>
       <a href="#roles">Roles</a>
       <a href="#decisions">Decisions</a>
@@ -344,7 +481,7 @@ footer strong { color: var(--gold); }
     <p class="lede">Kannada event master for the anniversary hall. Picture is cut. Narration will be a <strong style="color:#fff">human Kannada voice</strong>. Use this page to align trustees, director, narrator, designer and editor.</p>
     <div class="meta">
       <span class="chip">designed 1920&times;1080 &middot; delivered 2160p &middot; 25 fps</span>
-      <span class="chip">00:05:03:21</span>
+      <span class="chip">00:05:36:01</span>
       <span class="chip">46 shots · 43 spoken lines</span>
       <span class="chip">105 wpm design pace</span>
       <span class="chip">Human narrator path</span>
@@ -364,33 +501,351 @@ footer strong { color: var(--gold); }
     <p class="sec-kicker">01 · Picture reference</p>
     <h2>Watch the animatic</h2>
     <p class="sec-lead">Judge pacing, pauses, graphics and shot order. Do not judge warmth of the voice: it is temporary.</p>
+    <div class="notice block">
+      <h3>This is a reference cut, not the final render</h3>
+      <p>The video below exists so that pacing, shot order, on-screen Kannada and the placement of sound can be judged. It is <strong>not</strong> a finished film and it is not what anybody should publish, re-post or hand to a printer, a sponsor or a news desk.</p>
+      <p>What is temporary in it: the narration is a synthetic ElevenLabs read and not a human Kannada voice; there is <strong>no music at all</strong>, because no licence has been cleared; the 14 sound effects are an audition sitting under an unsigned Trust decision (<code>07</code> item 5.8); and two of them are placeholder files that have to be replaced. The picture uses the consent fallback, so several photographs are stand-ins.</p>
+      <p><strong>Creative team:</strong> everything needed to re-cut or re-grade it is in <a href="#resources">section 03, Resources</a>. Do not work from the YouTube stream. <strong>Trustees:</strong> your notes go in <a href="#feedback">section 02, Feedback</a>.</p>
+    </div>
     <div class="player">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/x_v_8lQumYQ?rel=0&amp;modestbranding=1"
-        title="Kannada 2160p review cut, scratch narration"
+        src="https://www.youtube-nocookie.com/embed/I6iZCH88RYU?rel=0&amp;modestbranding=1"
+        title="Kannada 1080p picture and SFX preview, scratch narration"
         loading="lazy" allowfullscreen
         referrerpolicy="strict-origin-when-cross-origin"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
     </div>
-    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/x_v_8lQumYQ">youtu.be/x_v_8lQumYQ</a>, the 3840x2160 review cut. Streaming it keeps the render out of this repository, so no MP4 is committed any more. Rebuild the file locally with <code>tools/master.py</code> when you need the full-quality original. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>, which is <code>08-kannada-sfx-learning-mix.mp4</code>: 1920x1080, 00:05:37:22, ElevenLabs narration plus the 14-cue effects pack, at -16 LUFS. Streaming it keeps the render out of this repository, so no MP4 is committed. Rebuild it locally with <code>tools/film.py</code> and <code>tools/sfx.py</code>, or the 4K equivalent with <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
     <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
     <p class="player-note"><strong>If the player is blank</strong>, the video visibility has been changed to Private, which blocks embedding for everyone except explicitly named accounts. Set it to Unlisted to make this page work again, or ask the owner of the upload for access.</p>
   </div>
 </section>
 
+<section id="feedback">
+  <div class="wrap">
+    <p class="sec-kicker">02 &middot; Founder and trustee feedback</p>
+    <h2>Watch it, then say what has to change</h2>
+    <p class="sec-lead">Written for <span class="kn" lang="kn">&#3221;&#3262;&#3248;&#3265;&#3248;&#3262;&#3236;&#3262; &#3205;&#3202;. &#3206;&#3248;&#3277;.</span> and the trustees. Fill in only what you have a view on and leave the rest blank. Submitting shows you exactly what the PDF will say before it is made, so nothing goes out that you have not read.</p>
+
+    <div class="notice no-print">
+      <h3>Where this goes, and where it does not</h3>
+      <p>Nothing is sent anywhere automatically. Your answers stay in this browser until you press a button, and the draft is saved locally as you type so a closed tab does not lose it. The PDF is built on your own device.</p>
+      <p>Write in Kannada or English, whichever is easier. Both come out correctly in the PDF.</p>
+    </div>
+
+    <form class="fb-form" id="fbForm" novalidate>
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Who is giving this feedback</h3>
+        <div class="fb-grid">
+          <div class="fb-field" id="fbf-name">
+            <label for="fbName">Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="fbName" name="name" autocomplete="name" required
+                   placeholder="&#3221;&#3262;&#3248;&#3265;&#3248;&#3262;&#3236;&#3262; &#3205;&#3202;. &#3206;&#3248;&#3277;." lang="kn">
+          </div>
+          <div class="fb-field">
+            <label for="fbRole">Role</label>
+            <select id="fbRole" name="role">
+              <option>Founder and Managing Trustee</option>
+              <option>Trustee</option>
+              <option>Producer</option>
+              <option>Volunteer or programme lead</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fb-field">
+            <label for="fbDate">Date</label>
+            <input type="date" id="fbDate" name="date">
+          </div>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbCut">Which cut did you watch</label>
+          <select id="fbCut" name="cut">
+            <option>The YouTube reference cut on this page, picture plus effects</option>
+            <option>kannada-1080p-EVENT-master.mp4, the hall file</option>
+            <option>Another cut, described in the notes below</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset class="fb-set" id="fbf-verdict">
+        <legend>Overall <span aria-hidden="true">*</span></legend>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Approved as it is"><span><strong>Approved as it is.</strong> Proceed to the human narration and the music.</span></label>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Approved with the changes below"><span><strong>Approved with the changes below.</strong> No need to show me again.</span></label>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Needs another cut before I can decide"><span><strong>Needs another cut before I can decide.</strong></span></label>
+      </fieldset>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>The film, act by act</h3>
+        <p class="fb-hint" style="margin:0 0 1rem">Timecodes match the cut on this page. Leave anything blank that you are happy with.</p>
+        <div class="fb-field">
+          <label for="fbAct1">Act 1, the opening. <span class="mono">K01</span> to <span class="mono">K06</span>, up to <span class="mono">00:00:36:10</span></label>
+          <span class="fb-hint">The walk to school, the fee line, the title card, and the six silent seconds on your quote.</span>
+          <textarea id="fbAct1" name="act1" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct2">Act 2, 2016 and the founders. <span class="mono">K07</span> to <span class="mono">K13</span></label>
+          <span class="fb-hint">The Trust, you and S. M. Manjunatha, the first school visit, and <span class="kn" lang="kn">&#3202;&#3202;&#3238;&#3265; &#3226;&#3223;&#3265;. &#3202;&#3202;&#3238;&#3265; &#3236;&#3263;&#3238;&#3277;&#3247;&#3262;&#3248;&#3277;&#3208;&#3263;&#3236;&#3247;&#3273;&#3236;&#3238;.</span></span>
+          <textarea id="fbAct2" name="act2" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct3">Act 3, the decade. <span class="mono">K14</span> to <span class="mono">K25</span></label>
+          <span class="fb-hint">2017 to 2025, the pandemic year, the libraries, the school bags.</span>
+          <textarea id="fbAct3" name="act3" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct4">Act 4, the method and the community. <span class="mono">K26</span> to <span class="mono">K40</span></label>
+          <span class="fb-hint">The 75 per cent, direct payment to the school, the hardest children to reach, the partners, the newspaper, the award, the thanks.</span>
+          <textarea id="fbAct4" name="act4" lang="kn"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbAct5">Act 5, the closing welcome. <span class="mono">K41</span> to <span class="mono">K46</span></label>
+          <span class="fb-hint">The next decade, and the welcome line that ends the film.</span>
+          <textarea id="fbAct5" name="act5" lang="kn"></textarea>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Craft</h3>
+        <div class="fb-field">
+          <label for="fbVoice">The Kannada narration</label>
+          <span class="fb-hint">Wording, tone, pace, pronunciation of names and places. The voice itself is a placeholder, so do not judge its warmth.</span>
+          <textarea id="fbVoice" name="voice" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbSound">Music and sound</label>
+          <span class="fb-hint">There is no music yet. The effects are an audition. Say whether the silences land, especially <span class="mono">K06</span> and the drop under <span class="kn" lang="kn">&#3242;&#3266;&#3248;&#3277;&#3236;&#3263; &#3205;&#3222;&#3277;&#3236;.</span></span>
+          <textarea id="fbSound" name="sound" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbText">On-screen Kannada and subtitles</label>
+          <span class="fb-hint">Spelling, line breaks, whether anything is on screen too briefly to read.</span>
+          <textarea id="fbText" name="onscreen" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbFacts">Facts, names, numbers and spellings</label>
+          <span class="fb-hint">Anything that is wrong, or that we cannot prove and should therefore drop.</span>
+          <textarea id="fbFacts" name="facts" lang="kn"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbRemove">Anything that must come out</label>
+          <span class="fb-hint">A photograph, a claim, a name, a shot. Say which and why.</span>
+          <textarea id="fbRemove" name="remove" lang="kn"></textarea>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Five decisions only the Trust can make</h3>
+        <p class="fb-hint" style="margin:0 0 1rem">These are the open gates. Each one blocks a public release, and none of them is a creative preference. Answer what you can and leave the rest on <em>decide later</em>.</p>
+
+        <fieldset class="fb-set">
+          <legend>Sound effects. <code>07</code> items 5.7 and 5.8</legend>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Reaffirm 5.7, no sound effects"><span>Reaffirm 5.7. No sound effects, take the 14 out.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Amend 5.7, effects permitted under the limits in 11"><span>Amend 5.7. Effects permitted, under the limits in <code>11</code>.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>Guardian consent for the photographs. <code>07</code> item 1.1</legend>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Consents are in hand, send the list"><span>Consents are in hand. I will send the signed list.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Being collected"><span>Being collected. Keep the fallback cut for now.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Use the fallback cut, do not chase consent"><span>Use the fallback cut. Do not chase consent.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>The Udayavani newspaper clipping at <span class="mono">K36</span></legend>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Written permission is being sought"><span>Written permission is being sought from the paper.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Remove the shot"><span>Remove the shot. Not worth the copyright risk.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>Music. <code>07</code> item 5.1</legend>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Commission a Karnataka musician for original bansuri"><span>Commission a Karnataka musician for five minutes of original bansuri.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Licence a library track"><span>Licence a library track that covers event, YouTube and web.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set" style="margin-bottom:0">
+          <legend>Public release</legend>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Hold until all five gates close"><span>Hold. Nothing public until all five gates close.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Unlisted link only, for review"><span>Unlisted link only, for review by named people.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Release publicly now, on my instruction"><span>Release publicly now, on my instruction.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Anything else</h3>
+        <div class="fb-field" style="margin-bottom:1.1rem">
+          <label for="fbNotes">Notes</label>
+          <textarea id="fbNotes" name="notes" lang="kn" style="min-height:7rem"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0;max-width:22rem">
+          <label for="fbPhone">Send to, on WhatsApp</label>
+          <span class="fb-hint">Optional. Country code and number, digits only, for example <span class="mono">919876543210</span>. Leave it blank to pick the contact in WhatsApp yourself.</span>
+          <input type="tel" id="fbPhone" name="phone" inputmode="numeric" autocomplete="off" placeholder="919876543210">
+        </div>
+      </div>
+
+      <div class="fb-actions">
+        <button type="submit" class="btn gold" id="fbSubmit">Review, then make the PDF</button>
+        <button type="button" class="btn ghost" id="fbClear">Clear the draft</button>
+        <p class="fb-status" id="fbStatus" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <div id="fbReview" hidden>
+      <div class="notice no-print">
+        <h3>Read this, then make the PDF</h3>
+        <p>This is exactly what the PDF will contain. Go back and edit anything that is not right. The PDF is built on this device and nothing has been sent.</p>
+      </div>
+      <div class="fb-doc" id="fbDoc"></div>
+      <div class="fb-actions no-print">
+        <button type="button" class="btn ghost" id="fbBack">Back to edit</button>
+        <button type="button" class="btn" id="fbPdf">Download the PDF</button>
+        <button type="button" class="btn gold" id="fbSend">Send on WhatsApp</button>
+        <p class="fb-status" id="fbStatus2" role="status" aria-live="polite"></p>
+      </div>
+      <div class="notice no-print" id="fbWaHint" hidden>
+        <h3>Attach the PDF in WhatsApp</h3>
+        <p>WhatsApp cannot receive a file from a link, so on a computer it takes two steps. The PDF has been downloaded and WhatsApp has been opened with the summary already typed in. Attach the downloaded PDF with the paperclip, then send. On a phone the share sheet does both at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resources">
+  <div class="wrap">
+    <p class="sec-kicker">03 &middot; Resources</p>
+    <h2>Everything the creative team needs to re-cut this</h2>
+    <p class="sec-lead">The video is a reference. These files are the source. Anyone re-cutting, re-grading, re-scoring or re-subtitling the film should work from this list and never from the YouTube stream, which is a 1080p H.264 re-compression of a re-compression.</p>
+
+    <div class="notice">
+      <h3>Start with three files</h3>
+      <p><a href="tools/timeline.json"><code>tools/timeline.json</code></a> is the timing source of truth: 46 shots with in and out points, durations, narration, holds, pauses, crop windows, motion, transitions, consent status and the music cue for every one. Every other document and every render is derived from it. <a href="06-kannada-edit-decision-list.md"><code>06</code></a> is the same thing as a plain-text EDL so the film can be rebuilt in five years without a project file. <a href="Kannada-cue-sheet.csv"><code>Kannada-cue-sheet.csv</code></a> is the audio.</p>
+      <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved once, from <span class="mono">00:05:36:01</span> to <span class="mono">00:05:37:22</span>, and hand-typed timecodes went stale within the hour.</p>
+    </div>
+
+    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(25rem,1fr))">
+      <div class="card">
+        <h3>Download</h3>
+      <div class="res-group">
+        <h4>Timing and structure</h4>
+        <div class="res-list">
+          <a href="tools/timeline.json" download><strong>tools/timeline.json</strong><span>46 shots, the timing source of truth</span></a>
+          <a href="06-kannada-edit-decision-list.md"><strong>06 &middot; Edit decision list</strong><span>The cut as plain text, plus the grade notes</span></a>
+          <a href="03-kannada-storyboard.md"><strong>03 &middot; Storyboard</strong><span>Crop windows, motion and per-shot direction</span></a>
+          <a href="tools/subs.json" download><strong>tools/subs.json</strong><span>Subtitle cue data, derived</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Audio</h4>
+        <div class="res-list">
+          <a href="Kannada-cinematic-audio-direction.md"><strong>Cinematic audio direction</strong><span>Five acts, the effect palette, the gates</span></a>
+          <a href="Kannada-music-map.md"><strong>Music map</strong><span>Palette, motif, intensity curve, composer brief</span></a>
+          <a href="Kannada-cue-sheet.csv" download><strong>Cue sheet</strong><span>46 music cues and 14 effect events</span></a>
+          <a href="Kannada-final-mix-checklist.md"><strong>Final mix checklist</strong><span>Mix, master, five-system test, sign-off</span></a>
+          <a href="Kannada-sfx-licence-log.csv" download><strong>SFX licence log</strong><span>What shipped, and what is still uncaptured</span></a>
+          <a href="11-kannada-sound-design-and-sfx-sources.md"><strong>11 &middot; Sound design sources</strong><span>Where to find effects, and licence discipline</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Words and text</h4>
+        <div class="res-list">
+          <a href="01-kannada-final-script.md"><strong>01 &middot; Final script</strong><span>The approved Kannada narration</span></a>
+          <a href="04-kannada-onscreen-text.md"><strong>04 &middot; On-screen text</strong><span>Every card, exactly as it appears</span></a>
+          <a href="05-kannada-subtitles.srt" download><strong>05 &middot; Subtitles, .srt</strong><span>84 cues. Upload this as the caption track</span></a>
+          <a href="05-kannada-subtitles.vtt" download><strong>05 &middot; Subtitles, .vtt</strong><span>For web players</span></a>
+          <a href="02-kannada-voice-audition-plan.md"><strong>02 &middot; Voice audition plan</strong><span>How to cast and record the human read</span></a>
+          <a href="09-elevenlabs-narration-guide.md"><strong>09 &middot; Narration guide</strong><span>The interim synthetic read only</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Rights, facts and credits</h4>
+        <div class="res-list">
+          <a href="07-final-rights-and-approval-checklist.md"><strong>07 &middot; Rights and approval</strong><span>Every gate, including the five that block release</span></a>
+          <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md"><strong>14 &middot; Rights and publishing</strong><span>Consent, music and accessibility rules</span></a>
+          <a href="../../anniversary-video-research/01-source-of-truth.md"><strong>01 &middot; Source of truth</strong><span>Every verified fact and where it came from</span></a>
+          <a href="../../anniversary-video-research/02-evidence-table.csv" download><strong>02 &middot; Evidence table</strong><span>Claim by claim, with sources</span></a>
+          <a href="../../anniversary-video-research/04-media-inventory.csv" download><strong>04 &middot; Media inventory</strong><span>Every photograph, with consent status</span></a>
+          <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><strong>13 &middot; Credits</strong><span>End-roll names, not yet spelling-verified</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Brief and design</h4>
+        <div class="res-list">
+          <a href="../../anniversary-video-research/07-bilingual-creative-brief.md"><strong>07 &middot; Creative brief</strong><span>Tone, typography, and what to avoid</span></a>
+          <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><strong>12 &middot; On-screen text, bilingual</strong><span>Both language versions</span></a>
+          <a href="../../logo.png" download><strong>logo.png</strong><span>The mark, as used on the title card</span></a>
+          <a href="../../logo-purple.png" download><strong>logo-purple.png</strong><span>Alternate mark</span></a>
+          <a href="08-kannada-animatic-poster.jpg" download><strong>Poster frame</strong><span>For slides and thumbnails</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Build tools</h4>
+        <div class="res-list">
+          <a href="tools/README.md"><strong>tools/README.md</strong><span>What every script does, and in what order</span></a>
+          <a href="tools/film.py" download><strong>film.py</strong><span>Renders the picture from timeline.json</span></a>
+          <a href="tools/gfx.py" download><strong>gfx.py</strong><span>Renders the typographic cards and subtitles</span></a>
+          <a href="tools/master.py" download><strong>master.py</strong><span>Builds the master, checks the release gates</span></a>
+          <a href="tools/mix.py" download><strong>mix.py</strong><span>Stems, both masters, the four previews</span></a>
+          <a href="tools/cue.py" download><strong>cue.py</strong><span>Regenerates the cue sheet and audits timecodes</span></a>
+          <a href="tools/sfx.py" download><strong>sfx.py</strong><span>Places effects, refuses the silence cues</span></a>
+          <a href="tools/stem.py" download><strong>stem.py</strong><span>Assembles the narration into one aligned WAV</span></a>
+        </div>
+      </div>
+      </div>
+
+      <div class="card">
+        <h3>What is deliberately not here</h3>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem">No video, no audio and no rendered graphic is committed to this repository. All of it is reproducible from <code>timeline.json</code> plus the photographs, so committing it would only guarantee that someone edits a stale copy.</p>
+        <div class="table-wrap">
+          <table style="font-size:0.86rem">
+            <thead><tr><th scope="col">Missing</th><th scope="col">Rebuild it with</th></tr></thead>
+            <tbody>
+              <tr><td>Every <code>.mp4</code></td><td><code>python3 film.py</code>, then <code>master.py</code></td></tr>
+              <tr><td><code>tools/gfx/</code>, the cards</td><td><code>python3 gfx.py ../05-kannada-subtitles.srt --scale 2</code></td></tr>
+              <tr><td><code>tools/stills/</code>, the crops</td><td><code>python3 film.py</code> makes them on the way through</td></tr>
+              <tr><td>The narration <code>.wav</code></td><td><code>python3 stem.py &lt;VOICE_ID&gt;</code></td></tr>
+              <tr><td>Stems, masters, previews</td><td><code>python3 mix.py --calibrate</code></td></tr>
+              <tr><td>The effect <code>.mp3</code> files</td><td>Download from the URLs in <a href="Kannada-sfx-licence-log.csv">the licence log</a>, into <code>tools/sfx/</code></td></tr>
+              <tr><td>The music bed</td><td><strong>Does not exist.</strong> See <a href="Kannada-music-map.md">the music map</a>, section 6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="margin-top:1.25rem">Rebuild the whole film</h3>
+        <p style="margin:0 0 0.6rem;font-size:0.95rem">About 13 minutes on a recent laptop. Needs Python 3, ffmpeg and Playwright.</p>
+        <pre style="margin:0;overflow-x:auto;background:#1c1c2e;color:#e8e6e1;padding:0.9rem 1rem;border-radius:8px;font-size:0.82rem;line-height:1.6"><code>cd anniversary-video-production/kannada/tools
+
+python3 gfx.py ../05-kannada-subtitles.srt --scale 2
+python3 film.py silent.mp4
+python3 stem.py &lt;VOICE_ID&gt;
+python3 sfx.py --strict
+python3 mix.py --calibrate
+python3 master.py            # 4K review master
+python3 master.py --check    # what still blocks a release</code></pre>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--muted)"><code>master.py --release</code> is the only path to a publishable file, and it refuses to run while any of the five gates is open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="delivery">
   <div class="wrap">
-    <p class="sec-kicker">02 · Formats</p>
+    <p class="sec-kicker">04 &middot; Formats</p>
     <h2>What gets delivered, and where each version goes</h2>
-    <p class="sec-lead">Three files, three jobs. The preview above is the smallest of them and the only one anybody should be watching today.</p>
+    <p class="sec-lead">Five files, five jobs. The one in the player above is the one to watch today. Only the last of them is a public release, and it does not exist yet.</p>
     <div class="grid grid-2">
       <div class="card">
-        <h3>The three versions</h3>
+        <h3>The five versions</h3>
         <table style="font-size:0.88rem">
           <thead><tr><th scope="col">File</th><th scope="col">For</th></tr></thead>
           <tbody>
-            <tr><td><code>08-kannada-animatic-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, 36 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. Rebuild with <code>film.py</code>.</td></tr>
-            <tr><td><code>kannada-2160p-review-scratch-vo.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles, 304 MB</span></td><td>Hall projection test and quality review. This is the cut streaming at the top of this page. Built by <code>tools/master.py</code>.</td></tr>
+            <tr><td><code>08-kannada-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 14 SFX, -16 LUFS, 79 MB</span></td><td><strong>This is what the player above streams</strong>, as <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>. Picture and effects review. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
+            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 80 MB</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
+            <tr><td><code>08-kannada-animatic-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, 111 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. <strong>Stale at 00:05:36:01.</strong> Rebuild with <code>film.py</code>.</td></tr>
+            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles, 311 MB</span></td><td>Hall projection test and quality review. ElevenLabs narration. Built by <code>tools/master.py</code>. <strong>Stale: it is 00:05:36:01 and the film is now 00:05:37:22.</strong> Re-render before using it.</td></tr>
             <tr><td><code>kannada-2160p-youtube-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, human narration, -14 LUFS</span></td><td><strong>Does not exist yet.</strong> Needs the human read and all five clearances.</td></tr>
           </tbody>
         </table>
@@ -418,7 +873,7 @@ footer strong { color: var(--gold); }
 
 <section id="roles">
   <div class="wrap">
-    <p class="sec-kicker">03 · Who does what</p>
+    <p class="sec-kicker">05 &middot; Who does what</p>
     <h2>Role briefs</h2>
     <p class="sec-lead">Click a role. Each person gets only what they need to move next.</p>
 
@@ -517,7 +972,7 @@ footer strong { color: var(--gold); }
 
 <section id="decisions">
   <div class="wrap">
-    <p class="sec-kicker">04 · Open gates</p>
+    <p class="sec-kicker">06 &middot; Open gates</p>
     <h2>Decisions and clearances</h2>
     <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
     <div class="card no-print" style="margin-bottom:1rem;background:#fffdf7;border-left:4px solid var(--gold)">
@@ -554,7 +1009,7 @@ footer strong { color: var(--gold); }
 
 <section id="script">
   <div class="wrap">
-    <p class="sec-kicker">05 · Spoken text</p>
+    <p class="sec-kicker">07 &middot; Spoken text</p>
     <h2>Shot list and narration</h2>
     <p class="sec-lead">43 lines · 3,585 characters across 46 shots. Source: <code>tools/timeline.json</code>. Do not rewrite wording without Trust sign-off. <strong>Consent status is per shot:</strong> 22 shots are blocked until guardian or partner clearance is in hand, so read that column before you cut anything for a screening.</p>
     <div class="filter-row no-print">
@@ -589,7 +1044,7 @@ footer strong { color: var(--gold); }
 
 <section id="design">
   <div class="wrap">
-    <p class="sec-kicker">06 · Look</p>
+    <p class="sec-kicker">08 &middot; Look</p>
     <h2>Design tokens</h2>
     <p class="sec-lead">Match the film cards. Emotion target: quiet pride, earned over time. Not pity, not triumph.</p>
     <div class="grid grid-3">
@@ -619,7 +1074,7 @@ footer strong { color: var(--gold); }
 
 <section id="docs">
   <div class="wrap">
-    <p class="sec-kicker">07 · Library</p>
+    <p class="sec-kicker">09 &middot; Library</p>
     <h2>Documents and assets</h2>
     <p class="sec-lead">Every document in the pack is listed here. Markdown opens in any editor; CSV opens in Excel or Numbers. Keep relative paths intact when you zip, or the links break. No video file is in the repository: the review cut streams from YouTube, and the renders are rebuilt with <code>tools/master.py</code>.</p>
     <div class="grid grid-2">
@@ -632,7 +1087,7 @@ footer strong { color: var(--gold); }
         <a href="05-kannada-subtitles.srt"><span class="name">05 · Subtitles (.srt)</span><span class="for">Editor</span></a>
         <a href="06-kannada-edit-decision-list.md"><span class="name">06 · Edit decision list</span><span class="for">Editor</span></a>
         <a href="07-final-rights-and-approval-checklist.md"><span class="name">07 · Rights &amp; approval</span><span class="for">Trust · producer</span></a>
-        <a href="https://youtu.be/x_v_8lQumYQ"><span class="name">08 · Review cut (YouTube)</span><span class="for">Everyone · streams, not in the repo</span></a>
+        <a href="https://youtu.be/I6iZCH88RYU"><span class="name">08 · Picture and SFX preview (YouTube)</span><span class="for">Everyone · streams, not in the repo</span></a>
         <a href="08-kannada-animatic-notes.md"><span class="name">08 · Animatic notes</span><span class="for">Everyone</span></a>
         <a href="05-kannada-subtitles.vtt"><span class="name">05 · Subtitles (.vtt)</span><span class="for">This page only</span></a>
         <a href="09-elevenlabs-narration-guide.md"><span class="name">09 · ElevenLabs narration guide</span><span class="for">Interim scratch read</span></a>
@@ -666,7 +1121,7 @@ footer strong { color: var(--gold); }
 
 <section id="credits">
   <div class="wrap">
-    <p class="sec-kicker">08 · Last shot of the film</p>
+    <p class="sec-kicker">10 &middot; Last shot of the film</p>
     <h2>End roll and acknowledgements</h2>
     <p class="sec-lead">The credit roll is written in both languages, but it is not buildable yet. The repository holds inconsistent spellings, near-duplicates and first-name-only entries, so the roll is gated on a trustee name check.</p>
     <div class="grid grid-2">
@@ -690,7 +1145,7 @@ footer strong { color: var(--gold); }
 
 <section id="share">
   <div class="wrap">
-    <p class="sec-kicker">09 · How to send this</p>
+    <p class="sec-kicker">11 &middot; How to send this</p>
     <h2>Share the pack</h2>
     <p class="sec-lead">External creatives need the folder tree, not only this HTML, so relative links and the MP4 keep working.</p>
     <div class="grid grid-2">
@@ -853,6 +1308,391 @@ document.querySelectorAll(".owner-field[data-k]").forEach(el => {
   /* Do not let a click on the field toggle the checkbox in the same label. */
   el.addEventListener("click", e => e.stopPropagation());
 });
+
+/* ================================================================ Feedback
+
+   Submit shows a review of exactly what the PDF will say, then the PDF is
+   built on this device and handed to WhatsApp. Nothing is posted anywhere:
+   this page is opened from a filesystem or a static host and has no backend,
+   so a form POST would have nowhere to go and would fail silently, which is
+   worse than not offering it.
+
+   PDF: html2canvas paints the review document and jsPDF wraps it. That is a
+   picture of the document rather than selectable text, which is a real
+   tradeoff, taken because the trustees write in Kannada and jsPDF's built-in
+   fonts are WinAnsi only: Kannada through them comes out as empty boxes. The
+   browser already has Noto Sans Kannada loaded and shapes the script
+   correctly, so rendering through the browser is the only version that is
+   readable. If the two libraries cannot be reached, the fallback is the
+   browser's own print-to-PDF, which is text and also shapes Kannada properly.
+*/
+const FB_KEY = "lpet-kannada-feedback-draft-v1";
+const CDN = {
+  jspdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+  h2c: "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
+};
+
+const fbForm = document.getElementById("fbForm");
+const fbReview = document.getElementById("fbReview");
+const fbDoc = document.getElementById("fbDoc");
+const fbStatus = document.getElementById("fbStatus");
+const fbStatus2 = document.getElementById("fbStatus2");
+const fbWaHint = document.getElementById("fbWaHint");
+
+/* Label, field name, and whether it is a section of prose or a one-line fact.
+   Order here is the order in the document and in the PDF. */
+const FB_FIELDS = [
+  ["Role", "role", "line"],
+  ["Cut watched", "cut", "line"],
+  ["Overall", "verdict", "verdict"],
+  ["Act 1, the opening, K01 to K06", "act1", "prose"],
+  ["Act 2, 2016 and the founders, K07 to K13", "act2", "prose"],
+  ["Act 3, the decade, K14 to K25", "act3", "prose"],
+  ["Act 4, the method and the community, K26 to K40", "act4", "prose"],
+  ["Act 5, the closing welcome, K41 to K46", "act5", "prose"],
+  ["The Kannada narration", "voice", "prose"],
+  ["Music and sound", "sound", "prose"],
+  ["On-screen Kannada and subtitles", "onscreen", "prose"],
+  ["Facts, names, numbers and spellings", "facts", "prose"],
+  ["Anything that must come out", "remove", "prose"],
+  ["Decision: sound effects, 07 items 5.7 and 5.8", "gateSfx", "line"],
+  ["Decision: guardian consent, 07 item 1.1", "gateConsent", "line"],
+  ["Decision: the Udayavani clipping at K36", "gateClip", "line"],
+  ["Decision: music, 07 item 5.1", "gateMusic", "line"],
+  ["Decision: public release", "gatePublic", "line"],
+  ["Notes", "notes", "prose"],
+];
+
+function fbVal(name) {
+  const el = fbForm.elements[name];
+  if (!el) return "";
+  if (el instanceof RadioNodeList || (el.length && !el.tagName)) {
+    const picked = Array.from(el).find(r => r.checked);
+    return picked ? picked.value : "";
+  }
+  return (el.value || "").trim();
+}
+
+/* ------------------------------------------------------------ draft saving */
+function fbSaveDraft() {
+  const out = {};
+  for (const [, name] of FB_FIELDS) out[name] = fbVal(name);
+  out.name = fbVal("name");
+  out.date = fbVal("date");
+  out.phone = fbVal("phone");
+  try { localStorage.setItem(FB_KEY, JSON.stringify(out)); } catch { /* private mode */ }
+}
+
+function fbLoadDraft() {
+  let d = {};
+  try { d = JSON.parse(localStorage.getItem(FB_KEY) || "{}"); } catch { d = {}; }
+  for (const [k, v] of Object.entries(d)) {
+    if (!v) continue;
+    const el = fbForm.elements[k];
+    if (!el) continue;
+    if (el instanceof RadioNodeList || (el.length && !el.tagName)) {
+      const hit = Array.from(el).find(r => r.value === v);
+      if (hit) hit.checked = true;
+    } else {
+      el.value = v;
+    }
+  }
+  if (!fbVal("date")) {
+    /* Local date, not toISOString, which shifts the day either side of UTC. */
+    const n = new Date();
+    fbForm.elements.date.value =
+      `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
+  }
+}
+
+/* ------------------------------------------------------------- the document */
+function fbDocTitle() {
+  const who = fbVal("name") || "Unnamed";
+  /* \p{M} matters: Kannada vowel signs and the virama are combining marks,
+     not letters, so a set of L and N alone turns ಚಾರುಲತಾ into ಚ-ರ-ಲತ and
+     mangles the name of the person the document is from. */
+  return `LPET-10-years-Kannada-film-feedback-${who}-${fbVal("date") || "undated"}`
+    .replace(/[^\p{L}\p{M}\p{N}\-_]+/gu, "-").replace(/-+/g, "-").slice(0, 120);
+}
+
+function fbBuildDoc() {
+  /* An undecided gate is not feedback, and five "Decide later" rows in every
+     PDF bury the ones that were actually decided. They are collapsed into a
+     single closing line instead, so what is still open stays visible without
+     competing with what was answered. */
+  const deferred = [];
+  const rows = FB_FIELDS.map(([label, name, kind]) => {
+    const v = fbVal(name);
+    if (!v) return "";
+    if (name.startsWith("gate") && v === "Decide later") {
+      deferred.push(label.replace(/^Decision: /, "").replace(/,.*$/, ""));
+      return "";
+    }
+    const cls = kind === "verdict" ? ' class="fb-verdict"' : "";
+    return `<div><dt>${esc(label)}</dt><dd${cls} lang="kn">${esc(v)}</dd></div>`;
+  }).filter(Boolean).join("")
+    + (deferred.length
+       ? `<div><dt>Still to decide</dt><dd>${esc(deferred.join("; "))}</dd></div>`
+       : "");
+
+  fbDoc.innerHTML = `
+    <h3>Feedback on the Kannada 10-year welcome film</h3>
+    <p class="fb-doc-sub">${esc(fbVal("name"))}${fbVal("role") ? " &middot; " + esc(fbVal("role")) : ""}
+      ${fbVal("date") ? " &middot; " + esc(fbVal("date")) : ""}</p>
+    <dl>${rows}</dl>
+    <p class="fb-foot">Law Park Educational Trust &middot; reference cut
+      <span class="mono">00:05:37:22</span>, ElevenLabs narration, no music, effects unapproved
+      under <code>07</code> item 5.8. This document is feedback on that cut and is not an
+      approval to publish. Generated in the browser from team-handoff.html.</p>`;
+}
+
+/* --------------------------------------------------------------- validation */
+function fbFlag(id, bad) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle("bad", bad);
+}
+
+function fbValidate() {
+  const missing = [];
+  const noName = !fbVal("name");
+  const noVerdict = !fbVal("verdict");
+  fbFlag("fbf-name", noName);
+  fbFlag("fbf-verdict", noVerdict);
+  if (noName) missing.push("your name");
+  if (noVerdict) missing.push("the overall verdict");
+  if (!missing.length) return true;
+  fbStatus.textContent = "Still needed: " + missing.join(" and ") + ".";
+  fbStatus.classList.add("err");
+  (noName ? document.getElementById("fbName")
+          : fbForm.elements.verdict[0]).focus();
+  return false;
+}
+
+/* -------------------------------------------------------------- submit flow */
+fbForm.addEventListener("submit", e => {
+  e.preventDefault();
+  if (!fbValidate()) return;
+  fbStatus.textContent = "";
+  fbStatus.classList.remove("err");
+  fbSaveDraft();
+  fbBuildDoc();
+  fbForm.hidden = true;
+  fbReview.hidden = false;
+  fbWaHint.hidden = true;
+  fbStatus2.textContent = "";
+  fbStatus2.classList.remove("err");
+  fbReview.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("fbBack").addEventListener("click", () => {
+  fbReview.hidden = true;
+  fbForm.hidden = false;
+  fbForm.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("fbClear").addEventListener("click", () => {
+  if (!confirm("Clear every answer on this form? The saved draft goes too.")) return;
+  try { localStorage.removeItem(FB_KEY); } catch { /* ignore */ }
+  fbForm.reset();
+  fbLoadDraft();
+  fbStatus.textContent = "Draft cleared.";
+  fbStatus.classList.remove("err");
+});
+
+fbForm.addEventListener("input", fbSaveDraft);
+fbForm.addEventListener("change", fbSaveDraft);
+
+/* ------------------------------------------------------------------ the PDF */
+function loadScript(src) {
+  return new Promise((ok, no) => {
+    if (document.querySelector(`script[src="${src}"]`)) return ok();
+    const el = document.createElement("script");
+    el.src = src;
+    el.onload = () => ok();
+    el.onerror = () => no(new Error("could not load " + src));
+    document.head.appendChild(el);
+  });
+}
+
+function printFallback(why) {
+  fbStatus2.textContent = why + " Using the browser's own print-to-PDF instead: "
+    + "choose Save as PDF as the destination.";
+  document.body.classList.add("printing-feedback");
+  const done = () => {
+    document.body.classList.remove("printing-feedback");
+    window.removeEventListener("afterprint", done);
+  };
+  window.addEventListener("afterprint", done);
+  window.print();
+  /* Safari has never fired afterprint reliably. Clear it either way. */
+  setTimeout(done, 4000);
+}
+
+let fbCache = null;   /* one build per set of answers, reused by both buttons */
+
+async function fbMakePdf() {
+  if (fbCache) return fbCache;
+  await loadScript(CDN.h2c);
+  await loadScript(CDN.jspdf);
+  if (!window.html2canvas || !window.jspdf) throw new Error("libraries missing");
+  /* Kannada must be shaped before it is painted, or the canvas gets fallback
+     glyphs for text the screen showed correctly. */
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+  fbDoc.classList.add("capturing");
+  let canvas;
+  try {
+    canvas = await window.html2canvas(fbDoc, {
+      scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false,
+    });
+  } finally {
+    fbDoc.classList.remove("capturing");
+  }
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ unit: "mm", format: "a4", compress: true });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  const m = 12;
+  const drawW = pageW - m * 2;
+  const drawH = pageH - m * 2;
+  /* Slice the canvas into page-height bands rather than redrawing the whole
+     image at a negative offset on every page: the offset trick overlaps
+     bands and prints the same line twice at each break. */
+  const bandPx = Math.floor(canvas.width * drawH / drawW);
+  const bands = [];
+  for (let y = 0; y < canvas.height; y += bandPx) {
+    bands.push([y, Math.min(bandPx, canvas.height - y)]);
+  }
+  /* A document that overruns a page by a hair otherwise ships a second page
+     carrying a 60px sliver of card border, which reads as a fault rather than
+     as a page. Fold a small tail back into the page before it and shrink that
+     page's image to fit instead. */
+  if (bands.length > 1 && bands[bands.length - 1][1] < bandPx * 0.18) {
+    bands[bands.length - 2][1] += bands.pop()[1];
+  }
+  bands.forEach(([y, h], page) => {
+    const band = document.createElement("canvas");
+    band.width = canvas.width;
+    band.height = h;
+    const ctx = band.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, band.width, band.height);
+    ctx.drawImage(canvas, 0, -y);
+    let w = drawW;
+    let dh = h * drawW / canvas.width;
+    if (dh > drawH) { w = drawW * drawH / dh; dh = drawH; }   /* the folded page */
+    if (page) pdf.addPage();
+    pdf.addImage(band.toDataURL("image/jpeg", 0.92), "JPEG",
+                 m + (drawW - w) / 2, m, w, dh);
+  });
+  fbCache = { blob: pdf.output("blob"), filename: fbDocTitle() + ".pdf" };
+  return fbCache;
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+
+async function withBusy(btn, label, fn) {
+  const was = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = label;
+  try { await fn(); } finally { btn.disabled = false; btn.textContent = was; }
+}
+
+document.getElementById("fbPdf").addEventListener("click", e => {
+  fbStatus2.classList.remove("err");
+  withBusy(e.currentTarget, "Building the PDF", async () => {
+    try {
+      const { blob, filename } = await fbMakePdf();
+      downloadBlob(blob, filename);
+      fbStatus2.textContent = "Saved as " + filename;
+    } catch (err) {
+      printFallback("The PDF library could not be reached, which usually means no internet.");
+    }
+  });
+});
+
+/* --------------------------------------------------------------- WhatsApp */
+function fbSummary() {
+  const lines = [
+    "Feedback on the Kannada 10-year welcome film",
+    `${fbVal("name")}${fbVal("role") ? ", " + fbVal("role") : ""}${fbVal("date") ? ", " + fbVal("date") : ""}`,
+    "",
+    "Overall: " + (fbVal("verdict") || "not stated"),
+  ];
+  const commented = FB_FIELDS
+    .filter(([, n, k]) => k === "prose" && fbVal(n))
+    .map(([l]) => l.replace(/,.*$/, ""));
+  if (commented.length) lines.push("Comments on: " + commented.join("; "));
+  const decided = FB_FIELDS
+    .filter(([, n]) => n.startsWith("gate"))
+    .map(([l, n]) => [l.replace(/^Decision: /, "").replace(/,.*$/, ""), fbVal(n)])
+    .filter(([, v]) => v && v !== "Decide later");
+  if (decided.length) {
+    lines.push("", "Decisions:");
+    for (const [l, v] of decided) lines.push(`  ${l}: ${v}`);
+  }
+  lines.push("", "The full feedback is in the attached PDF.");
+  return lines.join("\n");
+}
+
+document.getElementById("fbSend").addEventListener("click", e => {
+  fbStatus2.classList.remove("err");
+  withBusy(e.currentTarget, "Preparing", async () => {
+    const text = fbSummary();
+    const phone = fbVal("phone").replace(/\D/g, "");
+    let pdf = null;
+    try {
+      pdf = await fbMakePdf();
+    } catch {
+      fbStatus2.textContent = "The PDF library could not be reached. Sending the "
+        + "summary as text only; make the PDF separately with Download the PDF.";
+      fbStatus2.classList.add("err");
+    }
+
+    /* A phone can hand the actual file to WhatsApp through the share sheet.
+       A desktop browser cannot: no URL scheme attaches a file, so the only
+       honest desktop flow is download, then attach by hand. */
+    if (pdf && navigator.canShare) {
+      const file = new File([pdf.blob], pdf.filename, { type: "application/pdf" });
+      if (navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], text, title: "Kannada film feedback" });
+          fbStatus2.textContent = "Handed to the share sheet. Pick WhatsApp.";
+          return;
+        } catch (err) {
+          if (err && err.name === "AbortError") { fbStatus2.textContent = "Cancelled."; return; }
+        }
+      }
+    }
+
+    if (pdf) downloadBlob(pdf.blob, pdf.filename);
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`,
+                "_blank", "noopener");
+    fbWaHint.hidden = false;
+    if (!fbStatus2.classList.contains("err")) {
+      fbStatus2.textContent = pdf
+        ? "PDF downloaded and WhatsApp opened. Attach the PDF, then send."
+        : "WhatsApp opened with the summary.";
+    }
+  });
+});
+
+/* Any edit invalidates a built PDF, so it is rebuilt rather than resent. */
+fbForm.addEventListener("input", () => { fbCache = null; });
+fbForm.addEventListener("change", () => { fbCache = null; });
+
+fbLoadDraft();
+
 </script>
 </body>
 </html>

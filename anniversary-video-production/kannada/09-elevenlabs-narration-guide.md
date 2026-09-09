@@ -126,31 +126,16 @@ python3 film.py silent.mp4
 
 `--render` prints, per line, how far the read landed from the predicted allocation, and flags anything more than 12 percent out. Step 2 then makes the picture match. **Expect the film to get longer.** A natural Kannada read of this script runs 5 to 10 percent over the cluster prediction; at +9 percent the film becomes **00:05:27:13**. That is not a fault, it is the real duration. If the event needs it shorter, `01` section 1 has the trim path, and it takes the time out of picture, not pace.
 
-Then assemble the narration stem and mux. Lines are placed at each shot's start, so pauses and holds stay silent:
+Then assemble the narration stem and mux. `stem.py` places each line at its shot's start, so pauses and holds stay silent:
 
 ```bash
-python3 - <<'EOF'
-import json, glob, os, subprocess, wave, struct, math
-SR=48000; V=sorted(glob.glob("vo_eleven/*/durations.json"))[-1]; D=os.path.dirname(V)
-S=json.load(open("timeline.json")); M=json.load(open(V))
-track=[0]*int(math.ceil(S[-1]["t_out"]*SR)+SR)
-for sh in S:
-    f=os.path.join(D, sh["sid"]+".mp3")
-    if not os.path.exists(f): continue
-    subprocess.run(["ffmpeg","-v","error","-y","-i",f,"-ar",str(SR),"-ac","1",
-                    "-c:a","pcm_s16le","/tmp/l.wav"],check=True)
-    w=wave.open("/tmp/l.wav"); n=w.getnframes()
-    s=struct.unpack("<%dh"%n,w.readframes(n)); w.close()
-    at=int(round(sh["t_in"]*SR))
-    for i,v in enumerate(s):
-        if at+i<len(track): track[at+i]+=v
-pk=max(1,max(abs(v) for v in track)); g=(10**(-3/20))*32767/pk
-track=[max(-32768,min(32767,int(v*g))) for v in track]
-w=wave.open(D+"/narration.wav","w"); w.setnchannels(1); w.setsampwidth(2)
-w.setframerate(SR); w.writeframes(struct.pack("<%dh"%len(track),*track)); w.close()
-print("wrote", D+"/narration.wav")
-EOF
+python3 stem.py <VOICE_ID>          # writes vo_eleven/<VOICE_ID>/narration.wav
+python3 stem.py                     # with no argument, lists the voice dirs it can see
+```
 
+Name the voice. Do not discover it: `sorted(glob("vo_eleven/*/durations.json"))[-1]` loses to any sibling directory sorting later, such as an audition backup or `VOICE_ID_HERE`, and would build a stem from five lines out of forty-three while still printing success.
+
+```bash
 ffmpeg -i silent.mp4 -i vo_eleven/<VOICE_ID>/narration.wav \
   -map 0:v -map 1:a -c:v copy \
   -af "loudnorm=I=-16:TP=-3.0:LRA=11" \

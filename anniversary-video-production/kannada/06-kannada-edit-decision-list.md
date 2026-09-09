@@ -209,6 +209,8 @@ One bed, both language versions. Only the narration stem changes. `07` section 1
 
 **Three cues carry the film:** the six seconds of complete silence at `K06`, the drop-out under `ಪೂರ್ತಿ ಅಲ್ಲ.` at `K27`, and the refusal to climax at `K43`. If a music supplier cannot deliver those three, the bed is wrong regardless of how good the melody is.
 
+**Sound effects are not in this cue sheet on purpose.** `07` item 5.7 rules them out. A sourcing plan exists in `11` if the Trust revises 5.7; it must not touch the silence cues above.
+
 **Forbidden:** any track with a vocal in any language; orchestral swell on the numbers; four-to-the-floor percussion; corporate-inspirational piano-and-clap library music; devotional cadence; a rise under the award. `07` section 11, `14` item 5.4.
 
 **BLOCKING on licence.** The licence must cover public event screening, YouTube monetised or not, social media and website embedding, worldwide, in perpetuity. A "personal use" or "single project, non-broadcast" licence is not sufficient for an event plus YouTube. `14` items 5.1 and 5.2. If the budget allows, commissioning five minutes of original bansuri from a Karnataka musician is cheaper than premium library licensing and is a better story. `07` section 11.

@@ -59,3 +59,17 @@ anniversary-video-production/**/tools/vo/
 anniversary-video-production/**/tools/subs.json
 anniversary-video-production/**/tools/*.wav
 anniversary-video-production/**/tools/*.aiff
+
+# Downloaded sound effects. The licence record is the CSV, not the files.
+anniversary-video-production/**/tools/sfx/*.mp3
+anniversary-video-production/**/tools/sfx/*.wav
+anniversary-video-production/**/tools/sfx/*.ogg
+anniversary-video-production/**/tools/sfx/*.flac
+anniversary-video-production/**/tools/sfx/*.m4a
+anniversary-video-production/**/tools/vo_eleven/
+
+# Audio deliverables from tools/mix.py: stems, masters and previews. All of it
+# is rebuilt from timeline.json plus the narration stem and sfx/placements.csv,
+# and the cue sheet and licence log beside the pack are the record of what is in
+# them. `tools/*.wav` above does not reach a subdirectory, so it is named here.
+anniversary-video-production/**/tools/mix/

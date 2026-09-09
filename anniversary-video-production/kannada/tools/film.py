@@ -3,14 +3,19 @@
 """
 Composites the Kannada cut frame by frame and pipes it to ffmpeg.
 
-  python3 film.py out.mp4                 full render, 00:05:03:21, 1920x1080
+  python3 film.py out.mp4                 full render, 00:05:36:01, 1920x1080
   python3 film.py out.mp4 --stills        one PNG per shot, no video
   python3 film.py out.mp4 --range 60 75   render only 60s to 75s
   python3 film.py out.mp4 --scale 2       3840x2160 master (see below)
   python3 film.py out.mp4 --no-subs       omit the burned-in Kannada subtitles
+  python3 film.py out.mp4 --fallback      Part 12 consent fallback (face-free stills)
 
 Photography is composited by PIL. All Kannada text comes from the pre-rendered
 Chrome PNGs in gfx/ (see gfx.py); PIL is never asked to draw Kannada.
+
+--fallback keeps the full narration timing and swaps every consent-blocked or
+Udayavani shot for a face-free still from 07 / 14 Part 12. Timing does not move.
+Use it when 07 item 1.1 is unsigned; do not use it as a waiver of the gate.
 
 --scale N multiplies the output frame and every output-space measurement by N.
 Crop boxes in G are native source-file pixels and are NOT scaled; `push` values
@@ -38,7 +43,56 @@ SCALE = _arg("--scale", int, 1)
 if SCALE < 1:
     sys.exit("--scale must be 1 or more")
 BURN_SUBS = "--no-subs" not in sys.argv
+FALLBACK = "--fallback" in sys.argv
 GFXDIR = "gfx" if SCALE == 1 else f"gfx@{SCALE}x"
+
+# Face-free stills named in 07 Part 12 / 14 Part 12. Portrait sources use the
+# whole frame and cover() centre-crops to 16:9. Snack packets are cropped past
+# the commercial mark that got neighbouring assets rejected.
+FALLBACK_POOL = [
+    ("assets/images/timeline/2024-car-trunk-filled-with-school-bags.jpg", None),
+    ("assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg", None),
+    ("assets/images/timeline/2022-library-bookshelves.jpg", None),
+    ("assets/images/timeline/2022-library-donation-poster.jpg", (0, 0, 1406, 900)),
+    ("assets/images/timeline/2024-school-supply-kit-on-floor.jpg", None),
+    ("assets/images/timeline/2025-stationery-and-snacks-arranged.jpg", None),
+    ("assets/images/timeline/2024-snack-packets-for-distribution.jpg", (0, 0, 720, 720)),
+    ("assets/images/timeline/2025-saraswati-primary-school-sign.jpg", (0, 90, 1215, 774)),
+    ("assets/images/timeline/2025-government-primary-school-sign.jpg", (0, 0, 1215, 684)),
+    ("assets/images/awards/framed-bharat-shiksha-ratan-award-certificate.jpg", None),
+    ("assets/images/timeline/2020-pandemic-relief-announcement-poster.jpg", None),
+]
+
+
+def _needs_fallback(sh):
+    c = (sh.get("consent") or "").upper()
+    if "BLOCKING" in c or "[C]" in c or "COPYRIGHT" in c:
+        return True
+    if "SOME CHILDREN" in c:
+        return True
+    return False
+
+
+def apply_fallback():
+    """Replace blocked photography in place. Duration and narration stay put."""
+    dropped = []
+    i = 0
+    for sh in TL:
+        if not _needs_fallback(sh):
+            continue
+        path, box = FALLBACK_POOL[i % len(FALLBACK_POOL)]
+        i += 1
+        dropped.append((sh["sid"], sh.get("path", ""), path))
+        sh["path"] = path
+        G[sh["sid"]] = dict(mode="full", box=box, push=(1.0, 1.02),
+                            _dur=sh["dur"])
+        OV.pop(sh["sid"], None)
+    print("FALLBACK: replaced %d blocked shots; duration unchanged at %.2fs"
+          % (len(dropped), TL[-1]["t_out"]))
+    for sid, old, new in dropped:
+        print("  %s  dropped %s" % (sid, os.path.basename(old) or "(none)"))
+        print("       -> %s" % os.path.basename(new))
+    return dropped
 
 def o(px):
     """Scale an output-space measurement. Source-space crops never use this."""
@@ -312,6 +366,9 @@ def with_overlays(sh, t, img):
 for sh in TL:
     G[sh["sid"]]["_dur"] = sh["dur"]
 
+if FALLBACK:
+    apply_fallback()
+
 def trans_frames(sh):
     s = (sh.get("trans") or "").lower()
     if "no cut" in s:
@@ -387,7 +444,7 @@ def main():
     pos = _positional(sys.argv[1:])
     if not pos:
         sys.exit("usage: film.py OUT.mp4 [--scale N] [--no-subs] "
-                 "[--stills] [--range A B]")
+                 "[--fallback] [--stills] [--range A B]")
     out = pos[0]
     total = int(round(TL[-1]["t_out"] * FPS))
     if "--stills" in sys.argv:
@@ -406,11 +463,13 @@ def main():
     cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
            "-i", "-", "-an",
-           "-c:v", "libx264", "-preset", "slow", "-crf", crf,
-           "-profile:v", "high", "-level", "5.1",
-           "-pix_fmt", "yuv420p", "-movflags", "+faststart",
-           "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
-           out]
+          "-c:v", "libx264", "-preset", "slow", "-crf", crf,
+          "-profile:v", "high", "-level", "5.1",
+          "-pix_fmt", "yuv420p", "-movflags", "+faststart",
+          "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
+          "-color_range", "tv",
+          "-x264-params", "colorprim=bt709:transfer=bt709:colormatrix=bt709",
+          out]
     print(f"render {W}x{H} @ {FPS}fps, gfx from {GFXDIR}/, "
           f"subs {'burned in' if BURN_SUBS else 'omitted'}, crf {crf}")
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)

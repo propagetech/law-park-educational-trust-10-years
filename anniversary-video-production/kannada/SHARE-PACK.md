@@ -6,12 +6,37 @@
 
 It includes the animatic player with Kannada subtitles, role briefs, the trustee decision checklist with owner and date fields, the full shot list with per-shot consent status, the end-roll name gate, design tokens, and links to every document in the pack.
 
+## Two things the handoff page now does on its own
+
+**Trustee feedback, section 02.** The founder and the trustees watch the
+reference cut, fill in a form scoped to the five acts and the five open gates,
+and press one button. The page shows them exactly what the PDF will say, then
+builds the PDF on their own device and hands it to WhatsApp. Nothing is posted
+to a server, because this page is a static file and a form POST would have
+nowhere to go. Kannada typed into the form comes out correctly in the PDF: it
+is rendered through the browser, which has Noto Sans Kannada loaded, rather
+than through a PDF library's Latin-only built-in fonts.
+
+On a phone the share sheet passes the PDF straight into WhatsApp. On a
+computer it cannot: no URL scheme attaches a file, so the page downloads the
+PDF, opens WhatsApp with the summary already typed, and says to attach the
+file. If the two CDN libraries cannot be reached, it falls back to the
+browser's own print-to-PDF, which needs no network.
+
+**Creative resources, section 03.** Every committed source file the team needs
+to re-cut, re-grade, re-score or re-subtitle the film, grouped and linked, plus
+a table of what is deliberately not in the repository and the command that
+rebuilds each missing thing. The video is labelled a reference cut throughout,
+in the player note, in the formats table and in the footer of every feedback
+PDF, because it is not a final render and someone will otherwise treat it as
+one.
+
 ## The three versions of the film
 
 | File | Resolution | For | In git |
 |---|---|---|---|
 | `08-kannada-animatic-preview.mp4` | 1920x1080, subtitles burned in | Local review, phone-sized | no |
-| `kannada-2160p-review-scratch-vo.mp4` | 3840x2160, scratch narration | Projection test, quality review | no |
+| `kannada-2160p-review.mp4` | 3840x2160, ElevenLabs narration, no burned subtitles | Projection test, quality review | no |
 | `kannada-2160p-youtube-master.mp4` | 3840x2160, human narration | The YouTube upload | does not exist yet |
 
 **No video is committed to this repository.** `.gitignore` excludes `*.mp4`,
@@ -82,7 +107,7 @@ Recipients must **unzip first**. Opening the page from inside a zip viewer break
 
 | File | For |
 |---|---|
-| `team-handoff.html` | Everyone, open first |
+| `team-handoff.html` | Everyone, open first. Carries the reference-cut player, the trustee feedback form and the creative-team resource list |
 | `01-kannada-final-script.md` | Narrator, booth |
 | `02-kannada-voice-audition-plan.md` | Casting, audio |
 | `03-kannada-storyboard.md` | Director, editor |
@@ -96,10 +121,20 @@ Recipients must **unzip first**. Opening the page from inside a zip viewer break
 | `08-kannada-animatic-notes.md` | Everyone |
 | `09-elevenlabs-narration-guide.md` | Interim scratch read only |
 | `10-cursor-elevenlabs-prompt.md` | Whoever runs the TTS |
+| `11-kannada-sound-design-and-sfx-sources.md` | Sound designer, editor. Sourcing and licence discipline. Superseded in part by the four documents below |
+| `12-cursor-event-master-prompt.md` | Whoever builds the hall master |
+| `Kannada-cinematic-audio-direction.md` | **Composer, sound designer, mixer, open first.** The five-act direction, the effect palette and the two open gates |
+| `Kannada-music-map.md` | Composer or music supplier. Palette, motif, intensity curve, deliverables |
+| `Kannada-cue-sheet.csv` | Composer, sound designer, mixer. 46 music cues and 14 effect events at generated timecodes. **This, not `06` section 7** |
+| `Kannada-final-mix-checklist.md` | Re-recording mixer, producer. Mix, master, quality test, sign-off |
+| `Kannada-sfx-licence-log.csv` | Producer. 14 rows, every one still NOT CAPTURED against `07` 5.9 |
 | `tools/timeline.json` | Timing source of truth |
 | `tools/README.md` | How to re-run the build |
 | `tools/make_vtt.py` | Regenerates the `.vtt` after `make_srt.py` |
 | `tools/master.py` | Builds the 2160p master, checks the publishing gates |
+| `tools/cue.py` | Regenerates the cue sheet, and audits the timecodes typed into the audio documents |
+| `tools/log.py` | Regenerates the licence log, preserving every field a person filled in |
+| `tools/mix.py` | Builds the stems, the two masters and the four previews |
 
 **Research and bilingual** (`anniversary-video-research/`): `00` project map, `01` source of truth, `02` evidence table, `03` impact and milestone data, `04` media inventory, `05` asset audit and gaps, `06` trustee questions, `07` creative brief, `08` English script, `09` Kannada source script, `10` bilingual storyboard, `11` short teaser scripts, `12` onscreen text and lower thirds, `13` credits and acknowledgements, `14` rights and publishing checklist.
 

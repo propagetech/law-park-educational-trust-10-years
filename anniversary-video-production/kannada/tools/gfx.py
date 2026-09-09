@@ -16,7 +16,7 @@ CSS pixels, so nothing in BASE or any card needs touching, and every glyph, rule
 and logo edge is rendered natively at the higher resolution rather than enlarged.
 This is the one part of a 4K master that gains real detail; see film.py.
 """
-import json, os, sys
+import hashlib, json, os, sys
 from playwright.sync_api import sync_playwright
 
 def _arg(flag, cast, default):
@@ -355,9 +355,44 @@ for i, c in enumerate(SRT):
 json.dump(SRT, open("subs.json", "w"), ensure_ascii=False)
 
 # ================================================================ render
-todo = [(n, h) for n, h in CARDS.items() if not os.path.exists(f"{OUT}/{n}.png")]
+# The cache is keyed on the HTML, not on the filename. Keying it on the filename
+# alone is a silent-failure machine: SUB_NNN is an INDEX into the cue list, so
+# re-timing the film (build_timeline.py --from-audio) renumbers every cue after
+# the first split that moves, and each old PNG then sits under a new index
+# holding the previous cue's Kannada. The film renders clean, no error is raised,
+# and the burned subtitles are simply the wrong lines. That happened: the
+# ElevenLabs re-time grew the cue list from 80 to 83, so exactly 3 graphics were
+# judged new and 80 stale ones were kept.
+MANIFEST = f"{OUT}/.manifest.json"
+try:
+    seen = json.load(open(MANIFEST, encoding="utf-8"))
+except (OSError, ValueError):
+    seen = {}
+
+def _stamp(html):
+    return hashlib.sha256(html.encode("utf-8")).hexdigest()[:16]
+
+todo = [(n, h) for n, h in CARDS.items()
+        if not os.path.exists(f"{OUT}/{n}.png") or seen.get(n) != _stamp(h)]
+stale = [n for n, h in CARDS.items()
+         if os.path.exists(f"{OUT}/{n}.png") and seen.get(n) not in (None, _stamp(h))]
+# PNGs whose card no longer exists at all: a shorter cue list leaves orphans that
+# nothing references but that make the directory listing lie about the count.
+orphan = [f for f in os.listdir(OUT)
+          if f.endswith(".png") and f[:-4] not in CARDS]
+for f in orphan:
+    os.remove(f"{OUT}/{f}")
+
 print(f"{len(CARDS)} graphics, {len(todo)} to render "
       f"at {1920 * SCALE}x{1080 * SCALE} into {OUT}/")
+if stale:
+    print(f"  {len(stale)} changed content, re-rendering: "
+          f"{' '.join(sorted(stale)[:8])}{' ...' if len(stale) > 8 else ''}")
+if orphan:
+    print(f"  {len(orphan)} orphaned PNGs removed")
+if not seen:
+    print("  no manifest yet, so every graphic is re-rendered once to "
+          "guarantee the cache and the cue list agree")
 with sync_playwright() as p:
     br = p.chromium.launch()
     pg = br.new_page(viewport={"width": 1920, "height": 1080},
@@ -368,5 +403,10 @@ with sync_playwright() as p:
         pg.screenshot(path=f"{OUT}/{name}.png", omit_background=True)
         if i % 25 == 0:
             print(f"  {i}/{len(todo)}", flush=True)
+        seen[name] = _stamp(html)
     br.close()
-print("done:", len(os.listdir(OUT)), "files in", OUT)
+
+json.dump({n: _stamp(h) for n, h in CARDS.items()},
+          open(MANIFEST, "w"), indent=0, sort_keys=True)
+print("done:", len([f for f in os.listdir(OUT) if f.endswith(".png")]),
+      "PNGs in", OUT)

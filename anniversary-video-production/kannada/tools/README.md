@@ -1,6 +1,6 @@
 # Timeline and render tools
 
-Eight scripts. Together they rebuild the Kannada cut from the repository photographs
+Ten scripts. Together they rebuild the Kannada cut from the repository photographs
 and the Kannada script, with no manual step.
 
 ```bash
@@ -9,10 +9,22 @@ python3 make_srt.py timeline.json ../05-kannada-subtitles.srt
 python3 make_vtt.py                                # WebVTT for team-handoff.html
 python3 gfx.py ../05-kannada-subtitles.srt         # 133 Kannada graphics, via Chrome
 python3 vo.py                                      # scratch narration, fitted per line
-python3 film.py silent.mp4                         # 7,596 frames, ~3.5 min
+python3 stem.py <VOICE_ID>                         # ElevenLabs lines -> one aligned WAV
+python3 sfx.py --check                             # validate sound-effect placements
+python3 cue.py                                     # regenerate the cinematic cue sheet
+python3 cue.py --audit-docs                        # timecodes typed into the audio docs
+python3 log.py                                     # regenerate the SFX licence log
+python3 mix.py --check                             # measure effects against the narration
+python3 mix.py --calibrate                         # stems, masters and previews -> mix/
+python3 film.py silent.mp4                         # full warm cut, burned subs
+python3 film.py silent-fallback.mp4 --fallback     # Part 12 consent fallback
 python3 film.py out.mp4 --stills                   # one PNG per shot, fast
 python3 film.py out.mp4 --range 30 45              # one stretch only
 ```
+
+`--fallback` keeps the full narration timing and swaps every consent-blocked /
+Udayavani shot for a face-free still. Use it when `07` item 1.1 is unsigned;
+see `12-cursor-event-master-prompt.md` and `13-event-playback-notes.md`.
 
 No video is committed to this repository: `.gitignore` excludes `*.mp4` and the
 other video containers. Every render below is reproducible from `timeline.json`
@@ -93,9 +105,102 @@ neither can shape Kannada: they would break conjuncts and misplace vowel signs
 without raising an error, which is the silent failure `14` item 7.8 is about.
 **Never move Kannada text rendering to PIL or to ffmpeg.**
 
+The render cache is keyed on the **HTML of each card**, recorded in
+`gfx/.manifest.json`, not on the filename. Filename-only caching is a silent
+failure: `SUB_NNN` is an index into the cue list, so any re-time that changes
+where cues split renumbers them, and every old PNG then sits under a new index
+carrying the previous cue's Kannada. The film renders clean and the burned
+subtitles are simply the wrong lines. That is exactly what the ElevenLabs
+re-time did, growing the cue list from 80 to 83 so that only 3 graphics looked
+new. Orphaned PNGs whose card no longer exists are deleted on each run. If the
+manifest is missing, every graphic is re-rendered once so the cache and the cue
+list cannot disagree.
+
 Noto Serif Kannada is not installed here, so display titles use Noto Sans
 Kannada 700, the fallback `07` section 9 nominates. Install the serif and
 re-render before the graded master; the layouts will not move.
+
+## stem.py
+
+Assembles the per-line ElevenLabs MP3s into one timeline-aligned narration WAV,
+which is what `master.py --vo` and the animatic mux both want. `vo.py` already
+does this for the scratch track; this is its ElevenLabs counterpart.
+
+Run it only **after** `build_timeline.py --from-audio`, or the shots still carry
+the predicted allocations and every line after the first drift sits wrong. It
+refuses to build if any narrating shot has no MP3, and it reports any line that
+runs past its shot and bleeds over the cut.
+
+The voice is named on the command line rather than discovered, because
+`sorted(glob("vo_eleven/*/durations.json"))[-1]` silently loses to any sibling
+directory that sorts later: an audition backup, a second voice, `VOICE_ID_HERE`.
+That would build a stem from five lines out of forty-three and still print
+success. Run `python3 stem.py` with no argument to list what is there.
+
+## cue.py
+
+Builds `../Kannada-cue-sheet.csv` from `timeline.json` and `sfx/placements.csv`:
+46 music cues and 14 effect events, one row each, sorted by timecode.
+
+`--check` validates the cue table without writing: every shot has exactly one
+music cue, no cue sits inside a silence cue, no effect's fade-out crosses into
+one, the 14-effect cap holds, and every placement has a cue row and vice versa.
+It prints the clearance in seconds from each effect's tail to the next silence
+cue.
+
+`--audit-docs` reads the three audio markdown documents and checks every
+shot-and-timecode pair typed into their prose against `timeline.json`. Prose
+cannot be generated, so those numbers go stale on a re-time; three of them had
+already drifted when this check was written. Run it after any re-time.
+
+## log.py
+
+Rebuilds `../Kannada-sfx-licence-log.csv` from `sfx/placements.csv`, keeping
+every column a person filled in: download date, licence text captured that day,
+evidence file, approval and notes are carried across by `cue_key`, and the
+timecodes, levels, gains and fades are derived fresh. `--check` reports which
+rows still have no licence evidence, which `07` item 5.9 is about, and writes
+nothing.
+
+## mix.py
+
+Builds the audio deliverables into `mix/`: the dialogue stem, the effects stem,
+a music stem when `--music` names a bed, an event master at -23 LUFS
+high-passed at 65 Hz, an online master at -16 LUFS, and four previews. Both
+masters are two-pass `loudnorm` with a -3 dBTP ceiling.
+
+It measures the narration's speech RMS with the silences removed, then measures
+each trimmed and faded excerpt and derives the gain that lands it on the level
+`placements.csv` asks for in `level_rel_narr_db`. `--calibrate` writes those
+gains back into the `gain_db` column so `sfx.py` cannot disagree with it.
+`--check` prints the whole measurement table and writes nothing.
+
+After every build it measures `K06`, `K12`, `K27` and `K34` in the built stems
+and refuses to finish if any is above -70 dBFS, and it checks that every stem
+and master is exactly the length of the picture. Without `--music` the output is
+stamped `NOMUSIC`, and the effects stem and everything containing it is stamped
+`UNAPPROVED`, because `07` items 5.1 and 5.8 are both open.
+
+## sfx.py
+
+Mixes sound effects from `sfx/` into the narration stem, per `sfx/placements.csv`.
+Offsets are measured from each shot's `t_in`, so placements survive a re-time.
+
+It refuses more than it accepts, on purpose. No placement may land in the
+silence cues `K06`, `K12`, `K27` or `K34`; `K37` and `K43` warn, and fail under
+`--strict`; the film is capped at 14 effects; and any effect that would sit less
+than 12 dB under the narration is pulled down to that ceiling. An effect with no
+row in `Kannada-sfx-licence-log.csv` warns, because `07` item 5.9 makes the
+log the record of what shipped.
+
+`06` section 7 builds this film's audio around its silences. An effect dropped
+into one renders cleanly and is still wrong, which is the same silent-failure
+shape as the old gfx cache, so the rules are enforced in code rather than left
+to the mix.
+
+**Output is a LEARNING mix.** `07` item 5.7 forbids sound effects and 5.8 is
+unsigned, so this writes `narration_plus_sfx_LEARNING.wav` and never touches the
+narration stem or a master.
 
 ## film.py
 

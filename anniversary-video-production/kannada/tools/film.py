@@ -223,6 +223,34 @@ def gfx(name):
         _gfx[name] = Image.open(f"{GFXDIR}/{name}.png").convert("RGBA")
     return _gfx[name]
 
+
+def check_gfx_current():
+    """Refuse to render against graphics older than the script that draws them.
+
+    Two ways this bites, and both happened. gfx.py renders into gfx/ at scale 1
+    and gfx@2x/ at scale 2, and they are separate directories: editing a card and
+    re-rendering only gfx/ leaves the 4K master carrying the previous version of
+    every graphic, silently. And graphics are loaded lazily here, so editing them
+    while a render is running produces a film that is half one version and half
+    the other, also silently.
+
+    Comparing the manifest's mtime against gfx.py's catches both. It is a
+    cheap check and the failure it prevents is invisible in the output.
+    """
+    man = os.path.join(GFXDIR, ".manifest.json")
+    script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "gfx.py")
+    if not os.path.exists(man):
+        sys.exit(f"no {man}\n  render the graphics first:  python3 gfx.py "
+                 f"../05-kannada-subtitles.srt"
+                 + (f" --scale {SCALE}" if SCALE > 1 else ""))
+    if os.path.exists(script) and os.path.getmtime(script) > os.path.getmtime(man):
+        sys.exit(
+            f"refusing to render.\n"
+            f"  gfx.py is newer than {man}, so {GFXDIR}/ is stale and this "
+            f"render would carry the previous graphics.\n"
+            f"  Re-render them:  python3 gfx.py ../05-kannada-subtitles.srt"
+            + (f" --scale {SCALE}" if SCALE > 1 else ""))
+
 def cover(im, box, aspect=W / H):
     """Crop to `box`, then centre-crop that to the target aspect."""
     if box:
@@ -656,6 +684,7 @@ def main():
         sys.exit("usage: film.py OUT.mp4 [--scale N] [--no-subs] "
                  "[--fallback] [--stills] [--range A B]")
     out = pos[0]
+    check_gfx_current()
     total = int(round(TL[-1]["t_out"] * FPS))
     if "--stills" in sys.argv:
         sd = "stills" if SCALE == 1 else f"stills@{SCALE}x"

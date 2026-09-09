@@ -36,8 +36,9 @@ if (flag("--list") || !opt("--voice-id")) {
   const have = new Set((await listVoices()).voices.map((v) => v.voice_id));
   console.log(`\nshortlisted Voice Library voices (in account: ${[...have].length ? "checked" : "unknown"})\n`);
   for (const v of all) {
+    const cat = v.account_category ?? `${v.library_category ?? "?"} (library)`;
     console.log(`  ${have.has(v.voice_id) ? "IN ACCOUNT" : "not added "}  ` +
-      `${v.voice_id}  ${v.role.padEnd(12)}${v.category.padEnd(14)}${v.name}`);
+      `${v.voice_id}  ${v.role.padEnd(12)}${String(cat).padEnd(24)}${v.name}`);
   }
   console.log(`\nAdd one:  node scripts/add-shared-voice.mjs --voice-id <id> --yes`);
   console.log(`This changes the account and may consume a voice slot.\n`);
@@ -58,7 +59,8 @@ if (!flag("--yes")) {
   console.error(
     `\nwould add to the account:\n` +
     `  ${voiceId}  ${name}\n` +
-    `  category ${entry?.category ?? "unknown"}\n\n` +
+    `  category ${entry?.account_category ?? entry?.library_category ?? "unknown"}\n` +
+    `  verified for Kannada: ${entry?.verified_for_kannada ?? "unknown, not yet on the account"}\n\n` +
     `This changes the ElevenLabs account and may consume a voice slot.\n` +
     `Re-run with --yes to do it.\n`);
   process.exit(0);

@@ -1,92 +1,129 @@
 {
-  "generated_at": "2026-09-09T13:26:51.642Z",
+  "generated_at": "2026-09-09T14:03:44.986Z",
   "source": "reports/available-voices.json -> voice_library_kannada (search=kannada)",
-  "warning": "Every voice here is in the public Voice Library and NOT in this account. Each must be added before it can be generated with, which is an account change. See scripts/add-shared-voice.mjs.",
-  "selection_basis": "Metadata against the voice brief only. No audio has been heard.",
+  "warning": "Every voice here comes from the public Voice Library. A free plan cannot use library voices through the API at all (HTTP 402 paid_plan_required), whatever the character balance says, so a paid plan is required before any of these can be heard. Adding one to the account is a separate account change: see scripts/add-shared-voice.mjs.",
+  "selection_basis": "Metadata against the voice brief only. No audio has been heard. NOTE: none of the 20 library Kannada voices is verified for Kannada. All are verified for Hindi or English, on turbo_v2_5 / flash_v2_5 / multilingual_v2, none of which supports Kannada, and none is verified against v3. Treat every entry here as an unverified claim to speak Kannada.",
   "shortlist": [
     {
       "voice_id": "eESo8CL7VOqMtWCh1ikK",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Padhma - Calm Kannada Audiobook",
       "role": "primary",
-      "category": "high_quality",
       "gender": "female",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3",
-      "v3_risk": null,
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "Audiobook register is the closest thing in the library to long-form documentary narration, and high_quality is the safer category on v3. Female, matching the brief primary.",
-      "in_account": false
+      "in_account": true,
+      "library_category": "high_quality",
+      "account_category": "professional",
+      "verified_languages": [
+        "hi/eleven_turbo_v2_5",
+        "hi/eleven_v2_5_flash",
+        "hi/eleven_flash_v2_5",
+        "hi/eleven_multilingual_v2",
+        "hi/eleven_multilingual_sts_v2",
+        "no/eleven_flash_v2_5",
+        "no/eleven_turbo_v2_5",
+        "id/eleven_flash_v2_5",
+        "ar/eleven_multilingual_v2",
+        "ko/eleven_flash_v2_5",
+        "ru/eleven_turbo_v2_5",
+        "es/eleven_multilingual_v2",
+        "tr/eleven_multilingual_v2",
+        "tr/eleven_flash_v2_5",
+        "tr/eleven_turbo_v2_5",
+        "en/eleven_multilingual_v2",
+        "en/eleven_flash_v2_5",
+        "en/eleven_turbo_v2_5"
+      ],
+      "verified_for_kannada": false
     },
     {
       "voice_id": "7B4TkucyQHy3r9hvAnhg",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Sharadhi - Natural Kannada Conversation",
       "role": "primary",
-      "category": "high_quality",
       "gender": "female",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/7B4TkucyQHy3r9hvAnhg/OQwcAxItAsy4PvvPonit.mp3",
-      "v3_risk": null,
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "Female, high_quality, described as natural rather than performed. Conversational register is the risk to listen for.",
-      "in_account": false
+      "in_account": false,
+      "library_category": "high_quality",
+      "account_category": null,
+      "verified_languages": null,
+      "verified_for_kannada": null
     },
     {
       "voice_id": "1yebI4wPatIbQgkzinlP",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Aisiri - Warm Kannada Narration",
       "role": "primary",
-      "category": "professional",
       "gender": "female",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1yebI4wPatIbQgkzinlP/HDIGGM8mntjNGQWZzPY1.mp3",
-      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "The single best description against the brief: warm Kannada narration, well paced. Held third only because it is a Professional Voice Clone and those are documented as weaker on v3.",
-      "in_account": false
+      "in_account": false,
+      "library_category": "professional",
+      "account_category": null,
+      "verified_languages": null,
+      "verified_for_kannada": null
     },
     {
       "voice_id": "1dRM7GYsStGPro8wPFGA",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Mani - Steady Kannada Storyteller",
       "role": "alternative",
-      "category": "high_quality",
       "gender": "male",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1dRM7GYsStGPro8wPFGA/gPqZkWzLSfVnGYB9n2ro.mp3",
-      "v3_risk": null,
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "Male alternative. Described as trusting the story enough not to perform it, which is exactly the brief. high_quality.",
-      "in_account": false
+      "in_account": false,
+      "library_category": "high_quality",
+      "account_category": null,
+      "verified_languages": null,
+      "verified_for_kannada": null
     },
     {
       "voice_id": "UeUC009F3NYPIArcZmq0",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Srivatsa - Kannada Narration",
       "role": "alternative",
-      "category": "high_quality",
       "gender": "male",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/UeUC009F3NYPIArcZmq0/YT9phlJSSPdwve8X565g.mp3",
-      "v3_risk": null,
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "Male alternative, high_quality, rich and measured.",
-      "in_account": false
+      "in_account": false,
+      "library_category": "high_quality",
+      "account_category": null,
+      "verified_languages": null,
+      "verified_for_kannada": null
     },
     {
       "voice_id": "QnERnlMSVcCo1wktWlfs",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Srinatha - Kannada Factual Documentary",
       "role": "alternative",
-      "category": "professional",
       "gender": "male",
       "age": "middle_aged",
       "free_users_allowed": true,
       "preview_url": "https://api.us.elevenlabs.io/v1/voices/QnERnlMSVcCo1wktWlfs/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiJlZDliMDVlNjMyNGM0NTc2ODU0OTAzNTJlOWExZWM5MCIsImZpbGVuYW1lIjoibUFuWTl3cVIxQmtLdXgwZ053eWkubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
-      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "v3_risk": "Assume a Professional Voice Clone, which is documented as weaker on v3. v3 is the only model that speaks Kannada.",
       "why_shortlisted": "Male, explicitly a factual documentary voice. Professional Voice Clone, so v3 behaviour must be checked before it is trusted.",
-      "in_account": false
+      "in_account": false,
+      "library_category": "professional",
+      "account_category": null,
+      "verified_languages": null,
+      "verified_for_kannada": null
     }
   ],
   "rejected": [
@@ -120,5 +157,6 @@
       "name": "Kumaran - Kannada Expressive & Friendly",
       "reason": "Expressive and friendly. Warmer and lighter than the brief wants."
     }
-  ]
+  ],
+  "category_note": "library_category is the Voice Library quality tier and does NOT indicate clone type: Padhma reads high_quality there and professional once added to the account. account_category is the real clone type and is only known once a voice is added. Assume professional, which ElevenLabs documents as weaker on v3, until an account_category says otherwise."
 }

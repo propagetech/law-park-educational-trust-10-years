@@ -16,8 +16,19 @@ production file it can defend later.
 That decision stands until the Trust revises it. Nothing in this document
 overrides it, and no effect should be cut into the film while 5.7 is unrevised.
 
+**The 14-event cap in section 3 is withdrawn.** It was set on the judgement that
+past 14 "the sound design is decoration". The Trust's instruction was to place
+every licensed file, so `tools/sfx.py` now allows 32 and the film holds 28
+placements plus 8 ambience beds. Two files are still held out and both reasons
+are recorded in `Kannada-pause-sfx-shopping-list.md`: the Submority trailer boom
+is the wrong register, and the Grumpynora stinger is Content ID Registered.
+
+Section 1 below, where the film refuses sound, is untouched and still governs.
+So is the never-any-identifiable-child-voice rule, which is why the village
+ambience is cut only from the one 12.5s window `tools/sfx_voicecheck.py` cleared.
+
 **Superseded in part.** The proposal in this document has been worked up into a
-five-act score and a fixed 14-event palette at generated timecodes:
+five-act score and a palette at generated timecodes:
 
 | Document | What it owns |
 |---|---|

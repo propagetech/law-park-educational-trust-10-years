@@ -16,7 +16,7 @@ Model:
   shot duration = speech + marked pauses + held silence
   25 fps, timecodes HH:MM:SS:FF
 """
-import re, json, sys, unicodedata
+import re, json, os, sys, unicodedata
 
 WPM = 105.0          # brief: female Kannada voice, 100-110 wpm. 105 = design target.
 FPS = 25
@@ -112,12 +112,12 @@ shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K07", "CARD", "GFX-03", "O
      music="Bansuri returns at -26 dB", note="Cream #faf8f3 ground, navy text, gold rule. ORG-04, ORG-05.")
 shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K08", "PHOTOCARD", "A059",
      "assets/images/magazine-gallery/Charulatha-MR.jpeg", narr=B2,
-     crop="1280x853 placed at 1280px wide inside a navy 1920x1080 frame (67% width, native, no upscale). Crop the LG monitor badge out of the left edge.",
+     crop="1280x853. FULL FRAME. 16:9 window x 40-1280 upscaled 1.50x, which also crops the LG monitor badge off the left edge. Was placed at 1280px on navy, 67% width, leaving a third of the frame flat.",
      motion="2% push.", trans="Cut", osd="ಚಾರುಲತಾ ಎಂ. ಆರ್.  //  ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ಟ್ರಸ್ಟಿ",
      note="Lower third enters at 1.0s, holds 4.5s, exits over 500ms. Kannada bar 1.5x English height. TRUSTEE LIKENESS approval.")
 shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K09", "PHOTOCARD", "A082",
      "assets/images/magazine-gallery/trustee-mr-sm-manjunatha.webp", narr=B3,
-     crop="853x853 square, placed at 853px inside the navy frame (44% width, native). WEBP ONLY - see note.",
+     crop="853x853 square. FULL FRAME. Centre 16:9 window 853x480 upscaled 2.25x; the window also drops the framed devotional picture the note flags on the wall behind. WEBP ONLY - see note.",
      motion="Static.", trans="Cut", osd="ಎಸ್. ಎಂ. ಮಂಜುನಾಥ  //  ಟ್ರಸ್ಟಿ",
      note="ONLY WEBP EXISTS. No JPEG twin anywhere in the repository, so the house rule 'always grade from the JPEG' cannot be met. Request the original. A framed devotional picture is visible on the wall behind; the trustee should decide whether to keep or reframe.")
 shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K10", "PHOTO", "A234",
@@ -128,7 +128,7 @@ shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K10", "PHOTO", "A234",
      note="NO FACES. A weathered village school board, ಸರ್ಕಾರಿ ಕಿರಿಯ ಪ್ರಾಥಮಿಕ ಶಾಲೆ. Carries 'the children of his own village' without putting anyone on screen.")
 shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K11", "PHOTOCARD", "A061",
      "assets/images/magazine-gallery/charu-talk.jpeg", narr=B5,
-     crop="747x1328 portrait. Place at 640px wide, left third of a cream 1920x1080 card. Native, no upscale.",
+     crop="747x1328 portrait. FULL FRAME. Window y 300-1120 then 16:9, a 2.57x upscale and the softest frame in the cut. A collage would be sharper and A138 is the only sensible partner, which this pack forbids cutting: see the note. 4.0s shot, so softness is the cheaper cost.",
      motion="Static.", trans="Cut", osd="2016 · ಚಿಕ್ಕಬಳ್ಳಾಪುರ  //  ಮೊದಲ ಶಾಲಾ ಭೇಟಿ",
      note="THE FILM'S MOST VALUABLE FRAME IF DATED. The founder teaching at the blackboard, children seated on the floor seen from behind. Same room, same wall charts, same uniforms and the same 747x1328 slide-deck extraction as A138 (2016-classroom-session-with-students.jpg, inventoried as 2016 Chickaballapur), so this is almost certainly the same 2016 visit. Inventory lists its year as UNKNOWN. [ಟ್ರಸ್ಟಿ ದೃಢೀಕರಣ ಅಗತ್ಯ] on the date. Do NOT also cut A138 anywhere in the film; they are two frames of one moment.")
 shot("ಬಿ · ಆರಂಭದ ದಿನಗಳು", "K12", "CARD", "GFX-04", "One child card", narr=B6, hold=1.0,
@@ -173,7 +173,7 @@ shot("ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "K16", "PHOTO", "A160",
      note="A large outdoor gathering. The inventory marks A160 'N/A - no identifiable person'; that is WRONG, the frame is full of identifiable faces. Corrected in deliverable 07.")
 shot("ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "K17", "PHOTOCARD", "A158",
      "assets/images/timeline/2020-pandemic-relief-announcement-poster.jpg", narr=C4, pause=1.0,
-     crop="1440x1377. Place at 900px tall, right of frame, on navy. Native, no upscale.",
+     crop="1440x1377. TWO PANELS, EDGE TO EDGE. The navy gloss plate owns the left 760px and the poster covers the remaining 1160x1080, which is a downscale. No margin, no bare ground.",
      motion="Static. No push on a document.", trans="Cut",
      osd="2020 · ಸಾಂಕ್ರಾಮಿಕ ಕಾಲದ ನೆರವು  //  ಪೋಷಕರನ್ನು ಕಳೆದುಕೊಂಡ ಮಕ್ಕಳಿಗೆ · ಕೆಲಸ ಕಳೆದುಕೊಂಡ ಪೋಷಕರಿಗೆ",
      music="Drone only",
@@ -268,13 +268,13 @@ E6 = "ಈ ಕೆಲಸ ಬೆಳಕು ಟ್ರಸ್ಟ್, ಸೌಖ್ಯ �
 
 shot("ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "K31", "PHOTO", "A244",
      "assets/images/timeline/2025-stationery-and-snacks-arranged.jpg", narr=E1+" "+E2,
-     crop="513x911, the smallest asset in the cut. DO NOT FILL FRAME. Place at native 513px inside a cream card, 27% width, left third, with the Kannada programme labels stacked right.",
+     crop="513x911, the smallest asset in the cut. THREE-TILE COLLAGE, full frame. School bags, this stationery, then books, in the order the line names them. Each tile is 640x1080 so this file is enlarged 1.25x and barely cropped; a full-bleed 16:9 window of it alone would be 513x289 pushed 3.74x. All three tiles are CLEAR in the consent register.",
      motion="Static.", trans="Cut", osd="ಶಾಲಾ ಸಾಮಗ್ರಿ ವಿತರಣೆ",
      music="Tempo lifts slightly",
      note="Pens, geometry boxes, small stationery laid out on a floor. NO FACES, NO BRANDS. Chosen over A200 (2024-school-supply-kit-on-floor.jpg) and A202 (2024-snack-packets-for-distribution.jpg), both REJECTED for prominent commercial packaging.")
 shot("ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "K32", "PHOTOCARD", "A078",
      "assets/images/magazine-gallery/kids-craft.jpeg", narr=E3,
-     crop="720x1560 portrait. Place at native 720px, 37% width, on cream, with labels stacked beside.",
+     crop="720x1560 portrait. TWO-TILE COLLAGE, full frame. K18's library plate and this craft session, for the line that names libraries and games. 960x1080 tiles, so this file is enlarged 1.33x against 2.67x for a full-bleed window of it alone.",
      motion="Static.", trans="Cross-dissolve 16f",
      osd="ಕಲಿಕೆಯ ಆಟಗಳು · ನಾಡು ನುಡಿಯ ಪರಿಚಯ · ಗ್ರಾಮೀಣ ಶಾಲೆಗಳಲ್ಲಿ ಗ್ರಂಥಾಲಯ",
      note="Children making paper craft on a classroom floor. LABELS RUN 3s EACH, not 2s, per the Kannada dwell rule. CONSENT [C].")
@@ -305,21 +305,21 @@ F7 = "ಮತ್ತು ತಮ್ಮ ಪಾಲನ್ನು ತಪ್ಪದೇ ಕ�
 
 shot("ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "K36", "PHOTOCARD", "A196",
      "assets/images/timeline/2024-newspaper-coverage-clipping.jpg", narr=F1, pause=1.0,
-     crop="513x733, the second-lowest-resolution asset in the cut. Crop OFF the burned-in epaper URL strip at the foot. Place the remaining ~513x660 at native size on navy, 27% width, then push to 40% over the shot. NEVER full frame.",
+     crop="513x733, the second-lowest-resolution asset in the cut. Crop OFF the burned-in epaper URL strip at the foot. Place the remaining ~513x660 at native size on navy, 27% width, then push to 40% over the shot. NEVER full frame. THE ONE SHOT THAT IS STILL A CARD: it is the film's only independent verification and the headline is verified legible, which a 3.74x enlargement would destroy. The frame around it is a blurred copy of the clipping at 55% back toward navy, so the frame is full even though the image is not.",
      motion="Slow 5% push toward the headline and the caption, the only two legible text blocks. DO NOT push into the body text; it is unreadable at this resolution and pushing into it advertises the fact.",
      trans="Dissolve 20f", osd="ಉದಯವಾಣಿ · 19 ಜೂನ್ 2024",
      music="Music holds, no swell",
      note="KANNADA-SPECIFIC, difference 6, AND THE FILM'S ONLY INDEPENDENT VERIFICATION. Held 2s longer than in the English cut because in Kannada this is a document the audience reads, not a texture. Verified legible on inspection: headline ಪಾಲನೆಗೆ ಏಕ ಪೋಷಕರ ನಿರಾಸಕ್ತಿ ಸಲ್ಲ and the caption naming ಮುಳಬಾಗಿಲು ಮುತ್ತಲಪೇಟೆ, ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ and ಬೆಳಕು ಟ್ರಸ್ಟ್. BLOCKING: Udayavani permission, 14 item 4.1. Request the high-resolution page from epaper.udayavani.com/c/75279105; the repository copy will soften badly on a 4-metre screen.")
 shot("ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "K37", "PHOTOCARD", "A002",
      "assets/images/awards/bharat-shiksha-ratan-award-certificate-scan.jpeg", narr=F2, pause=2.0,
-     crop="1370x900. The scan shows an open folder with TWO documents. Crop to the RIGHT-HAND certificate only: window x 700-1370, y 40-870, then place at 830px tall on navy, right of frame.",
+     crop="1370x900. FULL FRAME, whole scan, 16:9 window upscaled 1.40x. Both documents are shown rather than a 670px window of the right-hand one, and at 1.40x both stay legible.",
      motion="Static. No push on a document.", trans="Cut",
      osd="ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ · 19 ಡಿಸೆಂಬರ್ 2025 · ನವದೆಹಲಿ  //  ಎಕನಾಮಿಕ್ ಅಂಡ್ ಸೋಶಿಯಲ್ ಡೆವಲಪ್‌ಮೆಂಟ್ ಫೌಂಡೇಶನ್",
      music="One gentle lift, then settle",
      note="Use A002 (1370x900), NOT A004 (framed version, 705x956), per 05 section 3.2. Certificate is in English; the Kannada card stays in the lower third throughout. NO MINISTER NAMES. NO 'one of 25'. 06 Q3, 14 item 6.3. The 2s pause after this line is the film's turn from recognition to gratitude; hold the certificate through it.")
 shot("ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "K38", "PHOTO", "A250",
      "assets/images/timeline/2025-volunteer-group-at-school-garden.jpg", narr=F3+" "+F4,
-     crop="941x529, sub-HD. Upscale 2.04x to 1920x1080 OR place at native inside a cream card. Editor's call on the projector; prefer the card.",
+     crop="941x529, sub-HD, and already 16:9. FULL FRAME at 2.04x. The card option is withdrawn: it left half the frame flat for no gain the projector could see.",
      motion="Static.", trans="Dissolve 20f", osd="ನೆರವು ನೀಡಿದವರಿಗೆ",
      music="Piano or nylon guitar enters here for the first time",
      note="Volunteers standing together in a school garden. The inventory marks A250 'N/A - no identifiable person'; that is WRONG, roughly thirteen adults and several children are identifiable. Corrected in deliverable 07. This is the gratitude section's opening frame precisely because it shows the helpers, not the helped.")
@@ -609,8 +609,40 @@ for s in S:
     s["tc_out"] = tc(t)
     s["t_out"] = t
 
-json.dump(S, open(sys.argv[1] if len(sys.argv) > 1 else "/dev/stdout", "w"),
-          ensure_ascii=False, indent=1)
+# REFUSE TO OVERWRITE A MEASURED TIMELINE WITH A PREDICTED ONE
+# Without --from-audio the durations above come from the cluster model, which is
+# a predictor for use BEFORE a read exists. Once a read exists the narration
+# leads and the picture follows, and the model is 54 seconds short of it: the
+# ElevenLabs cut runs 357.88s and the model says 303.86s.
+#
+# Running this plain over a measured timeline destroys every timecode in the
+# pack and does so silently, because the output is a valid timeline and the
+# render succeeds. That happened while editing a crop note, which needs no
+# recompute at all. So the model refuses to overwrite a longer timeline unless
+# it is told to.
+_out = sys.argv[1] if len(sys.argv) > 1 else "/dev/stdout"
+if not MEASURED and "--force-model" not in sys.argv and os.path.exists(_out):
+    try:
+        _prev = json.load(open(_out, encoding="utf-8"))
+        _was = max(x["t_out"] for x in _prev)
+    except Exception:
+        _was = 0.0
+    if _was > t + 0.5:
+        sys.exit(
+            f"refusing to write {_out}.\n"
+            f"  It holds a {_was:.2f}s timeline and this run predicts {t:.2f}s, "
+            f"{_was - t:.2f}s shorter.\n"
+            f"  A timeline that long was measured from a real read; the cluster "
+            f"model cannot reproduce it and\n"
+            f"  overwriting it would move every timecode in the pack without "
+            f"failing anything.\n"
+            f"  Re-time from the read:   python3 build_timeline.py {_out} "
+            f"--from-audio <durations.json>\n"
+            f"  Editing prose only?      change it in {_out} directly; no "
+            f"recompute is needed.\n"
+            f"  Really want the model?   add --force-model")
+
+json.dump(S, open(_out, "w"), ensure_ascii=False, indent=1)
 sys.stderr.write("shots=%d  words=%d  total=%.2fs  TC=%s\n" % (
     len(S), sum(s["words"] for s in S), t, tc(t)))
 sys.stderr.write("narration speech=%.1fs pauses=%.1fs holds=%.1fs\n" % (

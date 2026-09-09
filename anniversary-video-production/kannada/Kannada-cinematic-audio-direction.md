@@ -36,7 +36,7 @@ turning the music up.
 | Element | What a basic NGO video does | What this film does |
 |---|---|---|
 | Music | One constant bed at one level | Five acts, an intensity curve that falls as often as it rises, and three complete music-outs |
-| Effects | A whoosh on every photograph | 14 events in 337 seconds, from a palette of six sounds, each tied to a story beat |
+| Effects | A whoosh on every photograph | 20 accents in 357.88 seconds, each tied to a story beat, over 8 ambience beds. Was 14 accents and no bed, which measured as a narration with nothing underneath it |
 | Numbers | Orchestral swell on the total | `K22` and `K23` build **under** the numbers and are marked no swell |
 | Hardship | Sad piano, slow push on a face | `K17` and `K34` reduce to a drone. `K34` has no photograph at all |
 | The award | Fanfare | One gentle lift, then settle. No brass, no cymbal, no chime, no applause |
@@ -123,24 +123,71 @@ Nothing sounds on top of the welcome, and nothing sounds after the fade.
 
 ## 4 · The effect palette
 
-Six sounds, 14 events, 357.88 seconds. `11` section 3 caps the film at 14, and
-the caps below are why each event earns its place. **Adding one means removing
-one.**
+**20 accents and 8 ambience beds across 357.88 seconds.** This section used to
+read "six sounds, 14 events" and to say that adding one means removing one,
+because `11` section 3 capped the film at 14. That cap is withdrawn; the
+instruction was to place every licensed file.
 
-| Class | Cap | Used | Where |
+The count was never the problem. Fourteen accents at the level they were mixed
+contributed between 0.00 and 0.19 dB each to the mix, and the film played as a
+voice in a vacuum. What it was missing was a floor, not more events.
+
+### 4.0 The beds
+
+| Bed | Act | Runs | Level |
 |---|---|---|---|
-| Soft low impact | 3 | **2** | `K05` title line, `K23` ಮುನ್ನೂರು |
-| Gentle airy whoosh | 4 | **3** | `K07` gold rule, `K15` act transition, `K35` partners card |
-| Soft tonal riser | no cap, kept to 2 | **2** | `K05` into the title, `K41` into the future section |
-| Archive and learning foley | no cap, kept to 5 | **5** | `K11` page, `K18` book, `K21` pencil, `K22` bag zip, `K36` newspaper |
-| School bell | 1 | **1** | `K01`, distant, under picture with no narration |
-| Gentle chime | 1 | **1** | `K46`, after the voice has ended |
-| Applause | 1 | **0** | Removed. See 4.2 |
+| Room tone | all of it | 0.00 to 357.88 | -20 under the local voice |
+| Countryside morning | 1 | K01 to K06 | -15 |
+| Countryside morning | 2 | K07 to K13 | -16 |
+| Open field wind | 3 | K14 to K25 | -15 |
+| Insects and birds field | 4 | K26 to K37 | -17 |
+| Indian village ambience | 4, under the field work | K30 +60s | -21 |
+| Tape-echo spring | into 5 | K38 +27s | -20 |
+| Warm pad | 5 | K41 to K46 | -15 |
 
-Levels run from **-14 dB** (the `K11` page turn, the only effect carrying a
-story beat by itself) to **-22 dB** (the `K41` riser) relative to the
-narration's own speech RMS. `14` item 8.7 sets 12 dB under narration as a
-ceiling, not a target, and a palette flattened onto the ceiling is wallpaper.
+The village bed is cut only from 268.0s of its source file.
+`tools/sfx_voicecheck.py` found clear speech at 65.5s, 202.0s and six other
+points in it, and 268.0s begins the one 12.5s run in the calmest quartile. `14`
+item 2.4 is absolute and a human still has to confirm that excerpt by ear.
+
+### 4.0.1 The accents
+
+| Class | Used | Where |
+|---|---|---|
+| Soft low impact | 2 | `K05` title line, `K23` ಮುನ್ನೂರು |
+| Soft card landing | 1 | `K29` |
+| Gentle airy whoosh | 3 | `K07` gold rule, `K15` act transition, `K35` partners card |
+| Soft tonal riser or swell | 4 | `K05`, `K21` into MM Hills, `K30`, `K41` |
+| Windy thud | 1 | `K28`, the act 4 turn |
+| Archive and learning foley | 6 | `K11` page, `K17` rustle, `K18` book, `K22` zip, `K36` newspaper, `K44` zip |
+| Single piano note | 1 | `K04`, the school-fee line |
+| School bell | 1 | `K01`, distant, under picture with no narration |
+| Applause | 1 | `K46`, the end card, after the voice has ended |
+
+### 4.0.2 Levels, and the rule that was being misread
+
+`14` item 8.7 says "music bed at least 12 dB below narration". It says nothing
+about effects, and the point of it is that nothing competes with the voice
+**while the voice is speaking**.
+
+`sfx.py` used to apply it as one ceiling measured across the whole narration
+stem. Speech in this read is -17.8 dBFS, so the ceiling sat at -29.8 dBFS and
+every effect was held under it whether or not anyone was speaking. The school
+bell that opens the film, alone in seven seconds of silence, came out at -36.4
+dBFS.
+
+Three rules now:
+
+- **Under narration**, an accent sits at its stated level below the voice **in
+  the window it occupies**. 13 to 21 dB, and the film's floor is 13.
+- **In a silence**, it plays at a stated absolute level instead. The bell is
+  -20 dBFS, the applause -26.
+- **The effects bus**, not each effect, is what 8.7 is enforced on. Four sounds
+  each 14 dB under the voice add up to 8 dB under it. The bus is ducked in 1.5
+  second windows over up to four passes.
+
+Integrated, the bus is **-32.7 dBFS against a narration at -17.8 dBFS, 14.9 dB
+of headroom**, and the tightest 1.5s window anywhere is 12.20 dB.
 
 ### 4.1 Where the film refuses sound, and it is not negotiable
 

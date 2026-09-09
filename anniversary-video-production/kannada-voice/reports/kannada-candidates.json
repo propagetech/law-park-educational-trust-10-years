@@ -1,0 +1,231 @@
+{
+  "generated_at": "2026-09-09T13:39:39.764Z",
+  "tiers": {
+    "1": "verified_languages lists Kannada",
+    "2": "labels, name or description mention Kannada, not verified",
+    "3": "other Indian languages verified, Kannada not verified",
+    "4": "no Kannada or Indian-language evidence (excluded)"
+  },
+  "candidates": [
+    {
+      "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
+      "name": "Alice - Clear, Engaging Educator",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "female",
+        "age": "middle_aged",
+        "accent": "british",
+        "use_case": "informative_educational",
+        "descriptive": "professional"
+      },
+      "strengths": [
+        "female, the brief's primary target",
+        "age impression middle_aged",
+        "use case informative_educational"
+      ],
+      "risks": [
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/Xb7hH8MSUJpSbSDYk0k2/d10f7534-11f6-41fe-a012-2de1e482d336.mp3",
+      "kannada_preview_url": null,
+      "description": "Clear and engaging, friendly woman with a British accent suitable for e-learning."
+    },
+    {
+      "voice_id": "JBFqnCBsd6RMkjVDRZzb",
+      "name": "George - Warm, Captivating Storyteller",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "male",
+        "age": "middle_aged",
+        "accent": "british",
+        "use_case": "narrative_story",
+        "descriptive": "mature"
+      },
+      "strengths": [
+        "age impression middle_aged",
+        "use case narrative_story"
+      ],
+      "risks": [
+        "male, the brief's alternative rather than primary",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://api.us.elevenlabs.io/v1/voices/JBFqnCBsd6RMkjVDRZzb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiJlNjIwNmQxYS0wNzIxLTQ3ODctYWFmYi0wNmE2ZTcwNWNhYzUubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
+      "kannada_preview_url": null,
+      "description": "Warm resonance that instantly captivates listeners."
+    },
+    {
+      "voice_id": "nPczCjzI2devNBz1zQrb",
+      "name": "Brian - Deep, Resonant and Comforting",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "male",
+        "age": "middle_aged",
+        "accent": "american",
+        "use_case": "social_media",
+        "descriptive": "classy"
+      },
+      "strengths": [
+        "age impression middle_aged"
+      ],
+      "risks": [
+        "male, the brief's alternative rather than primary",
+        "use case social_media, wrong register for a trust film",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://api.us.elevenlabs.io/v1/voices/nPczCjzI2devNBz1zQrb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiIyZGQzZTcyYy00ZmQzLTQyZjEtOTNlYS1hYmM1ZDRlNWFhMWQubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
+      "kannada_preview_url": null,
+      "description": "Middle-aged man with a resonant and comforting tone. Great for narrations and advertisements."
+    },
+    {
+      "voice_id": "N2lVS1w4EtoT3dr4eOWO",
+      "name": "Callum - Husky Trickster",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "male",
+        "age": "middle_aged",
+        "accent": "american",
+        "use_case": "characters_animation",
+        "descriptive": null
+      },
+      "strengths": [
+        "age impression middle_aged"
+      ],
+      "risks": [
+        "male, the brief's alternative rather than primary",
+        "use case characters_animation, wrong register for a trust film",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/N2lVS1w4EtoT3dr4eOWO/ac833bd8-ffda-4938-9ebc-b0f99ca25481.mp3",
+      "kannada_preview_url": null,
+      "description": "Deceptively gravelly, yet unsettling edge."
+    },
+    {
+      "voice_id": "iP95p4xoKVk53GoZ742B",
+      "name": "Chris - Charming, Down-to-Earth",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "male",
+        "age": "middle_aged",
+        "accent": "american",
+        "use_case": "conversational",
+        "descriptive": "casual"
+      },
+      "strengths": [
+        "age impression middle_aged"
+      ],
+      "risks": [
+        "male, the brief's alternative rather than primary",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/iP95p4xoKVk53GoZ742B/3f4bde72-cc48-40dd-829f-57fbf906f4d7.mp3",
+      "kannada_preview_url": null,
+      "description": "Natural and real, this down-to-earth voice is great across many use-cases."
+    },
+    {
+      "voice_id": "cgSgspJ2msm6clMCkdW9",
+      "name": "Jessica - Playful, Bright, Warm",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "female",
+        "age": "young",
+        "accent": "american",
+        "use_case": "conversational",
+        "descriptive": "cute"
+      },
+      "strengths": [
+        "female, the brief's primary target"
+      ],
+      "risks": [
+        "age impression young, brief wants 35 to 50",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/cgSgspJ2msm6clMCkdW9/56a97bf8-b69b-448f-846c-c3a11683d45a.mp3",
+      "kannada_preview_url": null,
+      "description": "Young and popular, this playful American female voice is perfect for trendy content."
+    },
+    {
+      "voice_id": "EXAVITQu4vr4xnSDxMaL",
+      "name": "Sarah - Mature, Reassuring, Confident",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "female",
+        "age": "young",
+        "accent": "american",
+        "use_case": "entertainment_tv",
+        "descriptive": "professional"
+      },
+      "strengths": [
+        "female, the brief's primary target"
+      ],
+      "risks": [
+        "age impression young, brief wants 35 to 50",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/EXAVITQu4vr4xnSDxMaL/01a3e33c-6e99-4ee7-8543-ff2216a32186.mp3",
+      "kannada_preview_url": null,
+      "description": "Young adult woman with a confident and warm, mature quality and a reassuring, professional tone."
+    },
+    {
+      "voice_id": "TX3LPaxmHKxFdv7VOQHJ",
+      "name": "Liam - Energetic, Social Media Creator",
+      "tier": 3,
+      "why": "other Indian languages verified, Kannada not verified",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "premade",
+      "persona": {
+        "gender": "male",
+        "age": "young",
+        "accent": "american",
+        "use_case": "social_media",
+        "descriptive": "confident"
+      },
+      "strengths": [],
+      "risks": [
+        "male, the brief's alternative rather than primary",
+        "age impression young, brief wants 35 to 50",
+        "use case social_media, wrong register for a trust film",
+        "no v3 model listed, and v3 is the only model that speaks Kannada",
+        "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/premade/voices/TX3LPaxmHKxFdv7VOQHJ/63148076-6363-42db-aea8-31424308b92c.mp3",
+      "kannada_preview_url": null,
+      "description": "A young adult with energy and warmth - suitable for reels and shorts."
+    }
+  ]
+}

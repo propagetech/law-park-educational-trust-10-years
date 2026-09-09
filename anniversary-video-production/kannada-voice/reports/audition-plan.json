@@ -1,0 +1,492 @@
+{
+  "generated_at": "2026-09-09T13:39:41.881Z",
+  "dry_run": true,
+  "model_id": "eleven_v3",
+  "output_format": "mp3_44100_128",
+  "total_characters": 2457,
+  "subscription": {
+    "tier": "free",
+    "remaining": 10000
+  },
+  "v3_reality": {
+    "speed": "not a parameter on eleven_v3. Per-take speed is editorial intent only.",
+    "style": "not a parameter on eleven_v3. Expressiveness comes from the stability band and the text.",
+    "stability": "three points: creative 0.0, natural 0.5, robust 1.0.",
+    "breaks": "no SSML breaks. Pauses come from punctuation, or from the timeline in the edit."
+  },
+  "takes": [
+    {
+      "id": "a",
+      "label": "Balanced documentary",
+      "stability_band": "natural",
+      "similarity_boost": 0.75,
+      "brief_intent": {
+        "stability": 0.52,
+        "style": 0.1,
+        "speed": 0.95
+      },
+      "direction": "Confident, clear, warm and measured. A premium documentary narrator. Natural emotion, no performance exaggeration.",
+      "what_to_listen_for": "The safest all-purpose read. This is the baseline the other two are judged against."
+    },
+    {
+      "id": "b",
+      "label": "Cinematic and intimate",
+      "stability_band": "creative",
+      "similarity_boost": 0.78,
+      "brief_intent": {
+        "stability": 0.42,
+        "style": 0.2,
+        "speed": 0.92
+      },
+      "direction": "More intimate and cinematic. As if recalling ten years of real work. Gentle pauses, quiet pride, never sad for effect.",
+      "what_to_listen_for": "Warmer, and the only take that can be more expressive than A. Listen hard to ಚಿಕ್ಕಬಳ್ಳಾಪುರ, ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ and the years: creative is prone to hallucination and any drift on a proper noun rejects this take outright."
+    },
+    {
+      "id": "c",
+      "label": "Clear event-hall narration",
+      "stability_band": "robust",
+      "similarity_boost": 0.75,
+      "brief_intent": {
+        "stability": 0.6,
+        "style": 0.08,
+        "speed": 0.97
+      },
+      "direction": "Clear, mature, steady and strong enough for a large hall. Every Kannada word clean. Less intimate than B, but never newsreader-flat.",
+      "what_to_listen_for": "Most consistent diction and least responsive to direction. The likely winner for the years, counts and place names even if another take wins the opening."
+    }
+  ],
+  "passages": [
+    {
+      "id": "film",
+      "label": "The approved script's four decisive lines",
+      "characters_raw": 273,
+      "characters_spoken": 273,
+      "year_rewrites": [],
+      "numerals_left_for_human_check": [],
+      "zwnj_count": 1,
+      "listen_for": [
+        "K12 ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ. reads as three full stops, not a rising list. AUTOMATIC FAIL if it lists",
+        "K25 ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ intact. The hardest word in the script",
+        "K27 ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು does not stumble or split, and ಪೂರ್ತಿ ಅಲ್ಲ. stays level and quiet. AUTOMATIC FAIL if it is emphasised",
+        "K45 ಸಂಭ್ರಮ keeps the ಭ್ರ conjunct and does not become bha-ra",
+        "ವಿದ್ಯಾರ್ಥಿವೇತನ keeps all six syllables and the ರ್ಥಿ conjunct"
+      ]
+    }
+  ],
+  "jobs": [
+    {
+      "voice_id": "eESo8CL7VOqMtWCh1ikK",
+      "voice_name": "Padhma - Calm Kannada Audiobook",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "a",
+      "passage": "film",
+      "output_file": "audition-audio/voice-eESo8CL7VOqMtWCh1ikK-padhma-calm-kannada-audiobook-take-a-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.1,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.95,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/eESo8CL7VOqMtWCh1ikK",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "eESo8CL7VOqMtWCh1ikK",
+      "voice_name": "Padhma - Calm Kannada Audiobook",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "b",
+      "passage": "film",
+      "output_file": "audition-audio/voice-eESo8CL7VOqMtWCh1ikK-padhma-calm-kannada-audiobook-take-b-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0,
+        "similarity_boost": 0.78,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.2,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.92,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/eESo8CL7VOqMtWCh1ikK",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0,
+            "similarity_boost": 0.78,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "eESo8CL7VOqMtWCh1ikK",
+      "voice_name": "Padhma - Calm Kannada Audiobook",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "c",
+      "passage": "film",
+      "output_file": "audition-audio/voice-eESo8CL7VOqMtWCh1ikK-padhma-calm-kannada-audiobook-take-c-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 1,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.08,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.97,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/eESo8CL7VOqMtWCh1ikK",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 1,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "7B4TkucyQHy3r9hvAnhg",
+      "voice_name": "Sharadhi - Natural Kannada Conversation",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "a",
+      "passage": "film",
+      "output_file": "audition-audio/voice-7B4TkucyQHy3r9hvAnhg-sharadhi-natural-kannada-conversation-take-a-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.1,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.95,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/7B4TkucyQHy3r9hvAnhg",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "7B4TkucyQHy3r9hvAnhg",
+      "voice_name": "Sharadhi - Natural Kannada Conversation",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "b",
+      "passage": "film",
+      "output_file": "audition-audio/voice-7B4TkucyQHy3r9hvAnhg-sharadhi-natural-kannada-conversation-take-b-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0,
+        "similarity_boost": 0.78,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.2,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.92,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/7B4TkucyQHy3r9hvAnhg",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0,
+            "similarity_boost": 0.78,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "7B4TkucyQHy3r9hvAnhg",
+      "voice_name": "Sharadhi - Natural Kannada Conversation",
+      "role": "primary",
+      "category": "high_quality",
+      "v3_risk": null,
+      "take": "c",
+      "passage": "film",
+      "output_file": "audition-audio/voice-7B4TkucyQHy3r9hvAnhg-sharadhi-natural-kannada-conversation-take-c-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 1,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.08,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.97,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/7B4TkucyQHy3r9hvAnhg",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 1,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "1yebI4wPatIbQgkzinlP",
+      "voice_name": "Aisiri - Warm Kannada Narration",
+      "role": "primary",
+      "category": "professional",
+      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "take": "a",
+      "passage": "film",
+      "output_file": "audition-audio/voice-1yebI4wPatIbQgkzinlP-aisiri-warm-kannada-narration-take-a-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0.5,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.1,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.95,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/1yebI4wPatIbQgkzinlP",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0.5,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "1yebI4wPatIbQgkzinlP",
+      "voice_name": "Aisiri - Warm Kannada Narration",
+      "role": "primary",
+      "category": "professional",
+      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "take": "b",
+      "passage": "film",
+      "output_file": "audition-audio/voice-1yebI4wPatIbQgkzinlP-aisiri-warm-kannada-narration-take-b-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 0,
+        "similarity_boost": 0.78,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.2,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.92,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/1yebI4wPatIbQgkzinlP",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 0,
+            "similarity_boost": 0.78,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    },
+    {
+      "voice_id": "1yebI4wPatIbQgkzinlP",
+      "voice_name": "Aisiri - Warm Kannada Narration",
+      "role": "primary",
+      "category": "professional",
+      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "take": "c",
+      "passage": "film",
+      "output_file": "audition-audio/voice-1yebI4wPatIbQgkzinlP-aisiri-warm-kannada-narration-take-c-film.mp3",
+      "characters": 273,
+      "settings_sent": {
+        "stability": 1,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.08,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.97,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/1yebI4wPatIbQgkzinlP",
+        "query": {
+          "output_format": "mp3_44100_128"
+        },
+        "body": {
+          "text": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.\n\nಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.\n\nನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.\n\nಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 1,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 273
+      }
+    }
+  ]
+}

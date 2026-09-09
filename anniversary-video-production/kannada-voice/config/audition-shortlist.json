@@ -1,75 +1,124 @@
 {
-  "generated_for": "Law Park Educational Trust 10th Anniversary Welcome Film",
-  "model_id": "eleven_v3",
-  "selection_order": [
-    "Explicit Kannada-labelled Voice Library voices",
-    "Female middle-aged narrative (primary brief)",
-    "Male middle-aged narrative (alternative brief)",
-    "Reject radio/FM, animated/children, ad, and overly energetic documentary voices"
-  ],
-  "voices": [
-    {
-      "voice_id": "1yebI4wPatIbQgkzinlP",
-      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
-      "name": "Aisiri - Warm Kannada Narration",
-      "gender": "female",
-      "age": "middle_aged",
-      "use_case": "narrative_story",
-      "role": "primary_candidate",
-      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1yebI4wPatIbQgkzinlP/HDIGGM8mntjNGQWZzPY1.mp3"
-    },
+  "generated_at": "2026-09-09T13:26:51.642Z",
+  "source": "reports/available-voices.json -> voice_library_kannada (search=kannada)",
+  "warning": "Every voice here is in the public Voice Library and NOT in this account. Each must be added before it can be generated with, which is an account change. See scripts/add-shared-voice.mjs.",
+  "selection_basis": "Metadata against the voice brief only. No audio has been heard.",
+  "shortlist": [
     {
       "voice_id": "eESo8CL7VOqMtWCh1ikK",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Padhma - Calm Kannada Audiobook",
+      "role": "primary",
+      "category": "high_quality",
       "gender": "female",
       "age": "middle_aged",
-      "use_case": "narrative_story",
-      "role": "intimate_candidate",
-      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3"
+      "free_users_allowed": true,
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3",
+      "v3_risk": null,
+      "why_shortlisted": "Audiobook register is the closest thing in the library to long-form documentary narration, and high_quality is the safer category on v3. Female, matching the brief primary.",
+      "in_account": false
     },
     {
       "voice_id": "7B4TkucyQHy3r9hvAnhg",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Sharadhi - Natural Kannada Conversation",
+      "role": "primary",
+      "category": "high_quality",
       "gender": "female",
       "age": "middle_aged",
-      "use_case": "conversational",
-      "role": "warmth_candidate",
-      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/7B4TkucyQHy3r9hvAnhg/OQwcAxItAsy4PvvPonit.mp3"
+      "free_users_allowed": true,
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/7B4TkucyQHy3r9hvAnhg/OQwcAxItAsy4PvvPonit.mp3",
+      "v3_risk": null,
+      "why_shortlisted": "Female, high_quality, described as natural rather than performed. Conversational register is the risk to listen for.",
+      "in_account": false
     },
     {
-      "voice_id": "imphBib61OiJ8r9IfSGe",
+      "voice_id": "1yebI4wPatIbQgkzinlP",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
-      "name": "Varalaxmi - Natural Kannada Conversation",
+      "name": "Aisiri - Warm Kannada Narration",
+      "role": "primary",
+      "category": "professional",
       "gender": "female",
       "age": "middle_aged",
-      "use_case": "conversational",
-      "role": "backup_female",
-      "preview_url": null
+      "free_users_allowed": true,
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1yebI4wPatIbQgkzinlP/HDIGGM8mntjNGQWZzPY1.mp3",
+      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "why_shortlisted": "The single best description against the brief: warm Kannada narration, well paced. Held third only because it is a Professional Voice Clone and those are documented as weaker on v3.",
+      "in_account": false
     },
     {
       "voice_id": "1dRM7GYsStGPro8wPFGA",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Mani - Steady Kannada Storyteller",
+      "role": "alternative",
+      "category": "high_quality",
       "gender": "male",
       "age": "middle_aged",
-      "use_case": "narrative_story",
-      "role": "male_alternative",
-      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1dRM7GYsStGPro8wPFGA/gPqZkWzLSfVnGYB9n2ro.mp3"
+      "free_users_allowed": true,
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1dRM7GYsStGPro8wPFGA/gPqZkWzLSfVnGYB9n2ro.mp3",
+      "v3_risk": null,
+      "why_shortlisted": "Male alternative. Described as trusting the story enough not to perform it, which is exactly the brief. high_quality.",
+      "in_account": false
     },
     {
       "voice_id": "UeUC009F3NYPIArcZmq0",
       "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
       "name": "Srivatsa - Kannada Narration",
+      "role": "alternative",
+      "category": "high_quality",
       "gender": "male",
       "age": "middle_aged",
-      "use_case": "narrative_story",
-      "role": "male_fallback",
-      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/UeUC009F3NYPIArcZmq0/YT9phlJSSPdwve8X565g.mp3"
+      "free_users_allowed": true,
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/UeUC009F3NYPIArcZmq0/YT9phlJSSPdwve8X565g.mp3",
+      "v3_risk": null,
+      "why_shortlisted": "Male alternative, high_quality, rich and measured.",
+      "in_account": false
+    },
+    {
+      "voice_id": "QnERnlMSVcCo1wktWlfs",
+      "public_owner_id": "7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6",
+      "name": "Srinatha - Kannada Factual Documentary",
+      "role": "alternative",
+      "category": "professional",
+      "gender": "male",
+      "age": "middle_aged",
+      "free_users_allowed": true,
+      "preview_url": "https://api.us.elevenlabs.io/v1/voices/QnERnlMSVcCo1wktWlfs/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJjdXN0b20iLCJ3b3Jrc3BhY2VfaWQiOiJlZDliMDVlNjMyNGM0NTc2ODU0OTAzNTJlOWExZWM5MCIsImZpbGVuYW1lIjoibUFuWTl3cVIxQmtLdXgwZ053eWkubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
+      "v3_risk": "Professional Voice Clone: documented as weaker on v3, and v3 is the only model that speaks Kannada",
+      "why_shortlisted": "Male, explicitly a factual documentary voice. Professional Voice Clone, so v3 behaviour must be checked before it is trusted.",
+      "in_account": false
     }
   ],
-  "listen_before_commit": [
-    "XrExE9yKIg1WjnnlVkGX (Matilda) already has a prior eleven_v3 Kannada render in kannada/tools/vo_eleven/. Treat as human-review-only baseline, not a native Kannada voice."
+  "rejected": [
+    {
+      "voice_id": "wgYipW6i4oMTbU78GXhZ",
+      "name": "Kampana - Kannada FM Radio Presenter",
+      "reason": "FM radio presenter. The brief forbids a radio jockey register outright."
+    },
+    {
+      "voice_id": "MYdTqLsWF6IueSvcrO97",
+      "name": "Sangamitra - Animated Kannada Narrator",
+      "reason": "Animated narrator. Too performed for a film about real children."
+    },
+    {
+      "voice_id": "2SDH0owxS12R2YMgMNoG",
+      "name": "Aisiri - Friendly Kannada Customer Care",
+      "reason": "Customer care register. Wrong for a trust anniversary film."
+    },
+    {
+      "voice_id": "dzooKAnqL8jJ27zWCzUq",
+      "name": "Kannada - Surprised and Paranoid",
+      "reason": "Multi-emotional range, paranoid whispers to screams. Nothing to do with this film."
+    },
+    {
+      "voice_id": "IhKT5UXTU9TDtTgBOJ01",
+      "name": "Sanjay",
+      "reason": "free_users_allowed is false, and the name carries no Kannada or register information."
+    },
+    {
+      "voice_id": "skuB5EKxDUgzOfSsFjqK",
+      "name": "Kumaran - Kannada Expressive & Friendly",
+      "reason": "Expressive and friendly. Warmer and lighter than the brief wants."
+    }
   ]
 }

@@ -1,28 +1,36 @@
 {
-  "voice_id": "REPLACE_AFTER_AUDITION",
-  "voice_name": "REPLACE_AFTER_AUDITION",
-  "public_owner_id": null,
-  "preferred_take": "a",
+  "_status": "TEMPLATE, NOT YET DECIDED",
+  "_comment": [
+    "generate-final-narration.mjs refuses to run while voice_id is null.",
+    "Fill this in only after a human has listened to the auditions and two",
+    "Kannada-native listeners have signed off on the proper nouns.",
+    "",
+    "Nothing in this pipeline can hear audio, so nothing in this pipeline is",
+    "entitled to fill this file in."
+  ],
+  "voice_id": null,
+  "voice_name": null,
   "model_id": "eleven_v3",
-  "language_code": "kn",
-  "settings": {
-    "stability": 0.52,
-    "similarity_boost": 0.75,
-    "style": 0.1,
-    "speed": 0.95
-  },
-  "scene_settings": {
-    "opening": { "stability": 0.45, "similarity_boost": 0.78, "style": 0.18, "speed": 0.92 },
-    "origin": { "stability": 0.5, "similarity_boost": 0.76, "style": 0.13, "speed": 0.93 },
-    "timeline": { "stability": 0.56, "similarity_boost": 0.75, "style": 0.1, "speed": 0.96 },
-    "scholarship": { "stability": 0.58, "similarity_boost": 0.75, "style": 0.08, "speed": 0.91 },
-    "community": { "stability": 0.48, "similarity_boost": 0.77, "style": 0.15, "speed": 0.93 },
-    "closing": { "stability": 0.46, "similarity_boost": 0.78, "style": 0.18, "speed": 0.91 }
-  },
-  "approval": {
-    "opening_30s_approved": false,
+  "chosen_take": null,
+  "stability_band": null,
+  "similarity_boost": null,
+  "decided_by": null,
+  "decided_on": null,
+  "trustee_approval": {
+    "opening_30s_sample_approved": false,
     "approved_by": null,
-    "approved_at": null,
-    "notes": "Do not run full five-minute generation until opening_30s_approved is true."
+    "approved_on": null,
+    "_note": "02 section 7 and 14 item 7.1. The 30 second opening test must be approved before the full read is generated."
+  },
+  "kannada_native_review": {
+    "reviewer_1": null,
+    "reviewer_2": null,
+    "proper_nouns_confirmed": false,
+    "_note": "14 item 7.1 requires a native Kannada speaker who is not the translator. A synthesised read does not discharge it."
+  },
+  "fallback": {
+    "voice_id": null,
+    "voice_name": null,
+    "why": null
   }
 }

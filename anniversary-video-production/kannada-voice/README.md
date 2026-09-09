@@ -1,24 +1,26 @@
-# README · kannada-voice
+# Kannada voice
 
-See [`scripts/README.md`](scripts/README.md) for full CLI documentation.
+ElevenLabs narration pipeline for the Law Park Educational Trust 10th
+anniversary film.
 
-Quick start:
+**Start here: [`scripts/README.md`](scripts/README.md).**
 
-```bash
-export ELEVENLABS_API_KEY=...   # never commit
-node scripts/list-elevenlabs-voices.mjs
-node scripts/generate-auditions.mjs --dry-run
-```
+Three facts that decide everything else in this directory:
 
-Folder layout:
+1. **Kannada runs on `eleven_v3` only.** Multilingual v2, Turbo v2.5 and Flash
+   v2.5 do not support it, and they are the default in most examples.
+2. **v3 has no speed and no style parameter**, and stability is three points
+   rather than a slider. The voice brief's per-scene numbers are editorial
+   intent, mapped in `lib/blocks.mjs`, not API fields.
+3. **Nothing here can hear audio.** Durations and words per minute are measured;
+   every subjective judgement is left to a human, and the scorecard ships empty
+   on purpose.
 
-```
-kannada-voice/
-  scripts/           CLI tools
-  lib/               shared helpers
-  config/            shortlist + selected voice (no secrets)
-  audition-audio/    generated takes (gitignored)
-  final-narration/   scene MP3s (gitignored)
-  reports/           discovery, shortlist, scorecard
-  manifests/         cue sheet + generation log
-```
+Current state, from the live account:
+
+| | |
+|---|---|
+| Plan | free, no commercial licence |
+| Kannada voices on the account | **0**, all 20 candidates are in the Voice Library |
+| Film | 00:05:37:22, 43 narrated lines, 3,585 characters, 93 wpm |
+| Audio generated | none. See [`reports/final-voice-recommendation.md`](reports/final-voice-recommendation.md) for what blocks it |

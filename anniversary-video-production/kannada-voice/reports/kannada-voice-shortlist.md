@@ -1,111 +1,120 @@
 # Kannada voice shortlist
 
-Generated from live ElevenLabs account + Voice Library search (`search=kannada`).
-Account premade library is English-only; native Kannada candidates come from the shared Voice Library and must be added with `--add-shared` before TTS.
+Generated from the live account and the ElevenLabs Voice Library.
+Regenerate the data behind it with `node scripts/list-elevenlabs-voices.mjs`.
 
-**Recommended model:** `eleven_v3` (only current TTS model listing Kannada).
-
-**Quota at discovery:** free tier `10000/10000` characters used — real auditions blocked until reset or top-up.
-
----
-
-## Shortlist (6)
-
-### 1. Aisiri - Warm Kannada Narration
-| | |
-|---|---|
-| Voice ID | `1yebI4wPatIbQgkzinlP` |
-| Public owner | `7398804d9eaf2f463899a907587c33a390591775784f87857b6d0e1e4e3e66f6` |
-| Profile | Female · middle_aged · narrative_story · professional |
-| Why shortlisted | Closest match to the primary brief: warm Kannada narration, mature, story-led |
-| Strengths | Narration use-case; middle-aged female; explicit Kannada branding |
-| Risks | “Soothing / story” register may soften auditorium authority; verify hall playback |
-| Suggested settings | Take A baseline; Take B for opening/closing |
-| Best for | Opening, origin, gratitude, closing |
-| Preview | [library preview](https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1yebI4wPatIbQgkzinlP/HDIGGM8mntjNGQWZzPY1.mp3) |
-
-### 2. Padhma - Calm Kannada Audiobook
-| | |
-|---|---|
-| Voice ID | `eESo8CL7VOqMtWCh1ikK` |
-| Profile | Female · middle_aged · narrative_story · high_quality |
-| Why shortlisted | Calm long-form Kannada; good long-listener comfort candidate |
-| Strengths | Unhurried; audiobook pacing; dignity |
-| Risks | May be too soft / intimate for a full event hall without Take C |
-| Suggested settings | Take B intimate; Take C for timeline/numbers |
-| Best for | Opening, founder quote zone, closing |
-| Preview | [library preview](https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3) |
-
-### 3. Sharadhi - Natural Kannada Conversation
-| | |
-|---|---|
-| Voice ID | `7B4TkucyQHy3r9hvAnhg` |
-| Profile | Female · middle_aged · conversational · high_quality |
-| Why shortlisted | Natural Kannada warmth; middle-aged female |
-| Strengths | Human, unscripted feel |
-| Risks | Conversational energy may feel too casual for documentary hall narration |
-| Suggested settings | Take A or C; avoid high style |
-| Best for | Community / gratitude if Take A stays composed |
-| Preview | [library preview](https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/7B4TkucyQHy3r9hvAnhg/OQwcAxItAsy4PvvPonit.mp3) |
-
-### 4. Varalaxmi - Natural Kannada Conversation
-| | |
-|---|---|
-| Voice ID | `imphBib61OiJ8r9IfSGe` |
-| Profile | Female · middle_aged · conversational · professional |
-| Why shortlisted | Additional mature female Kannada option |
-| Strengths | Familiar, warm neighbourly tone |
-| Risks | “Bright / lively” description may fight quiet documentary restraint |
-| Suggested settings | Take C first; reject if list intonation appears on K12-style lines |
-| Best for | Backup female only |
-
-### 5. Mani - Steady Kannada Storyteller
-| | |
-|---|---|
-| Voice ID | `1dRM7GYsStGPro8wPFGA` |
-| Profile | Male · middle_aged · narrative_story · high_quality |
-| Why shortlisted | Best male match to the alternative brief (steady storyteller, not trailer) |
-| Strengths | Unhurried; plainspoken; narrative |
-| Risks | Confirm baritone warmth vs. flatness; watch English proper nouns |
-| Suggested settings | Take A; Take C for timeline |
-| Best for | Full film alternative if female shortlist fails pronunciation |
-| Preview | [library preview](https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/1dRM7GYsStGPro8wPFGA/gPqZkWzLSfVnGYB9n2ro.mp3) |
-
-### 6. Srivatsa - Kannada Narration
-| | |
-|---|---|
-| Voice ID | `UeUC009F3NYPIArcZmq0` |
-| Profile | Male · middle_aged · narrative_story · high_quality |
-| Why shortlisted | Measured immersive Kannada narration; male fallback |
-| Strengths | Rich, long-form friendly |
-| Risks | Audiobook warmth may over-soften factual 75% section |
-| Suggested settings | Take A / C |
-| Best for | Male fallback |
-| Preview | [library preview](https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/UeUC009F3NYPIArcZmq0/YT9phlJSSPdwve8X565g.mp3) |
+**Nothing in this document has heard a voice.** Every judgement below is read off
+metadata, descriptions and category. It exists to decide what to audition, not
+what to cast.
 
 ---
 
-## Explicitly rejected (from Kannada search)
+## 1 · What the account actually holds
+
+| | |
+|---|---|
+| Plan | **free** |
+| Characters | 10,000 per month |
+| Voices on the account | 21 |
+| Kannada voices on the account | **0** |
+| Voice Library Kannada voices found | 20 |
+
+All 21 account voices are English premade voices: Alice, George, Brian, Callum,
+Chris, Jessica, Sarah, Liam and so on. Not one of them has a verified Kannada
+entry, and none is listed against a v3 model.
+
+Two consequences follow, and both have to be settled before any audio is worth
+generating.
+
+**The voices have to be added.** Every Kannada voice is in the public Voice
+Library, not on the account. A library voice cannot be generated with until it
+is added, which changes the account and may consume a voice slot. Use
+`node scripts/add-shared-voice.mjs --voice-id <id> --yes`. The preflight in
+every generator refuses to run until the voice is present.
+
+**The plan has no commercial licence.** ElevenLabs grants one from Starter
+upward. This film is screened at a public event and published by a registered
+trust, so narration generated on the free plan would leave the trust using audio
+it is not licensed for. That belongs in the same file as the music licence and
+the photo consents, `14` item 5.2. The preflight blocks a real run on a
+non-commercial plan.
+
+## 2 · How a voice qualified
+
+`verified_languages` is the field that decides this, not the description. A
+verified Kannada entry has a real Kannada preview behind it and names the model
+that produced it.
+
+| Tier | Meaning | Found |
+|---|---|---|
+| 1 | `verified_languages` lists Kannada | 0 on the account |
+| 2 | Labels or description claim Kannada, unverified | 0 on the account |
+| 3 | Other Indian languages verified, Kannada not | 8 on the account |
+| Library | Voice Library search for Kannada | 20 |
+
+One caveat that runs through the whole library list: the library's `language`
+filter is useless for Kannada. Several Kannada voices are tagged with a
+different primary language, so `language=kn` returns nothing at all. The search
+in `lib/eleven.mjs` matches on name and description instead, and filters the
+results for genuine Kannada mentions.
+
+## 3 · The category matters more than the description
+
+The library splits these voices into `high_quality` and `professional`.
+`professional` means a Professional Voice Clone, and ElevenLabs documents those
+as **weaker on v3** than designed or high quality voices. Since v3 is the only
+model that speaks Kannada, that caveat lands directly on this film. `09` section
+2 reached the same conclusion from the other direction.
+
+So a beautifully described `professional` voice ranks below a plainly described
+`high_quality` one until a preview proves otherwise.
+
+## 4 · Shortlist
+
+Machine-readable: `config/audition-shortlist.json`.
+
+### Primary target, female, age impression 35 to 50
+
+| # | Voice | ID | Category | Why |
+|---|---|---|---|---|
+| 1 | Padhma - Calm Kannada Audiobook | `eESo8CL7VOqMtWCh1ikK` | high_quality | Audiobook is the closest register in the library to long-form documentary narration, and the category is the safer one on v3. Described as unhurried and measured, which is the brief. |
+| 2 | Sharadhi - Natural Kannada Conversation | `7B4TkucyQHy3r9hvAnhg` | high_quality | Female, high_quality, described as natural rather than performed. The conversational register is the risk: listen for whether it can carry a hall. |
+| 3 | Aisiri - Warm Kannada Narration | `1yebI4wPatIbQgkzinlP` | professional | The best description against the brief in the entire library: warm, well paced Kannada narration. Held third only because it is a Professional Voice Clone. |
+
+### Alternative, male, age impression 40 to 55
+
+| # | Voice | ID | Category | Why |
+|---|---|---|---|---|
+| 4 | Mani - Steady Kannada Storyteller | `1dRM7GYsStGPro8wPFGA` | high_quality | Described as sounding like someone who trusts the story enough not to perform it. That is the brief almost word for word. |
+| 5 | Srivatsa - Kannada Narration | `UeUC009F3NYPIArcZmq0` | high_quality | Rich and measured, audiobook lineage, high_quality. |
+| 6 | Srinatha - Kannada Factual Documentary | `QnERnlMSVcCo1wktWlfs` | professional | The only voice in the library that names documentary as its register. Professional, so v3 behaviour must be checked before it is trusted. |
+
+## 5 · Rejected, with reasons
 
 | Voice | Reason |
 |---|---|
-| Kampana - Kannada FM Radio Presenter | Radio / FM energy — brief forbids RJ delivery |
-| Sangamitra - Animated Kannada Narrator | Children’s / animated register |
-| Ishvak - Friendly Kannada Speaker | Young conversational; not documentary |
-| Srinatha - Kannada Factual Documentary | Self-described energetic / gripping — trailer risk |
-| Aisiri - Friendly Kannada Customer Care | Support-agent register |
-| Kumaran variants (young) | Too youthful for 40–55 male brief |
+| Kampana - Kannada FM Radio Presenter | FM radio presenter. The brief forbids a radio jockey register outright. |
+| Sangamitra - Animated Kannada Narrator | Animated. Too performed for a film about real children. |
+| Aisiri - Friendly Kannada Customer Care | Customer care register. Wrong for a trust anniversary film. |
+| Kannada - Surprised and Paranoid | Multi-emotional range, paranoid whispers to screams. Nothing to do with this film. |
+| Sanjay | `free_users_allowed` is false, and the entry carries no Kannada or register information. |
+| Kumaran - Kannada Expressive & Friendly | Expressive and friendly, warmer and lighter than the brief wants. |
+| Ishvak, Subbanna, Nelamane Srini, Srivatsa - Warm Deep, Mani - Rich Deep, Kumaran - Effortless | Plausible but not shortlisted. Held in reserve behind the six above; see `reports/available-voices.json`. |
+| All 21 account voices | English premade, no Kannada verification, no v3 listing. |
 
-## Human-review-only baseline (not shortlisted as native Kannada)
+## 6 · Budget
 
-**Matilda** `XrExE9yKIg1WjnnlVkGX` — English premade already rendered on this account with `eleven_v3` under `kannada/tools/vo_eleven/`. Useful as a pronunciation/control baseline only after native listeners approve Kannada authenticity.
+The full matrix, six voices by three takes by two passages, is **10,584
+characters**. The plan holds 10,000 per month, so the whole shortlist does not
+fit in one month.
 
----
+| Run | Characters | Fits in 10,000 |
+|---|---|---|
+| All six voices, three takes, both passages | 10,584 | no |
+| Three primary voices, three takes, both passages | 5,292 | yes |
+| Six voices, three takes, main passage only | 4,518 | yes |
+| Full film read, 43 lines, one take | 3,585 | yes |
 
-## Next step
-
-```bash
-node scripts/generate-auditions.mjs --dry-run
-# after credits available:
-node scripts/generate-auditions.mjs --add-shared
-```
+Recommended first pass: `--role primary`, which is the three female candidates
+at 5,292 characters, and keep the rest of the month's allowance for the stress
+test on whichever voice survives.

@@ -1,0 +1,105 @@
+{
+  "generated_at": "2026-09-09T13:39:44.932Z",
+  "voice_id": "eESo8CL7VOqMtWCh1ikK",
+  "voice_name": null,
+  "model_id": "eleven_v3",
+  "output_format": "mp3_44100_192",
+  "total_characters": 141,
+  "handle_ms": 500,
+  "v3_reality": {
+    "speed": "not a parameter. Per-scene speed in the brief is editorial intent.",
+    "style": "not a parameter. Expressiveness comes from the stability band and the text.",
+    "stability": "creative 0.0, natural 0.5, robust 1.0."
+  },
+  "scenes": [
+    {
+      "id": "method",
+      "label": "How the work is done, and the 75 percent line",
+      "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
+      "brief_scene": "method",
+      "tc_in": "00:02:37:00",
+      "tc_out": "00:03:21:21",
+      "lines": 2,
+      "characters": 540,
+      "words": 73,
+      "allotted_speech_s": 41.84,
+      "stability_band": "robust",
+      "settings_sent": {
+        "stability": 1,
+        "similarity_boost": 0.75,
+        "use_speaker_boost": true
+      },
+      "dropped": [
+        {
+          "field": "style",
+          "requested": 0.075,
+          "why": "eleven_v3 does not document a style parameter. Style on v3 comes from the text: punctuation, ellipses, capitals and audio tags"
+        },
+        {
+          "field": "speed",
+          "requested": 0.915,
+          "why": "eleven_v3 has no speed parameter and no SSML breaks. Pace comes from punctuation. Re-time the picture to the read instead"
+        }
+      ],
+      "snapped": [],
+      "direction": "Precise, trustworthy, calm. K27 is the film's turn: ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ. The second sentence must be level and quiet, never emphasised. Leave the silence around it in the edit; do not ask the voice to perform the pause.",
+      "generates_variants": false
+    }
+  ],
+  "jobs": [
+    {
+      "sid": "K25",
+      "scene": "method",
+      "variant": false,
+      "characters": 69,
+      "allotted_speech_s": 4.88,
+      "year_rewrites": [],
+      "numerals_left_for_human_check": [],
+      "output_file": "final-narration/eESo8CL7VOqMtWCh1ikK/K25.mp3",
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/eESo8CL7VOqMtWCh1ikK",
+        "query": {
+          "output_format": "mp3_44100_192"
+        },
+        "body": {
+          "text": "ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 1,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 69
+      }
+    },
+    {
+      "sid": "K27",
+      "scene": "method",
+      "variant": false,
+      "characters": 72,
+      "allotted_speech_s": 5.44,
+      "year_rewrites": [],
+      "numerals_left_for_human_check": [],
+      "output_file": "final-narration/eESo8CL7VOqMtWCh1ikK/K27.mp3",
+      "request": {
+        "method": "POST",
+        "path": "/v1/text-to-speech/eESo8CL7VOqMtWCh1ikK",
+        "query": {
+          "output_format": "mp3_44100_192"
+        },
+        "body": {
+          "text": "ನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.",
+          "model_id": "eleven_v3",
+          "voice_settings": {
+            "stability": 1,
+            "similarity_boost": 0.75,
+            "use_speaker_boost": true
+          }
+        },
+        "characters": 72
+      }
+    }
+  ]
+}

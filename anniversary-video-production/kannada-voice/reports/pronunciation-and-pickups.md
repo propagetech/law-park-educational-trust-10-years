@@ -1,53 +1,130 @@
 # Pronunciation and pickups
 
-Suggestions only. The approved Kannada script in `anniversary-video-research/09-kannada-five-minute-script.md` and `timeline.json` remains authoritative. Do not rewrite the film from this file.
+Give this document to the Kannada-native listeners and nothing else. No scores,
+no shortlist, no recommendation, so they are not primed.
 
-## TTS year rewrite (already automated)
+Every shot id below is a real line in
+`anniversary-video-production/kannada/tools/timeline.json`. The full text of
+each is in `manifests/narration-cue-sheet.csv`, column `narration_kannada`,
+beside exactly what the API will be sent in
+`sent_to_tts_after_year_rewrite`.
 
-Arabic years are rewritten for spoken payloads only (onscreen text stays Arabic):
+---
 
-| Script | Spoken for TTS |
+## 1 · The brief's checklist does not match the film
+
+The voice brief lists words to check that the narration never speaks. They are
+on-screen text and lower thirds, not narration, so a voice can pass the brief's
+stress test and still fail the film.
+
+| In the brief's checklist | In the narrated script? |
 |---|---|
-| 2016ರಲ್ಲಿ | ಎರಡು ಸಾವಿರದ ಹದಿನಾರರಲ್ಲಿ |
-| 2017ರಲ್ಲಿ | ಎರಡು ಸಾವಿರದ ಹದಿನೇಳರಲ್ಲಿ |
-| 2020ರಲ್ಲಿ | ಎರಡು ಸಾವಿರದ ಇಪ್ಪತ್ತರಲ್ಲಿ |
-| 2022ರಲ್ಲಿ … 2026ರಲ್ಲಿ | matching ಎರಡು ಸಾವಿರದ … forms |
+| ಸ್ಕಾಲರ್‌ಶಿಪ್ | no. The narration says ವಿದ್ಯಾರ್ಥಿವೇತನ |
+| ಹೆಚ್. ಡಿ. ಕೋಟೆ | no. On-screen only |
+| ಎಂ. ಎಂ. ಹಿಲ್ಸ್ | no. On-screen only |
+| ಉದಯವಾಣಿ | no. It is a visual clipping moment |
+| ಮುಳಬಾಗಿಲು | no |
+| Law Park Educational Trust | no, not in the 43 narrated lines |
+| ಚಿಕ್ಕಬಳ್ಳಾಪುರ | **yes**, K12 |
+| ವಿದ್ಯಾರ್ಥಿವೇತನ | **yes**, K12 K14 K31 K36 |
+| ಗ್ರಂಥಾಲಯ | **yes**, K18 K32 K43 |
+| ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ | **yes**, K21 K32 |
+| ಚಾರುಲತಾ ಎಂ. ಆರ್. | **yes**, K08 |
+| ಎಸ್. ಎಂ. ಮಂಜುನಾಥ | **yes**, K09 |
+| ಸಾದೇನಹಳ್ಳಿ | **yes**, K09 |
+| ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ | **yes**, K37 |
 
-Implemented in `lib/year-speak.mjs` (same policy as `kannada/tools/tts_eleven.py`).
+Three words that decide this film are missing from the brief's list entirely:
+**ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ** (K25), **ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು** (K27) and **ಸಂಭ್ರಮ** (K45).
 
-## Listen-hard list (native speakers)
+That is why `--passages film` exists. It is built live from K12, K25, K27 and
+K45, and it is the passage that predicts the read.
 
-Confirm these survive every take:
+## 2 · The words that break a Kannada voice
 
-| Term | Concern |
-|---|---|
-| ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ | Keep exact approved form; no translation |
-| ಚಾರುಲತಾ ಎಂ. ಆರ್. | Trustee-approved spelling |
-| ಎಸ್. ಎಂ. ಮಂಜುನಾಥ | Trustee-approved spelling |
-| ಚಿಕ್ಕಬಳ್ಳಾಪುರ | Full place name, not clipped |
-| ಸಾದೇನಹಳ್ಳಿ | |
-| ಮೈಸೂರು | |
-| ಹೆಚ್. ಡಿ. ಕೋಟೆ / ಎಚ್.ಡಿ. ಕೋಟೆ | Script uses ಎಚ್.ಡಿ. in timeline |
-| ಎಂ. ಎಂ. ಹಿಲ್ಸ್ | Confirm vs ಮಲೆ ಮಹದೇಶ್ವರ ಬೆಟ್ಟ with trustees |
-| ಮುಳಬಾಗಿಲು | |
-| ಉದಯವಾಣಿ | Onscreen; may appear in gratitude VO context |
-| ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ | |
-| ಬೆಂಗಳೂರು | |
-| ವಿದ್ಯಾರ್ಥಿವೇತನ | Film glossary term — not ಸ್ಕಾಲರ್‌ಶಿಪ್ in final VO |
-| ಸ್ಕಾಲರ್‌ಶಿಪ್ | Present only in brief Test A audition copy |
-| ಗ್ರಂಥಾಲಯ | |
-| ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ | |
-
-## Suggested pickups (after first full render)
-
-| SID | Issue | Action |
+| Word | Shots | What failure sounds like |
 |---|---|---|
-| K12 | List intonation | Re-render Take C; verify three full stops |
-| K27 | Over-emphasis on ಪೂರ್ತಿ ಅಲ್ಲ | Raise stability; shorter style |
-| K23 | Trailing ಮುನ್ನೂರು | Leave breath/handle after line in edit |
-| K45 | Closing welcome rush | Prefer opening/closing intimate settings |
+| ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ | K25 | Anything at all. The hardest word in the script |
+| ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು | K27 | Stumbles, or splits into two words |
+| ವಿದ್ಯಾರ್ಥಿವೇತನ | K12 K14 K31 K36 | Compressed to four syllables, or ರ್ಥಿ broken into "ra-thi" |
+| ಚಿಕ್ಕಬಳ್ಳಾಪುರ | K12 | The doubled ಳ್ಳ flattened to a single ಳ |
+| ಸಂಭ್ರಮ | K45 | The ಭ್ರ conjunct read as "bha-ra". Second-to-last word in the film |
+| ಗ್ರಂಥಾಲಯ | K18 K32 K43 | The ಂಥಾ conjunct broken up |
+| ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ | K21 K32 | ವೃ flattened, or ರ್ಶ split into "ra-sha" |
+| ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ | K37 | An award title rushed. It has to be audible and unhurried |
+| ಸಾದೇನಹಳ್ಳಿ | K09 | The ಳ್ಳಿ ending |
+| ಚಾರುಲತಾ ಎಂ. ಆರ್. | K08 | The initials read as a word instead of letters |
 
-## Optional pacing corrections (not script changes)
+## 3 · Years
 
-- Prefer longer editorial handles (300–700 ms) around K12, K27, K29, K45 rather than speeding TTS  
-- If total VO overshoots picture, re-time picture via `build_timeline.py --from-audio` — do not force unnatural speed on `eleven_v3`
+Nine lines carry a year numeral. v3 reads `2016ರಲ್ಲಿ` as English "two thousand
+sixteen", so the numerals are rewritten to Kannada number words before the
+request. `2016ರಲ್ಲಿ` goes out as `ಎರಡು ಸಾವಿರದ ಹದಿನಾರರಲ್ಲಿ`, with the case
+ending attached so the sandhi is right.
+
+The map lives in two places by necessity, `lib/speak-text.mjs` and
+`tools/tts_eleven.py`. The preflight compares them on every run and refuses to
+proceed if they have drifted apart.
+
+Subtitles and on-screen text keep the Arabic numerals. Only the TTS payload is
+rewritten. Confirm in the cue sheet that no line was rewritten that should not
+have been.
+
+After the rewrite **no bare numerals remain** in any narrated line, so there is
+nothing left in the film for v3 to read as English digits. The brief's stress
+test does still contain `200` and `300`, but those numbers are not spoken in the
+film.
+
+## 4 · The zero-width non-joiner
+
+Ten narrated lines carry U+200C: K07 K19 K22 K31 K34 K36 K37 K39 K41 K45. It is
+deliberate. Nothing in this pipeline calls `.normalize()` and nothing strips it.
+
+If a listener reports a word in one of those lines sounding fused or wrong, check
+the character survived into the payload before blaming the voice.
+
+## 5 · The two automatic fails
+
+Neither is about accent. Both are about reading punctuation.
+
+**K12** ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.
+Three sentences, three full stops. Most voices read it as a rising comma list.
+If it lists, the voice is rejected regardless of its total.
+
+**K27** ...ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.
+The film's turn. ಪೂರ್ತಿ ಅಲ್ಲ. must be level and quiet, never emphasised. The
+silence around it belongs to the edit; the voice must not perform the pause.
+
+## 6 · Pickups
+
+A pickup is one line, not a scene. Nothing needs regenerating around it.
+
+```bash
+node scripts/generate-final-narration.mjs --voice-id <ID> --sid K25
+node scripts/generate-final-narration.mjs --voice-id <ID> --sid K27 K45
+```
+
+`durations.json` is read before it is written, so a pickup updates only the
+lines it regenerated and leaves the rest of the read intact.
+
+If a pickup changes a line's length by more than about 12 percent the picture
+has to be re-timed to it, which the script tells you at the end of the run:
+
+```bash
+cd ../kannada/tools
+python3 build_timeline.py timeline.json --from-audio vo_eleven/<ID>/durations.json
+python3 make_srt.py timeline.json ../05-kannada-subtitles.srt
+python3 gfx.py ../05-kannada-subtitles.srt
+python3 film.py silent.mp4
+python3 stem.py <ID>
+```
+
+## 7 · What a synthesised read does not settle
+
+`14` item 7.1 requires a native Kannada speaker who is **not the translator** to
+read the full script aloud and confirm it sounds spoken rather than translated. A
+synthesised read is a useful proxy and does not discharge that item.
+
+`01` section 6 still lists seven pending line variants: ನಿಂತಿದೆ against
+ನಿಂತಿದ್ದಾರೆ against ನಿಂತುಕೊಂಡಿದೆ, ಎಚ್‌ಐವಿ ಇರುವ against ಪೀಡಿತ. Generate all of
+them and let the trustees choose by ear. They are cheap: a handful of lines.

@@ -1,42 +1,42 @@
 {
-  "model_id": "eleven_v3",
-  "language_code": "kn",
-  "output_format": "mp3_44100_128",
-  "notes": [
-    "Kannada is supported by eleven_v3 only. Do not use multilingual_v2 / turbo / flash for this film.",
-    "eleven_v3 does not reliably honour speed; speed fields are editorial intent and are omitted from API requests.",
-    "Copy selected-voice.example → selected-voice.json after trustee approval of auditions.",
-    "Never put ELEVENLABS_API_KEY in this file."
+  "_comment": [
+    "Copy to voice-config.json and edit. Nothing reads a key from here.",
+    "The API key comes from ELEVENLABS_API_KEY or ~/.elevenlabs_key and must",
+    "never be written into this or any other file in the repository.",
+    "",
+    "Only eleven_v3 and eleven_v3_conversational speak Kannada. The scripts",
+    "refuse any other model rather than producing fluent-sounding audio that",
+    "is not Kannada.",
+    "",
+    "stability is a BAND on v3, not a float: creative | natural | robust.",
+    "style and speed do not exist on v3. They are recorded as editorial",
+    "intent and dropped from the request, which the generation log shows."
   ],
-  "takes": {
-    "a": {
-      "label": "Balanced documentary",
-      "stability": 0.52,
-      "similarity_boost": 0.75,
-      "style": 0.1,
-      "speed": 0.95
-    },
-    "b": {
-      "label": "Cinematic and intimate",
-      "stability": 0.42,
-      "similarity_boost": 0.78,
-      "style": 0.2,
-      "speed": 0.92
-    },
-    "c": {
-      "label": "Clear event-hall narration",
-      "stability": 0.6,
-      "similarity_boost": 0.75,
-      "style": 0.08,
-      "speed": 0.97
-    }
+  "model_id": "eleven_v3",
+  "output_format": {
+    "audition": "mp3_44100_128",
+    "final": "mp3_44100_192",
+    "_note": "192 kbps needs Creator or above; PCM/WAV 44.1k needs Pro."
   },
-  "scene_settings": {
-    "opening": { "stability": 0.45, "similarity_boost": 0.78, "style": 0.18, "speed": 0.92 },
-    "origin": { "stability": 0.5, "similarity_boost": 0.76, "style": 0.13, "speed": 0.93 },
-    "timeline": { "stability": 0.56, "similarity_boost": 0.75, "style": 0.1, "speed": 0.96 },
-    "scholarship": { "stability": 0.58, "similarity_boost": 0.75, "style": 0.08, "speed": 0.91 },
-    "community": { "stability": 0.48, "similarity_boost": 0.77, "style": 0.15, "speed": 0.93 },
-    "closing": { "stability": 0.46, "similarity_boost": 0.78, "style": 0.18, "speed": 0.91 }
+  "defaults": {
+    "stability": "natural",
+    "similarity_boost": 0.75,
+    "use_speaker_boost": true
+  },
+  "handle_ms": 500,
+  "_handle_note": "Handles are interleaved silence in the scene concat lists, never padded into the line files: durations.json feeds build_timeline.py --from-audio.",
+  "targets": {
+    "brief_words_per_minute": [100, 110],
+    "approved_script_words_per_minute": 93.0,
+    "_wpm_note": "The approved Kannada script and timeline run at 93 wpm across 296.9s of speech. The brief's 100 to 110 would compress a read the edit is already built around. Measure, do not force.",
+    "film_duration": "00:05:37:22",
+    "narrated_lines": 43,
+    "narrated_characters": 3585
+  },
+  "rights": {
+    "commercial_licence_required": true,
+    "_licence_note": "ElevenLabs grants a commercial licence from Starter upward. A free plan does not carry one, and this film is screened publicly by a registered trust. Record the plan and licence with the music licence under 14 item 5.2.",
+    "disclose_synthesised_narration_in_credits": true,
+    "_disclosure_note": "09 section 8 point 4 recommends one line in the end credits stating the narration is synthesised."
   }
 }

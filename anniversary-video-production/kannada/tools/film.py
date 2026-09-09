@@ -8,6 +8,7 @@ Composites the Kannada cut frame by frame and pipes it to ffmpeg.
   python3 film.py out.mp4 --range 60 75   render only 60s to 75s
   python3 film.py out.mp4 --scale 2       3840x2160 master (see below)
   python3 film.py out.mp4 --no-subs       omit the burned-in Kannada subtitles
+  python3 film.py out.mp4 --no-sharpen    plain LANCZOS, no unsharp at all
   python3 film.py out.mp4 --fallback      Part 12 consent fallback (face-free stills)
 
 Photography is composited by PIL. All Kannada text comes from the pre-rendered
@@ -42,6 +43,7 @@ def _arg(flag, cast, default):
 SCALE = _arg("--scale", int, 1)
 # Restore the flat card plates, before the blurred backdrop.
 FLAT_CARDS = "--flat-cards" in sys.argv
+NO_SHARPEN = "--no-sharpen" in sys.argv
 if SCALE < 1:
     sys.exit("--scale must be 1 or more")
 BURN_SUBS = "--no-subs" not in sys.argv
@@ -302,12 +304,26 @@ def zoom_at(g, u):
 # on the gold rules, which is the usual way this goes wrong.
 SHARPEN_FLOOR = 1.20      # below this, an enlargement costs nothing worth fixing
 SHARPEN_PER_X = 60.0      # percent of unsharp per 1.0x of enlargement past the floor
-SHARPEN_MAX = 90.0        # halos start to show above this on skin and sky
+# 60, and the number is a rights decision as much as a taste one. `06` section 8
+# says "Protect faces. No aggressive sharpening, no AI face enhancement, no skin
+# smoothing", and `05` section 3.1 forbids AI-upscaling documentary photographs
+# of real children and presenting the result as an archival record.
+#
+# This is none of those things: it is a 1px unsharp mask with a threshold that
+# skips flat areas, it invents no detail and it touches no face differently from
+# any other part of the frame. But "aggressive" needed a number rather than an
+# assurance. Compared on K09's face, which is the closest face in the cut and
+# the second-hardest enlargement: 60 percent is plainly better than none at the
+# glasses, beard and collar with no halo anywhere, and 87 begins to harden the
+# collar edge. So 60, and --no-sharpen turns it off entirely.
+SHARPEN_MAX = 60.0
 SHARPEN_THRESHOLD = 3     # leave flat areas alone rather than lifting their grain
 
 
 def sharpened(im, enlarge):
     """Unsharp in proportion to how far the source was pushed."""
+    if NO_SHARPEN:
+        return im
     pct = min(SHARPEN_MAX, max(0.0, (enlarge - SHARPEN_FLOOR) * SHARPEN_PER_X))
     if pct < 4.0:
         return im

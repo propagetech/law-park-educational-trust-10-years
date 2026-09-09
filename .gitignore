@@ -35,3 +35,9 @@ next-env.d.ts
 *.njsproj
 *.sln
 *.sw?
+
+# secrets and large render artefacts
+*.key
+.elevenlabs_key
+anniversary-video-production/**/vo_eleven/
+anniversary-video-production/**/*.mp4

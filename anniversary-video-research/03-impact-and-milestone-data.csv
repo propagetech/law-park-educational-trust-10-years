@@ -1,0 +1,44 @@
+year,milestone,impact_number,impact_unit,location,source_path,status,conflict_group,notes
+2016,First scholarship and first school visit,1,scholarship,Chickaballapur,data/milestones.ts,VERIFIED,,The single origin beat. Photo-backed.
+2016,Steel plates and steel glasses distributed,150,students,Chickaballapur,data/milestones.ts,VERIFIED,,Hero image of the site shows this distribution.
+2017,Scholarships given,10,students,Chickaballapur,data/milestones.ts; public/magazine/template-06.html,VERIFIED,,Magazine phrases it 'One became ten.'
+2018,Continued support,,,Chickaballapur,data/milestones.ts,VERIFIED,,No number in the data. Do not invent one.
+2018,Renewals plus personal home visits and parent interviews,,,Chickaballapur,public/magazine/template-06.html,NEEDS CONFIRMATION,,"Magazine-only elaboration, not present in milestones.ts."
+2019,Scholarships to more children,,,KGF,data/milestones.ts,NEEDS CONFIRMATION,LOC-2019,Code says KGF.
+2019,"Scholarship coverage expanded, focus on single-parent and daily-wage families",,,Chickaballapur,public/magazine/template-06.html,NEEDS CONFIRMATION,LOC-2019,Magazine says Chickaballapur and adds a beneficiary focus not in the data.
+2020,Support continued through the pandemic,,,"Chickaballapur, KGF",data/milestones.ts,VERIFIED,LOC-2020,Location conflicts with the magazine.
+2020,"Pandemic Relief to Students scholarship, published eligibility criteria",,,India,assets/images/timeline/2020-pandemic-relief-announcement-poster.jpg,VERIFIED,,"LPET-authored poster. Criteria: children who lost a parent, and/or parents who lost jobs. Strongest 2020 evidence."
+2020,Fees honoured for every enrolled child so no child restarted from zero,,,Chickaballapur,public/magazine/template-06.html,NEEDS CONFIRMATION,LOC-2020,Magazine-only elaboration.
+2021,Children given scholarship,,,KGF,data/milestones.ts,NEEDS CONFIRMATION,LOC-2021,CLIENT_FEEDBACK_STATUS.md records that a specific number was deliberately removed from this milestone at client request. Do not restore a number.
+2021,Scholarship list renewed and expanded as schools reopened,,,Chickaballapur,public/magazine/template-06.html,NEEDS CONFIRMATION,LOC-2021,Magazine says Chickaballapur.
+2022,Libraries set up in rural schools with donated books,,,"Mandya, Kolar",data/milestones.ts,VERIFIED,,"Story books, academic books for engineering and NEET, unused notebooks."
+2022,"Named library sites: DMS Jnana Kuteera School, Baby Village; Grameena Mahila Okkuta, Gram Vikas NGO",2,library sites,Mandya; Kolar,assets/images/timeline/2022-library-donation-poster.jpg,VERIFIED,,Poster spelling 'Grameena Mahaila Okutta' needs correction.
+2022,Rural-sector scholarship event held at the Law Park office premises,,,Bengaluru,data/milestones.ts,VERIFIED,,"Useful, shows the office as a venue."
+2023,Expanded to Mysore and H.D. Kote,,,"Mysore, H.D. Kote",data/milestones.ts,VERIFIED,,First appearance of H.D. Kote.
+2023,Career counselling for 10th and 9th standard students,,,"Mysore, H.D. Kote",data/milestones.ts,VERIFIED,,Photo: 2024-classroom-career-counselling-session.jpg.
+2024,Interviews and career counselling at DMS Jnana Kuteera School,,,Pandavapura,data/milestones.ts,VERIFIED,,School is in Baby Village per the 2022 poster; milestone location lists Pandavapura.
+2024,Scholarship interviews conducted,,,Mulbagal,data/milestones.ts,VERIFIED,,Corroborated by the Udayavani clipping.
+2024,"School bags, notebooks and stationery distributed at MM Hills tribal schools, opening academic year 2024-25",200,school bags,MM Hills,data/milestones.ts; public/magazine/template-06.html,VERIFIED,,Magazine 'Did you know?' repeats 200.
+2024,Support extended to HIV-affected children,,,H.D. Kote,data/milestones.ts,VERIFIED,,Delivered with Belaku Trust and Soukhya Samrudhi Samsthe.
+2024,"Scholarships distributed to children of single parents with Belaku Trust, covered by Udayavani on 19 June 2024",,,"Muttalapete, Mulbagal",assets/images/timeline/2024-newspaper-coverage-clipping.jpg,VERIFIED,,Only independent third-party verification in the repository.
+2025,"School bags, notebooks and stationery to tribal children with Nisarga Foundation",300,school bags,H.D. Kote,data/milestones.ts; public/magazine/template-06.html,VERIFIED,,Strongest single number in the film.
+2025,Scholarship interviews conducted,,,"KGF, Kolar",data/milestones.ts,VERIFIED,,
+2025,Supplies distributed to HIV-affected children and children with other chronic health conditions,,,Kolar area,data/milestones.ts,VERIFIED,,Never name a child's health status alongside an identifiable face.
+2025,Students received scholarships at DMS Jnana Kuteera School,20,students,Pandavapura,data/milestones.ts,VERIFIED,,
+2025,Bharat Shiksha Ratan Award received by the Founder at the National Summit,,,New Delhi,assets/images/awards/bharat-shiksha-ratan-award-certificate-scan.jpeg; data/websiteContent.ts,VERIFIED,,19 December 2025. Certificate scan confirms every field.
+2025,Selected from 25 national awardees,25,awardees,New Delhi,data/websiteContent.ts; SOCIAL_MEDIA_CONTENT.md,NEEDS CONFIRMATION,AWARD-25,Not on the certificate.
+2026,No milestone recorded,,,,data/milestones.ts,NEEDS CONFIRMATION,YEAR-2026,The film celebrates 2016 to 2026 but the timeline stops at 2025. Six WhatsApp photographs dated 8 April 2026 exist without context.
+2026,"Planned: bring all children under LPET care to Bengaluru for the anniversary, a one-day tour and gifts, a first city visit for many",,,Bengaluru,components/pages/WebpageContentPage.tsx; components/pages/DonorInviteContentPage.tsx,VERIFIED,,"A plan, not an achievement. Narrate in future tense only."
+cumulative,Students supported,1000,"students, plus",across programme areas,data/stats.ts; public/magazine/template-06.html,NEEDS CONFIRMATION,STUDENTS,CONFLICT. Do not use.
+cumulative,Students supported,500,"students, plus",across programme areas,components/sections/Hero.tsx; CLIENT_FEEDBACK_STATUS.md,NEEDS CONFIRMATION,STUDENTS,CONFLICT. Do not use.
+cumulative,Students supported,550,"students, plus",across programme areas,PROJECT_SUMMARY.md,EXCLUDE,STUDENTS,"Stale build note, superseded."
+cumulative,Villages reached,150,"villages, plus",,data/stats.ts; public/magazine/template-06.html,NEEDS CONFIRMATION,GEOGRAPHY,CONFLICT with the schools figure below.
+cumulative,Schools reached,150,"schools, plus",,CLIENT_FEEDBACK_STATUS.md,NEEDS CONFIRMATION,GEOGRAPHY,"Same number, different unit. One of the two is a transcription error."
+cumulative,Districts reached,10,"districts, plus",India,data/stats.ts; public/magazine/template-06.html,NEEDS CONFIRMATION,DISTRICTS,CONFLICT. Only 9 distinct places appear in the whole timeline.
+cumulative,Districts reached,5,"districts, plus",Karnataka,components/sections/Hero.tsx,NEEDS CONFIRMATION,DISTRICTS,CONFLICT. Also narrows scope to Karnataka against an 'across India' mission line.
+cumulative,Locations reached,8,"locations, plus",,PROJECT_SUMMARY.md,EXCLUDE,DISTRICTS,Stale.
+cumulative,School bags distributed,500,"bags, plus",,PROJECT_SUMMARY.md,EXCLUDE,BAGS,Stale. The only defensible bag figures are 200 in 2024 and 300 in 2025.
+cumulative,Years of impact,10,years,,data/stats.ts; components/sections/Hero.tsx,VERIFIED,,Depends on resolving the 2012 versus 2016 founding-year question.
+cumulative,Share of tuition fees covered,75,"percent, up to",,data/websiteContent.ts,VERIFIED,,"Safe, distinctive, and explains the model in one number."
+cumulative,Named donors and supporter organisations listed,110,"names, approximately","India, USA, UK, Germany, Denmark, Dubai, Abu Dhabi, Hong Kong",data/websiteContent.ts,NEEDS CONFIRMATION,DONORS,Contains near-duplicate spellings. Count only after de-duplication.
+cumulative,Named testimonials on record,28,testimonials,,data/websiteContent.ts; public/magazine/testimany with pic.docx,VERIFIED,,Traceable to a source document with an extraction manifest.

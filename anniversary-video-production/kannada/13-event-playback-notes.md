@@ -110,6 +110,33 @@ pack is what to hand them.
 
 ---
 
+## K34 is blank on purpose, and that is not a fault
+
+`00:03:57:23` to `00:04:10:11`, 12.52 seconds, carries no photograph and no card
+type. Only a gold rule.
+
+The line spoken over it names single-parent status, HIV in the family and
+chronic illness. `14` item 2.4 and the storyboard make this absolute: **no
+photograph, no face, no illustration of a child, and no card text while the
+line is spoken.** Any image or on-screen label there would attach those
+conditions to identifiable children. The partner list arrives at K35, after the
+sentence has ended.
+
+It is the only card in the film with no type of its own, and the longest.
+
+**What was wrong** is that the 2160p master carried no captions at all, so those
+12.5 seconds were literally empty on screen. The 1080p cuts burn the subtitle
+in, so the words are there. The 2160p now carries a **soft Kannada subtitle
+track** (`mov_text`, language `kan`) which stays toggleable for YouTube and is
+visible to anyone reviewing the file locally. Turn subtitles on in the player.
+
+**One length note.** The storyboard designed this shot at 10.72s. The
+synthesised read is slower, so it now runs 12.52s: speech 11.52 plus a 1.0s
+pause. Trimming that pause to 0 would bring it to 11.52s and is the only lever
+that does not touch the consent rule. It needs a re-time and a re-render.
+
+---
+
 ## Still open, Trust only
 
 `07` **1.1**, **1.12**, **4.1**, **5.1**, **5.5**, **5.8**, Part 11.

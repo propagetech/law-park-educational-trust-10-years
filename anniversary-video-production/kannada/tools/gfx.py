@@ -73,15 +73,43 @@ def card(name, body, extra=""):
 # The logo must be inlined as a data URI: set_content() gives the page an
 # about:blank origin, so a file:// <img> is blocked and renders as a broken icon.
 import base64
-_LOGO_PATH = ("/Users/chetan/Downloads/jeevitha/law-park-educational-trust-10-years/logo.png")
+# logo-hires.png, not the repository's logo.png.
+#
+# logo.png is 300x257. At --scale 2 a 268 CSS px logo is 536 device pixels, so
+# the mark was the one element in a 4K master being enlarged while every glyph
+# around it was drawn natively. logo-purple.png is the same artwork at 976x833
+# on a flat purple ground: composited back over that ground, logo.png matches it
+# to a mean of 3.8/255, which is the same file. tools/make_logo.py keys the
+# purple out and leaves a 976px transparent mark, so nothing here is enlarged.
+_LOGO_PATH = os.path.join(os.path.dirname(os.path.abspath(__file__)),
+                          "logo-hires.png")
+if not os.path.exists(_LOGO_PATH):
+    sys.exit(f"missing {_LOGO_PATH}\n  build it with: python3 make_logo.py")
 LOGO = "data:image/png;base64," + base64.b64encode(open(_LOGO_PATH, "rb").read()).decode()
+
+# THE LOGO MAY NOT SIT DIRECTLY ON NAVY
+# Measured on logo.png: 45.1 percent of its opaque pixels are #301010, 19.0
+# percent #201010 and 5.9 percent #202010. Against NAVY those are 1.04:1, 1.10:1
+# and 1.02:1. Three quarters of the mark, including the whole trunk, both hands
+# and the graduation cap, was invisible on the title card and the end card; only
+# the green arcs read, at 5.49:1. The same pixels are 16.4:1 and 17.3:1 on cream.
+#
+# So on a dark ground the mark gets its own cream plate. That is the ordinary
+# answer for a brand mark drawn for light backgrounds, it keeps the real colours
+# rather than knocking the mark out to one flat tone, and it is measurable.
+def logo_on_dark(width, extra=""):
+    pad = round(width * 0.17)
+    return (f'<div style="display:inline-block;background:{CREAM};'
+            f'border-radius:{round(width * 0.035)}px;padding:{pad}px {pad}px;'
+            f'line-height:0;{extra}">'
+            f'<img src="{LOGO}" style="width:{width}px;height:auto;display:block"></div>')
 
 for i, (show_mark, show_sub) in enumerate([(0, 0), (1, 0), (1, 1)]):
     card(f"K05_{i}", f"""
 <div class="frame navy"></div>
 <div class="stack pad">
-  <img src="{LOGO}" style="width:268px;height:auto;margin-bottom:44px;
-       opacity:{1 if show_mark else 0}">
+  <div style="margin-bottom:44px;opacity:{1 if show_mark else 0}">
+       {logo_on_dark(238)}</div>
   <div class="rule" style="width:{220 if show_mark else 90}px;margin-bottom:40px;
        transition:none"></div>
   <div class="kn700" style="font-size:96px;line-height:1.5;color:{WHITE};
@@ -188,8 +216,8 @@ for n in range(4):
        margin-top:34px;opacity:{1 if n >= 3 else 0}">
     journey.lawparkeducationaltrust.org<br>
     lawparktrust@gmail.com&nbsp;&nbsp;·&nbsp;&nbsp;+91&nbsp;99456&nbsp;65379</div>
-  <img src="{LOGO}" style="position:absolute;right:150px;bottom:0;width:200px;
-       height:auto;opacity:{1 if n >= 3 else 0}">
+  <div style="position:absolute;right:150px;bottom:96px;
+       opacity:{1 if n >= 3 else 0}">{logo_on_dark(196)}</div>
 </div>""")
 
 # ================================================================ OVERLAYS
@@ -283,17 +311,35 @@ for i, l in enumerate(LABELS_K32):
 # of a small native-size photograph, not a full-width lower third. A lower third
 # crosses the photograph and looks like an accident.
 def right_panel(name, heading, items, shown):
-    rows = "".join(
-        f'<div class="kn600" style="font-size:52px;line-height:1.5;color:{NAVY};'
-        f'margin-top:26px;opacity:{1 if i < shown else 0}">{it}</div>'
-        for i, it in enumerate(items))
+    """A heading and a progressive list, on a scrim, at the foot of the frame.
+
+    This used to be navy Kannada set directly over the picture with nothing
+    behind it, stacked down the right third. On a flat cream card that measured
+    15.77:1 and was fine. It stopped being fine the moment K31 and K32 became
+    full-bleed photography: navy type over an arbitrary photograph has whatever
+    contrast the photograph happens to give it, and over the pale stationery
+    plate that is close to none.
+
+    Two changes. It sits on the same navy scrim the rest of the film's lower
+    thirds use, where white is 16.7:1 and the gold 8.4:1 and neither depends on
+    the picture. And the list is one line of separated items rather than a
+    stack, because a four-item stack is a 400px block that covered most of a
+    three-tile collage; K26 already sets its four method words this way.
+    """
+    parts = []
+    for i, it in enumerate(items):
+        if i:
+            parts.append(f'<span style="color:{GOLD};opacity:'
+                         f'{1 if i < shown else 0}">&nbsp;·&nbsp;</span>')
+        parts.append(f'<span style="opacity:{1 if i < shown else 0}">{it}</span>')
     card(name, f"""
-<div style="position:absolute;right:150px;top:0;bottom:0;width:900px;display:flex;
-     flex-direction:column;justify-content:center">
-  <div class="rule" style="margin-bottom:30px"></div>
-  <div class="kn700" style="font-size:60px;line-height:1.5;color:{NAVY}">{heading}</div>
-  <div>{rows}</div>
-</div>""", extra="html,body{background:transparent}")
+<div class="lt"><div class="ltbar">
+  <div class="kn600" style="font-size:52px;line-height:1.5;color:{WHITE}">{heading}</div>
+  <div class="kn500" style="font-size:44px;line-height:1.6;color:{GOLDL};
+       margin-top:12px">{"".join(parts)}</div>
+</div></div>""", extra="html,body{background:transparent}"
+     ".ltbar{border-top:3px solid " + GOLD + "}")
+
 
 for n in range(1, 4):
     right_panel(f"RP_K31_{n}", "ಶಾಲಾ ಸಾಮಗ್ರಿ ವಿತರಣೆ",
@@ -311,7 +357,7 @@ def sub_html(lines):
     return ("<!doctype html><meta charset='utf-8'><style>" + BASE +
             "html,body{background:transparent}</style>"
             f"""<div style="position:absolute;left:0;right:0;bottom:64px;text-align:center">
-  <div style="display:inline-block;background:rgba(28,28,46,.82);padding:20px 40px;
+  <div style="display:inline-block;background:rgba(28,28,46,.94);padding:20px 40px;
        border-radius:6px;max-width:1560px">
     <div class="kn500" style="font-size:48px;line-height:1.55;color:{WHITE}">{body}</div>
   </div></div>""")

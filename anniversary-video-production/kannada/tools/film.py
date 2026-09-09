@@ -30,7 +30,7 @@ are Lanczos-enlarged. See 08-kannada-animatic-notes.md section 9.
 captions stay toggleable, searchable and translatable.
 """
 import json, os, subprocess, sys
-from PIL import Image, ImageFilter
+from PIL import Image, ImageDraw, ImageFilter
 
 REPO = "/Users/chetan/Downloads/jeevitha/law-park-educational-trust-10-years"
 
@@ -102,6 +102,7 @@ def o(px):
 
 W, H, FPS = o(1920), o(1080), 25
 NAVY, CREAM, BLACK = (28, 28, 46), (250, 248, 243), (0, 0, 0)
+GOLD = (201, 144, 62)          # matches GOLD in gfx.py, #c9903e
 
 TL = json.load(open("timeline.json", encoding="utf-8"))
 SUBS = json.load(open("subs.json", encoding="utf-8"))
@@ -122,11 +123,10 @@ G = {
  "K05": dict(mode="gfx", states=[("K05_0", 0.0), ("K05_1", 0.6), ("K05_2", 1.6)]),
  "K06": dict(mode="gfx", states=[("K06", 0.0)], fade_in=0.8),
  "K07": dict(mode="gfx", states=[("K07", 0.0)]),
- "K08": dict(mode="card", ground=NAVY, fit=("w", 1280), push=(1.0, 1.02),
-             box=(40, 0, 1280, 853)),
- "K09": dict(mode="card", ground=NAVY, fit=("w", 853),  push=(1.0, 1.0)),
+ "K08": dict(mode="full", box=(40, 0, 1280, 853),  push=(1.0, 1.03)),
+ "K09": dict(mode="full", box=None,                    push=(1.0, 1.02)),
  "K10": dict(mode="full", box=(0, 90, 1215, 774),     push=(1.0, 1.0)),
- "K11": dict(mode="card", ground=CREAM, fit=("h", 900), align="left", push=(1.0, 1.0)),
+ "K11": dict(mode="full", box=(0, 300, 747, 1120),    push=(1.0, 1.03)),
  "K12": dict(mode="gfx", states=[("K12_0", 0.0), ("K12_1", 1.2)]),
  "K13": dict(mode="full", box=None,                    push=(1.0, 1.04)),
  "K14": dict(mode="full", box=(0, 150, 1600, 1050),   push=(1.0, 1.0)),
@@ -136,7 +136,7 @@ G = {
                 ("assets/images/timeline/2019-community-group-photo-outdoors.jpg", None)],
              push=(1.0, 1.02), xfade=0.64),
  "K16": dict(mode="full", box=(0, 200, 1600, 1100),   push=(1.0, 1.0)),
- "K17": dict(mode="panel", fit=("h", 900), push=(1.0, 1.0),
+ "K17": dict(mode="panel", panel_w=760, push=(1.0, 1.0),
              states=[("GLOSS_K17_0", 0.0), ("GLOSS_K17_1", 2.6), ("GLOSS_K17_2", 5.4)]),
  "K18": dict(mode="full", box=None,                    push=(1.0, 1.04)),
  "K19": dict(mode="full", box=None,                    push=(1.0, 1.0)),
@@ -151,17 +151,21 @@ G = {
  "K28": dict(mode="full", box=None,                    push=(1.0, 1.0)),
  "K29": dict(mode="gfx", states=[("K29", 0.0)]),
  "K30": dict(mode="full", box=None,                    push=(1.0, 1.0)),
- "K31": dict(mode="card", ground=CREAM, fit=("h", 820), align="left", push=(1.0, 1.0)),
- "K32": dict(mode="card", ground=CREAM, fit=("h", 880), align="left", push=(1.0, 1.0)),
+ "K31": dict(mode="collage", cols=3, push=(1.0, 1.03), tiles=[
+             ("assets/images/timeline/2024-car-trunk-filled-with-school-bags.jpg", None),
+             ("assets/images/timeline/2025-stationery-and-snacks-arranged.jpg", None),
+             ("assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg", None)]),
+ "K32": dict(mode="collage", cols=2, push=(1.0, 1.02), tiles=[
+             ("assets/images/timeline/2022-library-bookshelves.jpg", None),
+             ("assets/images/magazine-gallery/kids-craft.jpeg", None)]),
  "K33": dict(mode="full", box=(0, 150, 1600, 1050),   push=(1.0, 1.0)),
  "K34": dict(mode="gfx", states=[("K34", 0.0)]),
  "K35": dict(mode="gfx", states=[("K35_0", 0.0), ("K35_1", 0.9), ("K35_2", 1.8),
                                   ("K35_3", 2.7), ("K35_4", 3.6)]),
  "K36": dict(mode="card", ground=NAVY, box=(0, 0, 513, 662), fit=("h", 660),
              push=(1.0, 1.42)),
- "K37": dict(mode="card", ground=NAVY, box=(700, 40, 1370, 872), fit=("h", 840),
-             align="right", push=(1.0, 1.0)),
- "K38": dict(mode="card", ground=CREAM, fit=("w", 941), push=(1.0, 1.0)),
+ "K37": dict(mode="full", box=None,                    push=(1.0, 1.02)),
+ "K38": dict(mode="full", box=None,                    push=(1.0, 1.03)),
  "K39": dict(mode="full", box=(0, 150, 1600, 1050),   push=(1.0, 1.0)),
  "K40": dict(mode="full", box=(0, 190, 1600, 1090),   push=(1.0, 1.0)),
  "K41": dict(mode="full", box=None,                    push=(1.0, 1.03)),
@@ -250,6 +254,60 @@ def zoom_at(g, u):
         u = 0.0 if u * dur < wait else (u * dur - wait) / (dur - wait)
     return z0 + (z1 - z0) * ease(max(0.0, min(1.0, u)))
 
+# ---------------------------------------------------------------- collage
+# WHY A COLLAGE RATHER THAN A BIGGER CROP
+# Five of this cut's photographs are portrait or square and none of them is
+# large. Filling a 16:9 frame with one of them means cropping away most of the
+# subject AND enlarging what is left: K31's stationery is 513x911, so a
+# full-bleed 16:9 crop is 513x289 pushed 3.74x. That is the reason the card
+# treatment existed, and the reason it left 45 to 80 percent of the frame as
+# flat colour with a washed backdrop behind it.
+#
+# Three portrait images side by side is the way out of that trade. Each tile is
+# 640x1080, so a 513x911 source is enlarged 1.25x instead of 3.74x and is
+# cropped barely at all. The frame is full, the subject survives, and the
+# picture is sharper than either alternative.
+#
+# The collage is not a licence to bring new photographs into the cut. Every
+# consent assessment in build_timeline.py is per asset, and most of this library
+# is marked [C] BLOCKING, so a tile drawn from outside the cut would widen the
+# rights problem rather than solve a framing one. Tiles come from images already
+# in this film, or from ones the register marks CLEAR.
+_collage = {}
+
+
+def collage_plate(sid, g):
+    """Tile several photographs edge to edge across the full frame."""
+    if sid in _collage:
+        return _collage[sid]
+    tiles = g["tiles"]
+    n = len(tiles)
+    cols = g.get("cols", n)
+    rows = (n + cols - 1) // cols
+    base = Image.new("RGB", (W, H), g.get("ground", NAVY))
+    # Integer edges that always sum to exactly W and H, so no seam of ground
+    # colour shows between tiles at either scale.
+    xs = [round(i * W / cols) for i in range(cols + 1)]
+    ys = [round(i * H / rows) for i in range(rows + 1)]
+    for i, (path, box) in enumerate(tiles):
+        c, r = i % cols, i // cols
+        x0, x1, y0, y1 = xs[c], xs[c + 1], ys[r], ys[r + 1]
+        cw, ch = x1 - x0, y1 - y0
+        im = cover(src(path), box, aspect=cw / ch)
+        base.paste(im.resize((cw, ch), Image.LANCZOS), (x0, y0))
+    # A hairline between tiles reads as a deliberate grid rather than as three
+    # photographs that happen to touch.
+    if g.get("rule", True):
+        d = ImageDraw.Draw(base)
+        t = max(2, o(4))
+        for x in xs[1:-1]:
+            d.rectangle([x - t // 2, 0, x - t // 2 + t - 1, H], fill=GOLD)
+        for y in ys[1:-1]:
+            d.rectangle([0, y - t // 2, W, y - t // 2 + t - 1], fill=GOLD)
+    _collage[sid] = base
+    return base
+
+
 # pre-built 16:9 plates, so each frame is one crop plus one resize
 _plate = {}
 
@@ -270,8 +328,17 @@ _cardground = {}
 
 # How much of the flat ground colour stays in the blurred backdrop. 1.0 is the
 # old flat card, 0.0 is the photograph at full strength behind the type.
-CARD_BACKDROP_MIX = 0.74
-CARD_BACKDROP_BLUR = 26          # in output pixels at scale 1
+# K36 is now the only card shot in the film: everything else fills the frame or
+# is a collage. It stays a card because it is the one image the audience READS,
+# a newspaper clipping whose headline the shot note records as verified legible,
+# and enlarging a 513x733 scan to fill 1920x1080 would destroy exactly the thing
+# it is in the film to prove.
+#
+# The backdrop was blended 74 percent back to the ground, which on a light scan
+# left a pale grey haze around the clipping rather than a frame. At 0.55 toward
+# navy, with more blur, the clipping sits in something that reads as deliberate.
+CARD_BACKDROP_MIX = 0.55
+CARD_BACKDROP_BLUR = 44          # in output pixels at scale 1
 
 
 def card_ground(sh, g):
@@ -361,13 +428,20 @@ def clean(sh, t):
             im = Image.blend(Image.new("RGBA", (W, H), (28, 28, 46, 255)), im, a)
         base.paste(im.convert("RGB"), (0, 0))
         return base
+    if g["mode"] == "collage":
+        return zoomed(collage_plate(sid, g), zoom_at(g, u))
     if g["mode"] == "card":
         return card_frame(sh, u)
     if g["mode"] == "panel":
-        base = card_frame(sh, u)
+        # Two panels, edge to edge. The gloss plate owns the left, the
+        # photograph covers the rest of the frame with no margin, so nothing is
+        # left as bare ground. The gloss is a solid navy plate drawn in gfx.py,
+        # so its Kannada keeps the contrast it was designed with instead of
+        # depending on whatever is behind it.
+        pw = o(g.get("panel_w", 760))
         base = Image.new("RGB", (W, H), NAVY)
-        ph = _cardplate[sid]
-        base.paste(ph, (W - o(150) - ph.size[0], (H - ph.size[1]) // 2))
+        photo = cover(src(sh["path"]), g.get("box"), aspect=(W - pw) / H)
+        base.paste(photo.resize((W - pw, H), Image.LANCZOS), (pw, 0))
         ov = gfx(gfx_state(g, t))
         base = Image.alpha_composite(base.convert("RGBA"), ov).convert("RGB")
         return base

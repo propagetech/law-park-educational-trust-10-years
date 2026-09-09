@@ -43,13 +43,13 @@
   "consent": "[C] BLOCKING - approx 60 identifiable children and adults",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.44,
+  "speech": 8.64,
   "words": 13,
-  "dur": 7.44,
+  "dur": 8.64,
   "tc_in": "00:00:07:00",
   "t_in": 7.0,
-  "tc_out": "00:00:14:11",
-  "t_out": 14.440000000000001
+  "tc_out": "00:00:15:16",
+  "t_out": 15.64
  },
  {
   "sec": "ಎ · ಆರಂಭ",
@@ -69,13 +69,13 @@
   "consent": "[C] BLOCKING - two children in close-up, fully identifiable",
   "consent_note": "Highest-priority release in the film: it is the opening emotional beat.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 2.8,
+  "speech": 3.2,
   "words": 6,
-  "dur": 3.8,
-  "tc_in": "00:00:14:11",
-  "t_in": 14.440000000000001,
-  "tc_out": "00:00:18:06",
-  "t_out": 18.240000000000002
+  "dur": 4.2,
+  "tc_in": "00:00:15:16",
+  "t_in": 15.64,
+  "tc_out": "00:00:19:21",
+  "t_out": 19.84
  },
  {
   "sec": "ಎ · ಆರಂಭ",
@@ -95,13 +95,13 @@
   "consent": "CLEAR after crop - the one adult at bottom-left is cropped out",
   "consent_note": "School permission for the signboard: 14 item 2.2.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.6,
+  "speech": 6.16,
   "words": 11,
-  "dur": 7.6,
-  "tc_in": "00:00:18:06",
-  "t_in": 18.240000000000002,
-  "tc_out": "00:00:25:21",
-  "t_out": 25.840000000000003
+  "dur": 8.16,
+  "tc_in": "00:00:19:21",
+  "t_in": 19.84,
+  "tc_out": "00:00:28:00",
+  "t_out": 28.0
  },
  {
   "sec": "ಎ · ಆರಂಭ",
@@ -121,13 +121,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 4.08,
+  "speech": 4.48,
   "words": 8,
-  "dur": 4.58,
-  "tc_in": "00:00:25:21",
-  "t_in": 25.840000000000003,
-  "tc_out": "00:00:30:10",
-  "t_out": 30.42
+  "dur": 4.98,
+  "tc_in": "00:00:28:00",
+  "t_in": 28.0,
+  "tc_out": "00:00:33:00",
+  "t_out": 32.980000000000004
  },
  {
   "sec": "ಎ2 · ಸಂಸ್ಥಾಪಕರ ಮಾತು",
@@ -150,10 +150,10 @@
   "speech": 0.0,
   "words": 0,
   "dur": 6.0,
-  "tc_in": "00:00:30:10",
-  "t_in": 30.42,
-  "tc_out": "00:00:36:10",
-  "t_out": 36.42
+  "tc_in": "00:00:33:00",
+  "t_in": 32.980000000000004,
+  "tc_out": "00:00:39:00",
+  "t_out": 38.980000000000004
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -173,13 +173,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 6.16,
+  "speech": 6.96,
   "words": 10,
-  "dur": 6.16,
-  "tc_in": "00:00:36:10",
-  "t_in": 36.42,
-  "tc_out": "00:00:42:14",
-  "t_out": 42.58
+  "dur": 6.96,
+  "tc_in": "00:00:39:00",
+  "t_in": 38.980000000000004,
+  "tc_out": "00:00:45:24",
+  "t_out": 45.940000000000005
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -199,13 +199,13 @@
   "consent": "TRUSTEE LIKENESS - founder approval",
   "consent_note": "",
   "inv": "TRUSTEE LIKENESS - internal approval required",
-  "speech": 9.44,
+  "speech": 10.16,
   "words": 16,
-  "dur": 9.44,
-  "tc_in": "00:00:42:14",
-  "t_in": 42.58,
-  "tc_out": "00:00:52:00",
-  "t_out": 52.019999999999996
+  "dur": 10.16,
+  "tc_in": "00:00:45:24",
+  "t_in": 45.940000000000005,
+  "tc_out": "00:00:56:03",
+  "t_out": 56.10000000000001
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -225,13 +225,13 @@
   "consent": "TRUSTEE LIKENESS - trustee approval",
   "consent_note": "",
   "inv": "TRUSTEE LIKENESS - internal approval required",
-  "speech": 7.84,
+  "speech": 8.64,
   "words": 15,
-  "dur": 7.84,
-  "tc_in": "00:00:52:00",
-  "t_in": 52.019999999999996,
-  "tc_out": "00:00:59:21",
-  "t_out": 59.86
+  "dur": 8.64,
+  "tc_in": "00:00:56:03",
+  "t_in": 56.10000000000001,
+  "tc_out": "00:01:04:19",
+  "t_out": 64.74000000000001
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -251,13 +251,13 @@
   "consent": "CLEAR - no person in frame",
   "consent_note": "INVENTORY CORRECTION: A234 is flagged 'likely shows minors'. It does not. School permission still applies.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 3.44,
+  "speech": 3.6,
   "words": 7,
-  "dur": 5.4399999999999995,
-  "tc_in": "00:00:59:21",
-  "t_in": 59.86,
-  "tc_out": "00:01:05:07",
-  "t_out": 65.3
+  "dur": 5.6,
+  "tc_in": "00:01:04:19",
+  "t_in": 64.74000000000001,
+  "tc_out": "00:01:10:08",
+  "t_out": 70.34
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -277,13 +277,13 @@
   "consent": "[C] BLOCKING - children seated with backs to camera, plus the founder",
   "consent_note": "Backs of heads are far lower risk, but the school and the visit still need permission.",
   "inv": "TRUSTEE LIKENESS - internal approval required",
-  "speech": 3.76,
+  "speech": 4.0,
   "words": 6,
-  "dur": 3.76,
-  "tc_in": "00:01:05:07",
-  "t_in": 65.3,
-  "tc_out": "00:01:09:01",
-  "t_out": 69.06
+  "dur": 4.0,
+  "tc_in": "00:01:10:08",
+  "t_in": 70.34,
+  "tc_out": "00:01:14:08",
+  "t_out": 74.34
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -303,13 +303,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 4.16,
+  "speech": 5.12,
   "words": 5,
-  "dur": 5.16,
-  "tc_in": "00:01:09:01",
-  "t_in": 69.06,
-  "tc_out": "00:01:14:06",
-  "t_out": 74.22
+  "dur": 6.12,
+  "tc_in": "00:01:14:08",
+  "t_in": 74.34,
+  "tc_out": "00:01:20:12",
+  "t_out": 80.46000000000001
  },
  {
   "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು",
@@ -329,13 +329,13 @@
   "consent": "[C] BLOCKING - approx 25 identifiable children at a meal",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.44,
+  "speech": 5.52,
   "words": 9,
-  "dur": 5.44,
-  "tc_in": "00:01:14:06",
-  "t_in": 74.22,
-  "tc_out": "00:01:19:17",
-  "t_out": 79.66
+  "dur": 5.52,
+  "tc_in": "00:01:20:12",
+  "t_in": 80.46000000000001,
+  "tc_out": "00:01:26:00",
+  "t_out": 85.98
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -355,13 +355,13 @@
   "consent": "[C] BLOCKING - approx 14 identifiable children and adults",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.92,
+  "speech": 6.08,
   "words": 6,
-  "dur": 5.92,
-  "tc_in": "00:01:19:17",
-  "t_in": 79.66,
-  "tc_out": "00:01:25:15",
-  "t_out": 85.58
+  "dur": 6.08,
+  "tc_in": "00:01:26:00",
+  "t_in": 85.98,
+  "tc_out": "00:01:32:02",
+  "t_out": 92.06
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -381,13 +381,13 @@
   "consent": "[C] BLOCKING - adults identifiable, children in foreground from behind",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.84,
+  "speech": 7.76,
   "words": 12,
-  "dur": 9.84,
-  "tc_in": "00:01:25:15",
-  "t_in": 85.58,
-  "tc_out": "00:01:35:11",
-  "t_out": 95.42
+  "dur": 9.76,
+  "tc_in": "00:01:32:02",
+  "t_in": 92.06,
+  "tc_out": "00:01:41:21",
+  "t_out": 101.82000000000001
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -407,13 +407,13 @@
   "consent": "[C] BLOCKING - large crowd, many identifiable",
   "consent_note": "INVENTORY CORRECTION: A160 is flagged 'N/A - no identifiable person'. The frame is full of identifiable faces.",
   "inv": "N/A - no identifiable person",
-  "speech": 4.88,
+  "speech": 6.0,
   "words": 6,
-  "dur": 4.88,
-  "tc_in": "00:01:35:11",
-  "t_in": 95.42,
-  "tc_out": "00:01:40:08",
-  "t_out": 100.3
+  "dur": 6.0,
+  "tc_in": "00:01:41:21",
+  "t_in": 101.82000000000001,
+  "tc_out": "00:01:47:21",
+  "t_out": 107.82000000000001
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -433,13 +433,13 @@
   "consent": "CLEAR - LPET's own poster artwork, no person",
   "consent_note": "Confirm the poster was not built from licensed stock: 14 item 4.10.",
   "inv": "N/A - no identifiable person",
-  "speech": 11.52,
+  "speech": 12.16,
   "words": 16,
-  "dur": 12.52,
-  "tc_in": "00:01:40:08",
-  "t_in": 100.3,
-  "tc_out": "00:01:52:20",
-  "t_out": 112.82
+  "dur": 13.16,
+  "tc_in": "00:01:47:21",
+  "t_in": 107.82000000000001,
+  "tc_out": "00:02:00:24",
+  "t_out": 120.98
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -459,13 +459,13 @@
   "consent": "CLEAR - no person in frame",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 6.8,
+  "speech": 7.2,
   "words": 7,
-  "dur": 6.8,
-  "tc_in": "00:01:52:20",
-  "t_in": 112.82,
-  "tc_out": "00:01:59:15",
-  "t_out": 119.61999999999999
+  "dur": 7.2,
+  "tc_in": "00:02:00:24",
+  "t_in": 120.98,
+  "tc_out": "00:02:08:04",
+  "t_out": 128.18
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -485,13 +485,13 @@
   "consent": "[C] - students browsing, almost all from behind",
   "consent_note": "Lower risk by composition. Still request release.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.28,
+  "speech": 5.6,
   "words": 9,
-  "dur": 5.28,
-  "tc_in": "00:01:59:15",
-  "t_in": 119.61999999999999,
-  "tc_out": "00:02:04:22",
-  "t_out": 124.89999999999999
+  "dur": 5.6,
+  "tc_in": "00:02:08:04",
+  "t_in": 128.18,
+  "tc_out": "00:02:13:19",
+  "t_out": 133.78
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -511,13 +511,13 @@
   "consent": "[C] BLOCKING - approx 30 identifiable children",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 6.0,
+  "speech": 6.24,
   "words": 6,
-  "dur": 6.0,
-  "tc_in": "00:02:04:22",
-  "t_in": 124.89999999999999,
-  "tc_out": "00:02:10:22",
-  "t_out": 130.89999999999998
+  "dur": 6.24,
+  "tc_in": "00:02:13:19",
+  "t_in": 133.78,
+  "tc_out": "00:02:20:01",
+  "t_out": 140.02
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -537,13 +537,13 @@
   "consent": "ADULTS ONLY - four volunteers, no children",
   "consent_note": "Volunteer consent under 14 item 3.7.",
   "inv": "N/A - no identifiable person",
-  "speech": 8.24,
+  "speech": 8.48,
   "words": 13,
-  "dur": 8.24,
-  "tc_in": "00:02:10:22",
-  "t_in": 130.89999999999998,
-  "tc_out": "00:02:19:03",
-  "t_out": 139.14
+  "dur": 8.48,
+  "tc_in": "00:02:20:01",
+  "t_in": 140.02,
+  "tc_out": "00:02:28:12",
+  "t_out": 148.5
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -563,13 +563,13 @@
   "consent": "CLEAR - no person in frame",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 10.88,
+  "speech": 11.04,
   "words": 15,
-  "dur": 10.88,
-  "tc_in": "00:02:19:03",
-  "t_in": 139.14,
-  "tc_out": "00:02:30:00",
-  "t_out": 150.01999999999998
+  "dur": 11.04,
+  "tc_in": "00:02:28:12",
+  "t_in": 148.5,
+  "tc_out": "00:02:39:13",
+  "t_out": 159.54
  },
  {
   "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ",
@@ -589,13 +589,13 @@
   "consent": "[C] BLOCKING - approx 20 identifiable children and adults",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 4.48,
+  "speech": 4.56,
   "words": 5,
-  "dur": 6.98,
-  "tc_in": "00:02:30:00",
-  "t_in": 150.01999999999998,
-  "tc_out": "00:02:37:00",
-  "t_out": 156.99999999999997
+  "dur": 7.06,
+  "tc_in": "00:02:39:13",
+  "t_in": 159.54,
+  "tc_out": "00:02:46:15",
+  "t_out": 166.6
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -615,13 +615,13 @@
   "consent": "[C] BLOCKING - large group, faces small but identifiable",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 2.64,
+  "speech": 3.2,
   "words": 5,
-  "dur": 2.64,
-  "tc_in": "00:02:37:00",
-  "t_in": 156.99999999999997,
-  "tc_out": "00:02:39:16",
-  "t_out": 159.63999999999996
+  "dur": 3.2,
+  "tc_in": "00:02:46:15",
+  "t_in": 166.6,
+  "tc_out": "00:02:49:20",
+  "t_out": 169.79999999999998
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -641,13 +641,13 @@
   "consent": "CLEAR - no identifiable person in the 16:9 window",
   "consent_note": "School permission still required for the signboard and the school's name: 14 item 2.2.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 4.88,
+  "speech": 6.48,
   "words": 7,
-  "dur": 4.88,
-  "tc_in": "00:02:39:16",
-  "t_in": 159.63999999999996,
-  "tc_out": "00:02:44:13",
-  "t_out": 164.51999999999995
+  "dur": 6.48,
+  "tc_in": "00:02:49:20",
+  "t_in": 169.79999999999998,
+  "tc_out": "00:02:56:07",
+  "t_out": 176.27999999999997
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -667,13 +667,13 @@
   "consent": "CLEAR after crop - the hands-and-form window excludes every face",
   "consent_note": "THE FULL FRAME MUST NEVER BE SCREENED: it is a private conversation about a family's finances. 14 item 2.10.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.44,
+  "speech": 8.0,
   "words": 13,
-  "dur": 8.440000000000001,
-  "tc_in": "00:02:44:13",
-  "t_in": 164.51999999999995,
-  "tc_out": "00:02:52:24",
-  "t_out": 172.95999999999995
+  "dur": 9.0,
+  "tc_in": "00:02:56:07",
+  "t_in": 176.27999999999997,
+  "tc_out": "00:03:05:07",
+  "t_out": 185.27999999999997
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -693,13 +693,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 5.44,
+  "speech": 5.92,
   "words": 9,
-  "dur": 7.44,
-  "tc_in": "00:02:52:24",
-  "t_in": 172.95999999999995,
-  "tc_out": "00:03:00:10",
-  "t_out": 180.39999999999995
+  "dur": 7.92,
+  "tc_in": "00:03:05:07",
+  "t_in": 185.27999999999997,
+  "tc_out": "00:03:13:05",
+  "t_out": 193.19999999999996
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -719,13 +719,13 @@
   "consent": "[C] BLOCKING - families, adults and children identifiable",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.6,
+  "speech": 8.0,
   "words": 14,
-  "dur": 7.6,
-  "tc_in": "00:03:00:10",
-  "t_in": 180.39999999999995,
-  "tc_out": "00:03:08:00",
-  "t_out": 187.99999999999994
+  "dur": 8.0,
+  "tc_in": "00:03:13:05",
+  "t_in": 193.19999999999996,
+  "tc_out": "00:03:21:05",
+  "t_out": 201.19999999999996
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -745,13 +745,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 4.96,
+  "speech": 5.28,
   "words": 10,
-  "dur": 4.96,
-  "tc_in": "00:03:08:00",
-  "t_in": 187.99999999999994,
-  "tc_out": "00:03:12:24",
-  "t_out": 192.95999999999995
+  "dur": 5.28,
+  "tc_in": "00:03:21:05",
+  "t_in": 201.19999999999996,
+  "tc_out": "00:03:26:12",
+  "t_out": 206.47999999999996
  },
  {
   "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ",
@@ -771,13 +771,13 @@
   "consent": "[C] BLOCKING - one volunteer and one child, both identifiable",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 8.88,
+  "speech": 9.6,
   "words": 15,
-  "dur": 8.88,
-  "tc_in": "00:03:12:24",
-  "t_in": 192.95999999999995,
-  "tc_out": "00:03:21:21",
-  "t_out": 201.83999999999995
+  "dur": 9.6,
+  "tc_in": "00:03:26:12",
+  "t_in": 206.47999999999996,
+  "tc_out": "00:03:36:02",
+  "t_out": 216.07999999999996
  },
  {
   "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ",
@@ -797,13 +797,13 @@
   "consent": "CLEAR - no person, no brand in frame",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 9.28,
+  "speech": 9.44,
   "words": 12,
-  "dur": 9.28,
-  "tc_in": "00:03:21:21",
-  "t_in": 201.83999999999995,
-  "tc_out": "00:03:31:03",
-  "t_out": 211.11999999999995
+  "dur": 9.44,
+  "tc_in": "00:03:36:02",
+  "t_in": 216.07999999999996,
+  "tc_out": "00:03:45:13",
+  "t_out": 225.51999999999995
  },
  {
   "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ",
@@ -823,13 +823,13 @@
   "consent": "[C] BLOCKING - approx 8 identifiable children",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 8.88,
+  "speech": 9.2,
   "words": 13,
-  "dur": 8.88,
-  "tc_in": "00:03:31:03",
-  "t_in": 211.11999999999995,
-  "tc_out": "00:03:40:00",
-  "t_out": 219.99999999999994
+  "dur": 9.2,
+  "tc_in": "00:03:45:13",
+  "t_in": 225.51999999999995,
+  "tc_out": "00:03:54:18",
+  "t_out": 234.71999999999994
  },
  {
   "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ",
@@ -849,13 +849,13 @@
   "consent": "[C] BLOCKING - large hall, many identifiable",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 3.28,
+  "speech": 3.2,
   "words": 4,
-  "dur": 3.28,
-  "tc_in": "00:03:40:00",
-  "t_in": 219.99999999999994,
-  "tc_out": "00:03:43:07",
-  "t_out": 223.27999999999994
+  "dur": 3.2,
+  "tc_in": "00:03:54:18",
+  "t_in": 234.71999999999994,
+  "tc_out": "00:03:57:23",
+  "t_out": 237.91999999999993
  },
  {
   "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ",
@@ -875,13 +875,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 11.84,
+  "speech": 11.52,
   "words": 18,
-  "dur": 12.84,
-  "tc_in": "00:03:43:07",
-  "t_in": 223.27999999999994,
-  "tc_out": "00:03:56:03",
-  "t_out": 236.11999999999995
+  "dur": 12.52,
+  "tc_in": "00:03:57:23",
+  "t_in": 237.91999999999993,
+  "tc_out": "00:04:10:11",
+  "t_out": 250.43999999999994
  },
  {
   "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ",
@@ -901,13 +901,13 @@
   "consent": "n/a - graphics only",
   "consent_note": "",
   "inv": "",
-  "speech": 8.08,
+  "speech": 8.16,
   "words": 15,
-  "dur": 8.08,
-  "tc_in": "00:03:56:03",
-  "t_in": 236.11999999999995,
-  "tc_out": "00:04:04:05",
-  "t_out": 244.19999999999996
+  "dur": 8.16,
+  "tc_in": "00:04:10:11",
+  "t_in": 250.43999999999994,
+  "tc_out": "00:04:18:15",
+  "t_out": 258.59999999999997
  },
  {
   "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ",
@@ -927,13 +927,13 @@
   "consent": "THIRD-PARTY COPYRIGHT - BLOCKING",
   "consent_note": "Udayavani permission required: 14 item 4.1. The clipping's own photograph also shows approx 25 identifiable children, already published by the newspaper. INVENTORY CORRECTION: A196 is flagged 'N/A - no identifiable person'.",
   "inv": "N/A - no identifiable person",
-  "speech": 10.24,
+  "speech": 11.28,
   "words": 13,
-  "dur": 11.24,
-  "tc_in": "00:04:04:05",
-  "t_in": 244.19999999999996,
-  "tc_out": "00:04:15:11",
-  "t_out": 255.43999999999997
+  "dur": 12.28,
+  "tc_in": "00:04:18:15",
+  "t_in": 258.59999999999997,
+  "tc_out": "00:04:30:22",
+  "t_out": 270.87999999999994
  },
  {
   "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ",
@@ -953,13 +953,13 @@
   "consent": "CLEAR - document only",
   "consent_note": "Economic and Social Development Foundation permission to reproduce the certificate and use the award name: 14 item 4.5.",
   "inv": "N/A - no identifiable person",
-  "speech": 8.64,
+  "speech": 9.36,
   "words": 11,
-  "dur": 10.64,
-  "tc_in": "00:04:15:11",
-  "t_in": 255.43999999999997,
-  "tc_out": "00:04:26:02",
-  "t_out": 266.08
+  "dur": 11.36,
+  "tc_in": "00:04:30:22",
+  "t_in": 270.87999999999994,
+  "tc_out": "00:04:42:06",
+  "t_out": 282.23999999999995
  },
  {
   "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ",
@@ -979,13 +979,13 @@
   "consent": "ADULTS AND SOME CHILDREN - identifiable",
   "consent_note": "INVENTORY CORRECTION: A250 is flagged 'N/A - no identifiable person'. Roughly thirteen adults and several children are identifiable.",
   "inv": "N/A - no identifiable person",
-  "speech": 14.08,
+  "speech": 15.28,
   "words": 19,
-  "dur": 14.08,
-  "tc_in": "00:04:26:02",
-  "t_in": 266.08,
-  "tc_out": "00:04:40:04",
-  "t_out": 280.15999999999997
+  "dur": 15.28,
+  "tc_in": "00:04:42:06",
+  "t_in": 282.23999999999995,
+  "tc_out": "00:04:57:13",
+  "t_out": 297.5199999999999
  },
  {
   "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ",
@@ -1005,13 +1005,13 @@
   "consent": "[C] BLOCKING after crop - approx 60 identifiable",
   "consent_note": "Crop removes the L. H. International School banner but not the people. Third-party school permission would also be needed if the banner were shown: 14 item 2.2.",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 8.72,
+  "speech": 8.96,
   "words": 11,
-  "dur": 8.72,
-  "tc_in": "00:04:40:04",
-  "t_in": 280.15999999999997,
-  "tc_out": "00:04:48:22",
-  "t_out": 288.88
+  "dur": 8.96,
+  "tc_in": "00:04:57:13",
+  "t_in": 297.5199999999999,
+  "tc_out": "00:05:06:12",
+  "t_out": 306.4799999999999
  },
  {
   "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ",
@@ -1031,13 +1031,13 @@
   "consent": "[C] BLOCKING - approx 30 identifiable children",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 2.88,
+  "speech": 2.8,
   "words": 6,
-  "dur": 2.88,
-  "tc_in": "00:04:48:22",
-  "t_in": 288.88,
-  "tc_out": "00:04:51:19",
-  "t_out": 291.76
+  "dur": 2.8,
+  "tc_in": "00:05:06:12",
+  "t_in": 306.4799999999999,
+  "tc_out": "00:05:09:07",
+  "t_out": 309.2799999999999
  },
  {
   "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ",
@@ -1057,13 +1057,13 @@
   "consent": "[C] BLOCKING - approx 10 identifiable children",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 11.12,
+  "speech": 11.76,
   "words": 19,
-  "dur": 11.12,
-  "tc_in": "00:04:51:19",
-  "t_in": 291.76,
-  "tc_out": "00:05:02:22",
-  "t_out": 302.88
+  "dur": 11.76,
+  "tc_in": "00:05:09:07",
+  "t_in": 309.2799999999999,
+  "tc_out": "00:05:21:01",
+  "t_out": 321.0399999999999
  },
  {
   "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ",
@@ -1083,13 +1083,13 @@
   "consent": "[C] BLOCKING - approx 15 identifiable children and adults",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.2,
+  "speech": 7.76,
   "words": 15,
-  "dur": 8.2,
-  "tc_in": "00:05:02:22",
-  "t_in": 302.88,
-  "tc_out": "00:05:11:02",
-  "t_out": 311.08
+  "dur": 8.76,
+  "tc_in": "00:05:21:01",
+  "t_in": 321.0399999999999,
+  "tc_out": "00:05:29:20",
+  "t_out": 329.7999999999999
  },
  {
   "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ",
@@ -1109,13 +1109,13 @@
   "consent": "[C] BLOCKING - as A240",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 7.92,
+  "speech": 8.48,
   "words": 12,
-  "dur": 7.92,
-  "tc_in": "00:05:11:02",
-  "t_in": 311.08,
-  "tc_out": "00:05:19:00",
-  "t_out": 319.0
+  "dur": 8.48,
+  "tc_in": "00:05:29:20",
+  "t_in": 329.7999999999999,
+  "tc_out": "00:05:38:07",
+  "t_out": 338.2799999999999
  },
  {
   "sec": "ಎಚ್ · ಸ್ವಾಗತ ಮತ್ತು ಸಮಾರೋಪ",
@@ -1135,13 +1135,13 @@
   "consent": "[C] BLOCKING - approx 40 identifiable children",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.12,
+  "speech": 5.92,
   "words": 8,
-  "dur": 6.12,
-  "tc_in": "00:05:19:00",
-  "t_in": 319.0,
-  "tc_out": "00:05:25:03",
-  "t_out": 325.12
+  "dur": 6.92,
+  "tc_in": "00:05:38:07",
+  "t_in": 338.2799999999999,
+  "tc_out": "00:05:45:05",
+  "t_out": 345.19999999999993
  },
  {
   "sec": "ಎಚ್ · ಸ್ವಾಗತ ಮತ್ತು ಸಮಾರೋಪ",
@@ -1161,13 +1161,13 @@
   "consent": "[C] BLOCKING - as A224",
   "consent_note": "",
   "inv": "CONSENT VERIFICATION REQUIRED - likely shows minors",
-  "speech": 5.76,
+  "speech": 5.68,
   "words": 10,
-  "dur": 5.76,
-  "tc_in": "00:05:25:03",
-  "t_in": 325.12,
-  "tc_out": "00:05:30:22",
-  "t_out": 330.88
+  "dur": 5.68,
+  "tc_in": "00:05:45:05",
+  "t_in": 345.19999999999993,
+  "tc_out": "00:05:50:22",
+  "t_out": 350.87999999999994
  },
  {
   "sec": "ಎಚ್ · ಸಮಾರೋಪ",
@@ -1190,9 +1190,9 @@
   "speech": 0.0,
   "words": 0,
   "dur": 7.0,
-  "tc_in": "00:05:30:22",
-  "t_in": 330.88,
-  "tc_out": "00:05:37:22",
-  "t_out": 337.88
+  "tc_in": "00:05:50:22",
+  "t_in": 350.87999999999994,
+  "tc_out": "00:05:57:22",
+  "t_out": 357.87999999999994
  }
 ]

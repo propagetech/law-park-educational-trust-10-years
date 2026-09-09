@@ -357,8 +357,11 @@ def main():
             sid = r["shot"].strip()
             at = tl[sid]["t_in"] + float(r["offset_s"])
             kind = (r.get("kind") or "accent").strip().lower() or "accent"
-            gain = 10 ** (float(r["gain_db"]) / 20)
-            s = [v * gain for v in decode(
+            # gain_db is NOT read here. It is mix.py's derived column and this
+            # script computes its own target below, so multiplying by it and
+            # then rescaling would cancel exactly. Leaving the multiply in
+            # implied the column still drove something.
+            s = [v for v in decode(
                 os.path.join(SFXDIR, r["file"].strip()), tmp,
                 num(r, "in_s"), num(r, "dur_s") or None,
                 num(r, "fade_in"), num(r, "fade_out"),

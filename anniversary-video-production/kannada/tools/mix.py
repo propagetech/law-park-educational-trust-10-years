@@ -110,6 +110,29 @@ def rms_db(path, pre=""):
     return float("-inf") if v == "-inf" else float(v)
 
 
+
+# THIS TOOL AND sfx.py NO LONGER LEVEL THE SAME WAY
+# sfx.py is the one whose output ships, and it reads `14` item 8.7 locally: an
+# effect is held under the voice in the window it occupies, an effect playing
+# where there is no voice takes a stated solo level instead, and the 12 dB is
+# enforced on the summed effects BUS rather than on each effect alone.
+#
+# This tool still applies one ceiling measured across the whole narration stem.
+# That is what made the old sound design inaudible: the school bell that opens
+# the film, alone in seven seconds of silence with no voice anywhere near it,
+# came out at -36.4 dBFS, and eleven of fourteen effects contributed under
+# 0.2 dB to the mix.
+#
+# The stems below are correct for their own law and quieter than the film in
+# every silence. Use them for the dialogue and music stems; for the effects,
+# use sfx.py.
+NOT_THE_SAME_LAW = """
+  NOTE: this tool levels each effect against ONE ceiling taken across the whole
+  narration stem. sfx.py, whose output ships, levels against the voice in each
+  effect's own window, gives an effect in a silence a stated solo level, and
+  enforces the 12 dB on the summed bus. These stems will be quieter than the
+  film in every silence. Effects: use sfx.py."""
+
 def speech_rms_db(path):
     """The narration's RMS with its silences removed.
 
@@ -224,6 +247,7 @@ def main():
     ceiling = narr - HEADROOM_DB
     print(f"\nnarration speech RMS {narr:.2f} dBFS, so every effect must sit at "
           f"or below {ceiling:.2f} dBFS")
+    print(NOT_THE_SAME_LAW)
 
     # ------------------------------------------------------- measure and correct
     gains, table = {}, []
@@ -253,6 +277,10 @@ def main():
           "excerpt is the raw file at unity.")
 
     if a.calibrate:
+        # gain_db was the column that kept the two tools agreeing. sfx.py no
+        # longer reads it, so calibrating records this tool's own derivation and
+        # does not reconcile the two.
+        print("\n  note: sfx.py no longer reads gain_db.")
         for i, r in enumerate(rows):
             r["gain_db"] = f"{gains[i]:+.2f}"
         with open("sfx/placements.csv", "w", encoding="utf-8", newline="") as f:

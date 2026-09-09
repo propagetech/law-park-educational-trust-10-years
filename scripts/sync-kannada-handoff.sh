@@ -1,23 +1,46 @@
 #!/usr/bin/env bash
 # Slim copy of the Kannada film handoff into public/ for the static site.
+# Uses cp (not rsync) so Cloudflare Pages / CI images without rsync still build.
 set -euo pipefail
 ROOT="$(cd "$(dirname "$0")/.." && pwd)"
 DEST="$ROOT/public/anniversary-video-production/kannada"
 RES="$ROOT/public/anniversary-video-research"
+SRC_K="$ROOT/anniversary-video-production/kannada"
+SRC_R="$ROOT/anniversary-video-research"
+
 rm -rf "$DEST" "$RES"
 mkdir -p "$DEST/tools" "$RES"
+
+copy_globs() {
+  local dest="$1"
+  shift
+  local f
+  for f in "$@"; do
+    if [ -e "$f" ]; then
+      cp "$f" "$dest/"
+    fi
+  done
+}
+
 # Docs and handoff page (no renders)
-rsync -a \
-  --include='*.md' --include='*.html' --include='*.csv' \
-  --include='*.srt' --include='*.vtt' --include='*.jpg' --include='*.png' \
-  --exclude='*' \
-  "$ROOT/anniversary-video-production/kannada/" "$DEST/"
+copy_globs "$DEST" \
+  "$SRC_K"/*.md \
+  "$SRC_K"/*.html \
+  "$SRC_K"/*.csv \
+  "$SRC_K"/*.srt \
+  "$SRC_K"/*.vtt \
+  "$SRC_K"/*.jpg \
+  "$SRC_K"/*.png
+
 # Tools: scripts + timing JSON only
-rsync -a \
-  --include='*.py' --include='*.json' --include='README.md' \
-  --exclude='*' \
-  "$ROOT/anniversary-video-production/kannada/tools/" "$DEST/tools/"
+copy_globs "$DEST/tools" \
+  "$SRC_K/tools"/*.py \
+  "$SRC_K/tools"/*.json \
+  "$SRC_K/tools/README.md"
+
 # Research docs linked from the handoff
-rsync -a --include='*.md' --include='*.csv' --exclude='*' \
-  "$ROOT/anniversary-video-research/" "$RES/"
+copy_globs "$RES" \
+  "$SRC_R"/*.md \
+  "$SRC_R"/*.csv
+
 echo "Synced handoff to public/anniversary-video-production/kannada ($(du -sh "$DEST" | awk '{print $1}'))"

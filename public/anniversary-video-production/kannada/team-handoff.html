@@ -478,16 +478,16 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker" style="color:var(--gold)">Team coordination pack · internal</p>
     <h1>One page for the NGO owner and the creative team</h1>
-    <p class="lede">Kannada event master for the anniversary hall. Picture is cut. Narration will be a <strong style="color:#fff">human Kannada voice</strong>. Use this page to align trustees, director, narrator, designer and editor.</p>
+    <p class="lede">Kannada event master for the anniversary hall. Picture is cut. Narration is an <strong style="color:#fff">ElevenLabs Kannada read</strong>, pending a native-speaker check. Use this page to align trustees, director, narrator, designer and editor.</p>
     <div class="meta">
       <span class="chip">designed 1920&times;1080 &middot; delivered 2160p &middot; 25 fps</span>
-      <span class="chip">00:05:36:01</span>
+      <span class="chip">00:05:57:22</span>
       <span class="chip">46 shots · 43 spoken lines</span>
       <span class="chip">105 wpm design pace</span>
       <span class="chip">Human narrator path</span>
     </div>
     <div class="alert">
-      <strong>Status:</strong> Animatic exists with a scratch (macOS) voice for pacing only.
+      <strong>Status:</strong> Full ElevenLabs Kannada narration is cut in and the picture is re-timed to it.
       Cast and record a live Kannada narrator. Do not ship the scratch track.
       Nothing is cleared for public screening until the consent and rights items in
       <a href="#decisions" style="color:var(--gold)">section 04, Decisions and clearances</a>, are done.
@@ -515,7 +515,7 @@ footer strong { color: var(--gold); }
         referrerpolicy="strict-origin-when-cross-origin"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
     </div>
-    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>, which is <code>08-kannada-sfx-learning-mix.mp4</code>: 1920x1080, 00:05:37:22, ElevenLabs narration plus the 14-cue effects pack, at -16 LUFS. Streaming it keeps the render out of this repository, so no MP4 is committed. Rebuild it locally with <code>tools/film.py</code> and <code>tools/sfx.py</code>, or the 4K equivalent with <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>, which is <code>08-kannada-sfx-learning-mix.mp4</code>: 1920x1080, 00:05:57:22, ElevenLabs narration plus the 14-cue effects pack, at -16 LUFS. Streaming it keeps the render out of this repository, so no MP4 is committed. Rebuild it locally with <code>tools/film.py</code> and <code>tools/sfx.py</code>, or the 4K equivalent with <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
     <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
     <p class="player-note"><strong>If the player is blank</strong>, the video visibility has been changed to Private, which blocks embedding for everyone except explicitly named accounts. Set it to Unlisted to make this page work again, or ask the owner of the upload for access.</p>
   </div>
@@ -724,7 +724,7 @@ footer strong { color: var(--gold); }
     <div class="notice">
       <h3>Start with three files</h3>
       <p><a href="tools/timeline.json"><code>tools/timeline.json</code></a> is the timing source of truth: 46 shots with in and out points, durations, narration, holds, pauses, crop windows, motion, transitions, consent status and the music cue for every one. Every other document and every render is derived from it. <a href="06-kannada-edit-decision-list.md"><code>06</code></a> is the same thing as a plain-text EDL so the film can be rebuilt in five years without a project file. <a href="Kannada-cue-sheet.csv"><code>Kannada-cue-sheet.csv</code></a> is the audio.</p>
-      <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved once, from <span class="mono">00:05:36:01</span> to <span class="mono">00:05:37:22</span>, and hand-typed timecodes went stale within the hour.</p>
+      <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved twice, 00:05:36:01 to 00:05:37:22 to <span class="mono">00:05:57:22</span>, and hand-typed timecodes went stale within the hour.</p>
     </div>
 
     <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(25rem,1fr))">
@@ -842,10 +842,10 @@ python3 master.py --check    # what still blocks a release</code></pre>
         <table style="font-size:0.88rem">
           <thead><tr><th scope="col">File</th><th scope="col">For</th></tr></thead>
           <tbody>
-            <tr><td><code>08-kannada-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 14 SFX, -16 LUFS, 79 MB</span></td><td><strong>This is what the player above streams</strong>, as <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>. Picture and effects review. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
-            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 80 MB</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
-            <tr><td><code>08-kannada-animatic-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, 111 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. <strong>Stale at 00:05:36:01.</strong> Rebuild with <code>film.py</code>.</td></tr>
-            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles, 311 MB</span></td><td>Hall projection test and quality review. ElevenLabs narration. Built by <code>tools/master.py</code>. <strong>Stale: it is 00:05:36:01 and the film is now 00:05:37:22.</strong> Re-render before using it.</td></tr>
+            <tr><td><code>08-kannada-elevenlabs-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 14 SFX, -16 LUFS, 114 MB</span></td><td><strong>This is what the player above streams</strong>, as <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>. Picture and effects review. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
+            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 83 MB, 00:05:57:22</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
+            <tr><td><code>08-kannada-elevenlabs-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration only, no effects, -16 LUFS, 114 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. Current: 00:05:57:22, rebuilt with the ElevenLabs read.</td></tr>
+            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles, 311 MB</span></td><td>Hall projection test and quality review. ElevenLabs narration. Built by <code>tools/master.py</code>. <strong>Stale: it is 00:05:36:01 and the film is now 00:05:57:22.</strong> Re-render before using it.</td></tr>
             <tr><td><code>kannada-2160p-youtube-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, human narration, -14 LUFS</span></td><td><strong>Does not exist yet.</strong> Needs the human read and all five clearances.</td></tr>
           </tbody>
         </table>
@@ -1439,7 +1439,7 @@ function fbBuildDoc() {
       ${fbVal("date") ? " &middot; " + esc(fbVal("date")) : ""}</p>
     <dl>${rows}</dl>
     <p class="fb-foot">Law Park Educational Trust &middot; reference cut
-      <span class="mono">00:05:37:22</span>, ElevenLabs narration, no music, effects unapproved
+      <span class="mono">00:05:57:22</span>, ElevenLabs narration, no music, effects unapproved
       under <code>07</code> item 5.8. This document is feedback on that cut and is not an
       approval to publish. Generated in the browser from team-handoff.html.</p>`;
 }

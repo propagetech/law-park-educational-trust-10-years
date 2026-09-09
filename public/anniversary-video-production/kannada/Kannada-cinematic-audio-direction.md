@@ -5,7 +5,7 @@ recurring effect palette. It upgrades music, sound design, pacing and mix. It
 changes no fact, no image, no shot order, no approved Kannada line and no
 consent restriction.
 
-**Film on disk:** `00:05:37:22` = 337.88 s, 46 shots, 25 fps.
+**Film on disk:** `00:05:57:22` = 357.88 s, 46 shots, 25 fps.
 Timecodes here and in the cue sheet are generated from `tools/timeline.json`.
 
 ---
@@ -58,7 +58,7 @@ time, and any identifiable child voice in any ambience bed.
 | 2 | 2016, one beginning | 00:00:36:10 to 00:01:19:17 | 43.2s | K07 to K13, 7 | 0 to 2 | 2 | 3.0s |
 | 3 | ಒಂದು ದಶಕದ ಹಾದಿ, ten years of showing up | 00:01:19:17 to 00:02:44:13 | 84.9s | K14 to K25, 12 | 1 to 4 | 5 | 5.5s |
 | 4 | ಕೆಲಸದ ಕ್ರಮ, method, care and community | 00:02:44:13 to 00:04:51:19 | 127.2s | K26 to K40, 15 | 0 to 3 | 2 | 7.0s |
-| 5 | ಮುಂದಿನ ದಾರಿ, future and anniversary welcome | 00:04:51:19 to 00:05:37:22 | 46.1s | K41 to K46, 6 | 2 to 4 | 2 | 9.0s |
+| 5 | ಮುಂದಿನ ದಾರಿ, future and anniversary welcome | 00:04:51:19 to 00:05:57:22 | 46.1s | K41 to K46, 6 | 2 to 4 | 2 | 9.0s |
 
 The acts fall on shot boundaries, so an act can be re-scored without touching
 its neighbours. Per-shot cues, levels and the reasoning behind each are in
@@ -75,7 +75,7 @@ the gratitude.
 
 ## 3 · Three moments the film is built around
 
-### 3.1 The anniversary title, `K05` at 00:00:25:21
+### 3.1 The anniversary title, `K05` at 00:00:28:00
 
 `GFX-01` reveals in three states: gold rule at +0.0s, logo and wordmark at
 +0.6s, and `ಹತ್ತು ವರ್ಷ · 2016 ರಿಂದ 2026` at +1.6s. The audio follows the
@@ -93,7 +93,7 @@ starts, the impact is over 1.58 s before `K06`, and the gold-rule whoosh is
 **not** here: it is at `K07`, on the organisation card, where a rule animates
 without a title competing for the same two seconds.
 
-### 3.2 One scholarship, `K12` at 00:01:09:01
+### 3.2 One scholarship, `K12` at 00:01:14:08
 
 ```
 ಚಿಕ್ಕಬಳ್ಳಾಪುರ.
@@ -107,7 +107,7 @@ card holds for 1.0 s after it. This is the moment most likely to be
 preceding page turn at `K11` is the only sound near it, and it clears `K12` by
 3.61 s.
 
-### 3.3 The welcome, `K45` at 00:05:25:03
+### 3.3 The welcome, `K45` at 00:05:45:05
 
 ```
 ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ
@@ -123,7 +123,7 @@ Nothing sounds on top of the welcome, and nothing sounds after the fade.
 
 ## 4 · The effect palette
 
-Six sounds, 14 events, 337.88 seconds. `11` section 3 caps the film at 14, and
+Six sounds, 14 events, 357.88 seconds. `11` section 3 caps the film at 14, and
 the caps below are why each event earns its place. **Adding one means removing
 one.**
 
@@ -146,12 +146,12 @@ ceiling, not a target, and a palette flattened onto the ceiling is wallpaper.
 
 | Shot | Timecode | Rule |
 |---|---|---|
-| `K06` | 00:00:30:10 | Six seconds fully silent under the founder's quote. Room tone only |
-| `K12` | 00:01:09:01 | Silence under ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ. |
-| `K27` | 00:02:52:24 | Music out completely under ಪೂರ್ತಿ ಅಲ್ಲ. Drone alone returns on the pause |
-| `K34` | 00:03:43:07 | Drone and one held note. Nothing that could be read as sentiment |
-| `K37` | 00:04:15:11 | One gentle lift for the award, then settle. No fanfare |
-| `K43` | 00:05:11:02 | Lifts, but does not climax |
+| `K06` | 00:00:33:00 | Six seconds fully silent under the founder's quote. Room tone only |
+| `K12` | 00:01:14:08 | Silence under ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ. |
+| `K27` | 00:03:05:07 | Music out completely under ಪೂರ್ತಿ ಅಲ್ಲ. Drone alone returns on the pause |
+| `K34` | 00:03:57:23 | Drone and one held note. Nothing that could be read as sentiment |
+| `K37` | 00:04:30:22 | One gentle lift for the award, then settle. No fanfare |
+| `K43` | 00:05:29:20 | Lifts, but does not climax |
 
 `tools/sfx.py` refuses to place anything in the first four and warns on the last
 two. `tools/cue.py --check` fails if a cue is written into one, or if an
@@ -193,10 +193,10 @@ status, bereavement, disability, family violence or poverty appears over an
 identifiable face. The edit already satisfies it by putting the hardest lines
 over typographic cards. The audio must not undo that.
 
-- **`K17`, 00:01:40:08, the 2020 relief poster.** Drone only. No sad piano, no
+- **`K17`, 00:01:47:21, the 2020 relief poster.** Drone only. No sad piano, no
   swell, no added ambience. The poster names children who lost parents, and any
   music that comments on it is the film telling the audience how to feel.
-- **`K34`, 00:03:43:07, 12.8 seconds, no photograph.** ಏಕ ಪೋಷಕರ ಮಕ್ಕಳು.
+- **`K34`, 00:03:57:23, 12.8 seconds, no photograph.** ಏಕ ಪೋಷಕರ ಮಕ್ಕಳು.
   ಎಚ್‌ಐವಿ ಇರುವ ಕುಟುಂಬಗಳ ಮಕ್ಕಳು. Drone and one held bansuri note, at -28 dB.
   No effect, no ambience change, no movement, and nothing that could be read as
   sentiment. This shot is a card with no image precisely so that these words
@@ -233,8 +233,9 @@ python3 mix.py --music bed.wav       # the same, once a licensed bed exists
 ```
 
 Everything is derived from `tools/timeline.json`, so a re-time costs one command
-and not a re-typed cue sheet. This matters here: the film was re-timed from
-00:05:36:01 to 00:05:37:22 during the writing of these documents, and every
+and not a re-typed cue sheet. This matters here: the film was re-timed twice
+during the writing of these documents, from 00:05:36:01 to 00:05:37:22 and
+then to 00:05:57:22 when the full ElevenLabs read landed, and every
 timecode in `06` section 7 is between 2 and 33 seconds early because it was
 written against the pre-build plan of 00:05:03:21. Use the cue sheet, not `06`
 section 7, and re-run `cue.py` after any re-time.

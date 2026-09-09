@@ -1,8 +1,12 @@
 # 13 · Event playback notes · FALLBACK + pause SFX
 
-**This is not the warm child cut.** Guardian consent (`07` item 1.1) was blank
-when this file was built. Picture uses `film.py --fallback`. Audio now carries
-the 14-cue pause SFX pack (still under unsigned `07` 5.8 — Trust decision).
+**This is not the warm child cut.** Guardian consent (`07` item 1.1) is still
+blank, so the picture uses `film.py --fallback`: 24 shots are replaced with
+face-free stills. Audio carries the ElevenLabs Kannada narration and the 14-cue
+SFX pack, the latter still under unsigned `07` 5.8.
+
+Rebuilt 2026-09-09 against the ElevenLabs read. **The film is 20 seconds longer
+than the previous master.** Anything downstream that quotes 00:05:37:22 is stale.
 
 ---
 
@@ -11,98 +15,113 @@ the 14-cue pause SFX pack (still under unsigned `07` 5.8 — Trust decision).
 | | |
 |---|---|
 | **Primary** | `anniversary-video-production/kannada/kannada-1080p-EVENT-master.mp4` |
-| **SHA-256** | `90344b11788eab83536ff082a4ad694dacdba9ccc81168645c93c99c3ac01807` |
-| **Size** | ~80 MB |
-| **Picture** | 1920×1080, H.264 High, yuv420p, 25 fps, CRF 18, full bt709 tags |
-| **Audio** | AAC 320k, 48 kHz, stereo, **−23.00 LUFS** / peak ≤ −3 dBTP; narration + 14 SFX |
-| **Duration** | **337.88 s** · **8447** video frames |
-| **Subtitles** | Burned in (**84** cues) |
-| **Title** | `… EVENT MASTER (FALLBACK+SFX) 2026-09-09` |
+| **SHA-256** | `6292898f5e35788915e32c78c3c3fc4e68369b8a82ba422880f7dc42ceb290d8` |
+| **Size** | ~83 MB |
+| **Picture** | 1920x1080, H.264 High, yuv420p, 25 fps, full bt709 tags |
+| **Audio** | AAC 320k, 48 kHz, stereo, **-23.0 LUFS** integrated, true peak **-10.7 dBTP** |
+| **Duration** | **357.88 s** = **00:05:57:22** · **8947** video frames |
+| **Subtitles** | Burned in (85 cues) |
+| **Narration** | ElevenLabs `eleven_v3`, voice Sarah, per-scene stability bands |
+| **Title tag** | `... EVENT MASTER (FALLBACK+SFX) 2026-09-09` |
 
-Second copy on a different USB. Online preview with the same picture+SFX at −16 LUFS:
-`08-kannada-sfx-learning-mix.mp4`.
+Second copy on a different USB. Online preview, same picture and audio at
+-16 LUFS: `08-kannada-elevenlabs-sfx-learning-mix.mp4`. Narration without
+effects: `08-kannada-elevenlabs-preview.mp4`.
 
 ---
 
 ## How to play
 
-1. Local file only — never browser / Drive streaming.
+1. Local file only. Never browser or Drive streaming.
 2. 16:9 fullscreen, no player UI.
-3. Test on the real PA before doors open (−23 LUFS sounds quiet on a laptop).
-4. Operator: _________________ · Standby: _________________
+3. Test on the real PA before doors open. **-23 LUFS sounds quiet on a laptop
+   and is correct for a hall.**
+4. The film now runs **5 minutes 58 seconds**. Re-check the run of show.
+5. Operator: _________________ · Standby: _________________
 
 ---
 
-## Pause SFX (14 cues — cap in `sfx.py`)
+## Pause SFX, the 14 actually in this build
 
-Placed on designed pauses / accents. **Never** on structural silence:
+Generated from `tools/sfx/placements.csv`, not typed by hand. Timecodes are the
+shot in-points in the current timeline.
 
-| Forbidden (left clean) | Why |
+| Shot | Shot in | Cue | Effect |
+|---|---|---|---|
+| `K01` | 00:00:00:00 | k01-bell | ACT 1 |
+| `K05` | 00:00:28:00 | k05-riser | Warm tonal riser resolving into the wordmark reveal at K05 |
+| `K05` | 00:00:28:00 | k05-impact | Soft low impact on the 2016 ರಿಂದ 2026 line |
+| `K07` | 00:00:39:00 | k07-whoosh | ACT 2 |
+| `K10` | 00:01:04:19 | k10-ambience | Village morning bed under the 2s pause before the 2016 ori |
+| `K11` | 00:01:10:08 | k11-page | 2016 first school visit |
+| `K15` | 00:01:32:02 | k15-whoosh | ACT 3 transition, into the 2s pause across the thin years |
+| `K18` | 00:02:00:24 | k18-book | Library shelves |
+| `K22` | 00:02:28:12 | k22-zip | Two hundred school bags at MM Hills |
+| `K23` | 00:02:39:13 | k23-impact | Soft low land under ಮುನ್ನೂರು, then the 2 |
+| `K35` | 00:04:10:11 | k35-whoosh | ACT 4 |
+| `K36` | 00:04:18:15 | k36-page | Udayavani clipping, 19 June 2024 |
+| `K41` | 00:05:09:07 | k41-riser | ACT 5 |
+| `K46` | 00:05:50:22 | k46-roomtone | End card |
+
+**Never on structural silence.** `sfx.py` refuses to build if a placement lands
+in one, or merely runs over the cut into one:
+
+| Left clean | Why |
 |---|---|
-| `K06` `K12` `K27` `K34` | `06` §7 / `07` 5.6 — the film’s silences |
+| `K06` `K12` `K27` `K34` | `06` §7, `07` 5.6. The film's silences |
 
-| Shot | Effect |
-|---|---|
-| K01 | distant school bell |
-| K04 | whoosh into post-line pause |
-| K05 | tonal riser into title (clear of K06) |
-| K07 | whoosh on organisation card |
-| K10 | whoosh under 2 s village hold |
-| K11 | page turn (2016) |
-| K15 | whoosh into thin-years pause |
-| K18 | page turn (library / books proxy) |
-| K22 | backpack |
-| K23 | soft boom under ಮುನ್ನೂರು, then hold stays clean |
-| K26 | page turn (form / paper proxy) |
-| K35 | whoosh partners card |
-| K36 | page turn (clipping) |
-| K46 | low applause on end card |
+Verified on this build, measured across each shot's silent window:
 
-Pixabay browser download of new pencil/paper assets did not land on disk; existing
-library files were reused and logged in `08-pixabay-sfx-licence-log.csv`.
+| Cue | Window | RMS |
+|---|---|---|
+| `K06` | 33.08s to 38.88s | **-inf** |
+| `K12` | 79.56s to 80.36s | **-inf** |
+| `K27` | 191.30s to 193.10s | **-inf** |
+| `K34` | 249.54s to 250.34s | **-inf** |
+
+Normalisation is two-pass `loudnorm` with `linear=true`. Single-pass dynamic
+normalisation would lift the noise floor inside those silences.
 
 ---
 
-## Year / number pronunciation (ElevenLabs)
+## Narration
 
-`tts_eleven.py` now rewrites years to Kannada number words with correct sandhi
-(e.g. `2016ರಲ್ಲಿ` → `ಎರಡು ಸಾವಿರದ ಹದಿನಾರರಲ್ಲಿ`) for TTS only. Cards / SRT stay
-Arabic numerals.
+Generated with `anniversary-video-production/kannada-voice`, not `tts_eleven.py`.
+All 43 lines, 3,738 characters after the year rewrite, one file per shot id so a
+single line can be re-recorded without touching the rest.
 
-**Free-tier quota hit (9957 / 10000 chars).** Correct sandhi re-renders landed for
-`K11` `K14` `K16` `K18` `K20`. `K22` `K23` `K36` `K37` still use the earlier
-Kannada-year render (slight sandhi roughness). Re-run when quota resets or after
-a paid plan:
+Years are spoken as Kannada number words with the correct sandhi
+(`2016ರಲ್ಲಿ` becomes `ಎರಡು ಸಾವಿರದ ಹದಿನಾರರಲ್ಲಿ`). Cards and SRT keep the Arabic
+numerals. The whole script was rendered in one pass at the same settings, so
+there is no sandhi roughness left from a part-render.
 
-```bash
-cd tools
-python3 tts_eleven.py --render XrExE9yKIg1WjnnlVkGX --only K22 K23 K36 K37
-python3 build_timeline.py timeline.json --from-audio vo_eleven/XrExE9yKIg1WjnnlVkGX/durations.json
-python3 stem.py XrExE9yKIg1WjnnlVkGX && python3 sfx.py
-# then remux event master
-```
+**The voice is not verified for Kannada.** Sarah is an English premade voice.
+`14` item 7.1 still needs a native Kannada speaker who is not the translator to
+confirm the read, and `reports/pronunciation-and-pickups.md` in the kannada-voice
+pack is what to hand them.
 
 ---
 
-## Picture fallback (unchanged rule)
+## Picture fallback, unchanged rule
 
-24 blocked shots replaced with face-free stills. Same drop list as before
-(`K02` `K03` `K11` `K13`–`K16` `K19` `K20` `K23` `K24` `K28` `K30` `K32` `K33`
-`K36` `K38`–`K45`).
-
----
-
-## Quick verify on this build
-
-| Check | Result |
-|---|---|
-| Decode | clean |
-| Loudness | **−23.00 LUFS** integrated |
-| Duration / frames | **337.88 s** / **8447** |
-| `K06` silence | mean **−91.0 dB**, max **−84.3 dB** |
+24 blocked shots replaced with face-free stills:
+`K02` `K03` `K11` `K13` to `K16` `K19` `K20` `K23` `K24` `K28` `K30` `K32` `K33`
+`K36` `K38` to `K45`.
 
 ---
 
-## Still open (Trust only)
+## Still open, Trust only
 
-`07` **1.1**, **1.12**, **4.1**, **5.1**, **5.5**, **5.8** (SFX amendment), Part 11.
+`07` **1.1**, **1.12**, **4.1**, **5.1**, **5.5**, **5.8**, Part 11.
+
+Two of those bite on this file specifically:
+
+- **1.1** is why the picture is the fallback. It is not a licence anyone can
+  buy; it is written guardian consent, per child, naming the uses.
+- **5.8** is why the SFX build is a learning mix. Production has been
+  instructed to proceed with effects ahead of go-live pending that signature.
+- **5.1** (music) is unrelated to this file: there is no music bed in it yet.
+
+The ElevenLabs commercial licence is separate again, and outstanding: the
+narration above was generated on a free plan, which carries no commercial
+licence. See `anniversary-video-production/kannada-voice/reports/final-voice-recommendation.md`.

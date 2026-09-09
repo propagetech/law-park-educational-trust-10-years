@@ -164,11 +164,10 @@ SFX = [
   "Resolves into the wordmark reveal at K05 +0.6s, before the subtitle at +1.6s",
   None),
  ("k05-impact", "K05", "Soft warm low impact on the 2016 ರಿಂದ 2026 line",
-  "https://pixabay.com/sound-effects/boom-geomorphism-cinematic-trailer-sound-effects-123876/",
-  "PLACEHOLDER FILE IS TRAILER CLASS and `11` rejects a trailer boom. Replace "
-  "with a warm documentary impact before picture lock: "
-  "https://pixabay.com/sound-effects/search/cinematic%20impact/ . `11` puts the "
-  "low impact on this line and nowhere near K27. Impact 1 of 2", None),
+  "https://pixabay.com/sound-effects/cinematic-low-hit-291095/",
+  "Universfield Cinematic Low Hit, 2.38s. Replaced the trailer-class "
+  "placeholder `11` rejected by name. `11` puts the low impact on this line "
+  "and nowhere near K27. Impact 1 of 2", None),
  ("k07-whoosh", "K07", "Gentle airy whoosh on the gold rule",
   "https://pixabay.com/sound-effects/gentle-amp-echoing-whoosh-sound-effect-451056/",
   "Whoosh 1 of 3. On the rule, not on the cut", None),
@@ -183,17 +182,14 @@ SFX = [
   "https://pixabay.com/sound-effects/turn-a-page-336933/",
   "Library. The page turn stands in as the book proxy until a real book file "
   "is auditioned: https://pixabay.com/sound-effects/search/book/", None),
- ("k21-pencil", "K21", "Pencil on paper, short",
-  "https://pixabay.com/sound-effects/search/pencil%20writing/",
-  "NOT YET DOWNLOADED. Career guidance. Clean short foley, no desk knock, "
-  "no ASMR scratchiness", (1.00, -20, "in 0.10s / out 0.50s")),
  ("k22-zip", "K22", "School bag zip",
   "https://pixabay.com/sound-effects/backpack-34942/",
   "Two hundred school bags at MM Hills. Under a bag close-up only", None),
  ("k23-impact", "K23", "Soft warm low land under ಮುನ್ನೂರು",
-  "https://pixabay.com/sound-effects/boom-geomorphism-cinematic-trailer-sound-effects-123876/",
-  "PLACEHOLDER FILE IS TRAILER CLASS, replace as for k05-impact. Impact 2 of 2. "
-  "Lands on the word and stops, so the 2.5s hold after it stays clean", None),
+  "https://pixabay.com/sound-effects/cinematic-low-hit-291095/",
+  "Universfield Cinematic Low Hit, trimmed to 1.40s. Replaced the trailer-class "
+  "placeholder. Lands on the number, then the 2.5s hold after it stays clean. "
+  "Impact 2 of 2", None),
  ("k35-whoosh", "K35", "Gentle airy whoosh on the partners card",
   "https://pixabay.com/sound-effects/gentle-amp-echoing-whoosh-sound-effect-451056/",
   "Whoosh 3 of 3. Lower than K07 because this card is denser", None),
@@ -204,11 +200,18 @@ SFX = [
   "https://pixabay.com/sound-effects/dreamy-cinematic-riser-523158/",
   "A different, quieter excerpt of the K05 riser. The first effect to cut if "
   "it fights the line", None),
- ("k46-chime", "K46", "One gentle acoustic chime, after the voice has ended",
-  "https://pixabay.com/sound-effects/search/gentle%20chime/",
-  "NOT YET DOWNLOADED. Warm, non-electronic, must not sound like a phone "
-  "notification. The last sound in the film, and it starts after the "
-  "narration has ended", (2.00, -22, "in 0s / out 2.50s")),
+ ("k10-ambience", "K10", "Village morning bed under the 2s pause",
+  "https://pixabay.com/sound-effects/nature-countryside-morning-sounds-246032/",
+  "dbsound Countryside morning sounds, excerpt at 7.70s for 2.20s. Puts the "
+  "audience in a Karnataka village before the narration names the trust. The "
+  "excerpt was chosen by sfx_voicecheck.py as the calmest, least speech-like "
+  "run in the file: `14` item 2.4 forbids any audible voice, and a human must "
+  "confirm the shipped excerpt by ear", None),
+ ("k46-roomtone", "K46", "Neutral room tone under the end card",
+  "https://pixabay.com/sound-effects/household-bedroom-room-tone-446021/",
+  "kai_audio Bedroom Room Tone, excerpt at 9.20s for 6.60s under the 7s hold. "
+  "Speech-band energy measures 0.00, so it carries no voice. Chosen over "
+  "applause, and over a stinger Pixabay marks Content ID Registered", None),
 ]
 
 COLS = ["timecode", "seconds", "shot", "act", "visual_scene", "narration_line",

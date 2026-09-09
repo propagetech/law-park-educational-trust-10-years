@@ -16,7 +16,7 @@ tools/README.md, 06-kannada-edit-decision-list.md section 7,
 
 GOAL
 Build an EVENT MASTER for projection in a hall, from the existing picture and
-the existing ElevenLabs narration. The film is 336.04 s, 00:05:36:01, 46 shots,
+the existing ElevenLabs narration. The film is 357.88 s, 00:05:57:22, 46 shots,
 25 fps. Do not re-time it and do not re-render the picture unless a step below
 tells you to.
 
@@ -94,7 +94,7 @@ STEP 4. VERIFY, AND REPORT NUMBERS RATHER THAN ASSURANCES.
 Print each of these as a measured value:
   a. ffmpeg -v error -i <out> -f null -   must produce no output
   b. integrated loudness within 0.5 LU of -23, true peak at or below -3.0 dBFS
-  c. duration 336.04 s and 8401 video frames, or the fallback's own figures
+  c. duration 357.88 s and 8947 video frames, or the fallback's own figures
   d. both audio channels non-silent and identical
   e. no black frames longer than 0.5 s (blackdetect)
   f. burned subtitle identity: for every cue in subs.json, extract the frame at

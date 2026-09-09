@@ -4,7 +4,7 @@ Mix, master, quality-test and sign-off for the Kannada event film. Work down it
 in order. Nothing here overrides `07-final-rights-and-approval-checklist.md`,
 which is the approval record; this is the engineering record.
 
-**Film:** `00:05:37:22` = 337.88 s, 46 shots, 25 fps, 1920x1080.
+**Film:** `00:05:57:22` = 357.88 s, 46 shots, 25 fps, 1920x1080.
 
 ---
 
@@ -26,13 +26,13 @@ is ready to run the day they are.
 
 | # | Item | Check |
 |---|---|---|
-| 1.1 | Picture and timeline agree | `tools/mix.py` compares `kannada-1080p-EVENT-master.mp4` against `tools/timeline.json` and warns if they differ by more than 0.08 s. The film was re-timed from `00:05:36:01` to `00:05:37:22` once already |
+| 1.1 | Picture and timeline agree | `tools/mix.py` compares `kannada-1080p-EVENT-master.mp4` against `tools/timeline.json` and warns if they differ by more than 0.08 s. The film has been re-timed twice, `00:05:36:01` to `00:05:37:22` to `00:05:57:22` |
 | 1.2 | Narration stem rebuilt against **this** render | `python3 stem.py <VOICE_ID>`. Run only after `build_timeline.py --from-audio`, or every line after the first drift sits wrong |
 | 1.3 | Cue sheet regenerated | `python3 cue.py`. Never hand-edit `Kannada-cue-sheet.csv` |
 | 1.4 | Hand-typed timecodes in the audio documents still true | `python3 cue.py --audit-docs`. Checks every shot-and-timecode pair in the three markdown files against the timeline |
 | 1.5 | Licence log regenerated, human fields preserved | `python3 log.py` |
 | 1.6 | Effect placements valid | `python3 sfx.py --check`, then `python3 sfx.py --strict` |
-| 1.7 | Every stem and master exactly 337.88 s | `mix.py` refuses to finish otherwise |
+| 1.7 | Every stem and master exactly 357.88 s | `mix.py` refuses to finish otherwise |
 | 1.8 | `06` section 7 **is not** the cue sheet | Its timecodes were written against the pre-build plan of `00:05:03:21` and are between 2 and 33 seconds early. Use `Kannada-cue-sheet.csv` |
 
 ---
@@ -60,12 +60,12 @@ The Kannada voice is the most important element in the film at every moment.
 | 3.1 | Level | **12 to 18 dB below narration**, and further down under dense Kannada. `14` item 8.7 sets 12 dB as the ceiling, not the target |
 | 3.2 | Rises only where narration is absent | The intensity curve in `Kannada-music-map.md` section 4 |
 | 3.3 | Ducking | Sidechain subtle enough that it never pumps. If the ducking is audible as an effect, ride the bed by hand instead |
-| 3.4 | **`K06`, 00:00:30:10, six seconds fully silent** | Room tone only, under the founder's quote. `07` item 5.6 |
-| 3.5 | **`K12`, 00:01:09:01, silence** | Under ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ., plus 1.0 s of hold after the line |
-| 3.6 | **`K27`, 00:02:52:24, music out completely** | Under ಪೂರ್ತಿ ಅಲ್ಲ. Drone alone returns on the 2 s pause at -30 dB |
-| 3.7 | **`K34`, 00:03:43:07, drone and one held note** | 12.8 s over a card with no photograph. Nothing that could be read as sentiment |
-| 3.8 | **`K37`, 00:04:15:11, no fanfare** | One gentle lift for the award, then settle |
-| 3.9 | **`K43`, 00:05:11:02, no climax** | Lifts and stops lifting. No added percussion, no cymbal, no key change, no octave doubling |
+| 3.4 | **`K06`, 00:00:33:00, six seconds fully silent** | Room tone only, under the founder's quote. `07` item 5.6 |
+| 3.5 | **`K12`, 00:01:14:08, silence** | Under ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ., plus 1.0 s of hold after the line |
+| 3.6 | **`K27`, 00:03:05:07, music out completely** | Under ಪೂರ್ತಿ ಅಲ್ಲ. Drone alone returns on the 2 s pause at -30 dB |
+| 3.7 | **`K34`, 00:03:57:23, drone and one held note** | 12.8 s over a card with no photograph. Nothing that could be read as sentiment |
+| 3.8 | **`K37`, 00:04:30:22, no fanfare** | One gentle lift for the award, then settle |
+| 3.9 | **`K43`, 00:05:29:20, no climax** | Lifts and stops lifting. No added percussion, no cymbal, no key change, no octave doubling |
 | 3.10 | No swell on the numbers | `K22` and `K23`. `14` item 5.4 |
 | 3.11 | No vocals in any language | `07` item 5.4 |
 | 3.12 | End | Final warm chord, then a natural fade to silence across the last 3 s. No boom, no hard cut after the logo |
@@ -81,7 +81,7 @@ fails if a cue is written into one or if a fade-out crosses into one.
 
 | # | Item | Target |
 |---|---|---|
-| 4.1 | Count | **14 events maximum** across 337.88 s. `11` section 3. Currently 12 placed, 2 pending download |
+| 4.1 | Count | **14 events maximum** across 357.88 s. `11` section 3. Currently 12 placed, 2 pending download |
 | 4.2 | Class caps | No more than 3 low impacts (2 used), 4 whooshes (3 used), 1 school bell (1 used), 1 applause (0 used) |
 | 4.3 | Levels | -14 dB to -22 dB relative to the narration's speech RMS. `mix.py` derives each gain by measurement from the level in `sfx/placements.csv` and prints what it achieved |
 | 4.4 | Position | Behind the narration, never between it and the listener |
@@ -106,7 +106,7 @@ fails if a cue is written into one or if a fade-out crosses into one.
 | 5.4 | Peak ceiling | -3 dBTP satisfies `14` item 8.7 and is stricter than the -1 dBTP an online master is usually allowed. It costs nothing audible at these loudnesses and leaves the hall headroom |
 | 5.5 | Sub-bass | The event master does not need the bottom two octaves and a hall rig will turn them into mud |
 
-### Stems, at the same 337.88 s and the same start
+### Stems, at the same 357.88 s and the same start
 
 | # | Stem | State |
 |---|---|---|

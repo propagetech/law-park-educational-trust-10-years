@@ -156,7 +156,29 @@ def main():
                 if os.path.exists(os.path.join("vo_eleven", d, "narration.wav"))]
         if not cand:
             die("no narration stem found. Run: python3 stem.py <VOICE_ID>")
-        vo = cand[-1]
+        # Never sorted(...)[-1]. stem.py's docstring explains why and this
+        # script had the same bug: any sibling directory sorting later wins
+        # silently, including an audition backup or a literal VOICE_ID_HERE.
+        # The mix would then be built against the wrong read and still succeed.
+        if len(cand) > 1:
+            die("more than one narration stem exists, so this will not guess:\n"
+                + "\n".join(f"    {c}" for c in cand)
+                + "\n  Name one:  python3 sfx.py --vo <path/to/narration.wav>")
+        vo = cand[0]
+
+    # Whichever stem is used, its length must match the timeline it is being
+    # mixed against. A stem from before a re-time is the same failure as
+    # picking the wrong directory, and it is invisible in the output.
+    # stem.py allocates ceil(total * SR) + SR samples, so a correct stem runs
+    # about one second longer than the timeline. Anything shorter than the
+    # timeline, or more than two seconds over, is a stem from another cut.
+    stem_len = probe(vo)
+    if stem_len < total - 0.5 or stem_len > total + 2.0:
+        die(f"{vo} is {stem_len:.2f}s but timeline.json runs {total:.2f}s.\n"
+            f"  A current stem runs {total:.2f}s to {total + 1.0:.2f}s. This one "
+            f"is from another cut, so every placement below would sit against "
+            f"the wrong read.\n"
+            f"  Rebuild it:  python3 stem.py <VOICE_ID>")
 
     rows = [r for r in csv.DictReader(open(PLACEMENTS, encoding="utf-8"))
             if r.get("file", "").strip()]

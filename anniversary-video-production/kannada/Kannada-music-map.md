@@ -3,7 +3,7 @@
 The score, as a brief a composer can work from. One bed serves both language
 versions; only the narration stem changes. `07` section 11.
 
-**Film:** `00:05:37:22` = 337.88 s, 25 fps. **There is no music in this
+**Film:** `00:05:57:22` = 357.88 s, 25 fps. **There is no music in this
 repository.** `07` item 5.1, the licence gate, is BLOCKING and unsigned, and
 nothing below exists yet.
 
@@ -31,11 +31,11 @@ under ಪೂರ್ತಿ ಅಲ್ಲ. at `K27`, and the refusal to climax at `K
 |---|---|---|---|
 | **Bansuri** | The film's voice. Carries the motif | `K01`, 00:00:00:00 | Single-note phrases and short motifs. Breath is welcome. Not devotional, not television-serial phrasing |
 | **Low drone** | Continuity through every silence and every drop | `K01` | Tanpura-like or a warm synthetic pad. Near-static. Minimal and modern, not devotional. This is what returns first after each music-out |
-| **Felt piano** | The origin story and, later, gratitude | `K08`, 00:00:42:14 | Open voicings, sparse notes, gentle broken patterns. Never repetitive inspirational-corporate piano |
+| **Felt piano** | The origin story and, later, gratitude | `K08`, 00:00:45:24 | Open voicings, sparse notes, gentle broken patterns. Never repetitive inspirational-corporate piano |
 | **Cello** | Weight under the founders and the method | `K08` | Long held notes. One low note is usually enough |
-| **Soft violin ensemble** | A bed, never a lead | `K19`, 00:01:59:15 | Slow swells and gentle counter-melodies. No aggressive orchestral strings and no Hollywood victory chord |
-| **Soft frame drum** | Forward movement, once | `K22`, 00:02:19:03 | Very light, muted, no groove. Out by `K24`. Never returns. No fast rhythm, no dance rhythm, no claps, no motivational beat |
-| **Nylon guitar** | Alternative to the piano at gratitude | `K38`, 00:04:26:02 | Either the piano or the guitar takes `K38`, not both |
+| **Soft violin ensemble** | A bed, never a lead | `K19`, 00:02:08:04 | Slow swells and gentle counter-melodies. No aggressive orchestral strings and no Hollywood victory chord |
+| **Soft frame drum** | Forward movement, once | `K22`, 00:02:28:12 | Very light, muted, no groove. Out by `K24`. Never returns. No fast rhythm, no dance rhythm, no claps, no motivational beat |
+| **Nylon guitar** | Alternative to the piano at gratitude | `K38`, 00:04:42:06 | Either the piano or the guitar takes `K38`, not both |
 
 **Not in the palette at all:** vocals in any language, brass, cymbals, timpani,
 orchestral tutti, trailer impacts, EDM risers, synthesised plucks, harp glissandi,
@@ -52,14 +52,14 @@ repeats, and it is how a five-minute score with almost no rhythm stays coherent.
 | Statement | Shot | Timecode | Treatment |
 |---|---|---|---|
 | 1 | `K02` | 00:00:07:00 | Bansuri alone, unaccompanied, no answer |
-| 2 | `K03` | 00:00:14:11 | Stops mid-phrase. Drone alone under ಬುದ್ಧಿ ಇದೆ. ಕಲಿಯುವ ಹಂಬಲ ಇದೆ. The unfinished phrase is the question the film opens with |
-| 3 | `K07` | 00:00:36:10 | Returns after the six seconds of silence, warmer register. Completes this time |
-| 4 | `K09` | 00:00:52:00 | Piano answers it once, an octave down |
-| 5 | `K14` | 00:01:19:17 | Bansuri and piano together. The first time it has company |
-| 6 | `K15` | 00:01:25:15 | One small variation per year across the timeline. Cello counter-line |
-| 7 | `K32` | 00:03:31:03 | Piano takes it, bansuri answers. Roles swapped |
-| 8 | `K40` | 00:04:48:22 | Piano, quietly, under the parents. The last complete statement |
-| 9 | `K41` to `K44` | 00:04:51:19 | Opens out, piano and bansuri together, and **resolves without a climax** |
+| 2 | `K03` | 00:00:15:16 | Stops mid-phrase. Drone alone under ಬುದ್ಧಿ ಇದೆ. ಕಲಿಯುವ ಹಂಬಲ ಇದೆ. The unfinished phrase is the question the film opens with |
+| 3 | `K07` | 00:00:39:00 | Returns after the six seconds of silence, warmer register. Completes this time |
+| 4 | `K09` | 00:00:56:03 | Piano answers it once, an octave down |
+| 5 | `K14` | 00:01:26:00 | Bansuri and piano together. The first time it has company |
+| 6 | `K15` | 00:01:32:02 | One small variation per year across the timeline. Cello counter-line |
+| 7 | `K32` | 00:03:45:13 | Piano takes it, bansuri answers. Roles swapped |
+| 8 | `K40` | 00:05:06:12 | Piano, quietly, under the parents. The last complete statement |
+| 9 | `K41` to `K44` | 00:05:09:07 | Opens out, piano and bansuri together, and **resolves without a climax** |
 
 ---
 
@@ -158,7 +158,7 @@ cymbal, no chime, no applause. Piano or nylon guitar enters for the first time
 at `K38` and the gratitude section runs warm and level to the end of the act.
 
 ### Act 5 · ಮುಂದಿನ ದಾರಿ, future and anniversary welcome
-`00:04:51:19` to `00:05:37:22`, 46.1 s, intensity 2 to 4
+`00:04:51:19` to `00:05:57:22`, 46.1 s, intensity 2 to 4
 
 Open up at `K41`: piano and bansuri together at -20 dB, with a low pulse that
 reads as forward movement rather than rhythm. One rising interval at `K42`, not
@@ -183,7 +183,7 @@ gentle chime at `00:05:32:22`, and a natural fade to silence over the last
 
 | # | Item | Spec |
 |---|---|---|
-| 1 | Full bed, 337.88 s | 48 kHz, 24-bit WAV, one file, starting at 00:00:00:00 with no head trim. Silence written into the file at `K06`, `K12` and `K27`, not left to the mixer |
+| 1 | Full bed, 357.88 s | 48 kHz, 24-bit WAV, one file, starting at 00:00:00:00 with no head trim. Silence written into the file at `K06`, `K12` and `K27`, not left to the mixer |
 | 2 | Stems | Bansuri, piano and guitar, strings and cello, drone, percussion. Same length, same start |
 | 3 | Levels | Mixed to sit 12 to 18 dB below narration. `tools/mix.py --music` will conform the bed and measure the result |
 | 4 | Licence | Public event screening, YouTube monetised or not, social media and website embedding, worldwide, in perpetuity. `07` items 5.1 and 5.2. A personal-use or single-project non-broadcast licence is not sufficient |

@@ -13,7 +13,7 @@ which is the approval record; this is the engineering record.
 | # | Item | State | Owner | Date |
 |---|---|---|---|---|
 | 0.1 | **BLOCKING.** `07` item 5.1, music licence covering public event screening, YouTube monetised or not, social media and website embedding, worldwide, in perpetuity | **OPEN.** No music exists in this repository at all | | |
-| 0.2 | **BLOCKING.** `07` item 5.8, the Trust either reaffirms "no sound effects" or amends it to "sound effects permitted under the limits in `11`" | **UNSIGNED.** 14 effects are specified and 12 are cut into a learning mix only | | |
+| 0.2 | **BLOCKING.** `07` item 5.8, the Trust either reaffirms "no sound effects" or amends it to "sound effects permitted under the limits in `11`" | **UNSIGNED.** 28 placements, 20 accents and 8 ambience beds, are cut into a learning mix only | | |
 | 0.3 | `07` item 5.5, narrator release signed, covering all listed uses | | | |
 | 0.4 | `07` item 5.9, every effect's asset page captured as PDF or screenshot on the day of download | **NOT DONE.** All 14 rows in the licence log read NOT CAPTURED, and every asset URL in it was reconstructed from a filename rather than verified | | |
 
@@ -81,7 +81,7 @@ fails if a cue is written into one or if a fade-out crosses into one.
 
 | # | Item | Target |
 |---|---|---|
-| 4.1 | Count | **14 events maximum** across 357.88 s. `11` section 3. Currently 12 placed, 2 pending download |
+| 4.1 | Count | The `11` section 3 cap of 14 is withdrawn on the Trust's instruction to place every licensed file. `sfx.py` allows 32; **28 are placed**, 20 accents and 8 beds |
 | 4.2 | Class caps | No more than 3 low impacts (2 used), 4 whooshes (3 used), 1 school bell (1 used), 1 applause (0 used) |
 | 4.3 | Levels | -14 dB to -22 dB relative to the narration's speech RMS. `mix.py` derives each gain by measurement from the level in `sfx/placements.csv` and prints what it achieved |
 | 4.4 | Position | Behind the narration, never between it and the listener |
@@ -147,7 +147,7 @@ dropout.
 |---|---|---|
 | 6.6 | The three cues that carry the film | `K06` silence, the `K27` drop under ಪೂರ್ತಿ ಅಲ್ಲ., and `K43` not climaxing. Listen for these first, on every system |
 | 6.7 | Subtitles against the mix | `05-kannada-subtitles.srt` and `.vtt` still match the read |
-| 6.8 | No effect masks a phrase edge | Walk the 14 events against the narration, not against silence |
+| 6.8 | No effect masks a phrase edge | Walk the 20 accents against the narration, not against silence. The beds are constant and cannot mask an edge, but check the seams where one act's bed hands over to the next |
 | 6.9 | Sensitive passages | `K17` and `K34`. If either has acquired anything that comments emotionally, remove it |
 
 ---

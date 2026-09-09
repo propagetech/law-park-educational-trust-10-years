@@ -125,7 +125,7 @@ Recipients must **unzip first**. Opening the page from inside a zip viewer break
 | `12-cursor-event-master-prompt.md` | Whoever builds the hall master |
 | `Kannada-cinematic-audio-direction.md` | **Composer, sound designer, mixer, open first.** The five-act direction, the effect palette and the two open gates |
 | `Kannada-music-map.md` | Composer or music supplier. Palette, motif, intensity curve, deliverables |
-| `Kannada-cue-sheet.csv` | Composer, sound designer, mixer. 46 music cues and 14 effect events at generated timecodes. **This, not `06` section 7** |
+| `Kannada-cue-sheet.csv` | Composer, sound designer, mixer. 46 music cues and 28 effect events at generated timecodes. **This, not `06` section 7** |
 | `Kannada-final-mix-checklist.md` | Re-recording mixer, producer. Mix, master, quality test, sign-off |
 | `Kannada-sfx-licence-log.csv` | Producer. 14 rows, every one still NOT CAPTURED against `07` 5.9 |
 | `tools/timeline.json` | Timing source of truth |

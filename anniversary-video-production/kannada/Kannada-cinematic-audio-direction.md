@@ -17,7 +17,7 @@ Nothing below may be cut into a master until both are signed.
 | Gate | Reads | Effect on this document |
 |---|---|---|
 | `07` item **5.1** | BLOCKING. A music licence covering public event screening, YouTube monetised or not, social media and website embedding, worldwide, in perpetuity | There is no music in this repository at all. The whole score below is a specification for a composer or a supplier, not a description of something that exists |
-| `07` items **5.7** and **5.8** | "No sound effects. This film does not need them." 5.8 asks the Trust to reaffirm or amend it, and is unsigned | The 14 effects below are a proposal. `tools/sfx.py` and `tools/mix.py` both stamp their output UNAPPROVED and neither will write over a master |
+| `07` items **5.7** and **5.8** | "No sound effects. This film does not need them." 5.8 asks the Trust to reaffirm or amend it, and is unsigned | The 28 placements below are a proposal. `tools/sfx.py` and `tools/mix.py` both stamp their output UNAPPROVED and neither will write over a master |
 
 The honest summary: **the picture is finished, the narration is finished, and the
 soundtrack does not exist yet.** This document, the cue sheet and the music map
@@ -251,7 +251,9 @@ over typographic cards. The audio must not undo that.
   problem in the other medium.
 - **No identifiable child voice anywhere**, in ambience or foreground. A
   classroom or schoolyard bed must be unintelligible room tone or it does not
-  go in. Nothing in the current 14 events uses one.
+  go in. The one bed cut from a file that contains speech, the village ambience,
+  takes only the 12.5s window `tools/sfx_voicecheck.py` cleared, and a human
+  still has to confirm that excerpt by ear.
 
 ---
 
@@ -291,7 +293,7 @@ section 7, and re-run `cue.py` after any re-time.
 
 ## 7 · Related
 
-- [`Kannada-cue-sheet.csv`](Kannada-cue-sheet.csv), 46 music cues and 14 effect events at generated timecodes
+- [`Kannada-cue-sheet.csv`](Kannada-cue-sheet.csv), 46 music cues and 28 effect events at generated timecodes
 - [`Kannada-music-map.md`](Kannada-music-map.md), the score: palette, motif, intensity curve, what a composer must deliver
 - [`Kannada-final-mix-checklist.md`](Kannada-final-mix-checklist.md), mix, master, QA and sign-off
 - [`Kannada-sfx-licence-log.csv`](Kannada-sfx-licence-log.csv), the record of what shipped, and what is still NOT CAPTURED

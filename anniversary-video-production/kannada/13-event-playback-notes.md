@@ -41,27 +41,53 @@ effects: `08-kannada-elevenlabs-preview.mp4`.
 
 ---
 
-## Pause SFX, the 14 actually in this build
+## Sound design, the 28 placements actually in this build
 
 Generated from `tools/sfx/placements.csv`, not typed by hand. Timecodes are the
 shot in-points in the current timeline.
 
-| Shot | Shot in | Cue | Effect |
-|---|---|---|---|
-| `K01` | 00:00:00:00 | k01-bell | ACT 1 |
-| `K05` | 00:00:28:00 | k05-riser | Warm tonal riser resolving into the wordmark reveal at K05 |
-| `K05` | 00:00:28:00 | k05-impact | Soft low impact on the 2016 ರಿಂದ 2026 line |
-| `K07` | 00:00:39:00 | k07-whoosh | ACT 2 |
-| `K10` | 00:01:04:19 | k10-ambience | Village morning bed under the 2s pause before the 2016 ori |
-| `K11` | 00:01:10:08 | k11-page | 2016 first school visit |
-| `K15` | 00:01:32:02 | k15-whoosh | ACT 3 transition, into the 2s pause across the thin years |
-| `K18` | 00:02:00:24 | k18-book | Library shelves |
-| `K22` | 00:02:28:12 | k22-zip | Two hundred school bags at MM Hills |
-| `K23` | 00:02:39:13 | k23-impact | Soft low land under ಮುನ್ನೂರು, then the 2 |
-| `K35` | 00:04:10:11 | k35-whoosh | ACT 4 |
-| `K36` | 00:04:18:15 | k36-page | Udayavani clipping, 19 June 2024 |
-| `K41` | 00:05:09:07 | k41-riser | ACT 5 |
-| `K46` | 00:05:50:22 | k46-roomtone | End card |
+### The ambience beds
+
+Eight beds carry the film so no shot sits in a vacuum. The room-tone floor
+runs the whole 357.88s; the rest are one per act.
+
+| Shot | Enters | Cue | Runs | Effect |
+|---|---|---|---|---|
+| `K01` | 00:00:00:00 | bed-film-roomtone | 357.9s | THE FLOOR |
+| `K01` | 00:00:00:00 | bed-act1-morning | 39.0s | ACT 1 |
+| `K07` | 00:00:39:00 | bed-act2-village | 47.0s | ACT 2, 2016 |
+| `K14` | 00:01:26:00 | bed-act3-field | 90.3s | ACT 3, ten years of showing up |
+| `K26` | 00:02:56:07 | bed-act4-insects | 116.0s | ACT 4, method and care |
+| `K30` | 00:03:26:12 | bed-act4-village | 60.0s | ACT 4 depth, under the field work |
+| `K38` | 00:04:42:06 | bed-act5-spring | 27.0s | Tonal lift under the gratitude and coverage stretch, resolving |
+| `K41` | 00:05:09:07 | bed-act5-pad | 48.6s | ACT 5 |
+
+### The accents
+
+Twenty story-beat effects.
+
+| Shot | Enters | Cue | Runs | Effect |
+|---|---|---|---|---|
+| `K01` | 00:00:01:05 | k01-bell | 2.2s | ACT 1 |
+| `K04` | 00:00:25:19 | k04-piano | 1.9s | The school-fee line, under the dignity rule |
+| `K05` | 00:00:28:02 | k05-riser | 2.2s | Warm tonal riser resolving into the wordmark reveal at K05 +0 |
+| `K05` | 00:00:29:15 | k05-impact | 1.6s | Soft low impact on the 2016 ರಿಂದ 2026 line |
+| `K07` | 00:00:39:03 | k07-whoosh | 2.6s | ACT 2 |
+| `K11` | 00:01:10:12 | k11-page | full | 2016 first school visit |
+| `K15` | 00:01:39:21 | k15-whoosh | 2.0s | ACT 3 transition, into the 2s pause across the thin years |
+| `K17` | 00:01:48:03 | k17-rustle | 2.6s | The one-page COVID announcement |
+| `K18` | 00:02:01:10 | k18-book | full | Library shelves |
+| `K21` | 00:02:25:15 | k21-riser | 2.8s | ACT 3 lift into the MM Hills reveal |
+| `K22` | 00:02:28:22 | k22-zip | 2.0s | Two hundred school bags at MM Hills |
+| `K23` | 00:02:43:09 | k23-impact | 1.4s | Soft low land under ಮುನ್ನೂರು, then the 2 |
+| `K28` | 00:03:13:10 | k28-thud | 2.4s | ACT 4 turn |
+| `K29` | 00:03:21:10 | k29-card | 1.6s | Soft landing on the card reveal |
+| `K30` | 00:03:32:17 | k30-swell | 3.0s | Low swell under the field work |
+| `K35` | 00:04:10:15 | k35-whoosh | 2.6s | ACT 4 |
+| `K36` | 00:04:18:22 | k36-page | full | Udayavani clipping, 19 June 2024 |
+| `K41` | 00:05:09:07 | k41-riser | 1.8s | ACT 5 |
+| `K44` | 00:05:38:17 | k44-zip | 1.8s | The classroom of children with bags |
+| `K46` | 00:05:51:12 | k46-applause | 5.2s | End card |
 
 **Never on structural silence.** `sfx.py` refuses to build if a placement lands
 in one, or merely runs over the cut into one:

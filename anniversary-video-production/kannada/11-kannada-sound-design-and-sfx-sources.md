@@ -33,7 +33,7 @@ five-act score and a palette at generated timecodes:
 | Document | What it owns |
 |---|---|
 | [`Kannada-cinematic-audio-direction.md`](Kannada-cinematic-audio-direction.md) | The direction, the palette, the caps, the removals and the gates |
-| [`Kannada-cue-sheet.csv`](Kannada-cue-sheet.csv) | 46 music cues and 14 effect events, generated from `timeline.json` |
+| [`Kannada-cue-sheet.csv`](Kannada-cue-sheet.csv) | 46 music cues and 28 effect events, generated from `timeline.json` |
 | [`Kannada-music-map.md`](Kannada-music-map.md) | The score: palette, motif, intensity curve, composer deliverables |
 | [`Kannada-final-mix-checklist.md`](Kannada-final-mix-checklist.md) | Mix, master, quality test and sign-off |
 

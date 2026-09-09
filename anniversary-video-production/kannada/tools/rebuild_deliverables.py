@@ -38,6 +38,12 @@ OUTPUTS = [
 ]
 
 
+def duration(path):
+    return float(subprocess.run(
+        ["ffprobe", "-v", "error", "-show_entries", "format=duration",
+         "-of", "csv=p=0", path], capture_output=True, text=True).stdout.strip())
+
+
 def run(cmd):
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode:
@@ -74,7 +80,18 @@ def main():
             ["-map", "0:v", "-map", "1:a"] + extra[2:] +
             ["-c:v", "copy", "-af", af,
              "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-ac", "2",
-             "-shortest", "-movflags", "+faststart",
+             # -t, not -shortest.
+             #
+             # -shortest bounds the output by the SHORTEST input, and a subtitle
+             # stream ends at its last cue. 05-kannada-subtitles.srt runs out at
+             # 350.88s because the end card carries no narration to caption, so
+             # the 2160p master came out 350.88s and lost its whole seven-second
+             # end card: the logo, the wordmark, the site and the phone number.
+             # It was 357.88s long, it was valid, and nothing failed.
+             #
+             # The picture's own duration is the only correct bound, so it is
+             # measured and passed explicitly.
+             "-t", f"{duration(pic):.3f}", "-movflags", "+faststart",
              "-metadata", "title=Law Park Educational Trust, ten years, Kannada "
                           "(REVIEW COPY, NOT FOR RELEASE)", out])
         print(f"  wrote {out}  ({os.path.getsize(out) / 1e6:.0f} MB)")

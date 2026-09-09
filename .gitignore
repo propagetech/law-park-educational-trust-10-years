@@ -41,3 +41,5 @@ next-env.d.ts
 .elevenlabs_key
 anniversary-video-production/**/vo_eleven/
 anniversary-video-production/**/*.mp4
+# Temporary scratch animatic for team handoff review (replace when human narration lands).
+!anniversary-video-production/kannada/08-kannada-animatic-preview.mp4

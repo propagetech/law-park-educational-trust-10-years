@@ -61,11 +61,23 @@ anniversary-video-production/**/tools/*.wav
 anniversary-video-production/**/tools/*.aiff
 
 # Downloaded sound effects. The licence record is the CSV, not the files.
+# The second pattern of each pair matters: the first only reaches direct
+# children of sfx/, so a staging folder such as sfx/new/ would otherwise put
+# tens of megabytes of audio into the repository.
 anniversary-video-production/**/tools/sfx/*.mp3
+anniversary-video-production/**/tools/sfx/**/*.mp3
 anniversary-video-production/**/tools/sfx/*.wav
+anniversary-video-production/**/tools/sfx/**/*.wav
 anniversary-video-production/**/tools/sfx/*.ogg
+anniversary-video-production/**/tools/sfx/**/*.ogg
 anniversary-video-production/**/tools/sfx/*.flac
+anniversary-video-production/**/tools/sfx/**/*.flac
 anniversary-video-production/**/tools/sfx/*.m4a
+anniversary-video-production/**/tools/sfx/**/*.m4a
+
+# Download staging area. Everything needed from it has been copied to sfx/ and
+# sfx/licence-evidence/, which ARE the record. Safe to delete once verified.
+anniversary-video-production/**/tools/sfx/new/
 anniversary-video-production/**/tools/vo_eleven/
 
 # Audio deliverables from tools/mix.py: stems, masters and previews. All of it

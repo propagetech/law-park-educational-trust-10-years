@@ -10,6 +10,69 @@ read, so the timecodes below are the current ones. The film is now
 
 ---
 
+## STATUS, 2026-09-09 · what was downloaded and what was placed
+
+Twelve files were downloaded with licence evidence for eleven of the cues below.
+**Two were placed and two existing files were replaced**, which puts the film at
+exactly the 14-effect cap. Five files are on disk, licensed and unplaced.
+
+### Placed
+
+| Cue | Shot | File | Excerpt |
+|---|---|---|---|
+| `k10-ambience` | K10 | dbsound Countryside morning sounds | `in_s 7.70`, 2.20s |
+| `k46-roomtone` | K46 | kai_audio Bedroom Room Tone | `in_s 9.20`, 6.60s |
+
+### Replaced, at no cost to the cap
+
+Both impact cues moved off the trailer-class placeholder onto
+**Universfield, Cinematic Low Hit**, 2.38s. `k05-impact` and `k23-impact`.
+
+### Downloaded, licensed, NOT placed
+
+The cap is the reason, not the files. Order of addition if the Trust raises it:
+**K17**, then **K44**, then **K26**.
+
+| Cue | File | Why it is waiting |
+|---|---|---|
+| K17 paper rustle | spinopel-paper-rustle-345748 | Cap. Also the third page-ish sound after `k11-page` and `k36-page` |
+| K44 bag zip | mrstokes302-backpack-zipper-585349 | Cap. Also the second zip after `k22-zip` |
+| K26 village ambience | ranjit_foley-indian-village-ambience-219221 | **Cap, and a `14` 2.4 risk.** See below |
+| K04 piano note | freesound_community-1-note-piano-104171 | Cap. `11` says this beat belongs to the score, not an effect |
+| K42 warm pad | gigidelaromusic-warm-pad-fragment-short-450964 | Cap, and `k41-riser` already lifts one shot earlier. Pixabay marks it AI generated |
+
+### Three findings from vetting the files
+
+**The village ambience contains human voices.** `tools/sfx_voicecheck.py` was
+written for this and found clear speech at 65.5s, 202.0s and six other points
+across the 293-second file: a 0.79 speech-band ratio with 0.32 syllable-rate
+modulation is a person talking. `14` item 2.4 is absolute. The only stretch in
+the calmest quartile runs 12.5s from 268.0s, so if K26 is ever placed it must
+excerpt from there and a human must still confirm it by ear.
+
+**The K46 stinger is Content ID Registered.** Pixabay labels
+`grumpynora-pleasing-5-sec-edit-stinger-467228` that way. On a film the Trust
+will publish, that invites a YouTube claim. Room tone was chosen instead: its
+speech-band energy measures 0.00, so it carries no voice at all.
+
+**`k10-ambience-licence-evidence.jpg` documents the wrong file.** It shows
+dbsound *Insects Birds Field*, which the selection notes had already excluded,
+not *Countryside morning sounds* which was placed. The correct evidence is
+`licence-evidence/K10_countryside-morning-birds_licence.jpg`, and that is what
+the licence log cites. Both were checked against the Pixabay pages they show.
+
+### Licence log
+
+Four rows in `Kannada-sfx-licence-log.csv` now carry real evidence paths and a
+verified licence status, closing `07` item 5.9 for those four. **The other
+twelve rows still read NOT CAPTURED.**
+
+`07` item 5.7 still forbids sound effects and 5.8 is still unsigned, so the
+output remains `narration_plus_sfx_LEARNING.wav` and
+`08-kannada-elevenlabs-sfx-learning-mix.mp4`. Neither is a deliverable.
+
+---
+
 ## Read this before you download anything
 
 **Three things constrain this, and none of them is my preference.**

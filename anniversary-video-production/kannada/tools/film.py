@@ -3,18 +3,48 @@
 """
 Composites the Kannada cut frame by frame and pipes it to ffmpeg.
 
-  python3 film.py out.mp4                 full render, 00:05:03:21
+  python3 film.py out.mp4                 full render, 00:05:03:21, 1920x1080
   python3 film.py out.mp4 --stills        one PNG per shot, no video
   python3 film.py out.mp4 --range 60 75   render only 60s to 75s
+  python3 film.py out.mp4 --scale 2       3840x2160 master (see below)
+  python3 film.py out.mp4 --no-subs       omit the burned-in Kannada subtitles
 
 Photography is composited by PIL. All Kannada text comes from the pre-rendered
 Chrome PNGs in gfx/ (see gfx.py); PIL is never asked to draw Kannada.
+
+--scale N multiplies the output frame and every output-space measurement by N.
+Crop boxes in G are native source-file pixels and are NOT scaled; `push` values
+are ratios and are not scaled either. At --scale 2 the graphics are read from
+gfx@2x/, which gfx.py must have rendered first at device_scale_factor=2, so all
+Kannada type is natively crisp rather than upscaled. The photography cannot be:
+no source photograph in this library reaches 3840px, so at scale 2 the stills
+are Lanczos-enlarged. See 08-kannada-animatic-notes.md section 9.
+
+--no-subs is the right choice for a YouTube master: upload
+05-kannada-subtitles.srt as a caption track instead of burning pixels in, so the
+captions stay toggleable, searchable and translatable.
 """
 import json, os, subprocess, sys
 from PIL import Image
 
 REPO = "/Users/chetan/Downloads/jeevitha/law-park-educational-trust-10-years"
-W, H, FPS = 1920, 1080, 25
+
+def _arg(flag, cast, default):
+    if flag in sys.argv:
+        return cast(sys.argv[sys.argv.index(flag) + 1])
+    return default
+
+SCALE = _arg("--scale", int, 1)
+if SCALE < 1:
+    sys.exit("--scale must be 1 or more")
+BURN_SUBS = "--no-subs" not in sys.argv
+GFXDIR = "gfx" if SCALE == 1 else f"gfx@{SCALE}x"
+
+def o(px):
+    """Scale an output-space measurement. Source-space crops never use this."""
+    return int(round(px * SCALE))
+
+W, H, FPS = o(1920), o(1080), 25
 NAVY, CREAM, BLACK = (28, 28, 46), (250, 248, 243), (0, 0, 0)
 
 TL = json.load(open("timeline.json", encoding="utf-8"))
@@ -130,7 +160,7 @@ def src(path):
 
 def gfx(name):
     if name not in _gfx:
-        _gfx[name] = Image.open(f"gfx/{name}.png").convert("RGBA")
+        _gfx[name] = Image.open(f"{GFXDIR}/{name}.png").convert("RGBA")
     return _gfx[name]
 
 def cover(im, box, aspect=W / H):
@@ -190,6 +220,7 @@ def card_frame(sh, u):
         if g.get("box"):
             im = im.crop(g["box"])
         kind, px = g["fit"]
+        px = o(px)                      # fit is measured in output pixels
         w, h = im.size
         s = px / w if kind == "w" else px / h
         im = im.resize((max(1, int(round(w * s))), max(1, int(round(h * s)))), Image.LANCZOS)
@@ -203,9 +234,9 @@ def card_frame(sh, u):
     pw, phh = ph.size
     align = g.get("align", "center")
     if align == "left":
-        x = 130
+        x = o(130)
     elif align == "right":
-        x = W - 150 - pw
+        x = W - o(150) - pw
     else:
         x = (W - pw) // 2
     y = (H - phh) // 2
@@ -238,7 +269,7 @@ def clean(sh, t):
         base = card_frame(sh, u)
         base = Image.new("RGB", (W, H), NAVY)
         ph = _cardplate[sid]
-        base.paste(ph, (W - 150 - ph.size[0], (H - ph.size[1]) // 2))
+        base.paste(ph, (W - o(150) - ph.size[0], (H - ph.size[1]) // 2))
         ov = gfx(gfx_state(g, t))
         base = Image.alpha_composite(base.convert("RGBA"), ov).convert("RGB")
         return base
@@ -326,36 +357,62 @@ def frame(fi):
             else:
                 under = with_overlays(p, pd + lt, clean(p, min(pd, pd + lt)))
                 img = Image.blend(under, img, a)
-    # burned-in Kannada subtitle, preview only
-    for j, c in enumerate(SUBS):
-        if c["start"] <= t < c["end"]:
-            img = Image.alpha_composite(img.convert("RGBA"),
-                                        gfx(f"SUB_{j:03d}")).convert("RGB")
-            break
+    # burned-in Kannada subtitle, preview only. A YouTube master uses --no-subs
+    # and carries 05-kannada-subtitles.srt as a real caption track instead.
+    if BURN_SUBS:
+        for j, c in enumerate(SUBS):
+            if c["start"] <= t < c["end"]:
+                img = Image.alpha_composite(img.convert("RGBA"),
+                                            gfx(f"SUB_{j:03d}")).convert("RGB")
+                break
     return img
 
 # ---------------------------------------------------------------- drive
+def _positional(argv, valued=("--scale", "--range")):
+    """argv minus flags and their values. --range takes two values."""
+    out, skip = [], 0
+    for a in argv:
+        if skip:
+            skip -= 1
+            continue
+        if a in valued:
+            skip = 2 if a == "--range" else 1
+            continue
+        if a.startswith("--"):
+            continue
+        out.append(a)
+    return out
+
 def main():
-    out = sys.argv[1]
+    pos = _positional(sys.argv[1:])
+    if not pos:
+        sys.exit("usage: film.py OUT.mp4 [--scale N] [--no-subs] "
+                 "[--stills] [--range A B]")
+    out = pos[0]
     total = int(round(TL[-1]["t_out"] * FPS))
     if "--stills" in sys.argv:
-        os.makedirs("stills", exist_ok=True)
+        sd = "stills" if SCALE == 1 else f"stills@{SCALE}x"
+        os.makedirs(sd, exist_ok=True)
         for sh in TL:
             t = sh["dur"] * 0.55
-            frame(int(round((sh["t_in"] + t) * FPS))).save(f"stills/{sh['sid']}.png")
-        print("stills written:", len(TL))
+            frame(int(round((sh["t_in"] + t) * FPS))).save(f"{sd}/{sh['sid']}.png")
+        print(f"stills written: {len(TL)} at {W}x{H} in {sd}/")
         return
     a, b = 0, total
     if "--range" in sys.argv:
         k = sys.argv.index("--range")
         a = int(float(sys.argv[k + 1]) * FPS); b = int(float(sys.argv[k + 2]) * FPS)
+    crf = "18" if SCALE == 1 else "15"      # master carries headroom for YouTube
     cmd = ["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
            "-f", "rawvideo", "-pix_fmt", "rgb24", "-s", f"{W}x{H}", "-r", str(FPS),
            "-i", "-", "-an",
-           "-c:v", "libx264", "-preset", "slow", "-crf", "18",
+           "-c:v", "libx264", "-preset", "slow", "-crf", crf,
+           "-profile:v", "high", "-level", "5.1",
            "-pix_fmt", "yuv420p", "-movflags", "+faststart",
            "-color_primaries", "bt709", "-color_trc", "bt709", "-colorspace", "bt709",
            out]
+    print(f"render {W}x{H} @ {FPS}fps, gfx from {GFXDIR}/, "
+          f"subs {'burned in' if BURN_SUBS else 'omitted'}, crf {crf}")
     p = subprocess.Popen(cmd, stdin=subprocess.PIPE)
     for fi in range(a, b):
         p.stdin.write(frame(fi).tobytes())

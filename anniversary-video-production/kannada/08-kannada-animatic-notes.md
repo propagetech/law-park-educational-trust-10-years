@@ -140,3 +140,73 @@ ffmpeg -i silent.mp4 -i vo/scratch_narration.wav -map 0:v -map 1:a -c:v copy -af
 Requires `ffmpeg`, Pillow, Playwright with Chromium, and the macOS `say` command with the Kannada voice Soumya installed.
 
 **If a narration line changes:** edit `build_timeline.py`, then re-run the whole chain. Every timecode in `01`, `03`, `04`, `05` and `06` derives from `timeline.json`. **Do not hand-edit timecodes in five documents.**
+
+---
+
+## 9 · The 2160p master, and what 4K does and does not buy
+
+`tools/master.py` builds a 3840x2160 delivery master. It is worth doing, but for
+one honest reason and not the obvious one.
+
+### What is genuinely 4K
+
+The Kannada type. `gfx.py --scale 2` re-renders all 133 graphics in Chrome at
+`device_scale_factor=2`, so glyph curves, conjuncts, rules and the logo edge are
+drawn at 3840x2160 rather than enlarged from 1080p. The CSS layout is unchanged
+at 1920x1080 CSS pixels, so no card was re-designed to get this. Sixteen of the
+46 shots are card or photo-card shots, and type is where softness reads first,
+so this is a real and visible gain.
+
+### What is not
+
+The photography. Measured across the 34 unique source files:
+
+| Longest edge | Files |
+|---|---|
+| 3840px or more | 0 |
+| 2560 to 3839 | 0 |
+| 1920 to 2559 | 5 |
+| 1280 to 1919 | 22 |
+| under 1280 | 7 |
+
+The largest asset is 1920x1446. Twenty-nine of 34 are under 1920px. The 1080p
+cut already enlarges many shots, and at 2160p those factors double: K38
+(941x529) is enlarged about 4x, K26 about 4.4x, and the best case, the five true
+1920px files, exactly 2x. Lanczos is doing the work and doing it well, but no
+resampler invents detail that was never photographed.
+
+**So do not judge the 4K master on photographic sharpness.** Judge it on type
+crispness, and on what YouTube delivers.
+
+### Why deliver 4K anyway
+
+YouTube allocates a better codec and a materially higher bitrate to a 2160p
+upload than to a 1080p one. A viewer watching at 1080p receives YouTube's
+downscale of the 4K transcode, which holds together better than YouTube's 1080p
+transcode of a 1080p upload, particularly on the slow pushes and the dissolves,
+which is exactly where a low-bitrate transcode blocks up. That is the main
+reason this master exists.
+
+If the Trust later commissions re-scans or re-shoots of the key stills at native
+4K, the pipeline needs no change: drop the higher-resolution files in place, keep
+the same crop boxes in `film.py` (they are native source pixels), and re-run.
+
+### Two deliberate differences from the animatic
+
+1. **No burned-in subtitles.** `film.py --no-subs`. Upload
+   `05-kannada-subtitles.srt` as a YouTube caption track instead: it stays
+   toggleable, searchable, and machine-translatable, and it costs no pixels. The
+   burned-in captions in the animatic exist only so a reviewer on a phone can
+   follow the Kannada without touching a menu.
+2. **Audio mastered to -14 LUFS**, not the -16 used for hall playback. -14 LUFS
+   is YouTube's own normalisation target, so mastering to it means YouTube
+   leaves the level alone rather than pulling it down.
+
+### The gates
+
+`python3 master.py --check` prints them. All five are open as of this writing:
+scratch narration, 22 consent-blocked shots, the Udayavani clipping on K36, no
+music licence, and unverified end-roll names. `--release` refuses to build while
+any of them is unwaived, and refuses outright while the narration is the scratch
+track. **A YouTube upload is public release.** The master this script builds by
+default is an internal review copy and is named to say so.

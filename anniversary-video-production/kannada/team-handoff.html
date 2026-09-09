@@ -162,12 +162,23 @@ h2 {
 
 /* Video */
 .player {
+  position: relative;
+  aspect-ratio: 16 / 9;
   background: #000;
   border-radius: var(--radius);
   overflow: hidden;
   border: 1px solid var(--navy);
 }
-.player video { display: block; width: 100%; max-height: 70vh; background: #000; }
+/* Covers both the YouTube iframe and a local <video>, if one is put back. */
+.player > iframe,
+.player > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
 .player-note { margin-top: 0.75rem; font-size: 0.9rem; color: var(--muted); }
 
 /* Role tabs */
@@ -289,7 +300,7 @@ footer strong { color: var(--gold); }
 }
 
 @media print {
-  .top, .tabs, .filter-row, .no-print, .skip-link, video { display: none !important; }
+  .top, .tabs, .filter-row, .no-print, .skip-link, video, .player { display: none !important; }
   .panel[hidden] { display: block !important; }
   body { background: #fff; }
   .hero { background: var(--navy); print-color-adjust: exact; }
@@ -314,6 +325,7 @@ footer strong { color: var(--gold); }
     <div class="brand">Law Park Educational Trust <span>10-year Kannada welcome film</span></div>
     <nav class="nav" aria-label="Sections">
       <a href="#watch">Watch</a>
+      <a href="#delivery">Formats</a>
       <a href="#roles">Roles</a>
       <a href="#decisions">Decisions</a>
       <a href="#script">Script</a>
@@ -341,7 +353,7 @@ footer strong { color: var(--gold); }
       <strong>Status:</strong> Animatic exists with a scratch (macOS) voice for pacing only.
       Cast and record a live Kannada narrator. Do not ship the scratch track.
       Nothing is cleared for public screening until the consent and rights items in
-      <a href="#decisions" style="color:var(--gold)">section 03, Decisions and clearances</a>, are done.
+      <a href="#decisions" style="color:var(--gold)">section 04, Decisions and clearances</a>, are done.
     </div>
   </div>
 </header>
@@ -353,21 +365,60 @@ footer strong { color: var(--gold); }
     <h2>Watch the animatic</h2>
     <p class="sec-lead">Judge pacing, pauses, graphics and shot order. Do not judge warmth of the voice: it is temporary.</p>
     <div class="player">
-      <video controls preload="metadata" playsinline
-        src="08-kannada-animatic-preview.mp4"
-        poster="08-kannada-animatic-poster.jpg">
-        <track kind="subtitles" srclang="kn" label="ಕನ್ನಡ (Kannada)" src="05-kannada-subtitles.vtt" default>
-        Your browser cannot play this MP4. Open <a href="08-kannada-animatic-preview.mp4">08-kannada-animatic-preview.mp4</a> directly.
-      </video>
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/x_v_8lQumYQ?rel=0&amp;modestbranding=1"
+        title="Kannada 2160p review cut, scratch narration"
+        loading="lazy" allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
     </div>
-    <p class="player-note">File: <a href="08-kannada-animatic-preview.mp4"><code>08-kannada-animatic-preview.mp4</code></a> · ~105 MB · notes in <a href="08-kannada-animatic-notes.md">08-kannada-animatic-notes.md</a>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
-    <p class="player-note">Kannada subtitles are on by default from <a href="05-kannada-subtitles.vtt"><code>05-kannada-subtitles.vtt</code></a> (80 cues). Turn them off with the CC button in the player. The editor works from the <code>.srt</code>; the <code>.vtt</code> exists only so this page can show them. If the player shows no CC button, you are viewing the page from a location that blocks local files: unzip the pack first, then open this file from the unzipped folder.</p>
+    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/x_v_8lQumYQ">youtu.be/x_v_8lQumYQ</a>, the 3840x2160 review cut. Streaming it keeps the render out of this repository, so no MP4 is committed any more. Rebuild the file locally with <code>tools/master.py</code> when you need the full-quality original. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
+    <p class="player-note"><strong>If the player is blank</strong>, the video visibility has been changed to Private, which blocks embedding for everyone except explicitly named accounts. Set it to Unlisted to make this page work again, or ask the owner of the upload for access.</p>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="wrap">
+    <p class="sec-kicker">02 · Formats</p>
+    <h2>What gets delivered, and where each version goes</h2>
+    <p class="sec-lead">Three files, three jobs. The preview above is the smallest of them and the only one anybody should be watching today.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>The three versions</h3>
+        <table style="font-size:0.88rem">
+          <thead><tr><th scope="col">File</th><th scope="col">For</th></tr></thead>
+          <tbody>
+            <tr><td><code>08-kannada-animatic-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, 36 MB</span></td><td>Review on this page. Sized to survive a git repository and a WhatsApp send.</td></tr>
+            <tr><td><code>kannada-2160p-review-scratch-vo.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles</span></td><td>Hall projection test and quality review. Built by <code>tools/master.py</code>.</td></tr>
+            <tr><td><code>kannada-2160p-youtube-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, human narration, -14 LUFS</span></td><td><strong>Does not exist yet.</strong> Needs the human read and all five clearances.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Why 4K, when no photograph is 4K</h3>
+        <p style="margin:0 0 0.6rem;font-size:0.95rem">Worth being straight about this, because someone will ask.</p>
+        <ul style="margin:0 0 0.6rem">
+          <li><strong>The Kannada type really is 4K.</strong> All 133 graphics are re-rendered in Chrome at the target resolution, so glyphs and conjuncts are drawn sharp rather than enlarged.</li>
+          <li><strong>The photography is not.</strong> The largest still in the library is 1920x1446 and 29 of 34 are under 1920px, so at 2160p they are enlarged 2x to 4x.</li>
+          <li><strong>YouTube is the reason.</strong> A 2160p upload gets a better codec and a higher bitrate than a 1080p one, so even a viewer watching at 1080p sees a cleaner picture.</li>
+        </ul>
+        <p style="margin:0;font-size:0.92rem;color:var(--muted)">Judge the master on type crispness, not on photographic detail. Full measurements in <a href="08-kannada-animatic-notes.md">08 animatic notes</a>, section 9.</p>
+      </div>
+    </div>
+    <div class="alert" style="margin-top:1rem">
+      <strong>A YouTube upload is public release.</strong> All five gates in
+      <a href="#decisions">section 04</a> are still open, so nothing goes up yet. Run
+      <code>python3 tools/master.py --check</code> for the current list. The build script
+      refuses to produce a release master while any gate is unwaived, and refuses outright
+      while the narration is the scratch track.
+    </div>
   </div>
 </section>
 
 <section id="roles">
   <div class="wrap">
-    <p class="sec-kicker">02 · Who does what</p>
+    <p class="sec-kicker">03 · Who does what</p>
     <h2>Role briefs</h2>
     <p class="sec-lead">Click a role. Each person gets only what they need to move next.</p>
 
@@ -466,7 +517,7 @@ footer strong { color: var(--gold); }
 
 <section id="decisions">
   <div class="wrap">
-    <p class="sec-kicker">03 · Open gates</p>
+    <p class="sec-kicker">04 · Open gates</p>
     <h2>Decisions and clearances</h2>
     <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
     <div class="card no-print" style="margin-bottom:1rem;background:#fffdf7;border-left:4px solid var(--gold)">
@@ -503,7 +554,7 @@ footer strong { color: var(--gold); }
 
 <section id="script">
   <div class="wrap">
-    <p class="sec-kicker">04 · Spoken text</p>
+    <p class="sec-kicker">05 · Spoken text</p>
     <h2>Shot list and narration</h2>
     <p class="sec-lead">43 lines · 3,585 characters across 46 shots. Source: <code>tools/timeline.json</code>. Do not rewrite wording without Trust sign-off. <strong>Consent status is per shot:</strong> 22 shots are blocked until guardian or partner clearance is in hand, so read that column before you cut anything for a screening.</p>
     <div class="filter-row no-print">
@@ -538,7 +589,7 @@ footer strong { color: var(--gold); }
 
 <section id="design">
   <div class="wrap">
-    <p class="sec-kicker">05 · Look</p>
+    <p class="sec-kicker">06 · Look</p>
     <h2>Design tokens</h2>
     <p class="sec-lead">Match the film cards. Emotion target: quiet pride, earned over time. Not pity, not triumph.</p>
     <div class="grid grid-3">
@@ -568,7 +619,7 @@ footer strong { color: var(--gold); }
 
 <section id="docs">
   <div class="wrap">
-    <p class="sec-kicker">06 · Library</p>
+    <p class="sec-kicker">07 · Library</p>
     <h2>Documents and assets</h2>
     <p class="sec-lead">Every document in the pack is listed here. Markdown opens in any editor; CSV opens in Excel or Numbers. Keep relative paths intact when you zip, or the links break.</p>
     <div class="grid grid-2">
@@ -615,7 +666,7 @@ footer strong { color: var(--gold); }
 
 <section id="credits">
   <div class="wrap">
-    <p class="sec-kicker">07 · Last shot of the film</p>
+    <p class="sec-kicker">08 · Last shot of the film</p>
     <h2>End roll and acknowledgements</h2>
     <p class="sec-lead">The credit roll is written in both languages, but it is not buildable yet. The repository holds inconsistent spellings, near-duplicates and first-name-only entries, so the roll is gated on a trustee name check.</p>
     <div class="grid grid-2">
@@ -629,8 +680,8 @@ footer strong { color: var(--gold); }
         <ol style="margin:0">
           <li>Trustees work through the verification list in <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
           <li>Producer records each confirmed spelling and each consent to be named.</li>
-          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 05</a>.</li>
-          <li>Tick the end-roll gate in <a href="#decisions">section 03</a> when it is done.</li>
+          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 06</a>.</li>
+          <li>Tick the end-roll gate in <a href="#decisions">section 04</a> when it is done.</li>
         </ol>
       </div>
     </div>
@@ -639,7 +690,7 @@ footer strong { color: var(--gold); }
 
 <section id="share">
   <div class="wrap">
-    <p class="sec-kicker">08 · How to send this</p>
+    <p class="sec-kicker">09 · How to send this</p>
     <h2>Share the pack</h2>
     <p class="sec-lead">External creatives need the folder tree, not only this HTML, so relative links and the MP4 keep working.</p>
     <div class="grid grid-2">

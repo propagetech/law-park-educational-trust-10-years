@@ -7,11 +7,28 @@ so PIL must never be asked to draw Kannada: it would break conjuncts silently,
 which is exactly the failure 14 item 7.8 warns about.
 
 Output: gfx/<name>.png, 1920x1080, RGBA (transparent where the shot needs it).
+
+  python3 gfx.py ../05-kannada-subtitles.srt              1920x1080 into gfx/
+  python3 gfx.py ../05-kannada-subtitles.srt --scale 2    3840x2160 into gfx@2x/
+
+--scale only raises Chrome's device_scale_factor. The CSS layout stays 1920x1080
+CSS pixels, so nothing in BASE or any card needs touching, and every glyph, rule
+and logo edge is rendered natively at the higher resolution rather than enlarged.
+This is the one part of a 4K master that gains real detail; see film.py.
 """
 import json, os, sys
 from playwright.sync_api import sync_playwright
 
-OUT = "gfx"
+def _arg(flag, cast, default):
+    if flag in sys.argv:
+        return cast(sys.argv[sys.argv.index(flag) + 1])
+    return default
+
+SCALE = _arg("--scale", int, 1)
+if SCALE < 1:
+    sys.exit("--scale must be 1 or more")
+
+OUT = "gfx" if SCALE == 1 else f"gfx@{SCALE}x"
 os.makedirs(OUT, exist_ok=True)
 
 NAVY   = "#1c1c2e"
@@ -313,7 +330,23 @@ def load_srt(path):
         out.append(dict(start=sec(a), end=sec(b), lines=L[2:]))
     return out
 
-SRT = load_srt(sys.argv[1] if len(sys.argv) > 1
+def _positional(argv, valued=("--scale",)):
+    """argv minus every flag and minus the value that follows a valued flag."""
+    out, skip = [], False
+    for a in argv:
+        if skip:
+            skip = False
+            continue
+        if a in valued:
+            skip = True
+            continue
+        if a.startswith("--"):
+            continue
+        out.append(a)
+    return out
+
+_pos = _positional(sys.argv[1:])
+SRT = load_srt(_pos[0] if _pos
                else "../../../../../../Users/chetan/Downloads/jeevitha/"
                     "law-park-educational-trust-10-years/anniversary-video-production/"
                     "kannada/05-kannada-subtitles.srt")
@@ -323,10 +356,12 @@ json.dump(SRT, open("subs.json", "w"), ensure_ascii=False)
 
 # ================================================================ render
 todo = [(n, h) for n, h in CARDS.items() if not os.path.exists(f"{OUT}/{n}.png")]
-print(f"{len(CARDS)} graphics, {len(todo)} to render")
+print(f"{len(CARDS)} graphics, {len(todo)} to render "
+      f"at {1920 * SCALE}x{1080 * SCALE} into {OUT}/")
 with sync_playwright() as p:
     br = p.chromium.launch()
-    pg = br.new_page(viewport={"width": 1920, "height": 1080}, device_scale_factor=1)
+    pg = br.new_page(viewport={"width": 1920, "height": 1080},
+                     device_scale_factor=SCALE)
     for i, (name, html) in enumerate(todo):
         pg.set_content(html)
         pg.wait_for_timeout(45)

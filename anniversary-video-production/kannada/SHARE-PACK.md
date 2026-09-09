@@ -6,6 +6,30 @@
 
 It includes the animatic player with Kannada subtitles, role briefs, the trustee decision checklist with owner and date fields, the full shot list with per-shot consent status, the end-roll name gate, design tokens, and links to every document in the pack.
 
+## The three versions of the film
+
+| File | Resolution | For | In git |
+|---|---|---|---|
+| `08-kannada-animatic-preview.mp4` | 1920x1080, subtitles burned in | Review on the handoff page | yes, 36 MB |
+| `kannada-2160p-review-scratch-vo.mp4` | 3840x2160, scratch narration | Projection test, quality review | no, rebuild it |
+| `kannada-2160p-youtube-master.mp4` | 3840x2160, human narration | The YouTube upload | does not exist yet |
+
+Only the first is committed. The 4K files are render artifacts: rebuild them with
+
+```bash
+cd anniversary-video-production/kannada/tools
+python3 gfx.py ../05-kannada-subtitles.srt --scale 2
+python3 master.py
+```
+
+`python3 tools/master.py --check` lists the five clearances that block a YouTube
+upload. The script refuses to build a release master while any of them is open.
+
+**On 4K:** the Kannada type is genuinely rendered at 3840x2160, the photography is
+not (largest source still is 1920x1446). The reason to deliver 4K is that YouTube
+gives a 2160p upload a better codec and bitrate, so even 1080p viewers see a
+cleaner picture. Details in `08-kannada-animatic-notes.md` section 9.
+
 ## Size warning: read before you attach anything
 
 The animatic is **105 MB**, so a full zip lands at about **110 MB**. That is over the limit almost everywhere:
@@ -74,10 +98,22 @@ Recipients must **unzip first**. Opening the page from inside a zip viewer break
 | `tools/timeline.json` | Timing source of truth |
 | `tools/README.md` | How to re-run the build |
 | `tools/make_vtt.py` | Regenerates the `.vtt` after `make_srt.py` |
+| `tools/master.py` | Builds the 2160p master, checks the publishing gates |
 
 **Research and bilingual** (`anniversary-video-research/`): `00` project map, `01` source of truth, `02` evidence table, `03` impact and milestone data, `04` media inventory, `05` asset audit and gaps, `06` trustee questions, `07` creative brief, `08` English script, `09` Kannada source script, `10` bilingual storyboard, `11` short teaser scripts, `12` onscreen text and lower thirds, `13` credits and acknowledgements, `14` rights and publishing checklist.
 
-## Two gates that need trustees, not creatives
+## Five gates before anything goes public
+
+`python3 tools/master.py --check` prints these and refuses to build a release
+master while any is open:
+
+1. **Narration** is still the macOS scratch voice, not a human Kannada read.
+2. **Consent** for 22 of 46 shots with identifiable children or partners.
+3. **Copyright** on K36, the Udayavani newspaper clipping, with no written permission on file.
+4. **Music licence** for event plus YouTube plus web.
+5. **End-roll names** not spelling-verified, consent to be named not recorded.
+
+## The two with the longest lead time
 
 1. **Guardian and partner consent** for the 22 consent-blocked shots. Visible per shot in the handoff page shot list, worklist in `07`.
 2. **End-roll name verification.** No name goes on screen until a trustee confirms its spelling and the person agrees to be named. List in `anniversary-video-research/13-credits-and-acknowledgements.md`, section 4.

@@ -7,41 +7,81 @@ first, and two of them are decisions rather than work.
 
 ## 1 · What blocks a recommendation
 
-### The account has no Kannada voice
+Three findings, all measured against the live account rather than read off
+descriptions. The first is the one that matters most.
 
-All 21 voices on the account are English premade voices with no Kannada
-verification and no v3 listing. Every Kannada voice found is in the public Voice
-Library, and a library voice cannot be generated with until it is added to the
-account. Adding one changes the account and may consume a voice slot, so no
-script here does it automatically.
+### No Kannada voice anywhere is actually verified for Kannada
 
-```bash
-node scripts/add-shared-voice.mjs --list
-node scripts/add-shared-voice.mjs --voice-id eESo8CL7VOqMtWCh1ikK --yes
+All 20 Kannada voices in the Voice Library carry `verified_languages`, and every
+entry is **Hindi**, or English for two of them. Not one Kannada entry, and not
+one verified against v3. The models they are verified on, turbo_v2_5,
+flash_v2_5 and multilingual_v2, do not support Kannada at all.
+
+So "Kannada" in those names and descriptions is unverified copy. Casting one is
+a bet that a Hindi-verified clone, driven by a model it was never verified
+against, produces credible Kannada. It might. Nothing in the metadata says so,
+and nothing in this repository can hear whether it does.
+
+**This makes an Instant Voice Clone the strongest option on the table**, and it
+is not a new idea: `09` section 2 already says a clone of a real Kannada speaker
+will beat any stock voice on this script, and `05` section 6 rank 5 already asks
+for 30 to 45 seconds of Charulatha M. R. speaking Kannada to camera. One
+recording would then do three jobs: the clone, the founder's own voice on the
+silent K06 quote card, and `14` item 7.1's native-speaker confirmation.
+
+### A free plan cannot use library voices through the API
+
+Padhma was added to the account and called. The API answered:
+
+```
+HTTP 402  paid_plan_required
+"Free users cannot use library voices via the API.
+ Please upgrade your subscription to use this voice."
 ```
 
-### The plan carries no commercial licence
+Refused before synthesis, so it cost nothing, and the character balance is
+untouched at 0 of 10,000 used. But it is absolute, and every Kannada voice is a
+library voice.
 
-The account is on the **free** plan. ElevenLabs grants a commercial licence from
-Starter upward. This film is screened at a public event and published by a
-registered trust, so narration generated on the free plan would leave the trust
-using audio it is not licensed for.
+Separately confirmed, so the diagnosis is precise: **`eleven_v3` itself works on
+the free plan.** A premade voice returned 23.4 seconds of Kannada audio from 273
+characters. The gate is on library voices specifically, not on the model, not on
+v3 access, and not on credits.
 
-This is the same class of problem as the music licence and the photo consents,
-and it belongs in the same place: `14` item 5.2. The preflight blocks a real run
-on a non-commercial plan, and `--allow-noncommercial` exists only for a
-throwaway pronunciation test that will never reach the cut.
+**A paid plan is therefore unavoidable to hear any Kannada voice.**
 
-### Nobody has listened yet
+### The plan also carries no commercial licence
+
+ElevenLabs grants one from Starter upward. This film is screened at a public
+event and published by a registered trust, so narration generated on the free
+plan would leave the trust using audio it is not licensed for. That belongs in
+the same file as the music licence and the photo consents, `14` item 5.2.
+
+Both of these resolve with the same upgrade, which is convenient: the cheapest
+paid tier fixes the 402 and the licence together.
+
+### And nobody has listened yet
 
 Nothing in this pipeline can hear audio. The scorecard's subjective columns are
 empty on purpose. `14` item 7.1 needs a native Kannada speaker who is not the
 translator, and `02` section 7 needs trustee approval of a 30 second opening
 sample before the full read.
 
+### Voice already added
+
+`Padhma - Calm Kannada Audiobook` (`eESo8CL7VOqMtWCh1ikK`) is on the account
+now, taking the count from 21 to 22. It is unusable until the plan is upgraded.
+Nothing else was added.
+
 ## 2 · The order to audition in
 
-Metadata only. This is a running order, not a ranking of quality.
+Metadata only, and after section 1 the metadata is known to be thin: none of
+these is verified for Kannada. This is a running order for a listening test, not
+a ranking of Kannada quality.
+
+**Audition option 0, ahead of all of them: an Instant Voice Clone** of a Kannada
+speaker, ideally the founder. It is the only route where the Kannada is verified
+by construction rather than asserted in a product description.
 
 | # | Voice | ID | Why it is in this position |
 |---|---|---|---|

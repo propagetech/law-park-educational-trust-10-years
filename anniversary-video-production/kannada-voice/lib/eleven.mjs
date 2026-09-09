@@ -218,6 +218,20 @@ async function call(pathname, { method = "GET", body, query, accept } = {}, labe
         `${res.status}: the API key was rejected or lacks permission. ` +
         `Check the key in ELEVENLABS_API_KEY or ~/.elevenlabs_key. ${detail}`);
     }
+    if (res.status === 402) {
+      // Measured against the live account: a free plan is refused a Voice
+      // Library voice at the API before any synthesis happens, so this costs
+      // nothing but it is a hard stop. Premade voices and eleven_v3 itself
+      // both work on free; only library voices are gated.
+      throw new Error(
+        `402 on ${label || pathname}: the plan will not allow this voice ` +
+        `through the API.\n` +
+        `  A free plan cannot use Voice Library voices via the API at all, ` +
+        `whatever the character balance says.\n` +
+        `  Every Kannada voice found is a library voice, so Kannada narration ` +
+        `needs a paid plan.\n` +
+        `  Nothing was synthesised and no characters were spent. ${detail}`);
+    }
     if (res.status === 422) {
       throw new Error(
         `422 on ${label || pathname}. Usually the model cannot handle the ` +

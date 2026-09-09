@@ -58,35 +58,89 @@ different primary language, so `language=kn` returns nothing at all. The search
 in `lib/eleven.mjs` matches on name and description instead, and filters the
 results for genuine Kannada mentions.
 
-## 3 · The category matters more than the description
+## 3 · Two things the metadata claims that turned out to be false
 
-The library splits these voices into `high_quality` and `professional`.
-`professional` means a Professional Voice Clone, and ElevenLabs documents those
-as **weaker on v3** than designed or high quality voices. Since v3 is the only
-model that speaks Kannada, that caveat lands directly on this film. `09` section
-2 reached the same conclusion from the other direction.
+Both were found by adding a voice and calling the API, not by reading
+descriptions. They change how this list should be read.
 
-So a beautifully described `professional` voice ranks below a plainly described
-`high_quality` one until a preview proves otherwise.
+### Not one of the 20 voices is verified for Kannada
+
+Every one of them carries `verified_languages`, and every one of those entries
+is **Hindi**, or English for two of them. Not a single Kannada entry, and not one
+verified against v3:
+
+| Voice | Verified language | Verified on |
+|---|---|---|
+| Padhma - Calm Kannada Audiobook | `hi` | turbo_v2_5, flash_v2_5, multilingual_v2 |
+| Mani - Steady Kannada Storyteller | `hi` | turbo_v2_5, flash_v2_5 |
+| Aisiri - Warm Kannada Narration | `hi` | multilingual_v2, turbo_v2_5 |
+| Srinatha - Kannada Factual Documentary | `hi` | turbo_v2_5, flash_v2_5 |
+| Kannada - Surprised and Paranoid | `en` | multilingual_v2, turbo_v2_5 |
+| Sanjay | `en` | turbo_v2_5, flash_v2_5 |
+| ...and 14 more | `hi` | none list v3 |
+
+None of turbo_v2_5, flash_v2_5 or multilingual_v2 supports Kannada at all. So
+the word "Kannada" in these names and descriptions is **unverified copy**, and
+casting one of them is a bet that a Hindi-verified clone, driven by a model it
+was never verified against, produces credible Kannada.
+
+This is exactly the risk `09` section 2 names, and it makes that section's other
+recommendation the strongest option on the table: **an Instant Voice Clone of a
+real Kannada speaker will beat any of these.** `05` section 6 rank 5 already
+asks for 30 to 45 seconds of Charulatha M. R. speaking Kannada to camera. That
+recording would serve twice, and it would also answer `14` item 7.1.
+
+### The library's `category` does not mean what it looks like
+
+In the library, Padhma reads `high_quality` and Aisiri reads `professional`, and
+the first draft of this shortlist ranked on that difference. It does not survive
+contact with the account: once Padhma is added, the account reports
+`category: professional`, so it is a Professional Voice Clone too.
+
+The library `category` is a quality tier, not a clone type. It therefore says
+nothing about the one thing that mattered here, which is that ElevenLabs
+documents Professional Voice Clones as weaker on v3. Treat all 20 as
+professional clones until an account-side `category` says otherwise.
+
+### And a free plan cannot use any of them
+
+Adding Padhma and calling the API returns:
+
+```
+HTTP 402  paid_plan_required
+"Free users cannot use library voices via the API.
+ Please upgrade your subscription to use this voice."
+```
+
+Refused before synthesis, so it costs nothing, but it is absolute. Separately
+confirmed: **`eleven_v3` itself works fine on the free plan** with a premade
+voice, 273 characters returning 23.4 seconds of audio. The gate is on library
+voices specifically, not on the model and not on the character balance.
+
+Since every Kannada voice is a library voice, **Kannada narration requires a paid
+plan.** There is no free path to hearing any of these voices.
 
 ## 4 · Shortlist
 
-Machine-readable: `config/audition-shortlist.json`.
+Machine-readable: `config/audition-shortlist.json`. Read section 3 first: the
+`category` column below is the account-side clone type, and **no voice here is
+verified for Kannada.** This is a running order for a listening test, not a
+ranking of Kannada quality, which nothing in this repository can assess.
 
 ### Primary target, female, age impression 35 to 50
 
 | # | Voice | ID | Category | Why |
 |---|---|---|---|---|
-| 1 | Padhma - Calm Kannada Audiobook | `eESo8CL7VOqMtWCh1ikK` | high_quality | Audiobook is the closest register in the library to long-form documentary narration, and the category is the safer one on v3. Described as unhurried and measured, which is the brief. |
-| 2 | Sharadhi - Natural Kannada Conversation | `7B4TkucyQHy3r9hvAnhg` | high_quality | Female, high_quality, described as natural rather than performed. The conversational register is the risk: listen for whether it can carry a hall. |
-| 3 | Aisiri - Warm Kannada Narration | `1yebI4wPatIbQgkzinlP` | professional | The best description against the brief in the entire library: warm, well paced Kannada narration. Held third only because it is a Professional Voice Clone. |
+| 1 | Padhma - Calm Kannada Audiobook | `eESo8CL7VOqMtWCh1ikK` | professional | Audiobook is the closest register in the library to long-form documentary narration, and it is described as unhurried and measured, which is the brief. **Added to the account; verified for Hindi, not Kannada.** |
+| 2 | Sharadhi - Natural Kannada Conversation | `7B4TkucyQHy3r9hvAnhg` | professional | Female, described as natural rather than performed. The conversational register is the risk: listen for whether it can carry a hall. |
+| 3 | Aisiri - Warm Kannada Narration | `1yebI4wPatIbQgkzinlP` | professional | The best description against the brief in the entire library: warm, well paced Kannada narration. No longer held back relative to the others, since all 20 are professional clones. |
 
 ### Alternative, male, age impression 40 to 55
 
 | # | Voice | ID | Category | Why |
 |---|---|---|---|---|
-| 4 | Mani - Steady Kannada Storyteller | `1dRM7GYsStGPro8wPFGA` | high_quality | Described as sounding like someone who trusts the story enough not to perform it. That is the brief almost word for word. |
-| 5 | Srivatsa - Kannada Narration | `UeUC009F3NYPIArcZmq0` | high_quality | Rich and measured, audiobook lineage, high_quality. |
+| 4 | Mani - Steady Kannada Storyteller | `1dRM7GYsStGPro8wPFGA` | professional | Described as sounding like someone who trusts the story enough not to perform it. That is the brief almost word for word. |
+| 5 | Srivatsa - Kannada Narration | `UeUC009F3NYPIArcZmq0` | professional | Rich and measured, audiobook lineage. |
 | 6 | Srinatha - Kannada Factual Documentary | `QnERnlMSVcCo1wktWlfs` | professional | The only voice in the library that names documentary as its register. Professional, so v3 behaviour must be checked before it is trusted. |
 
 ## 5 · Rejected, with reasons

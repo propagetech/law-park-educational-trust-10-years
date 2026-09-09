@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-09T13:39:39.764Z",
+  "generated_at": "2026-09-09T14:02:21.805Z",
   "tiers": {
     "1": "verified_languages lists Kannada",
     "2": "labels, name or description mention Kannada, not verified",
@@ -7,6 +7,34 @@
     "4": "no Kannada or Indian-language evidence (excluded)"
   },
   "candidates": [
+    {
+      "voice_id": "eESo8CL7VOqMtWCh1ikK",
+      "name": "Padhma - Calm Kannada Audiobook",
+      "tier": 2,
+      "why": "name or description mentions Kannada",
+      "v3_verified_for_kannada": false,
+      "v3_capable": false,
+      "category": "professional",
+      "persona": {
+        "gender": "female",
+        "age": "middle_aged",
+        "accent": "standard",
+        "use_case": "narrative_story",
+        "descriptive": "calm"
+      },
+      "strengths": [
+        "female, the brief's primary target",
+        "age impression middle_aged",
+        "use case narrative_story"
+      ],
+      "risks": [
+        "Professional Voice Clone: documented as weaker on v3 than designed voices or Instant Voice Clones",
+        "no v3 model listed, and v3 is the only model that speaks Kannada"
+      ],
+      "preview_url": "https://storage.googleapis.com/eleven-public-prod/database/workspace/ed9b05e6324c457685490352e9a1ec90/voices/eESo8CL7VOqMtWCh1ikK/yfuqPYaBx2inuAytLCXk.mp3",
+      "kannada_preview_url": null,
+      "description": "Gentle, unhurried & deeply soothing, Padhma brings a slow, soft Kannada voice that gives every audiobook the space it needs to breathe. Her patient, measured delivery moves through stories, characters, and emotions at a pace that lets listeners truly absorb every word. Perfect for Kannada audiobook publishers, indie authors, and content creators building audio experiences."
+    },
     {
       "voice_id": "Xb7hH8MSUJpSbSDYk0k2",
       "name": "Alice - Clear, Engaging Educator",
@@ -59,7 +87,7 @@
         "no v3 model listed, and v3 is the only model that speaks Kannada",
         "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
       ],
-      "preview_url": "https://api.us.elevenlabs.io/v1/voices/JBFqnCBsd6RMkjVDRZzb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiJlNjIwNmQxYS0wNzIxLTQ3ODctYWFmYi0wNmE2ZTcwNWNhYzUubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
+      "preview_url": "https://api.us.elevenlabs.io/v1/voices/JBFqnCBsd6RMkjVDRZzb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiJlNjIwNmQxYS0wNzIxLTQ3ODctYWFmYi0wNmE2ZTcwNWNhYzUubXAzIiwidGltZXN0YW1wIjoxNzg4OTYyNDAwMDAwMDAwfQ%3D%3D",
       "kannada_preview_url": null,
       "description": "Warm resonance that instantly captivates listeners."
     },
@@ -87,7 +115,7 @@
         "no v3 model listed, and v3 is the only model that speaks Kannada",
         "Kannada unverified: a Kannada speaker must approve the preview before this voice is auditioned further"
       ],
-      "preview_url": "https://api.us.elevenlabs.io/v1/voices/nPczCjzI2devNBz1zQrb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiIyZGQzZTcyYy00ZmQzLTQyZjEtOTNlYS1hYmM1ZDRlNWFhMWQubXAzIiwidGltZXN0YW1wIjoxNzg4OTU4ODAwMDAwMDAwfQ%3D%3D",
+      "preview_url": "https://api.us.elevenlabs.io/v1/voices/nPczCjzI2devNBz1zQrb/previews/audio?payload=eyJ2b2ljZV9zb3VyY2UiOiJwcmVtYWRlIiwiZmlsZW5hbWUiOiIyZGQzZTcyYy00ZmQzLTQyZjEtOTNlYS1hYmM1ZDRlNWFhMWQubXAzIiwidGltZXN0YW1wIjoxNzg4OTYyNDAwMDAwMDAwfQ%3D%3D",
       "kannada_preview_url": null,
       "description": "Middle-aged man with a resonant and comforting tone. Great for narrations and advertisements."
     },

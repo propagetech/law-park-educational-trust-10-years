@@ -83,3 +83,9 @@ anniversary-video-production/**/tools/mix/
 anniversary-video-production/kannada-voice/audition-audio/
 anniversary-video-production/kannada-voice/final-narration/
 anniversary-video-production/kannada-voice/manifests/narration-generation-log.csv
+# Per-run derived plans and measurements. Rewritten by every invocation, so they
+# churn in every diff. The stable reports beside them are the record: the
+# shortlist, scorecard, recommendation and pronunciation notes.
+anniversary-video-production/kannada-voice/reports/audition-plan.json
+anniversary-video-production/kannada-voice/reports/audition-measurements.json
+anniversary-video-production/kannada-voice/reports/final-narration-plan.json

@@ -20,7 +20,9 @@ Current state, from the live account:
 
 | | |
 |---|---|
-| Plan | free, no commercial licence |
-| Kannada voices on the account | **0**, all 20 candidates are in the Voice Library |
+| Plan | free: no commercial licence, and **library voices are refused at the API with HTTP 402** |
+| Kannada voices on the account | 1 added (Padhma), unusable until the plan is upgraded |
+| Library Kannada voices verified for Kannada | **0 of 20.** All are verified for Hindi or English, on models that do not support Kannada |
+| eleven_v3 on this plan | works, confirmed with a premade voice |
 | Film | 00:05:37:22, 43 narrated lines, 3,585 characters, 93 wpm |
-| Audio generated | none. See [`reports/final-voice-recommendation.md`](reports/final-voice-recommendation.md) for what blocks it |
+| Audio generated | one v3 reachability diagnostic on a premade English voice. No audition, no narration. See [`reports/final-voice-recommendation.md`](reports/final-voice-recommendation.md) |

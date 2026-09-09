@@ -1,11 +1,12 @@
 # Timeline and render tools
 
-Six scripts. Together they rebuild the Kannada cut from the repository photographs
+Seven scripts. Together they rebuild the Kannada cut from the repository photographs
 and the Kannada script, with no manual step.
 
 ```bash
 python3 build_timeline.py timeline.json            # the timing table + consent register
 python3 make_srt.py timeline.json ../05-kannada-subtitles.srt
+python3 make_vtt.py                                # WebVTT for team-handoff.html
 python3 gfx.py ../05-kannada-subtitles.srt         # 133 Kannada graphics, via Chrome
 python3 vo.py                                      # scratch narration, fitted per line
 python3 film.py silent.mp4                         # 7,596 frames, ~3.5 min
@@ -35,6 +36,14 @@ Enforces the Kannada caption rules and refuses to emit a file quietly: it prints
 `no violations`, or it prints every line over 32 display clusters and every cue
 under 1.8 s. It also holds the whitelist of Kannada initials and the two personal
 names that must never be split across a line break.
+
+## make_vtt.py
+
+Converts the `.srt` into `../05-kannada-subtitles.vtt`. The `.srt` remains the
+editor deliverable; this exists only because browsers cannot read SRT, and
+`team-handoff.html` loads the `.vtt` as the player subtitle track. Takes no
+arguments and always writes next to the `.srt`. Re-run it after every
+`make_srt.py` run, or the handoff page will show stale captions.
 
 ## gfx.py
 

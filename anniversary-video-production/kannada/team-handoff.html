@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>LPET 10 Years · Kannada Film · Team Handoff</title>
+<link rel="icon" href="favicon-32x32.png" sizes="32x32">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
@@ -26,15 +27,23 @@
   --max: 1120px;
 }
 * { box-sizing: border-box; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--gold); color: var(--navy);
+  padding: 0.6rem 1rem; font-weight: 600; z-index: 100;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+:focus-visible { outline: 3px solid var(--gold-dim); outline-offset: 2px; }
 html { scroll-behavior: smooth; }
 body {
   margin: 0;
-  font-family: "Source Sans 3", "Noto Sans Kannada", system-ui, sans-serif;
+  font-family: "Source Sans 3", "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", system-ui, sans-serif;
   color: var(--ink);
   background: var(--cream);
   line-height: 1.55;
 }
-.kn { font-family: "Noto Sans Kannada", "Source Sans 3", sans-serif; }
+.kn { font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif; }
 a { color: var(--navy-mid); }
 a:hover { color: var(--gold-dim); }
 .wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
@@ -183,13 +192,37 @@ h2 {
 
 /* Tables */
 .table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.shot-scroll { max-height: 70vh; overflow: auto; }
 table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
 th, td { padding: 0.65rem 0.75rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
 th { background: var(--navy); color: #fff; font-weight: 600; position: sticky; top: 0; }
 tr:nth-child(even) td { background: #fbf8f2; }
 td.kn { font-size: 0.95rem; line-height: 1.5; }
-.mono { font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mono { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 0.86rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
 .silent td { opacity: 0.72; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+td.consent { font-size: 0.82rem; max-width: 15rem; }
+td.note { font-size: 0.82rem; color: var(--muted); max-width: 18rem; white-space: normal; }
+.cflag {
+  display: inline-block; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 0.1rem 0.4rem; border-radius: 4px; margin-bottom: 0.2rem;
+}
+.cflag.block { background: #f6e3e3; color: var(--block); }
+.cflag.clear { background: #e2efe8; color: var(--ok); }
+.cflag.check { background: #f7ecd8; color: var(--warn); }
+tr.blocked .rowhead { box-shadow: inset 3px 0 0 var(--block); }
+.rowhead {
+  background: none; color: inherit; font-weight: 400;
+  position: static; white-space: nowrap;
+}
+.rowhead .kn { display: block; color: var(--muted); font-size: 0.8rem; white-space: normal; }
+tr:nth-child(even) .rowhead { background: #fbf8f2; }
 .filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; align-items: center; }
 .filter-row input {
   flex: 1; min-width: 180px;
@@ -228,7 +261,19 @@ td.kn { font-size: 0.95rem; line-height: 1.5; }
   font-size: 0.95rem;
 }
 .checklist label:last-child { border-bottom: 0; }
-.checklist input { margin-top: 0.25rem; }
+.checklist input[type=checkbox] { margin-top: 0.3rem; flex: 0 0 auto; }
+.checklist label { flex-wrap: wrap; }
+.ck-label { flex: 1 1 16rem; }
+.ck-meta { display: flex; gap: 0.35rem; flex: 0 0 auto; }
+.owner-field {
+  font: inherit; font-size: 0.82rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf7;
+  min-width: 5.5rem; max-width: 8rem;
+}
+.owner-field[type=date] { min-width: 8.5rem; }
 
 footer {
   background: var(--navy);
@@ -238,15 +283,31 @@ footer {
 }
 footer strong { color: var(--gold); }
 
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
 @media print {
-  .top, .tabs, .filter-row, .no-print { display: none !important; }
+  .top, .tabs, .filter-row, .no-print, .skip-link, video { display: none !important; }
   .panel[hidden] { display: block !important; }
   body { background: #fff; }
   .hero { background: var(--navy); print-color-adjust: exact; }
+
+  /* The shot list and every scroll box must print in full, not one screenful. */
+  .table-wrap, .shot-scroll { max-height: none; overflow: visible; border: 0; }
+  #shotTable, .table-wrap { break-inside: auto; }
+  th { position: static !important; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  table { font-size: 0.78rem; }
+  .panel, .card { break-inside: avoid; }
 }
 </style>
 </head>
 <body>
+
+<a class="skip-link" href="#main">Skip to content</a>
 
 <header class="top">
   <div class="wrap top-inner">
@@ -258,6 +319,7 @@ footer strong { color: var(--gold); }
       <a href="#script">Script</a>
       <a href="#design">Design</a>
       <a href="#docs">Files</a>
+      <a href="#credits">Credits</a>
       <a href="#share">Share</a>
     </nav>
   </div>
@@ -278,25 +340,28 @@ footer strong { color: var(--gold); }
     <div class="alert">
       <strong>Status:</strong> Animatic exists with a scratch (macOS) voice for pacing only.
       Cast and record a live Kannada narrator. Do not ship the scratch track.
-      Nothing is cleared for public screening until consent and rights in section Decisions are done.
+      Nothing is cleared for public screening until the consent and rights items in
+      <a href="#decisions" style="color:var(--gold)">section 03, Decisions and clearances</a>, are done.
     </div>
   </div>
 </header>
 
-<main>
+<main id="main">
 <section id="watch">
   <div class="wrap">
     <p class="sec-kicker">01 · Picture reference</p>
     <h2>Watch the animatic</h2>
-    <p class="sec-lead">Judge pacing, pauses, graphics and shot order. Do not judge warmth of the voice — it is temporary.</p>
+    <p class="sec-lead">Judge pacing, pauses, graphics and shot order. Do not judge warmth of the voice: it is temporary.</p>
     <div class="player">
       <video controls preload="metadata" playsinline
         src="08-kannada-animatic-preview.mp4"
-        poster="">
+        poster="08-kannada-animatic-poster.jpg">
+        <track kind="subtitles" srclang="kn" label="ಕನ್ನಡ (Kannada)" src="05-kannada-subtitles.vtt" default>
         Your browser cannot play this MP4. Open <a href="08-kannada-animatic-preview.mp4">08-kannada-animatic-preview.mp4</a> directly.
       </video>
     </div>
     <p class="player-note">File: <a href="08-kannada-animatic-preview.mp4"><code>08-kannada-animatic-preview.mp4</code></a> · ~105 MB · notes in <a href="08-kannada-animatic-notes.md">08-kannada-animatic-notes.md</a>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note">Kannada subtitles are on by default from <a href="05-kannada-subtitles.vtt"><code>05-kannada-subtitles.vtt</code></a> (80 cues). Turn them off with the CC button in the player. The editor works from the <code>.srt</code>; the <code>.vtt</code> exists only so this page can show them. If the player shows no CC button, you are viewing the page from a location that blocks local files: unzip the pack first, then open this file from the unzipped folder.</p>
   </div>
 </section>
 
@@ -307,46 +372,49 @@ footer strong { color: var(--gold); }
     <p class="sec-lead">Click a role. Each person gets only what they need to move next.</p>
 
     <div class="tabs" role="tablist" aria-label="Team roles">
-      <button class="tab" role="tab" aria-selected="true" data-panel="p-owner">NGO owner / trustees</button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="p-director">Director / editor</button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="p-voice">Narrator / audio</button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="p-design">Designer / graphics</button>
-      <button class="tab" role="tab" aria-selected="false" data-panel="p-coord">Producer / coordinator</button>
+      <button class="tab" id="t-owner"    role="tab" aria-selected="true"  aria-controls="p-owner"    tabindex="0"  data-panel="p-owner">NGO owner / trustees</button>
+      <button class="tab" id="t-director" role="tab" aria-selected="false" aria-controls="p-director" tabindex="-1" data-panel="p-director">Director / editor</button>
+      <button class="tab" id="t-voice"    role="tab" aria-selected="false" aria-controls="p-voice"    tabindex="-1" data-panel="p-voice">Narrator / audio</button>
+      <button class="tab" id="t-design"   role="tab" aria-selected="false" aria-controls="p-design"   tabindex="-1" data-panel="p-design">Designer / graphics</button>
+      <button class="tab" id="t-coord"    role="tab" aria-selected="false" aria-controls="p-coord"    tabindex="-1" data-panel="p-coord">Producer / coordinator</button>
     </div>
 
-    <div id="p-owner" class="panel card" role="tabpanel">
+    <div id="p-owner" class="panel card" role="tabpanel" aria-labelledby="t-owner" tabindex="0">
       <span class="who">Trustees · NGO owner</span>
       <h3>Approve facts, faces, names, and the forward promise</h3>
       <ul>
-        <li>Answer blocking questions Q1–Q5 (and name spellings Q10–Q11) in <a href="#decisions">Decisions</a>.</li>
+        <li>Answer blocking questions Q1 to Q5, and the name spellings in Q10 and Q11, in <a href="#decisions">Decisions</a>.</li>
         <li>Approve the 40-second narrator audition sample before the full booth session.</li>
-        <li>Approve <span class="kn">K43</span> next-decade wording before it is recorded into the master.</li>
-        <li>Start guardian consent for children in 22 shots — longest lead item.</li>
+        <li>Approve <span class="mono">K43</span> next-decade wording before it is recorded into the master.</li>
+        <li>Start guardian consent for children in 22 shots. Longest lead item.</li>
+        <li><strong>Confirm every name in the end roll.</strong> The repository holds inconsistent spellings, near-duplicates and first-name-only entries. No name goes on screen until a trustee confirms the spelling and the person agrees to be named: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
         <li>Read: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06 trustee questions</a>, <a href="07-final-rights-and-approval-checklist.md">07 rights checklist</a>.</li>
+        <li>Evidence behind every claim in the script: <a href="../../anniversary-video-research/02-evidence-table.csv">02 evidence table</a>, <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv">03 impact and milestone data</a>, <a href="../../anniversary-video-research/01-source-of-truth.md">01 source of truth</a>.</li>
       </ul>
     </div>
 
-    <div id="p-director" class="panel card" role="tabpanel" hidden>
+    <div id="p-director" class="panel card" role="tabpanel" aria-labelledby="t-director" tabindex="0" hidden>
       <span class="who">Director · picture editor</span>
       <h3>Picture is largely locked; narration stem will replace the scratch</h3>
       <ul>
         <li>Source of timing truth: <a href="tools/timeline.json"><code>tools/timeline.json</code></a> (46 shots).</li>
         <li>Storyboard + crops: <a href="03-kannada-storyboard.md">03</a> · EDL: <a href="06-kannada-edit-decision-list.md">06</a>.</li>
         <li>When human WAV arrives: re-time with <code>build_timeline.py --from-audio</code> if line lengths drift; picture follows voice.</li>
-        <li>Protect silences and holds. Do not fill <strong>K06</strong>, the drop under <span class="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span>, or the refusal to climax on <strong>K43</strong>.</li>
+        <li>Protect silences and holds. Do not fill <strong>K06</strong>, the drop under <span class="kn" lang="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span>, or the refusal to climax on <strong>K43</strong>.</li>
         <li>Photography lives under <code>assets/images/timeline/</code> (paths in the shot table).</li>
       </ul>
     </div>
 
-    <div id="p-voice" class="panel card" role="tabpanel" hidden>
+    <div id="p-voice" class="panel card" role="tabpanel" aria-labelledby="t-voice" tabindex="0" hidden>
       <span class="who">Human narrator · recording engineer</span>
-      <h3>Female, 35–50 · warm, composed, dignified · ~105 wpm</h3>
+      <h3>Female, 35 to 50 · warm, composed, dignified · about 105 wpm</h3>
       <ul>
-        <li>Register: respected Kannada-medium headmistress addressing a hall — not orator, vlogger, or newsreader.</li>
+        <li>Register: respected Kannada-medium headmistress addressing a hall. Not orator, not vlogger, not newsreader.</li>
         <li>Booth script: <a href="01-kannada-final-script.md">01 final script</a> (print pronunciation sheet in section 4).</li>
-        <li>Audition first with Test B only (K11, K12, K13, K27, K29) — see table below. Full script only after trustee approval.</li>
-        <li>Deliver: WAV 48 kHz 24-bit mono; no limiter on the recorded file; 3 takes/line, 5 of K45; pickups P1–P7; 30 s room tone; signed release.</li>
+        <li>Audition first with Test B only (K11, K12, K13, K27, K29), listed in the table below. Full script only after trustee approval.</li>
+        <li>Deliver: WAV 48 kHz 24-bit mono; no limiter on the recorded file; 3 takes/line, 5 of K45; pickups P1 to P7; 30 s room tone; signed release.</li>
         <li>Full direction: <a href="02-kannada-voice-audition-plan.md">02 audition plan</a> section 8.</li>
+        <li><strong>Interim synthetic read</strong> (for a trustee preview only, never for the hall): <a href="09-elevenlabs-narration-guide.md">09 ElevenLabs guide</a> and the paste-ready <a href="10-cursor-elevenlabs-prompt.md">10 Cursor prompt</a>. Kannada works on <code>eleven_v3</code> only.</li>
         <li><strong>Brief:</strong> this is a welcome, not an appeal. Read it to the people in the hall, not about them.</li>
       </ul>
       <p style="margin:1rem 0 0.4rem;font-weight:600">Audition copy (Test B)</p>
@@ -354,18 +422,18 @@ footer strong { color: var(--gold); }
         <table>
           <thead><tr><th>Shot</th><th>~s</th><th>Kannada</th></tr></thead>
           <tbody>
-            <tr><td class="mono">K11</td><td>3.8</td><td class="kn">2016ರಲ್ಲಿ ಅವರು ಮೊದಲ ಶಾಲಾ ಭೇಟಿ ಮಾಡಿದರು.</td></tr>
-            <tr><td class="mono">K12</td><td>3.1</td><td class="kn">ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.</td></tr>
-            <tr><td class="mono">K13</td><td>5.0</td><td class="kn">ಅದೇ ಭೇಟಿಯಲ್ಲಿ ನೂರೈವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸ್ಟೀಲ್ ತಟ್ಟೆ ಮತ್ತು ಲೋಟ ವಿತರಿಸಲಾಯಿತು.</td></tr>
-            <tr><td class="mono">K27</td><td>5.2</td><td class="kn">ನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.</td></tr>
-            <tr><td class="mono">K29</td><td>4.1</td><td class="kn">ಮತ್ತು ಆ ಹಣ ನೇರವಾಗಿ ಶಾಲೆಗೇ ಸಲ್ಲುತ್ತದೆ. ಬೇರೆ ಯಾರ ಕೈಗೂ ಅಲ್ಲ.</td></tr>
+            <tr><td class="mono">K11</td><td>3.8</td><td class="kn" lang="kn">2016ರಲ್ಲಿ ಅವರು ಮೊದಲ ಶಾಲಾ ಭೇಟಿ ಮಾಡಿದರು.</td></tr>
+            <tr><td class="mono">K12</td><td>3.1</td><td class="kn" lang="kn">ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.</td></tr>
+            <tr><td class="mono">K13</td><td>5.0</td><td class="kn" lang="kn">ಅದೇ ಭೇಟಿಯಲ್ಲಿ ನೂರೈವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸ್ಟೀಲ್ ತಟ್ಟೆ ಮತ್ತು ಲೋಟ ವಿತರಿಸಲಾಯಿತು.</td></tr>
+            <tr><td class="mono">K27</td><td>5.2</td><td class="kn" lang="kn">ನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.</td></tr>
+            <tr><td class="mono">K29</td><td>4.1</td><td class="kn" lang="kn">ಮತ್ತು ಆ ಹಣ ನೇರವಾಗಿ ಶಾಲೆಗೇ ಸಲ್ಲುತ್ತದೆ. ಬೇರೆ ಯಾರ ಕೈಗೂ ಅಲ್ಲ.</td></tr>
           </tbody>
         </table>
       </div>
-      <p class="player-note"><strong>K12 must land as three sentences</strong> with full stops, not a rising list. <span class="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span> on K27 is level and quiet — the film’s turn.</p>
+      <p class="player-note"><strong>K12 must land as three sentences</strong> with full stops, not a rising list. <span class="kn" lang="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span> on K27 is level and quiet. It is the turn of the film.</p>
     </div>
 
-    <div id="p-design" class="panel card" role="tabpanel" hidden>
+    <div id="p-design" class="panel card" role="tabpanel" aria-labelledby="t-design" tabindex="0" hidden>
       <span class="who">Motion / graphics designer</span>
       <h3>Every on-screen string is already specified</h3>
       <ul>
@@ -373,19 +441,24 @@ footer strong { color: var(--gold); }
         <li>Fonts: Noto Serif Kannada (titles), Noto Sans Kannada (body/lower thirds). <strong>Never track Kannada. Never force-uppercase Kannada.</strong></li>
         <li>Palette: navy <code>#1c1c2e</code>, gold body on navy <code>#e0b06a</code>, white titles.</li>
         <li>Repo tool <code>gfx.py</code> renders cards via headless Chrome (HarfBuzz). Do not move Kannada text to Pillow/ffmpeg drawtext.</li>
+        <li>Bilingual string reference for an English cut later: <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md">12 onscreen text and lower thirds</a>.</li>
+        <li>End roll copy in both languages: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>. Build it only after trustees confirm spellings.</li>
         <li>See <a href="#design">Design tokens</a> on this page.</li>
       </ul>
     </div>
 
-    <div id="p-coord" class="panel card" role="tabpanel" hidden>
+    <div id="p-coord" class="panel card" role="tabpanel" aria-labelledby="t-coord" tabindex="0" hidden>
       <span class="who">Producer · coordinator</span>
       <h3>Sequence the blockers; keep one source of truth</h3>
       <ol>
         <li>Share this HTML pack (see <a href="#share">Share</a>).</li>
         <li>Book narrator auditions; schedule trustee listen.</li>
         <li>Drive consent + Udayavani + music licence in parallel with booth booking.</li>
-        <li>Do not hand-edit timecodes in 01/03/05/06 — re-run tools from <code>timeline.json</code>.</li>
+        <li>Run the end-roll name verification with the trustees in parallel: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>, section 4. It gates the last shot of the film.</li>
+        <li>Do not hand-edit timecodes in 01/03/05/06. Re-run the tools from <code>timeline.json</code>: <a href="tools/README.md">tools/README.md</a>.</li>
         <li>Governing checklists: <a href="07-final-rights-and-approval-checklist.md">07</a> and research <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md">14</a>.</li>
+        <li>After the film is approved, social cutdowns are already written: <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md">11 teaser scripts</a>.</li>
+        <li>Packing and sending this folder: <a href="SHARE-PACK.md">SHARE-PACK.md</a>.</li>
       </ol>
     </div>
   </div>
@@ -395,28 +468,33 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker">03 · Open gates</p>
     <h2>Decisions and clearances</h2>
-    <p class="sec-lead">Checkboxes are local to your browser (a coordination aid). Final sign-off lives with the Trust.</p>
+    <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
+    <div class="card no-print" style="margin-bottom:1rem;background:#fffdf7;border-left:4px solid var(--gold)">
+      <p style="margin:0 0 0.35rem;font-weight:600">Who chases these</p>
+      <p style="margin:0;font-size:0.95rem;color:var(--muted)">Producer / coordinator: <input class="owner-field" style="min-width:11rem" type="text" data-k="coord-name" placeholder="name" aria-label="Coordinator name"> · <input class="owner-field" style="min-width:13rem" type="text" data-k="coord-contact" placeholder="phone or email" aria-label="Coordinator contact"> · target screening date <input class="owner-field" type="date" data-k="coord-date" aria-label="Target screening date">. Send every answer to this one person so the documents stay a single source of truth.</p>
+    </div>
 
     <div class="grid grid-2">
       <div class="card checklist">
         <h3><span class="badge badge-block">BLOCKING</span> Trustee answers first</h3>
-        <label><input type="checkbox" data-k="q1"> <span><strong>Q1</strong> Cumulative students / geography — or keep none on screen</span></label>
-        <label><input type="checkbox" data-k="q2"> <span><strong>Q2</strong> Founding year: 2012 start / 2016 registration, or 2016 start?</span></label>
-        <label><input type="checkbox" data-k="q3"> <span><strong>Q3</strong> Award: certificate facts only (recommended), or ministers / “one of 25”?</span></label>
-        <label><input type="checkbox" data-k="q4"> <span><strong>Q4</strong> Which children may appear; signed guardian releases held?</span></label>
-        <label><input type="checkbox" data-k="q5"> <span><strong>Q5</strong> 2026 content + next-decade promise (<span class="kn">K43</span>)</span></label>
-        <label><input type="checkbox" data-k="q10"> <span><strong>Q10–11</strong> Exact Kannada spellings: <span class="kn">ಚಾರುಲತಾ ಎಂ. ಆರ್.</span> · <span class="kn">ಎಸ್. ಎಂ. ಮಂಜುನಾಥ</span></span></label>
+        <label><input type="checkbox" data-k="q1"> <span class="ck-label"><strong>Q1</strong> Cumulative students and geography, or keep none on screen</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q1-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q1-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q2"> <span class="ck-label"><strong>Q2</strong> Founding year: 2012 start / 2016 registration, or 2016 start?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q2-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q2-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q3"> <span class="ck-label"><strong>Q3</strong> Award: certificate facts only (recommended), or ministers / “one of 25”?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q3-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q3-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q4"> <span class="ck-label"><strong>Q4</strong> Which children may appear; signed guardian releases held?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q4-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q4-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q5"> <span class="ck-label"><strong>Q5</strong> 2026 content + next-decade promise (<span class="mono">K43</span>)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q5-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q5-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q10"> <span class="ck-label"><strong>Q10, Q11</strong> Exact Kannada spellings: <span class="kn" lang="kn">ಚಾರುಲತಾ ಎಂ. ಆರ್.</span> · <span class="kn" lang="kn">ಎಸ್. ಎಂ. ಮಂಜುನಾಥ</span></span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q10-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q10-by" aria-label="Due date"></span></label>
       </div>
       <div class="card checklist">
         <h3><span class="badge badge-block">BLOCKING</span> Before any public screening</h3>
-        <label><input type="checkbox" data-k="c1"> Guardian consent for identifiable children (22 shots)</label>
-        <label><input type="checkbox" data-k="c2"> School premises permissions</label>
-        <label><input type="checkbox" data-k="c3"> Udayavani written permission for clipping (<span class="kn">K36</span>)</label>
-        <label><input type="checkbox" data-k="c4"> Partner name clearances (Belaku, Soukhya, Nisarga, District Health)</label>
-        <label><input type="checkbox" data-k="c5"> Music licence (event + YouTube + web; no vocals)</label>
-        <label><input type="checkbox" data-k="c6"> Narrator release signed (event, site, YT, social, donors)</label>
-        <label><input type="checkbox" data-k="c7"> Native Kannada speaker (not translator) read-aloud of full script</label>
-        <label><input type="checkbox" data-k="c8"> Trustee approval of narrator sample before full record</label>
+        <label><input type="checkbox" data-k="c1"> <span class="ck-label">Guardian consent for identifiable children (22 shots)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c1-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c1-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c2"> <span class="ck-label">School premises permissions</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c2-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c2-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c3"> <span class="ck-label">Udayavani written permission for clipping (<span class="mono">K36</span>)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c3-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c3-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c4"> <span class="ck-label">Partner name clearances (Belaku, Soukhya, Nisarga, District Health)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c4-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c4-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c5"> <span class="ck-label">Music licence (event + YouTube + web; no vocals)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c5-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c5-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c6"> <span class="ck-label">Narrator release signed (event, site, YT, social, donors)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c6-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c6-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c7"> <span class="ck-label">Native Kannada speaker (not translator) read-aloud of full script</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c7-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c7-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c9"> <span class="ck-label">End-roll names verified: spelling confirmed by a trustee and consent to be named (<a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13</a>, section 4)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c9-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c9-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c8"> <span class="ck-label">Trustee approval of narrator sample before full record</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c8-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c8-by" aria-label="Due date"></span></label>
       </div>
     </div>
     <p class="player-note" style="margin-top:1rem">Full question list: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06-fact-check-and-trustee-questions.md</a>. Kannada cut checklist: <a href="07-final-rights-and-approval-checklist.md">07</a>.</p>
@@ -427,28 +505,34 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker">04 · Spoken text</p>
     <h2>Shot list and narration</h2>
-    <p class="sec-lead">43 lines · 3,585 characters. Source: <code>tools/timeline.json</code>. Do not rewrite wording without Trust sign-off.</p>
+    <p class="sec-lead">43 lines · 3,585 characters across 46 shots. Source: <code>tools/timeline.json</code>. Do not rewrite wording without Trust sign-off. <strong>Consent status is per shot:</strong> 22 shots are blocked until guardian or partner clearance is in hand, so read that column before you cut anything for a screening.</p>
     <div class="filter-row no-print">
-      <input id="shotFilter" type="search" placeholder="Filter by shot id, Kannada text, asset…" aria-label="Filter shots">
+      <input id="shotFilter" type="search" placeholder="Filter by shot id, Kannada text, asset, consent, note…" aria-label="Filter shots">
       <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="spokenOnly"> Spoken lines only</label>
+      <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="blockedOnly"> Consent-blocked only</label>
+      <span id="shotCount" class="mono" style="color:var(--muted)"></span>
     </div>
-    <div class="table-wrap" style="max-height:70vh;overflow:auto">
+    <div class="table-wrap shot-scroll">
       <table id="shotTable">
+        <caption class="sr-only">Shot list with timecodes, Kannada narration, on-screen text, asset, consent status and direction notes for all 46 shots</caption>
         <thead>
           <tr>
-            <th>Shot</th>
-            <th>In</th>
-            <th>Dur</th>
-            <th>Speech</th>
-            <th>Narration</th>
-            <th>On-screen</th>
-            <th>Asset</th>
+            <th scope="col">Shot</th>
+            <th scope="col">In</th>
+            <th scope="col">Dur</th>
+            <th scope="col">Speech</th>
+            <th scope="col">Narration</th>
+            <th scope="col">On-screen</th>
+            <th scope="col">Asset</th>
+            <th scope="col">Consent</th>
+            <th scope="col">Direction note</th>
           </tr>
         </thead>
         <tbody id="shotBody"></tbody>
       </table>
     </div>
-    <p class="player-note">Subtitles file: <a href="05-kannada-subtitles.srt">05-kannada-subtitles.srt</a>. Creative brief: <a href="../../anniversary-video-research/07-bilingual-creative-brief.md">07 brief</a>.</p>
+    <p class="player-note">Consent wording comes straight from <a href="../../anniversary-video-research/04-media-inventory.csv">04 media inventory</a>; the worklist to clear it is <a href="07-final-rights-and-approval-checklist.md">07</a>. Subtitles: <a href="05-kannada-subtitles.srt">05-kannada-subtitles.srt</a> (editor) and <a href="05-kannada-subtitles.vtt">.vtt</a> (this page). Creative brief: <a href="../../anniversary-video-research/07-bilingual-creative-brief.md">07 brief</a>. Asset gaps and rejected duplicates: <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md">05 asset audit</a>.</p>
+    <p class="player-note no-print"><strong>Printing this table:</strong> use your browser print dialog. The print stylesheet unclips the scroll box, so all 46 rows come out, and it hides the player, filters and navigation. Landscape is the right orientation.</p>
   </div>
 </section>
 
@@ -456,7 +540,7 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker">05 · Look</p>
     <h2>Design tokens</h2>
-    <p class="sec-lead">Match the film cards. Emotion target: quiet pride, earned over time — not pity, not triumph.</p>
+    <p class="sec-lead">Match the film cards. Emotion target: quiet pride, earned over time. Not pity, not triumph.</p>
     <div class="grid grid-3">
       <div class="card">
         <h3>Colour</h3>
@@ -468,15 +552,15 @@ footer strong { color: var(--gold); }
         <h3>Type</h3>
         <ul>
           <li>Titles: Noto Serif Kannada 700</li>
-          <li>Body / L3: Noto Sans Kannada 500–600</li>
+          <li>Body / L3: Noto Sans Kannada 500 to 600</li>
           <li>Year numerals: Playfair Display 900 (Latin only)</li>
           <li>Tracking on Kannada: <strong>0</strong></li>
         </ul>
       </div>
       <div class="card">
         <h3>Words never used</h3>
-        <p class="kn" style="font-size:0.9rem;margin:0">ಫಲಾನುಭವಿ · ಬಡ ಮಕ್ಕಳು · ಅಸಹಾಯಕ · ದೀನ · ಸಬಲೀಕರಣ · ಜೀವನ ಪರಿವರ್ತನೆ · ಉದ್ಧಾರ</p>
-        <p style="margin:0.6rem 0 0;font-size:0.9rem;color:var(--muted)">Hold glossary: <span class="kn">ವಿದ್ಯಾರ್ಥಿವೇತನ</span> (not scholarship loanword), <span class="kn">ಬುಡಕಟ್ಟು</span>, <span class="kn">ನೆರವು ನೀಡಿದವರು</span> on cards.</p>
+        <p class="kn" lang="kn" style="font-size:0.9rem;margin:0">ಫಲಾನುಭವಿ · ಬಡ ಮಕ್ಕಳು · ಅಸಹಾಯಕ · ದೀನ · ಸಬಲೀಕರಣ · ಜೀವನ ಪರಿವರ್ತನೆ · ಉದ್ಧಾರ</p>
+        <p style="margin:0.6rem 0 0;font-size:0.9rem;color:var(--muted)">Hold glossary: <span class="kn" lang="kn">ವಿದ್ಯಾರ್ಥಿವೇತನ</span> (not scholarship loanword), <span class="kn" lang="kn">ಬುಡಕಟ್ಟು</span>, <span class="kn" lang="kn">ನೆರವು ನೀಡಿದವರು</span> on cards.</p>
       </div>
     </div>
   </div>
@@ -486,7 +570,7 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker">06 · Library</p>
     <h2>Documents and assets</h2>
-    <p class="sec-lead">Open from this folder. Markdown opens in any editor; keep relative paths intact when you zip.</p>
+    <p class="sec-lead">Every document in the pack is listed here. Markdown opens in any editor; CSV opens in Excel or Numbers. Keep relative paths intact when you zip, or the links break.</p>
     <div class="grid grid-2">
       <div class="card doc">
         <h3>Kannada production</h3>
@@ -499,7 +583,12 @@ footer strong { color: var(--gold); }
         <a href="07-final-rights-and-approval-checklist.md"><span class="name">07 · Rights &amp; approval</span><span class="for">Trust · producer</span></a>
         <a href="08-kannada-animatic-preview.mp4"><span class="name">08 · Animatic preview (.mp4)</span><span class="for">Everyone</span></a>
         <a href="08-kannada-animatic-notes.md"><span class="name">08 · Animatic notes</span><span class="for">Everyone</span></a>
+        <a href="05-kannada-subtitles.vtt"><span class="name">05 · Subtitles (.vtt)</span><span class="for">This page only</span></a>
+        <a href="09-elevenlabs-narration-guide.md"><span class="name">09 · ElevenLabs narration guide</span><span class="for">Interim scratch read</span></a>
+        <a href="10-cursor-elevenlabs-prompt.md"><span class="name">10 · Cursor prompt (ElevenLabs)</span><span class="for">Whoever runs the TTS</span></a>
         <a href="tools/timeline.json"><span class="name">tools/timeline.json</span><span class="for">Timing source of truth</span></a>
+        <a href="tools/README.md"><span class="name">tools/README.md</span><span class="for">How to re-run the build</span></a>
+        <a href="SHARE-PACK.md"><span class="name">SHARE-PACK.md</span><span class="for">Producer · how to send</span></a>
       </div>
       <div class="card doc">
         <h3>Research / bilingual</h3>
@@ -511,6 +600,38 @@ footer strong { color: var(--gold); }
         <a href="../../anniversary-video-research/04-media-inventory.csv"><span class="name">04 · Media inventory</span><span class="for">Consent worklist</span></a>
         <a href="../../assets/images/timeline/"><span class="name">assets/images/timeline/</span><span class="for">Photography pool</span></a>
         <a href="../../anniversary-video-research/00-project-map.md"><span class="name">00 · Project map</span><span class="for">Orientation</span></a>
+        <a href="../../anniversary-video-research/01-source-of-truth.md"><span class="name">01 · Source of truth</span><span class="for">What is established</span></a>
+        <a href="../../anniversary-video-research/02-evidence-table.csv"><span class="name">02 · Evidence table</span><span class="for">Backs every claim</span></a>
+        <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv"><span class="name">03 · Impact and milestone data</span><span class="for">Numbers on screen</span></a>
+        <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md"><span class="name">05 · Asset audit and gaps</span><span class="for">What still needs shooting</span></a>
+        <a href="../../anniversary-video-research/10-bilingual-storyboard-and-edit-plan.md"><span class="name">10 · Bilingual storyboard and edit plan</span><span class="for">English cut later</span></a>
+        <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md"><span class="name">11 · Short teaser scripts</span><span class="for">Social cutdowns</span></a>
+        <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><span class="name">12 · Onscreen text and lower thirds</span><span class="for">Designer · bilingual</span></a>
+        <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><span class="name">13 · Credits and acknowledgements</span><span class="for">Trustees · name check</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credits">
+  <div class="wrap">
+    <p class="sec-kicker">07 · Last shot of the film</p>
+    <h2>End roll and acknowledgements</h2>
+    <p class="sec-lead">The credit roll is written in both languages, but it is not buildable yet. The repository holds inconsistent spellings, near-duplicates and first-name-only entries, so the roll is gated on a trustee name check.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>The rule</h3>
+        <p style="margin:0 0 0.6rem"><strong>No name goes on screen until a trustee has confirmed its spelling and the person has agreed to be named.</strong></p>
+        <p style="margin:0;color:var(--muted);font-size:0.95rem">This covers trustees, staff, volunteers, donors and partner organisations. Getting a name wrong in a ten-year film is the one error the audience will remember, and it cannot be fixed after the screening.</p>
+      </div>
+      <div class="card">
+        <h3>What to do</h3>
+        <ol style="margin:0">
+          <li>Trustees work through the verification list in <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
+          <li>Producer records each confirmed spelling and each consent to be named.</li>
+          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 05</a>.</li>
+          <li>Tick the end-roll gate in <a href="#decisions">section 03</a> when it is done.</li>
+        </ol>
       </div>
     </div>
   </div>
@@ -518,7 +639,7 @@ footer strong { color: var(--gold); }
 
 <section id="share">
   <div class="wrap">
-    <p class="sec-kicker">07 · How to send this</p>
+    <p class="sec-kicker">08 · How to send this</p>
     <h2>Share the pack</h2>
     <p class="sec-lead">External creatives need the folder tree, not only this HTML, so relative links and the MP4 keep working.</p>
     <div class="grid grid-2">
@@ -532,11 +653,12 @@ footer strong { color: var(--gold); }
         </ul>
         <p>Then tell people to open:<br>
         <code>anniversary-video-production/kannada/team-handoff.html</code></p>
+        <p class="player-note" style="margin-top:0.8rem"><strong>The zip will be about 110 MB</strong>, because the animatic alone is 105 MB. That is over the limit on Gmail (25 MB), Outlook (20 MB) and WhatsApp (about 100 MB for documents). Send it on Drive, WeTransfer or a shared folder, or zip without the MP4 and share the video as a separate unlisted upload. Full instructions: <a href="SHARE-PACK.md">SHARE-PACK.md</a>.</p>
       </div>
       <div class="card">
         <h3>One-liner for WhatsApp / email</h3>
         <p style="background:#f3efe6;padding:0.9rem;border-radius:8px;font-size:0.95rem;margin:0">
-          “Kannada 10-year film pack attached. Open <strong>team-handoff.html</strong> first — animatic, role briefs, trustee decisions, full shot list, and links to script/design/rights. Narration will be a human Kannada voice; the voice in the preview is temporary.”
+          “Kannada 10-year film pack attached. Open <strong>team-handoff.html</strong> first: animatic, role briefs, trustee decisions, the full shot list with consent status, and links to script, design and rights. Narration will be a human Kannada voice; the voice in the preview is temporary and must not be shown in the hall.”
         </p>
         <p class="player-note" style="margin-top:0.8rem">Do not include <code>~/.elevenlabs_key</code>, API keys, or any generated ElevenLabs audition folder if you prefer to keep experiments private. Synthetic path is abandoned for delivery.</p>
       </div>
@@ -559,6 +681,19 @@ const SHOTS = [{"sid": "K01", "tc_in": "00:00:00:00", "tc_out": "00:00:07:00", "
 const body = document.getElementById("shotBody");
 const filter = document.getElementById("shotFilter");
 const spokenOnly = document.getElementById("spokenOnly");
+const blockedOnly = document.getElementById("blockedOnly");
+const shotCount = document.getElementById("shotCount");
+
+/* Consent wording comes from 04-media-inventory.csv via timeline.json.
+   Classify it so the blocker is visible per shot, not buried in a CSV. */
+function consentClass(c) {
+  const v = (c || "").toUpperCase();
+  if (!v || v === "N/A") return null;
+  if (v.includes("BLOCKING") || v.includes("COPYRIGHT")) return "block";
+  if (v.startsWith("CLEAR")) return "clear";
+  return "check";
+}
+const CFLAG_TEXT = { block: "Blocked", clear: "Clear", check: "Check" };
 
 function esc(s) {
   return String(s ?? "").replace(/[&<>"']/g, c => ({
@@ -569,40 +704,72 @@ function esc(s) {
 function render() {
   const q = (filter.value || "").trim().toLowerCase();
   const only = spokenOnly.checked;
+  const blocked = blockedOnly.checked;
   body.innerHTML = "";
+  let shown = 0, shownBlocked = 0;
   for (const s of SHOTS) {
     const narr = s.narr || "";
     if (only && !narr.trim()) continue;
-    const blob = [s.sid, narr, s.osd, s.asset, s.path, s.sec, s.note].join(" ").toLowerCase();
+    if (blocked && consentClass(s.consent) !== "block") continue;
+    const blob = [s.sid, narr, s.osd, s.asset, s.path, s.sec, s.note, s.consent].join(" ").toLowerCase();
     if (q && !blob.includes(q)) continue;
     const tr = document.createElement("tr");
     if (!narr.trim()) tr.className = "silent";
-    const assetLink = s.path
-      ? `<a href="../../${esc(s.path)}">${esc(s.asset || "—")}</a>`
-      : esc(s.asset || "—");
+    const cls = consentClass(s.consent);
+    if (cls === "block") tr.classList.add("blocked");
+    const isFile = /\/.+\.[a-z0-9]{2,4}$/i.test(s.path || "");
+    const assetLink = isFile
+      ? `<a href="../../${esc(s.path)}">${esc(s.asset || "n/a")}</a>`
+      : `${esc(s.asset || "n/a")}${s.path ? `<br><span style="color:#5c5c6e;font-size:0.8rem">${esc(s.path)}</span>` : ""}`;
+    const consentCell = cls
+      ? `<span class="cflag ${cls}">${CFLAG_TEXT[cls]}</span><br>${esc(s.consent)}`
+      : `<span style="color:#888">n/a</span>`;
     tr.innerHTML = `
-      <td class="mono"><strong>${esc(s.sid)}</strong><br><span style="color:#5c5c6e;font-size:0.8rem">${esc(s.kind)} · ${esc(s.sec)}</span></td>
+      <th scope="row" class="mono rowhead"><strong>${esc(s.sid)}</strong><br><span class="kn" lang="kn">${esc(s.kind)} · ${esc(s.sec)}</span></th>
       <td class="mono">${esc(s.tc_in)}</td>
       <td class="mono">${esc(s.dur)}s</td>
-      <td class="mono">${narr.trim() ? esc(s.speech) + "s" : "—"}</td>
-      <td class="kn">${narr.trim() ? esc(narr) : "<em style='color:#888'>silence / hold</em>"}</td>
-      <td class="kn">${esc(s.osd || "—")}</td>
-      <td>${assetLink}</td>`;
+      <td class="mono">${narr.trim() ? esc(s.speech) + "s" : "n/a"}</td>
+      <td class="kn" lang="kn">${narr.trim() ? esc(narr) : "<em lang='en' style='color:#888'>silence / hold</em>"}</td>
+      <td class="kn" lang="kn">${esc(s.osd) || "<span lang='en' style='color:#888'>none</span>"}</td>
+      <td>${assetLink}</td>
+      <td class="consent">${consentCell}</td>
+      <td class="note">${esc(s.note) || ""}</td>`;
     body.appendChild(tr);
+    shown++;
+    if (cls === "block") shownBlocked++;
   }
+  shotCount.textContent = shown + " of " + SHOTS.length + " shots, " + shownBlocked + " consent-blocked";
 }
 
 filter.addEventListener("input", render);
 spokenOnly.addEventListener("change", render);
+blockedOnly.addEventListener("change", render);
 render();
 
-/* Role tabs */
-document.querySelectorAll(".tab").forEach(btn => {
-  btn.addEventListener("click", () => {
-    document.querySelectorAll(".tab").forEach(b => b.setAttribute("aria-selected", "false"));
-    document.querySelectorAll(".panel").forEach(p => p.hidden = true);
-    btn.setAttribute("aria-selected", "true");
-    document.getElementById(btn.dataset.panel).hidden = false;
+/* Role tabs: click plus full keyboard support (arrows, Home, End) */
+const tabs = Array.from(document.querySelectorAll(".tab"));
+
+function selectTab(btn, focus) {
+  tabs.forEach(b => {
+    const on = b === btn;
+    b.setAttribute("aria-selected", on ? "true" : "false");
+    b.tabIndex = on ? 0 : -1;
+    document.getElementById(b.dataset.panel).hidden = !on;
+  });
+  if (focus) btn.focus();
+}
+
+tabs.forEach((btn, i) => {
+  btn.addEventListener("click", () => selectTab(btn, false));
+  btn.addEventListener("keydown", e => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    let next = null;
+    if (step) next = tabs[(i + step + tabs.length) % tabs.length];
+    else if (e.key === "Home") next = tabs[0];
+    else if (e.key === "End") next = tabs[tabs.length - 1];
+    if (!next) return;
+    e.preventDefault();
+    selectTab(next, true);
   });
 });
 
@@ -615,13 +782,25 @@ function saveChecks(map) {
   localStorage.setItem(KEY, JSON.stringify(map));
 }
 const checks = loadChecks();
-document.querySelectorAll(".checklist input[type=checkbox]").forEach(el => {
+document.querySelectorAll("input[type=checkbox][data-k]").forEach(el => {
   const k = el.dataset.k;
   el.checked = !!checks[k];
   el.addEventListener("change", () => {
     checks[k] = el.checked;
     saveChecks(checks);
   });
+});
+
+/* Owner and due-date fields persist the same way. Same caveat: this browser only. */
+document.querySelectorAll(".owner-field[data-k]").forEach(el => {
+  const k = el.dataset.k;
+  if (typeof checks[k] === "string") el.value = checks[k];
+  el.addEventListener("input", () => {
+    checks[k] = el.value;
+    saveChecks(checks);
+  });
+  /* Do not let a click on the field toggle the checkbox in the same label. */
+  el.addEventListener("click", e => e.stopPropagation());
 });
 </script>
 </body>

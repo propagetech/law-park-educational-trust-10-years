@@ -48,7 +48,10 @@ SCRATCH_VO = "vo/scratch_narration.wav"
 # consent-blocked shots is read from timeline.json rather than hard-coded.
 GATES = [
     ("narration",
-     "The narration is the macOS 'say' scratch track, not a human Kannada voice.",
+     "The narration is an ElevenLabs synthesised read on an English-verified "
+     "voice, not a human Kannada voice. `14` item 7.1 still needs a native "
+     "Kannada speaker who is not the translator, and the generating account "
+     "holds no commercial licence.",
      "02-kannada-voice-audition-plan.md"),
     ("consent",
      "{n} of 46 shots carry unresolved guardian or partner consent.",
@@ -152,11 +155,29 @@ def main():
     #    -14 LUFS is YouTube's own normalisation target, so mastering to it means
     #    YouTube leaves the level alone. The animatic used -16 for hall playback.
     print("\n2/2  mux narration and encode")
+    # Two-pass loudnorm with linear=true, not the single pass this used to do.
+    # Single-pass normalisation is dynamic: it raises gain during quiet
+    # passages, which lifts the noise floor inside K06, K12, K27 and K34. Those
+    # four silences are the spine of the film's audio design (`06` section 7),
+    # and a master that fills them is wrong in a way nobody notices until the
+    # hall goes quiet and does not.
+    print("  measuring for a linear normalisation pass")
+    meas = subprocess.run(
+        ["ffmpeg", "-hide_banner", "-i", vo,
+         "-af", "loudnorm=I=-14:TP=-1.5:LRA=11:print_format=json",
+         "-f", "null", "-"], capture_output=True, text=True).stderr
+    blob = meas[meas.rindex("{"):meas.rindex("}") + 1]
+    m = json.loads(blob)
+    af = ("loudnorm=I=-14:TP=-1.5:LRA=11"
+          f":measured_I={m['input_i']}:measured_TP={m['input_tp']}"
+          f":measured_LRA={m['input_lra']}:measured_thresh={m['input_thresh']}"
+          ":linear=true")
+    print(f"  measured {m['input_i']} LUFS, applying linear gain")
     run(["ffmpeg", "-y", "-hide_banner", "-loglevel", "error",
          "-i", picture, "-i", vo,
          "-map", "0:v", "-map", "1:a",
          "-c:v", "copy",
-         "-af", "loudnorm=I=-14:TP=-1.5:LRA=11",
+         "-af", af,
          "-c:a", "aac", "-b:a", "320k", "-ar", "48000", "-ac", "2",
          "-shortest", "-movflags", "+faststart",
          "-metadata", f"title=Law Park Educational Trust, ten years, Kannada"

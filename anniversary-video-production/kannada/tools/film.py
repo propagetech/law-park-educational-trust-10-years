@@ -30,7 +30,7 @@ are Lanczos-enlarged. See 08-kannada-animatic-notes.md section 9.
 captions stay toggleable, searchable and translatable.
 """
 import json, os, subprocess, sys
-from PIL import Image
+from PIL import Image, ImageFilter
 
 REPO = "/Users/chetan/Downloads/jeevitha/law-park-educational-trust-10-years"
 
@@ -40,6 +40,8 @@ def _arg(flag, cast, default):
     return default
 
 SCALE = _arg("--scale", int, 1)
+# Restore the flat card plates, before the blurred backdrop.
+FLAT_CARDS = "--flat-cards" in sys.argv
 if SCALE < 1:
     sys.exit("--scale must be 1 or more")
 BURN_SUBS = "--no-subs" not in sys.argv
@@ -264,6 +266,48 @@ def plate(sh):
     return v
 
 _cardplate = {}
+_cardground = {}
+
+# How much of the flat ground colour stays in the blurred backdrop. 1.0 is the
+# old flat card, 0.0 is the photograph at full strength behind the type.
+CARD_BACKDROP_MIX = 0.74
+CARD_BACKDROP_BLUR = 26          # in output pixels at scale 1
+
+
+def card_ground(sh, g):
+    """The plate behind a card photo.
+
+    A card shot places one photograph on a flat ground with Kannada type beside
+    it. Measured on the 1080p cut, that left between 45 and 80 percent of the
+    frame as flat colour, and K32 was 79.5 percent empty. Enlarging the
+    photograph does not fix it: five of these eight sources are portrait or
+    square, so filling a 16:9 frame with them would crop away most of the
+    subject, and every one of them is already being enlarged.
+
+    So the empty area is filled with the same photograph, cover-cropped,
+    blurred and blended most of the way back toward the ground colour. The
+    frame reads as full, the sharp photograph is untouched, and no resolution
+    is spent.
+
+    The blend goes toward THIS shot's ground, not toward black. Three of these
+    cards are cream with dark Kannada type on them; a dark backdrop would make
+    that type unreadable. Blending toward cream keeps it light, blending toward
+    navy keeps it dark, and the type stays as legible as it was on the flat
+    plate.
+    """
+    sid = sh["sid"]
+    ground = g.get("ground", NAVY)
+    if FLAT_CARDS:
+        return Image.new("RGB", (W, H), ground)
+    if sid not in _cardground:
+        im = cover(src(sh["path"]), g.get("box"))
+        im = im.resize((W, H), Image.LANCZOS)
+        im = im.filter(ImageFilter.GaussianBlur(o(CARD_BACKDROP_BLUR)))
+        im = Image.blend(im, Image.new("RGB", (W, H), ground), CARD_BACKDROP_MIX)
+        _cardground[sid] = im
+    return _cardground[sid].copy()
+
+
 
 def card_frame(sh, u):
     """Photo placed on a ground at native or fitted size. No enlargement."""
@@ -284,7 +328,7 @@ def card_frame(sh, u):
     if abs(z - 1.0) > 1e-3:
         pw, phh = ph.size
         ph = ph.resize((int(round(pw * z)), int(round(phh * z))), Image.LANCZOS)
-    base = Image.new("RGB", (W, H), g.get("ground", NAVY))
+    base = card_ground(sh, g)
     pw, phh = ph.size
     align = g.get("align", "center")
     if align == "left":

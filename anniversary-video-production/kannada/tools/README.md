@@ -7,7 +7,7 @@ photographs and the Kannada script, with no manual step.
 python3 build_timeline.py timeline.json            # the timing table + consent register
 python3 make_srt.py timeline.json ../05-kannada-subtitles.srt
 python3 make_vtt.py                                # WebVTT for team-handoff.html
-python3 gfx.py ../05-kannada-subtitles.srt         # 133 Kannada graphics, via Chrome
+python3 gfx.py ../05-kannada-subtitles.srt         # 138 Kannada graphics, via Chrome
 python3 vo.py                                      # scratch narration, fitted per line
 python3 stem.py <VOICE_ID>                         # ElevenLabs lines -> one aligned WAV
 python3 sfx.py --check                             # validate sound-effect placements
@@ -50,7 +50,7 @@ plus the repository photographs, so rebuild rather than hunt for a file.
 For the 2160p delivery master (see `master.py`):
 
 ```bash
-python3 gfx.py ../05-kannada-subtitles.srt --scale 2   # 133 graphics at 3840x2160
+python3 gfx.py ../05-kannada-subtitles.srt --scale 2   # 138 graphics at 3840x2160
 python3 master.py --check                              # the publishing gates
 python3 master.py                                      # 4K review master
 ```

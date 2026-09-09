@@ -150,12 +150,20 @@ one honest reason and not the obvious one.
 
 ### What is genuinely 4K
 
-The Kannada type. `gfx.py --scale 2` re-renders all 133 graphics in Chrome at
+The Kannada type. `gfx.py --scale 2` re-renders all 138 graphics in Chrome at
 `device_scale_factor=2`, so glyph curves, conjuncts, rules and the logo edge are
 drawn at 3840x2160 rather than enlarged from 1080p. The CSS layout is unchanged
-at 1920x1080 CSS pixels, so no card was re-designed to get this. Sixteen of the
-46 shots are card or photo-card shots, and type is where softness reads first,
-so this is a real and visible gain.
+at 1920x1080 CSS pixels, so no card was re-designed to get this. Nine of the 46
+shots are pure typography and every other shot carries a lower third, a year
+plate or a subtitle, and type is where softness reads first, so this is a real
+and visible gain.
+
+**The logo is now genuinely 4K too, and was not.** `logo.png` is 300x257 and
+`gfx.py` draws the mark at 238 CSS px, which at `--scale 2` is 476 device
+pixels: the mark was the one element in the master being enlarged while every
+glyph beside it was drawn natively. `tools/make_logo.py` recovers the same
+artwork at 976x833 from `logo-purple.png`, which carries it behind a flat purple
+rectangle.
 
 ### What is not
 
@@ -169,11 +177,22 @@ The photography. Measured across the 34 unique source files:
 | 1280 to 1919 | 22 |
 | under 1280 | 7 |
 
-The largest asset is 1920x1446. Twenty-nine of 34 are under 1920px. The 1080p
-cut already enlarges many shots, and at 2160p those factors double: K38
-(941x529) is enlarged about 4x, K26 about 4.4x, and the best case, the five true
-1920px files, exactly 2x. Lanczos is doing the work and doing it well, but no
-resampler invents detail that was never photographed.
+The largest asset is 1920x1446. Twenty-nine of 34 are under 1920px, and there is
+no larger copy of any of them anywhere in the repository: matching every
+photograph the film uses against the 81 images embedded in the magazine PDF they
+were cut from finds each one at byte-identical dimensions.
+
+`tools/frame_audit.py --scale 2` measures the enlargement per shot, `push`
+included. At 2160p, 20 of the 37 photographic shots are over 2.5x. The worst are
+`K11` at 5.29x, `K09` at 4.59x, `K26` at 4.36x, `K25` at 4.27x and `K38` at
+4.21x. Every one of those numbers is higher than it was, because the card
+treatment that kept eight shots at native size is withdrawn and the photography
+now fills the frame; that trade is the subject of `06` section 8.
+
+Lanczos does the work and does it well, and `film.py` follows it with a 1px
+unsharp mask scaled to each shot's own enlargement and capped at 60 percent,
+which recovers apparent detail without inventing any. No resampler invents
+detail that was never photographed, and nothing here pretends otherwise.
 
 **So do not judge the 4K master on photographic sharpness.** Judge it on type
 crispness, and on what YouTube delivers.

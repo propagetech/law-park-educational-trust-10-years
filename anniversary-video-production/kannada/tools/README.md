@@ -14,6 +14,10 @@ python3 film.py out.mp4 --stills                   # one PNG per shot, fast
 python3 film.py out.mp4 --range 30 45              # one stretch only
 ```
 
+No video is committed to this repository: `.gitignore` excludes `*.mp4` and the
+other video containers. Every render below is reproducible from `timeline.json`
+plus the repository photographs, so rebuild rather than hunt for a file.
+
 For the 2160p delivery master (see `master.py`):
 
 ```bash

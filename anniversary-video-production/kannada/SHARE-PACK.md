@@ -10,11 +10,13 @@ It includes the animatic player with Kannada subtitles, role briefs, the trustee
 
 | File | Resolution | For | In git |
 |---|---|---|---|
-| `08-kannada-animatic-preview.mp4` | 1920x1080, subtitles burned in | Review on the handoff page | yes, 36 MB |
-| `kannada-2160p-review-scratch-vo.mp4` | 3840x2160, scratch narration | Projection test, quality review | no, rebuild it |
+| `08-kannada-animatic-preview.mp4` | 1920x1080, subtitles burned in | Local review, phone-sized | no |
+| `kannada-2160p-review-scratch-vo.mp4` | 3840x2160, scratch narration | Projection test, quality review | no |
 | `kannada-2160p-youtube-master.mp4` | 3840x2160, human narration | The YouTube upload | does not exist yet |
 
-Only the first is committed. The 4K files are render artifacts: rebuild them with
+**No video is committed to this repository.** `.gitignore` excludes `*.mp4`,
+`*.mov`, `*.mkv` and `*.webm` outright. The handoff page streams the review cut
+from YouTube instead, and every render is reproducible in about 13 minutes:
 
 ```bash
 cd anniversary-video-production/kannada/tools
@@ -67,7 +69,7 @@ Then tell recipients:
 
 > Open `anniversary-video-production/kannada/team-handoff.html` in a browser.
 
-Recipients must **unzip first**. Opening the page from inside a zip viewer breaks the relative links, the video and the subtitle track.
+Recipients must **unzip first**. Opening the page from inside a zip viewer breaks the relative links and the subtitle track. The review video streams from YouTube, so it needs a network connection rather than the zip.
 
 ## Do not include
 
@@ -89,8 +91,7 @@ Recipients must **unzip first**. Opening the page from inside a zip viewer break
 | `05-kannada-subtitles.vtt` | The handoff page player only |
 | `06-kannada-edit-decision-list.md` | Editor |
 | `07-final-rights-and-approval-checklist.md` | Trust, producer |
-| `08-kannada-animatic-preview.mp4` | Everyone |
-| `08-kannada-animatic-poster.jpg` | Player poster frame |
+| `08-kannada-animatic-poster.jpg` | Poster frame, kept for slides and thumbnails |
 | `favicon-32x32.png` | Browser tab icon for the handoff page |
 | `08-kannada-animatic-notes.md` | Everyone |
 | `09-elevenlabs-narration-guide.md` | Interim scratch read only |

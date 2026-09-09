@@ -15,7 +15,7 @@ than the previous master.** Anything downstream that quotes 00:05:37:22 is stale
 | | |
 |---|---|
 | **Primary** | `anniversary-video-production/kannada/kannada-1080p-EVENT-master.mp4` |
-| **SHA-256** | `6292898f5e35788915e32c78c3c3fc4e68369b8a82ba422880f7dc42ceb290d8` |
+| **SHA-256** | `f0f3cf28bf3eeb60938f644b346a522a4beb32c0ca56f3402099835d06b43cf0` |
 | **Size** | ~83 MB |
 | **Picture** | 1920x1080, H.264 High, yuv420p, 25 fps, full bt709 tags |
 | **Audio** | AAC 320k, 48 kHz, stereo, **-23.0 LUFS** integrated, true peak **-10.7 dBTP** |

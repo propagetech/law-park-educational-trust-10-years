@@ -417,10 +417,14 @@ _cardground = {}
 # and enlarging a 513x733 scan to fill 1920x1080 would destroy exactly the thing
 # it is in the film to prove.
 #
-# The backdrop was blended 74 percent back to the ground, which on a light scan
-# left a pale grey haze around the clipping rather than a frame. At 0.55 toward
-# navy, with more blur, the clipping sits in something that reads as deliberate.
-CARD_BACKDROP_MIX = 0.55
+# The mix is how much of the flat NAVY stays, so a HIGHER number is a DARKER
+# backdrop. This was moved to 0.55 on the reasoning that 0.74 "left a pale grey
+# haze", which had the direction backwards and made it paler still: measured on
+# the frame, the gap between the backdrop and the clipping's white paper went
+# from 138.7 at 0.74 down to 111.7 at 0.55. At 0.85 the backdrop sits at L 50.9
+# against the paper's 205.3, a separation of 154.3, and reads as a dark frame
+# around a document rather than a haze behind one.
+CARD_BACKDROP_MIX = 0.85
 CARD_BACKDROP_BLUR = 44          # in output pixels at scale 1
 
 

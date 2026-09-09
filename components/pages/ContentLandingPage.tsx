@@ -159,7 +159,7 @@ function ContentLandingPage() {
                   Kannada Anniversary Video
                 </h2>
                 <p className="text-gray-600 flex-1 mb-6">
-                  Five-and-a-half-minute Kannada film for the celebration: YouTube captions, WhatsApp share text, and hall AV notes.
+                  Five-and-a-half-minute Kannada film for the celebration: YouTube captions, WhatsApp share text, hall AV notes, and the team handoff.
                 </p>
                 <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
                   View content

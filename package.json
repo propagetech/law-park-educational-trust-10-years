@@ -8,7 +8,8 @@
   "scripts": {
     "dev": "next dev",
     "optimize-images": "node scripts/optimize-images.mjs",
-    "build": "next build",
+    "sync:kannada-handoff": "bash scripts/sync-kannada-handoff.sh",
+    "build": "npm run sync:kannada-handoff && next build",
     "start": "next start",
     "lint": "eslint ."
   },

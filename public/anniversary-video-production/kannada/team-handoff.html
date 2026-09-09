@@ -1,0 +1,1698 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LPET 10 Years · Kannada Film · Team Handoff</title>
+<link rel="icon" href="favicon-32x32.png" sizes="32x32">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Kannada:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --navy: #1c1c2e;
+  --navy-mid: #2d2d44;
+  --navy-soft: #3a3a55;
+  --gold: #e0b06a;
+  --gold-dim: #c49a5a;
+  --cream: #f7f3eb;
+  --ink: #1a1a22;
+  --muted: #5c5c6e;
+  --line: #d9d2c4;
+  --ok: #2f6b4f;
+  --warn: #8a5a12;
+  --block: #8b2e2e;
+  --card: #ffffff;
+  --radius: 10px;
+  --max: 1120px;
+}
+* { box-sizing: border-box; }
+.skip-link {
+  position: absolute; left: -9999px; top: 0;
+  background: var(--gold); color: var(--navy);
+  padding: 0.6rem 1rem; font-weight: 600; z-index: 100;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+:focus-visible { outline: 3px solid var(--gold-dim); outline-offset: 2px; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: "Source Sans 3", "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", system-ui, sans-serif;
+  color: var(--ink);
+  background: var(--cream);
+  line-height: 1.55;
+}
+.kn { font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif; }
+a { color: var(--navy-mid); }
+a:hover { color: var(--gold-dim); }
+.wrap { max-width: var(--max); margin: 0 auto; padding: 0 1.25rem; }
+
+/* Top bar */
+.top {
+  background: var(--navy);
+  color: #fff;
+  padding: 0.85rem 0;
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  border-bottom: 3px solid var(--gold);
+}
+.top-inner { display: flex; flex-wrap: wrap; gap: 0.75rem 1.25rem; align-items: center; justify-content: space-between; }
+.brand { font-weight: 700; letter-spacing: 0.02em; }
+.brand span { color: var(--gold); font-weight: 500; margin-left: 0.5rem; font-size: 0.92rem; }
+.nav { display: flex; flex-wrap: wrap; gap: 0.35rem 0.9rem; font-size: 0.9rem; }
+.nav a { color: #e8e4dc; text-decoration: none; }
+.nav a:hover { color: var(--gold); }
+
+/* Hero */
+.hero {
+  background:
+    radial-gradient(ellipse at 20% 0%, rgba(224,176,106,0.18), transparent 50%),
+    linear-gradient(165deg, var(--navy) 0%, #151522 100%);
+  color: #fff;
+  padding: 2.75rem 0 2.5rem;
+}
+.hero h1 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.7rem, 3.5vw, 2.45rem);
+  line-height: 1.2;
+  margin: 0 0 0.75rem;
+  max-width: 18ch;
+}
+.hero .lede { max-width: 52ch; color: #d8d4cb; margin: 0 0 1.5rem; font-size: 1.05rem; }
+.meta {
+  display: flex; flex-wrap: wrap; gap: 0.5rem;
+  margin: 0 0 1.5rem;
+}
+.chip {
+  display: inline-flex; align-items: center;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(224,176,106,0.35);
+  color: var(--gold);
+  border-radius: 999px;
+  padding: 0.28rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+.alert {
+  background: rgba(224,176,106,0.12);
+  border-left: 4px solid var(--gold);
+  padding: 0.9rem 1rem;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: #f0e6d4;
+  max-width: 68ch;
+  font-size: 0.95rem;
+}
+
+/* Sections */
+section { padding: 2.5rem 0; }
+section + section { border-top: 1px solid var(--line); }
+.sec-kicker {
+  color: var(--gold-dim);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin: 0 0 0.4rem;
+}
+h2 {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: clamp(1.35rem, 2.4vw, 1.75rem);
+  margin: 0 0 0.5rem;
+  color: var(--navy);
+}
+.sec-lead { color: var(--muted); margin: 0 0 1.4rem; max-width: 60ch; }
+
+/* Cards / grids */
+.grid { display: grid; gap: 1rem; }
+.grid-2 { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+.grid-3 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.15rem 1.2rem;
+  box-shadow: 0 1px 0 rgba(28,28,46,0.04);
+}
+.card h3 { margin: 0 0 0.45rem; font-size: 1.05rem; color: var(--navy); }
+.card p, .card li { font-size: 0.95rem; color: #33343f; }
+.card ul { margin: 0.4rem 0 0; padding-left: 1.1rem; }
+.card .who {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold-dim);
+  margin-bottom: 0.35rem;
+}
+.badge {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  vertical-align: middle;
+}
+.badge-block { background: #f3d6d6; color: var(--block); }
+.badge-open { background: #f5e6c8; color: var(--warn); }
+.badge-done { background: #d5ebe0; color: var(--ok); }
+.badge-info { background: #e4e2f0; color: var(--navy-mid); }
+
+/* Video */
+.player {
+  position: relative;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  border-radius: var(--radius);
+  overflow: hidden;
+  border: 1px solid var(--navy);
+}
+/* Covers both the YouTube iframe and a local <video>, if one is put back. */
+.player > iframe,
+.player > video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.player-note { margin-top: 0.75rem; font-size: 0.9rem; color: var(--muted); }
+
+/* Role tabs */
+.tabs { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1rem; }
+.tab {
+  border: 1px solid var(--line);
+  background: #fff;
+  color: var(--navy);
+  border-radius: 999px;
+  padding: 0.4rem 0.9rem;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.tab[aria-selected="true"] {
+  background: var(--navy);
+  color: #fff;
+  border-color: var(--navy);
+}
+.panel[hidden] { display: none; }
+
+/* Tables */
+.table-wrap { overflow-x: auto; border: 1px solid var(--line); border-radius: var(--radius); background: #fff; }
+.shot-scroll { max-height: 70vh; overflow: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th, td { padding: 0.65rem 0.75rem; text-align: left; border-bottom: 1px solid var(--line); vertical-align: top; }
+th { background: var(--navy); color: #fff; font-weight: 600; position: sticky; top: 0; }
+tr:nth-child(even) td { background: #fbf8f2; }
+td.kn { font-size: 0.95rem; line-height: 1.5; }
+.mono { font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+        font-size: 0.86rem; font-variant-numeric: tabular-nums; white-space: nowrap; }
+.silent td { opacity: 0.72; }
+.sr-only {
+  position: absolute; width: 1px; height: 1px;
+  padding: 0; margin: -1px; overflow: hidden;
+  clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+td.consent { font-size: 0.82rem; max-width: 15rem; }
+td.note { font-size: 0.82rem; color: var(--muted); max-width: 18rem; white-space: normal; }
+.cflag {
+  display: inline-block; font-weight: 700; font-size: 0.7rem;
+  letter-spacing: 0.04em; text-transform: uppercase;
+  padding: 0.1rem 0.4rem; border-radius: 4px; margin-bottom: 0.2rem;
+}
+.cflag.block { background: #f6e3e3; color: var(--block); }
+.cflag.clear { background: #e2efe8; color: var(--ok); }
+.cflag.check { background: #f7ecd8; color: var(--warn); }
+tr.blocked .rowhead { box-shadow: inset 3px 0 0 var(--block); }
+.rowhead {
+  background: none; color: inherit; font-weight: 400;
+  position: static; white-space: nowrap;
+}
+.rowhead .kn { display: block; color: var(--muted); font-size: 0.8rem; white-space: normal; }
+tr:nth-child(even) .rowhead { background: #fbf8f2; }
+.filter-row { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 0.75rem; align-items: center; }
+.filter-row input {
+  flex: 1; min-width: 180px;
+  padding: 0.55rem 0.75rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  font: inherit;
+}
+
+/* Doc list */
+.doc a {
+  display: flex; justify-content: space-between; gap: 1rem; align-items: baseline;
+  text-decoration: none; color: inherit;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.doc a:last-child { border-bottom: 0; }
+.doc .name { font-weight: 600; color: var(--navy); }
+.doc .for { color: var(--muted); font-size: 0.85rem; }
+
+/* Swatches */
+.swatch {
+  display: flex; align-items: center; gap: 0.75rem;
+  margin: 0.4rem 0;
+}
+.swatch i {
+  width: 36px; height: 36px; border-radius: 8px;
+  border: 1px solid rgba(0,0,0,0.12);
+  display: block;
+}
+.checklist label {
+  display: flex; gap: 0.6rem; align-items: flex-start;
+  padding: 0.55rem 0;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+  font-size: 0.95rem;
+}
+.checklist label:last-child { border-bottom: 0; }
+.checklist input[type=checkbox] { margin-top: 0.3rem; flex: 0 0 auto; }
+.checklist label { flex-wrap: wrap; }
+.ck-label { flex: 1 1 16rem; }
+.ck-meta { display: flex; gap: 0.35rem; flex: 0 0 auto; }
+.owner-field {
+  font: inherit; font-size: 0.82rem;
+  padding: 0.2rem 0.4rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: #fffdf7;
+  min-width: 5.5rem; max-width: 8rem;
+}
+.owner-field[type=date] { min-width: 8.5rem; }
+
+footer {
+  background: var(--navy);
+  color: #c9c5bc;
+  padding: 2rem 0;
+  font-size: 0.9rem;
+}
+footer strong { color: var(--gold); }
+
+/* Kannada by attribute, not only by class. The .kn class covers the hand
+   written markup, but the feedback form and the generated review document
+   carry lang="kn" on fields and on text the trustees type, and an attribute
+   alone does not pick a font family. Without this, Kannada in the review
+   document renders through the Latin stack, per-glyph fallback decides what
+   it looks like, and html2canvas paints whatever that fallback was into the
+   PDF. Same stack as .kn, deliberately. */
+[lang="kn"] { font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif; }
+
+/* ---------------------------------------------------------------- Notices */
+.notice {
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--gold);
+  background: #fffdf7;
+  border-radius: var(--radius);
+  padding: 1rem 1.15rem;
+  margin: 1rem 0;
+}
+.notice.block { border-left-color: var(--block); background: #fdf6f6; }
+.notice h3 { margin: 0 0 0.4rem; font-size: 1rem; color: var(--navy); }
+.notice p { margin: 0 0 0.5rem; font-size: 0.92rem; }
+.notice p:last-child { margin-bottom: 0; }
+
+/* ------------------------------------------------------- Feedback form */
+.fb-grid { display: grid; gap: 1rem; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); }
+.fb-field { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1.1rem; }
+.fb-field > label, .fb-set > legend {
+  font-weight: 600; font-size: 0.92rem; color: var(--navy);
+}
+.fb-hint { font-size: 0.82rem; color: var(--muted); }
+.fb-field input[type=text], .fb-field input[type=date], .fb-field input[type=tel],
+.fb-field select, .fb-field textarea {
+  font: inherit; font-size: 0.95rem;
+  padding: 0.6rem 0.7rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--ink);
+  width: 100%;
+  min-height: 2.75rem;
+}
+.fb-field textarea { min-height: 5.5rem; resize: vertical; line-height: 1.55; }
+/* `font: inherit` above is a shorthand and resets font-family, so it outruns
+   the [lang="kn"] rule on the fields the trustees actually type Kannada into.
+   Restate the family for those, at matching specificity. */
+.fb-field input[lang="kn"], .fb-field textarea[lang="kn"] {
+  font-family: "Noto Sans Kannada", "Nirmala UI", "Kannada MN", "Tunga", "Source Sans 3", sans-serif;
+}
+.fb-field input:invalid, .fb-field textarea:invalid { border-color: var(--line); }
+.fb-field.bad input, .fb-field.bad textarea, .fb-set.bad { border-color: var(--block); }
+.fb-field.bad > label, .fb-set.bad > legend { color: var(--block); }
+.fb-set {
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 0.85rem 1rem 0.6rem;
+  margin: 0 0 1.1rem;
+  background: #fff;
+}
+.fb-set legend { padding: 0 0.4rem; }
+.fb-radio { display: flex; gap: 0.55rem; align-items: flex-start; padding: 0.4rem 0; font-size: 0.93rem; cursor: pointer; }
+.fb-radio input { margin-top: 0.25rem; flex: 0 0 auto; min-height: 0; width: auto; }
+.fb-radio span { flex: 1; }
+.fb-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin-top: 0.5rem; }
+.btn {
+  font: inherit; font-size: 0.95rem; font-weight: 600;
+  padding: 0.65rem 1.2rem;
+  border-radius: 999px;
+  border: 1px solid var(--navy);
+  background: var(--navy); color: #fff;
+  cursor: pointer;
+  min-height: 2.75rem;
+}
+.btn:hover { background: var(--navy-mid); }
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+.btn.ghost { background: #fff; color: var(--navy); }
+.btn.ghost:hover { background: #f4f1ea; }
+.btn.gold { background: var(--gold); border-color: var(--gold-dim); color: var(--navy); }
+.btn.gold:hover { background: var(--gold-dim); }
+.fb-status { font-size: 0.9rem; color: var(--muted); flex: 1 1 14rem; margin: 0; }
+.fb-status.err { color: var(--block); font-weight: 600; }
+
+/* The review step: what the PDF will contain, shown before it is made. */
+#fbReview[hidden] { display: none; }
+/* The rounded card border belongs on screen, not inside a PDF page that
+   already has its own margin. Dropped for the duration of the capture. */
+.fb-doc.capturing { border-color: transparent; border-radius: 0; }
+.fb-doc {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 1.6rem 1.75rem;
+  max-width: 46rem;
+}
+.fb-doc h3 { font-family: "Source Serif 4", Georgia, serif; font-size: 1.3rem; margin: 0 0 0.2rem; color: var(--navy); }
+.fb-doc .fb-doc-sub { color: var(--muted); font-size: 0.86rem; margin: 0 0 1.2rem; }
+.fb-doc dl { margin: 0; }
+.fb-doc dt {
+  font-weight: 700; font-size: 0.78rem; letter-spacing: 0.04em;
+  text-transform: uppercase; color: var(--gold-dim);
+  margin-top: 1.1rem; padding-top: 0.7rem; border-top: 1px solid var(--line);
+}
+.fb-doc dl > div:first-child dt { margin-top: 0; padding-top: 0; border-top: 0; }
+.fb-doc dd { margin: 0.3rem 0 0; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; }
+.fb-doc dd:empty::after { content: "no comment"; color: var(--muted); font-style: italic; }
+.fb-doc .fb-verdict { font-weight: 700; color: var(--navy); font-size: 1.05rem; }
+.fb-doc .fb-foot { margin: 1.5rem 0 0; padding-top: 0.8rem; border-top: 2px solid var(--gold); font-size: 0.8rem; color: var(--muted); }
+
+/* ------------------------------------------------- Creative resources */
+.res-group { margin-bottom: 1.4rem; }
+.res-group h4 {
+  font-size: 0.78rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; color: var(--gold-dim);
+  margin: 0 0 0.5rem;
+}
+.res-list { display: grid; gap: 0.35rem; grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr)); }
+.res-list a {
+  display: block; text-decoration: none; color: inherit;
+  border: 1px solid var(--line); border-radius: 8px;
+  padding: 0.55rem 0.7rem; background: #fff;
+  font-size: 0.9rem;
+}
+.res-list a:hover { border-color: var(--gold-dim); background: #fffdf7; }
+.res-list a strong { display: block; color: var(--navy); font-weight: 600; }
+.res-list a span { color: var(--muted); font-size: 0.82rem; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+@media print {
+  .top, .tabs, .filter-row, .no-print, .skip-link, video, .player { display: none !important; }
+  .fb-form, .fb-actions, .notice.no-print { display: none !important; }
+
+  /* Print-to-PDF fallback for the feedback document: when the page is in
+     this state, everything except the review document is suppressed, so the
+     browser's own Save as PDF produces the same one-document PDF that
+     jsPDF would have. It needs no network and renders Kannada correctly. */
+  body.printing-feedback > *:not(#feedback) { display: none !important; }
+  body.printing-feedback #feedback :not(#fbReview):not(#fbReview *):not(.wrap):not(.fb-doc) { display: none !important; }
+  body.printing-feedback #feedback .wrap { padding: 0; }
+  body.printing-feedback .fb-doc { border: 0; padding: 0; max-width: none; }
+  .panel[hidden] { display: block !important; }
+  body { background: #fff; }
+  .hero { background: var(--navy); print-color-adjust: exact; }
+
+  /* The shot list and every scroll box must print in full, not one screenful. */
+  .table-wrap, .shot-scroll { max-height: none; overflow: visible; border: 0; }
+  #shotTable, .table-wrap { break-inside: auto; }
+  th { position: static !important; }
+  thead { display: table-header-group; }
+  tr { break-inside: avoid; }
+  table { font-size: 0.78rem; }
+  .panel, .card { break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap top-inner">
+    <div class="brand">Law Park Educational Trust <span>10-year Kannada welcome film</span></div>
+    <nav class="nav" aria-label="Sections">
+      <a href="#watch">Watch</a>
+      <a href="#feedback">Feedback</a>
+      <a href="#resources">Resources</a>
+      <a href="#delivery">Formats</a>
+      <a href="#roles">Roles</a>
+      <a href="#decisions">Decisions</a>
+      <a href="#script">Script</a>
+      <a href="#design">Design</a>
+      <a href="#docs">Files</a>
+      <a href="#credits">Credits</a>
+      <a href="#share">Share</a>
+    </nav>
+  </div>
+</header>
+
+<header class="hero">
+  <div class="wrap">
+    <p class="sec-kicker" style="color:var(--gold)">Team coordination pack · internal</p>
+    <h1>One page for the NGO owner and the creative team</h1>
+    <p class="lede">Kannada event master for the anniversary hall. Picture is cut. Narration will be a <strong style="color:#fff">human Kannada voice</strong>. Use this page to align trustees, director, narrator, designer and editor.</p>
+    <div class="meta">
+      <span class="chip">designed 1920&times;1080 &middot; delivered 2160p &middot; 25 fps</span>
+      <span class="chip">00:05:36:01</span>
+      <span class="chip">46 shots · 43 spoken lines</span>
+      <span class="chip">105 wpm design pace</span>
+      <span class="chip">Human narrator path</span>
+    </div>
+    <div class="alert">
+      <strong>Status:</strong> Animatic exists with a scratch (macOS) voice for pacing only.
+      Cast and record a live Kannada narrator. Do not ship the scratch track.
+      Nothing is cleared for public screening until the consent and rights items in
+      <a href="#decisions" style="color:var(--gold)">section 04, Decisions and clearances</a>, are done.
+    </div>
+  </div>
+</header>
+
+<main id="main">
+<section id="watch">
+  <div class="wrap">
+    <p class="sec-kicker">01 · Picture reference</p>
+    <h2>Watch the animatic</h2>
+    <p class="sec-lead">Judge pacing, pauses, graphics and shot order. Do not judge warmth of the voice: it is temporary.</p>
+    <div class="notice block">
+      <h3>This is a reference cut, not the final render</h3>
+      <p>The video below exists so that pacing, shot order, on-screen Kannada and the placement of sound can be judged. It is <strong>not</strong> a finished film and it is not what anybody should publish, re-post or hand to a printer, a sponsor or a news desk.</p>
+      <p>What is temporary in it: the narration is a synthetic ElevenLabs read and not a human Kannada voice; there is <strong>no music at all</strong>, because no licence has been cleared; the 14 sound effects are an audition sitting under an unsigned Trust decision (<code>07</code> item 5.8); and two of them are placeholder files that have to be replaced. The picture uses the consent fallback, so several photographs are stand-ins.</p>
+      <p><strong>Creative team:</strong> everything needed to re-cut or re-grade it is in <a href="#resources">section 03, Resources</a>. Do not work from the YouTube stream. <strong>Trustees:</strong> your notes go in <a href="#feedback">section 02, Feedback</a>.</p>
+    </div>
+    <div class="player">
+      <iframe
+        src="https://www.youtube-nocookie.com/embed/I6iZCH88RYU?rel=0&amp;modestbranding=1"
+        title="Kannada 1080p picture and SFX preview, scratch narration"
+        loading="lazy" allowfullscreen
+        referrerpolicy="strict-origin-when-cross-origin"
+        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
+    </div>
+    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>, which is <code>08-kannada-sfx-learning-mix.mp4</code>: 1920x1080, 00:05:37:22, ElevenLabs narration plus the 14-cue effects pack, at -16 LUFS. Streaming it keeps the render out of this repository, so no MP4 is committed. Rebuild it locally with <code>tools/film.py</code> and <code>tools/sfx.py</code>, or the 4K equivalent with <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
+    <p class="player-note"><strong>If the player is blank</strong>, the video visibility has been changed to Private, which blocks embedding for everyone except explicitly named accounts. Set it to Unlisted to make this page work again, or ask the owner of the upload for access.</p>
+  </div>
+</section>
+
+<section id="feedback">
+  <div class="wrap">
+    <p class="sec-kicker">02 &middot; Founder and trustee feedback</p>
+    <h2>Watch it, then say what has to change</h2>
+    <p class="sec-lead">Written for <span class="kn" lang="kn">&#3221;&#3262;&#3248;&#3265;&#3248;&#3262;&#3236;&#3262; &#3205;&#3202;. &#3206;&#3248;&#3277;.</span> and the trustees. Fill in only what you have a view on and leave the rest blank. Submitting shows you exactly what the PDF will say before it is made, so nothing goes out that you have not read.</p>
+
+    <div class="notice no-print">
+      <h3>Where this goes, and where it does not</h3>
+      <p>Nothing is sent anywhere automatically. Your answers stay in this browser until you press a button, and the draft is saved locally as you type so a closed tab does not lose it. The PDF is built on your own device.</p>
+      <p>Write in Kannada or English, whichever is easier. Both come out correctly in the PDF.</p>
+    </div>
+
+    <form class="fb-form" id="fbForm" novalidate>
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Who is giving this feedback</h3>
+        <div class="fb-grid">
+          <div class="fb-field" id="fbf-name">
+            <label for="fbName">Name <span aria-hidden="true">*</span></label>
+            <input type="text" id="fbName" name="name" autocomplete="name" required
+                   placeholder="&#3221;&#3262;&#3248;&#3265;&#3248;&#3262;&#3236;&#3262; &#3205;&#3202;. &#3206;&#3248;&#3277;." lang="kn">
+          </div>
+          <div class="fb-field">
+            <label for="fbRole">Role</label>
+            <select id="fbRole" name="role">
+              <option>Founder and Managing Trustee</option>
+              <option>Trustee</option>
+              <option>Producer</option>
+              <option>Volunteer or programme lead</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="fb-field">
+            <label for="fbDate">Date</label>
+            <input type="date" id="fbDate" name="date">
+          </div>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbCut">Which cut did you watch</label>
+          <select id="fbCut" name="cut">
+            <option>The YouTube reference cut on this page, picture plus effects</option>
+            <option>kannada-1080p-EVENT-master.mp4, the hall file</option>
+            <option>Another cut, described in the notes below</option>
+          </select>
+        </div>
+      </div>
+
+      <fieldset class="fb-set" id="fbf-verdict">
+        <legend>Overall <span aria-hidden="true">*</span></legend>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Approved as it is"><span><strong>Approved as it is.</strong> Proceed to the human narration and the music.</span></label>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Approved with the changes below"><span><strong>Approved with the changes below.</strong> No need to show me again.</span></label>
+        <label class="fb-radio"><input type="radio" name="verdict" value="Needs another cut before I can decide"><span><strong>Needs another cut before I can decide.</strong></span></label>
+      </fieldset>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>The film, act by act</h3>
+        <p class="fb-hint" style="margin:0 0 1rem">Timecodes match the cut on this page. Leave anything blank that you are happy with.</p>
+        <div class="fb-field">
+          <label for="fbAct1">Act 1, the opening. <span class="mono">K01</span> to <span class="mono">K06</span>, up to <span class="mono">00:00:36:10</span></label>
+          <span class="fb-hint">The walk to school, the fee line, the title card, and the six silent seconds on your quote.</span>
+          <textarea id="fbAct1" name="act1" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct2">Act 2, 2016 and the founders. <span class="mono">K07</span> to <span class="mono">K13</span></label>
+          <span class="fb-hint">The Trust, you and S. M. Manjunatha, the first school visit, and <span class="kn" lang="kn">&#3202;&#3202;&#3238;&#3265; &#3226;&#3223;&#3265;. &#3202;&#3202;&#3238;&#3265; &#3236;&#3263;&#3238;&#3277;&#3247;&#3262;&#3248;&#3277;&#3208;&#3263;&#3236;&#3247;&#3273;&#3236;&#3238;.</span></span>
+          <textarea id="fbAct2" name="act2" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct3">Act 3, the decade. <span class="mono">K14</span> to <span class="mono">K25</span></label>
+          <span class="fb-hint">2017 to 2025, the pandemic year, the libraries, the school bags.</span>
+          <textarea id="fbAct3" name="act3" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbAct4">Act 4, the method and the community. <span class="mono">K26</span> to <span class="mono">K40</span></label>
+          <span class="fb-hint">The 75 per cent, direct payment to the school, the hardest children to reach, the partners, the newspaper, the award, the thanks.</span>
+          <textarea id="fbAct4" name="act4" lang="kn"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbAct5">Act 5, the closing welcome. <span class="mono">K41</span> to <span class="mono">K46</span></label>
+          <span class="fb-hint">The next decade, and the welcome line that ends the film.</span>
+          <textarea id="fbAct5" name="act5" lang="kn"></textarea>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Craft</h3>
+        <div class="fb-field">
+          <label for="fbVoice">The Kannada narration</label>
+          <span class="fb-hint">Wording, tone, pace, pronunciation of names and places. The voice itself is a placeholder, so do not judge its warmth.</span>
+          <textarea id="fbVoice" name="voice" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbSound">Music and sound</label>
+          <span class="fb-hint">There is no music yet. The effects are an audition. Say whether the silences land, especially <span class="mono">K06</span> and the drop under <span class="kn" lang="kn">&#3242;&#3266;&#3248;&#3277;&#3236;&#3263; &#3205;&#3222;&#3277;&#3236;.</span></span>
+          <textarea id="fbSound" name="sound" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbText">On-screen Kannada and subtitles</label>
+          <span class="fb-hint">Spelling, line breaks, whether anything is on screen too briefly to read.</span>
+          <textarea id="fbText" name="onscreen" lang="kn"></textarea>
+        </div>
+        <div class="fb-field">
+          <label for="fbFacts">Facts, names, numbers and spellings</label>
+          <span class="fb-hint">Anything that is wrong, or that we cannot prove and should therefore drop.</span>
+          <textarea id="fbFacts" name="facts" lang="kn"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0">
+          <label for="fbRemove">Anything that must come out</label>
+          <span class="fb-hint">A photograph, a claim, a name, a shot. Say which and why.</span>
+          <textarea id="fbRemove" name="remove" lang="kn"></textarea>
+        </div>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Five decisions only the Trust can make</h3>
+        <p class="fb-hint" style="margin:0 0 1rem">These are the open gates. Each one blocks a public release, and none of them is a creative preference. Answer what you can and leave the rest on <em>decide later</em>.</p>
+
+        <fieldset class="fb-set">
+          <legend>Sound effects. <code>07</code> items 5.7 and 5.8</legend>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Reaffirm 5.7, no sound effects"><span>Reaffirm 5.7. No sound effects, take the 14 out.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Amend 5.7, effects permitted under the limits in 11"><span>Amend 5.7. Effects permitted, under the limits in <code>11</code>.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateSfx" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>Guardian consent for the photographs. <code>07</code> item 1.1</legend>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Consents are in hand, send the list"><span>Consents are in hand. I will send the signed list.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Being collected"><span>Being collected. Keep the fallback cut for now.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Use the fallback cut, do not chase consent"><span>Use the fallback cut. Do not chase consent.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateConsent" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>The Udayavani newspaper clipping at <span class="mono">K36</span></legend>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Written permission is being sought"><span>Written permission is being sought from the paper.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Remove the shot"><span>Remove the shot. Not worth the copyright risk.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateClip" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set">
+          <legend>Music. <code>07</code> item 5.1</legend>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Commission a Karnataka musician for original bansuri"><span>Commission a Karnataka musician for five minutes of original bansuri.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Licence a library track"><span>Licence a library track that covers event, YouTube and web.</span></label>
+          <label class="fb-radio"><input type="radio" name="gateMusic" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+
+        <fieldset class="fb-set" style="margin-bottom:0">
+          <legend>Public release</legend>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Hold until all five gates close"><span>Hold. Nothing public until all five gates close.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Unlisted link only, for review"><span>Unlisted link only, for review by named people.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Release publicly now, on my instruction"><span>Release publicly now, on my instruction.</span></label>
+          <label class="fb-radio"><input type="radio" name="gatePublic" value="Decide later" checked><span>Decide later.</span></label>
+        </fieldset>
+      </div>
+
+      <div class="card" style="margin-bottom:1.25rem">
+        <h3>Anything else</h3>
+        <div class="fb-field" style="margin-bottom:1.1rem">
+          <label for="fbNotes">Notes</label>
+          <textarea id="fbNotes" name="notes" lang="kn" style="min-height:7rem"></textarea>
+        </div>
+        <div class="fb-field" style="margin-bottom:0;max-width:22rem">
+          <label for="fbPhone">Send to, on WhatsApp</label>
+          <span class="fb-hint">Optional. Country code and number, digits only, for example <span class="mono">919876543210</span>. Leave it blank to pick the contact in WhatsApp yourself.</span>
+          <input type="tel" id="fbPhone" name="phone" inputmode="numeric" autocomplete="off" placeholder="919876543210">
+        </div>
+      </div>
+
+      <div class="fb-actions">
+        <button type="submit" class="btn gold" id="fbSubmit">Review, then make the PDF</button>
+        <button type="button" class="btn ghost" id="fbClear">Clear the draft</button>
+        <p class="fb-status" id="fbStatus" role="status" aria-live="polite"></p>
+      </div>
+    </form>
+
+    <div id="fbReview" hidden>
+      <div class="notice no-print">
+        <h3>Read this, then make the PDF</h3>
+        <p>This is exactly what the PDF will contain. Go back and edit anything that is not right. The PDF is built on this device and nothing has been sent.</p>
+      </div>
+      <div class="fb-doc" id="fbDoc"></div>
+      <div class="fb-actions no-print">
+        <button type="button" class="btn ghost" id="fbBack">Back to edit</button>
+        <button type="button" class="btn" id="fbPdf">Download the PDF</button>
+        <button type="button" class="btn gold" id="fbSend">Send on WhatsApp</button>
+        <p class="fb-status" id="fbStatus2" role="status" aria-live="polite"></p>
+      </div>
+      <div class="notice no-print" id="fbWaHint" hidden>
+        <h3>Attach the PDF in WhatsApp</h3>
+        <p>WhatsApp cannot receive a file from a link, so on a computer it takes two steps. The PDF has been downloaded and WhatsApp has been opened with the summary already typed in. Attach the downloaded PDF with the paperclip, then send. On a phone the share sheet does both at once.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="resources">
+  <div class="wrap">
+    <p class="sec-kicker">03 &middot; Resources</p>
+    <h2>Everything the creative team needs to re-cut this</h2>
+    <p class="sec-lead">The video is a reference. These files are the source. Anyone re-cutting, re-grading, re-scoring or re-subtitling the film should work from this list and never from the YouTube stream, which is a 1080p H.264 re-compression of a re-compression.</p>
+
+    <div class="notice">
+      <h3>Start with three files</h3>
+      <p><a href="tools/timeline.json"><code>tools/timeline.json</code></a> is the timing source of truth: 46 shots with in and out points, durations, narration, holds, pauses, crop windows, motion, transitions, consent status and the music cue for every one. Every other document and every render is derived from it. <a href="06-kannada-edit-decision-list.md"><code>06</code></a> is the same thing as a plain-text EDL so the film can be rebuilt in five years without a project file. <a href="Kannada-cue-sheet.csv"><code>Kannada-cue-sheet.csv</code></a> is the audio.</p>
+      <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved once, from <span class="mono">00:05:36:01</span> to <span class="mono">00:05:37:22</span>, and hand-typed timecodes went stale within the hour.</p>
+    </div>
+
+    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(25rem,1fr))">
+      <div class="card">
+        <h3>Download</h3>
+      <div class="res-group">
+        <h4>Timing and structure</h4>
+        <div class="res-list">
+          <a href="tools/timeline.json" download><strong>tools/timeline.json</strong><span>46 shots, the timing source of truth</span></a>
+          <a href="06-kannada-edit-decision-list.md"><strong>06 &middot; Edit decision list</strong><span>The cut as plain text, plus the grade notes</span></a>
+          <a href="03-kannada-storyboard.md"><strong>03 &middot; Storyboard</strong><span>Crop windows, motion and per-shot direction</span></a>
+          <a href="tools/subs.json" download><strong>tools/subs.json</strong><span>Subtitle cue data, derived</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Audio</h4>
+        <div class="res-list">
+          <a href="Kannada-cinematic-audio-direction.md"><strong>Cinematic audio direction</strong><span>Five acts, the effect palette, the gates</span></a>
+          <a href="Kannada-music-map.md"><strong>Music map</strong><span>Palette, motif, intensity curve, composer brief</span></a>
+          <a href="Kannada-cue-sheet.csv" download><strong>Cue sheet</strong><span>46 music cues and 14 effect events</span></a>
+          <a href="Kannada-final-mix-checklist.md"><strong>Final mix checklist</strong><span>Mix, master, five-system test, sign-off</span></a>
+          <a href="Kannada-sfx-licence-log.csv" download><strong>SFX licence log</strong><span>What shipped, and what is still uncaptured</span></a>
+          <a href="11-kannada-sound-design-and-sfx-sources.md"><strong>11 &middot; Sound design sources</strong><span>Where to find effects, and licence discipline</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Words and text</h4>
+        <div class="res-list">
+          <a href="01-kannada-final-script.md"><strong>01 &middot; Final script</strong><span>The approved Kannada narration</span></a>
+          <a href="04-kannada-onscreen-text.md"><strong>04 &middot; On-screen text</strong><span>Every card, exactly as it appears</span></a>
+          <a href="05-kannada-subtitles.srt" download><strong>05 &middot; Subtitles, .srt</strong><span>84 cues. Upload this as the caption track</span></a>
+          <a href="05-kannada-subtitles.vtt" download><strong>05 &middot; Subtitles, .vtt</strong><span>For web players</span></a>
+          <a href="02-kannada-voice-audition-plan.md"><strong>02 &middot; Voice audition plan</strong><span>How to cast and record the human read</span></a>
+          <a href="09-elevenlabs-narration-guide.md"><strong>09 &middot; Narration guide</strong><span>The interim synthetic read only</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Rights, facts and credits</h4>
+        <div class="res-list">
+          <a href="07-final-rights-and-approval-checklist.md"><strong>07 &middot; Rights and approval</strong><span>Every gate, including the five that block release</span></a>
+          <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md"><strong>14 &middot; Rights and publishing</strong><span>Consent, music and accessibility rules</span></a>
+          <a href="../../anniversary-video-research/01-source-of-truth.md"><strong>01 &middot; Source of truth</strong><span>Every verified fact and where it came from</span></a>
+          <a href="../../anniversary-video-research/02-evidence-table.csv" download><strong>02 &middot; Evidence table</strong><span>Claim by claim, with sources</span></a>
+          <a href="../../anniversary-video-research/04-media-inventory.csv" download><strong>04 &middot; Media inventory</strong><span>Every photograph, with consent status</span></a>
+          <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><strong>13 &middot; Credits</strong><span>End-roll names, not yet spelling-verified</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Brief and design</h4>
+        <div class="res-list">
+          <a href="../../anniversary-video-research/07-bilingual-creative-brief.md"><strong>07 &middot; Creative brief</strong><span>Tone, typography, and what to avoid</span></a>
+          <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><strong>12 &middot; On-screen text, bilingual</strong><span>Both language versions</span></a>
+          <a href="../../logo.png" download><strong>logo.png</strong><span>The mark, as used on the title card</span></a>
+          <a href="../../logo-purple.png" download><strong>logo-purple.png</strong><span>Alternate mark</span></a>
+          <a href="08-kannada-animatic-poster.jpg" download><strong>Poster frame</strong><span>For slides and thumbnails</span></a>
+        </div>
+      </div>
+      <div class="res-group">
+        <h4>Build tools</h4>
+        <div class="res-list">
+          <a href="tools/README.md"><strong>tools/README.md</strong><span>What every script does, and in what order</span></a>
+          <a href="tools/film.py" download><strong>film.py</strong><span>Renders the picture from timeline.json</span></a>
+          <a href="tools/gfx.py" download><strong>gfx.py</strong><span>Renders the typographic cards and subtitles</span></a>
+          <a href="tools/master.py" download><strong>master.py</strong><span>Builds the master, checks the release gates</span></a>
+          <a href="tools/mix.py" download><strong>mix.py</strong><span>Stems, both masters, the four previews</span></a>
+          <a href="tools/cue.py" download><strong>cue.py</strong><span>Regenerates the cue sheet and audits timecodes</span></a>
+          <a href="tools/sfx.py" download><strong>sfx.py</strong><span>Places effects, refuses the silence cues</span></a>
+          <a href="tools/stem.py" download><strong>stem.py</strong><span>Assembles the narration into one aligned WAV</span></a>
+        </div>
+      </div>
+      </div>
+
+      <div class="card">
+        <h3>What is deliberately not here</h3>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem">No video, no audio and no rendered graphic is committed to this repository. All of it is reproducible from <code>timeline.json</code> plus the photographs, so committing it would only guarantee that someone edits a stale copy.</p>
+        <div class="table-wrap">
+          <table style="font-size:0.86rem">
+            <thead><tr><th scope="col">Missing</th><th scope="col">Rebuild it with</th></tr></thead>
+            <tbody>
+              <tr><td>Every <code>.mp4</code></td><td><code>python3 film.py</code>, then <code>master.py</code></td></tr>
+              <tr><td><code>tools/gfx/</code>, the cards</td><td><code>python3 gfx.py ../05-kannada-subtitles.srt --scale 2</code></td></tr>
+              <tr><td><code>tools/stills/</code>, the crops</td><td><code>python3 film.py</code> makes them on the way through</td></tr>
+              <tr><td>The narration <code>.wav</code></td><td><code>python3 stem.py &lt;VOICE_ID&gt;</code></td></tr>
+              <tr><td>Stems, masters, previews</td><td><code>python3 mix.py --calibrate</code></td></tr>
+              <tr><td>The effect <code>.mp3</code> files</td><td>Download from the URLs in <a href="Kannada-sfx-licence-log.csv">the licence log</a>, into <code>tools/sfx/</code></td></tr>
+              <tr><td>The music bed</td><td><strong>Does not exist.</strong> See <a href="Kannada-music-map.md">the music map</a>, section 6</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <h3 style="margin-top:1.25rem">Rebuild the whole film</h3>
+        <p style="margin:0 0 0.6rem;font-size:0.95rem">About 13 minutes on a recent laptop. Needs Python 3, ffmpeg and Playwright.</p>
+        <pre style="margin:0;overflow-x:auto;background:#1c1c2e;color:#e8e6e1;padding:0.9rem 1rem;border-radius:8px;font-size:0.82rem;line-height:1.6"><code>cd anniversary-video-production/kannada/tools
+
+python3 gfx.py ../05-kannada-subtitles.srt --scale 2
+python3 film.py silent.mp4
+python3 stem.py &lt;VOICE_ID&gt;
+python3 sfx.py --strict
+python3 mix.py --calibrate
+python3 master.py            # 4K review master
+python3 master.py --check    # what still blocks a release</code></pre>
+        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--muted)"><code>master.py --release</code> is the only path to a publishable file, and it refuses to run while any of the five gates is open.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="delivery">
+  <div class="wrap">
+    <p class="sec-kicker">04 &middot; Formats</p>
+    <h2>What gets delivered, and where each version goes</h2>
+    <p class="sec-lead">Five files, five jobs. The one in the player above is the one to watch today. Only the last of them is a public release, and it does not exist yet.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>The five versions</h3>
+        <table style="font-size:0.88rem">
+          <thead><tr><th scope="col">File</th><th scope="col">For</th></tr></thead>
+          <tbody>
+            <tr><td><code>08-kannada-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 14 SFX, -16 LUFS, 79 MB</span></td><td><strong>This is what the player above streams</strong>, as <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>. Picture and effects review. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
+            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 80 MB</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
+            <tr><td><code>08-kannada-animatic-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, 111 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. <strong>Stale at 00:05:36:01.</strong> Rebuild with <code>film.py</code>.</td></tr>
+            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, no burned subtitles, 311 MB</span></td><td>Hall projection test and quality review. ElevenLabs narration. Built by <code>tools/master.py</code>. <strong>Stale: it is 00:05:36:01 and the film is now 00:05:37:22.</strong> Re-render before using it.</td></tr>
+            <tr><td><code>kannada-2160p-youtube-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, human narration, -14 LUFS</span></td><td><strong>Does not exist yet.</strong> Needs the human read and all five clearances.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card">
+        <h3>Why 4K, when no photograph is 4K</h3>
+        <p style="margin:0 0 0.6rem;font-size:0.95rem">Worth being straight about this, because someone will ask.</p>
+        <ul style="margin:0 0 0.6rem">
+          <li><strong>The Kannada type really is 4K.</strong> All 133 graphics are re-rendered in Chrome at the target resolution, so glyphs and conjuncts are drawn sharp rather than enlarged.</li>
+          <li><strong>The photography is not.</strong> The largest still in the library is 1920x1446 and 29 of 34 are under 1920px, so at 2160p they are enlarged 2x to 4x.</li>
+          <li><strong>YouTube is the reason.</strong> A 2160p upload gets a better codec and a higher bitrate than a 1080p one, so even a viewer watching at 1080p sees a cleaner picture.</li>
+        </ul>
+        <p style="margin:0;font-size:0.92rem;color:var(--muted)">Judge the master on type crispness, not on photographic detail. Full measurements in <a href="08-kannada-animatic-notes.md">08 animatic notes</a>, section 9.</p>
+      </div>
+    </div>
+    <div class="alert" style="margin-top:1rem">
+      <strong>A YouTube upload is public release.</strong> All five gates in
+      <a href="#decisions">section 04</a> are still open, so nothing goes up yet. Run
+      <code>python3 tools/master.py --check</code> for the current list. The build script
+      refuses to produce a release master while any gate is unwaived, and refuses outright
+      while the narration is the scratch track.
+    </div>
+  </div>
+</section>
+
+<section id="roles">
+  <div class="wrap">
+    <p class="sec-kicker">05 &middot; Who does what</p>
+    <h2>Role briefs</h2>
+    <p class="sec-lead">Click a role. Each person gets only what they need to move next.</p>
+
+    <div class="tabs" role="tablist" aria-label="Team roles">
+      <button class="tab" id="t-owner"    role="tab" aria-selected="true"  aria-controls="p-owner"    tabindex="0"  data-panel="p-owner">NGO owner / trustees</button>
+      <button class="tab" id="t-director" role="tab" aria-selected="false" aria-controls="p-director" tabindex="-1" data-panel="p-director">Director / editor</button>
+      <button class="tab" id="t-voice"    role="tab" aria-selected="false" aria-controls="p-voice"    tabindex="-1" data-panel="p-voice">Narrator / audio</button>
+      <button class="tab" id="t-design"   role="tab" aria-selected="false" aria-controls="p-design"   tabindex="-1" data-panel="p-design">Designer / graphics</button>
+      <button class="tab" id="t-coord"    role="tab" aria-selected="false" aria-controls="p-coord"    tabindex="-1" data-panel="p-coord">Producer / coordinator</button>
+    </div>
+
+    <div id="p-owner" class="panel card" role="tabpanel" aria-labelledby="t-owner" tabindex="0">
+      <span class="who">Trustees · NGO owner</span>
+      <h3>Approve facts, faces, names, and the forward promise</h3>
+      <ul>
+        <li>Answer blocking questions Q1 to Q5, and the name spellings in Q10 and Q11, in <a href="#decisions">Decisions</a>.</li>
+        <li>Approve the 40-second narrator audition sample before the full booth session.</li>
+        <li>Approve <span class="mono">K43</span> next-decade wording before it is recorded into the master.</li>
+        <li>Start guardian consent for children in 22 shots. Longest lead item.</li>
+        <li><strong>Confirm every name in the end roll.</strong> The repository holds inconsistent spellings, near-duplicates and first-name-only entries. No name goes on screen until a trustee confirms the spelling and the person agrees to be named: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
+        <li>Read: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06 trustee questions</a>, <a href="07-final-rights-and-approval-checklist.md">07 rights checklist</a>.</li>
+        <li>Evidence behind every claim in the script: <a href="../../anniversary-video-research/02-evidence-table.csv">02 evidence table</a>, <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv">03 impact and milestone data</a>, <a href="../../anniversary-video-research/01-source-of-truth.md">01 source of truth</a>.</li>
+      </ul>
+    </div>
+
+    <div id="p-director" class="panel card" role="tabpanel" aria-labelledby="t-director" tabindex="0" hidden>
+      <span class="who">Director · picture editor</span>
+      <h3>Picture is largely locked; narration stem will replace the scratch</h3>
+      <ul>
+        <li>Source of timing truth: <a href="tools/timeline.json"><code>tools/timeline.json</code></a> (46 shots).</li>
+        <li>Storyboard + crops: <a href="03-kannada-storyboard.md">03</a> · EDL: <a href="06-kannada-edit-decision-list.md">06</a>.</li>
+        <li>When human WAV arrives: re-time with <code>build_timeline.py --from-audio</code> if line lengths drift; picture follows voice.</li>
+        <li>Protect silences and holds. Do not fill <strong>K06</strong>, the drop under <span class="kn" lang="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span>, or the refusal to climax on <strong>K43</strong>.</li>
+        <li>Photography lives under <code>assets/images/timeline/</code> (paths in the shot table).</li>
+      </ul>
+    </div>
+
+    <div id="p-voice" class="panel card" role="tabpanel" aria-labelledby="t-voice" tabindex="0" hidden>
+      <span class="who">Human narrator · recording engineer</span>
+      <h3>Female, 35 to 50 · warm, composed, dignified · about 105 wpm</h3>
+      <ul>
+        <li>Register: respected Kannada-medium headmistress addressing a hall. Not orator, not vlogger, not newsreader.</li>
+        <li>Booth script: <a href="01-kannada-final-script.md">01 final script</a> (print pronunciation sheet in section 4).</li>
+        <li>Audition first with Test B only (K11, K12, K13, K27, K29), listed in the table below. Full script only after trustee approval.</li>
+        <li>Deliver: WAV 48 kHz 24-bit mono; no limiter on the recorded file; 3 takes/line, 5 of K45; pickups P1 to P7; 30 s room tone; signed release.</li>
+        <li>Full direction: <a href="02-kannada-voice-audition-plan.md">02 audition plan</a> section 8.</li>
+        <li><strong>Interim synthetic read</strong> (for a trustee preview only, never for the hall): <a href="09-elevenlabs-narration-guide.md">09 ElevenLabs guide</a> and the paste-ready <a href="10-cursor-elevenlabs-prompt.md">10 Cursor prompt</a>. Kannada works on <code>eleven_v3</code> only.</li>
+        <li><strong>Brief:</strong> this is a welcome, not an appeal. Read it to the people in the hall, not about them.</li>
+      </ul>
+      <p style="margin:1rem 0 0.4rem;font-weight:600">Audition copy (Test B)</p>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Shot</th><th>~s</th><th>Kannada</th></tr></thead>
+          <tbody>
+            <tr><td class="mono">K11</td><td>3.8</td><td class="kn" lang="kn">2016ರಲ್ಲಿ ಅವರು ಮೊದಲ ಶಾಲಾ ಭೇಟಿ ಮಾಡಿದರು.</td></tr>
+            <tr><td class="mono">K12</td><td>3.1</td><td class="kn" lang="kn">ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.</td></tr>
+            <tr><td class="mono">K13</td><td>5.0</td><td class="kn" lang="kn">ಅದೇ ಭೇಟಿಯಲ್ಲಿ ನೂರೈವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸ್ಟೀಲ್ ತಟ್ಟೆ ಮತ್ತು ಲೋಟ ವಿತರಿಸಲಾಯಿತು.</td></tr>
+            <tr><td class="mono">K27</td><td>5.2</td><td class="kn" lang="kn">ನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.</td></tr>
+            <tr><td class="mono">K29</td><td>4.1</td><td class="kn" lang="kn">ಮತ್ತು ಆ ಹಣ ನೇರವಾಗಿ ಶಾಲೆಗೇ ಸಲ್ಲುತ್ತದೆ. ಬೇರೆ ಯಾರ ಕೈಗೂ ಅಲ್ಲ.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="player-note"><strong>K12 must land as three sentences</strong> with full stops, not a rising list. <span class="kn" lang="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span> on K27 is level and quiet. It is the turn of the film.</p>
+    </div>
+
+    <div id="p-design" class="panel card" role="tabpanel" aria-labelledby="t-design" tabindex="0" hidden>
+      <span class="who">Motion / graphics designer</span>
+      <h3>Every on-screen string is already specified</h3>
+      <ul>
+        <li>Build sheet: <a href="04-kannada-onscreen-text.md">04 onscreen text</a>.</li>
+        <li>Fonts: Noto Serif Kannada (titles), Noto Sans Kannada (body/lower thirds). <strong>Never track Kannada. Never force-uppercase Kannada.</strong></li>
+        <li>Palette: navy <code>#1c1c2e</code>, gold body on navy <code>#e0b06a</code>, white titles.</li>
+        <li>Repo tool <code>gfx.py</code> renders cards via headless Chrome (HarfBuzz). Do not move Kannada text to Pillow/ffmpeg drawtext.</li>
+        <li>Bilingual string reference for an English cut later: <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md">12 onscreen text and lower thirds</a>.</li>
+        <li>End roll copy in both languages: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>. Build it only after trustees confirm spellings.</li>
+        <li>See <a href="#design">Design tokens</a> on this page.</li>
+      </ul>
+    </div>
+
+    <div id="p-coord" class="panel card" role="tabpanel" aria-labelledby="t-coord" tabindex="0" hidden>
+      <span class="who">Producer · coordinator</span>
+      <h3>Sequence the blockers; keep one source of truth</h3>
+      <ol>
+        <li>Share this HTML pack (see <a href="#share">Share</a>).</li>
+        <li>Book narrator auditions; schedule trustee listen.</li>
+        <li>Drive consent + Udayavani + music licence in parallel with booth booking.</li>
+        <li>Run the end-roll name verification with the trustees in parallel: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>, section 4. It gates the last shot of the film.</li>
+        <li>Do not hand-edit timecodes in 01/03/05/06. Re-run the tools from <code>timeline.json</code>: <a href="tools/README.md">tools/README.md</a>.</li>
+        <li>Governing checklists: <a href="07-final-rights-and-approval-checklist.md">07</a> and research <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md">14</a>.</li>
+        <li>After the film is approved, social cutdowns are already written: <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md">11 teaser scripts</a>.</li>
+        <li>Packing and sending this folder: <a href="SHARE-PACK.md">SHARE-PACK.md</a>.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+<section id="decisions">
+  <div class="wrap">
+    <p class="sec-kicker">06 &middot; Open gates</p>
+    <h2>Decisions and clearances</h2>
+    <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
+    <div class="card no-print" style="margin-bottom:1rem;background:#fffdf7;border-left:4px solid var(--gold)">
+      <p style="margin:0 0 0.35rem;font-weight:600">Who chases these</p>
+      <p style="margin:0;font-size:0.95rem;color:var(--muted)">Producer / coordinator: <input class="owner-field" style="min-width:11rem" type="text" data-k="coord-name" placeholder="name" aria-label="Coordinator name"> · <input class="owner-field" style="min-width:13rem" type="text" data-k="coord-contact" placeholder="phone or email" aria-label="Coordinator contact"> · target screening date <input class="owner-field" type="date" data-k="coord-date" aria-label="Target screening date">. Send every answer to this one person so the documents stay a single source of truth.</p>
+    </div>
+
+    <div class="grid grid-2">
+      <div class="card checklist">
+        <h3><span class="badge badge-block">BLOCKING</span> Trustee answers first</h3>
+        <label><input type="checkbox" data-k="q1"> <span class="ck-label"><strong>Q1</strong> Cumulative students and geography, or keep none on screen</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q1-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q1-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q2"> <span class="ck-label"><strong>Q2</strong> Founding year: 2012 start / 2016 registration, or 2016 start?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q2-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q2-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q3"> <span class="ck-label"><strong>Q3</strong> Award: certificate facts only (recommended), or ministers / “one of 25”?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q3-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q3-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q4"> <span class="ck-label"><strong>Q4</strong> Which children may appear; signed guardian releases held?</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q4-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q4-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q5"> <span class="ck-label"><strong>Q5</strong> 2026 content + next-decade promise (<span class="mono">K43</span>)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q5-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q5-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="q10"> <span class="ck-label"><strong>Q10, Q11</strong> Exact Kannada spellings: <span class="kn" lang="kn">ಚಾರುಲತಾ ಎಂ. ಆರ್.</span> · <span class="kn" lang="kn">ಎಸ್. ಎಂ. ಮಂಜುನಾಥ</span></span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="q10-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="q10-by" aria-label="Due date"></span></label>
+      </div>
+      <div class="card checklist">
+        <h3><span class="badge badge-block">BLOCKING</span> Before any public screening</h3>
+        <label><input type="checkbox" data-k="c1"> <span class="ck-label">Guardian consent for identifiable children (22 shots)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c1-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c1-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c2"> <span class="ck-label">School premises permissions</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c2-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c2-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c3"> <span class="ck-label">Udayavani written permission for clipping (<span class="mono">K36</span>)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c3-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c3-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c4"> <span class="ck-label">Partner name clearances (Belaku, Soukhya, Nisarga, District Health)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c4-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c4-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c5"> <span class="ck-label">Music licence (event + YouTube + web; no vocals)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c5-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c5-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c6"> <span class="ck-label">Narrator release signed (event, site, YT, social, donors)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c6-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c6-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c7"> <span class="ck-label">Native Kannada speaker (not translator) read-aloud of full script</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c7-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c7-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c9"> <span class="ck-label">End-roll names verified: spelling confirmed by a trustee and consent to be named (<a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13</a>, section 4)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c9-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c9-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c8"> <span class="ck-label">Trustee approval of narrator sample before full record</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c8-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c8-by" aria-label="Due date"></span></label>
+      </div>
+    </div>
+    <p class="player-note" style="margin-top:1rem">Full question list: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06-fact-check-and-trustee-questions.md</a>. Kannada cut checklist: <a href="07-final-rights-and-approval-checklist.md">07</a>.</p>
+  </div>
+</section>
+
+<section id="script">
+  <div class="wrap">
+    <p class="sec-kicker">07 &middot; Spoken text</p>
+    <h2>Shot list and narration</h2>
+    <p class="sec-lead">43 lines · 3,585 characters across 46 shots. Source: <code>tools/timeline.json</code>. Do not rewrite wording without Trust sign-off. <strong>Consent status is per shot:</strong> 22 shots are blocked until guardian or partner clearance is in hand, so read that column before you cut anything for a screening.</p>
+    <div class="filter-row no-print">
+      <input id="shotFilter" type="search" placeholder="Filter by shot id, Kannada text, asset, consent, note…" aria-label="Filter shots">
+      <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="spokenOnly"> Spoken lines only</label>
+      <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="blockedOnly"> Consent-blocked only</label>
+      <span id="shotCount" class="mono" style="color:var(--muted)"></span>
+    </div>
+    <div class="table-wrap shot-scroll">
+      <table id="shotTable">
+        <caption class="sr-only">Shot list with timecodes, Kannada narration, on-screen text, asset, consent status and direction notes for all 46 shots</caption>
+        <thead>
+          <tr>
+            <th scope="col">Shot</th>
+            <th scope="col">In</th>
+            <th scope="col">Dur</th>
+            <th scope="col">Speech</th>
+            <th scope="col">Narration</th>
+            <th scope="col">On-screen</th>
+            <th scope="col">Asset</th>
+            <th scope="col">Consent</th>
+            <th scope="col">Direction note</th>
+          </tr>
+        </thead>
+        <tbody id="shotBody"></tbody>
+      </table>
+    </div>
+    <p class="player-note">Consent wording comes straight from <a href="../../anniversary-video-research/04-media-inventory.csv">04 media inventory</a>; the worklist to clear it is <a href="07-final-rights-and-approval-checklist.md">07</a>. Subtitles: <a href="05-kannada-subtitles.srt">05-kannada-subtitles.srt</a> (editor) and <a href="05-kannada-subtitles.vtt">.vtt</a> (this page). Creative brief: <a href="../../anniversary-video-research/07-bilingual-creative-brief.md">07 brief</a>. Asset gaps and rejected duplicates: <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md">05 asset audit</a>.</p>
+    <p class="player-note no-print"><strong>Printing this table:</strong> use your browser print dialog. The print stylesheet unclips the scroll box, so all 46 rows come out, and it hides the player, filters and navigation. Landscape is the right orientation.</p>
+  </div>
+</section>
+
+<section id="design">
+  <div class="wrap">
+    <p class="sec-kicker">08 &middot; Look</p>
+    <h2>Design tokens</h2>
+    <p class="sec-lead">Match the film cards. Emotion target: quiet pride, earned over time. Not pity, not triumph.</p>
+    <div class="grid grid-3">
+      <div class="card">
+        <h3>Colour</h3>
+        <div class="swatch"><i style="background:#1c1c2e"></i><div><strong>Navy</strong><br><code>#1c1c2e</code> · cards / bars</div></div>
+        <div class="swatch"><i style="background:#e0b06a"></i><div><strong>Gold</strong><br><code>#e0b06a</code> · Kannada body on navy</div></div>
+        <div class="swatch"><i style="background:#ffffff;border-color:#ccc"></i><div><strong>White</strong><br><code>#ffffff</code> · titles on navy</div></div>
+      </div>
+      <div class="card">
+        <h3>Type</h3>
+        <ul>
+          <li>Titles: Noto Serif Kannada 700</li>
+          <li>Body / L3: Noto Sans Kannada 500 to 600</li>
+          <li>Year numerals: Playfair Display 900 (Latin only)</li>
+          <li>Tracking on Kannada: <strong>0</strong></li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Words never used</h3>
+        <p class="kn" lang="kn" style="font-size:0.9rem;margin:0">ಫಲಾನುಭವಿ · ಬಡ ಮಕ್ಕಳು · ಅಸಹಾಯಕ · ದೀನ · ಸಬಲೀಕರಣ · ಜೀವನ ಪರಿವರ್ತನೆ · ಉದ್ಧಾರ</p>
+        <p style="margin:0.6rem 0 0;font-size:0.9rem;color:var(--muted)">Hold glossary: <span class="kn" lang="kn">ವಿದ್ಯಾರ್ಥಿವೇತನ</span> (not scholarship loanword), <span class="kn" lang="kn">ಬುಡಕಟ್ಟು</span>, <span class="kn" lang="kn">ನೆರವು ನೀಡಿದವರು</span> on cards.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="docs">
+  <div class="wrap">
+    <p class="sec-kicker">09 &middot; Library</p>
+    <h2>Documents and assets</h2>
+    <p class="sec-lead">Every document in the pack is listed here. Markdown opens in any editor; CSV opens in Excel or Numbers. Keep relative paths intact when you zip, or the links break. No video file is in the repository: the review cut streams from YouTube, and the renders are rebuilt with <code>tools/master.py</code>.</p>
+    <div class="grid grid-2">
+      <div class="card doc">
+        <h3>Kannada production</h3>
+        <a href="01-kannada-final-script.md"><span class="name">01 · Final narration script</span><span class="for">Narrator · booth</span></a>
+        <a href="02-kannada-voice-audition-plan.md"><span class="name">02 · Voice audition plan</span><span class="for">Casting · audio</span></a>
+        <a href="03-kannada-storyboard.md"><span class="name">03 · Storyboard</span><span class="for">Director · editor</span></a>
+        <a href="04-kannada-onscreen-text.md"><span class="name">04 · On-screen text</span><span class="for">Designer</span></a>
+        <a href="05-kannada-subtitles.srt"><span class="name">05 · Subtitles (.srt)</span><span class="for">Editor</span></a>
+        <a href="06-kannada-edit-decision-list.md"><span class="name">06 · Edit decision list</span><span class="for">Editor</span></a>
+        <a href="07-final-rights-and-approval-checklist.md"><span class="name">07 · Rights &amp; approval</span><span class="for">Trust · producer</span></a>
+        <a href="https://youtu.be/I6iZCH88RYU"><span class="name">08 · Picture and SFX preview (YouTube)</span><span class="for">Everyone · streams, not in the repo</span></a>
+        <a href="08-kannada-animatic-notes.md"><span class="name">08 · Animatic notes</span><span class="for">Everyone</span></a>
+        <a href="05-kannada-subtitles.vtt"><span class="name">05 · Subtitles (.vtt)</span><span class="for">This page only</span></a>
+        <a href="09-elevenlabs-narration-guide.md"><span class="name">09 · ElevenLabs narration guide</span><span class="for">Interim scratch read</span></a>
+        <a href="10-cursor-elevenlabs-prompt.md"><span class="name">10 · Cursor prompt (ElevenLabs)</span><span class="for">Whoever runs the TTS</span></a>
+        <a href="tools/timeline.json"><span class="name">tools/timeline.json</span><span class="for">Timing source of truth</span></a>
+        <a href="tools/README.md"><span class="name">tools/README.md</span><span class="for">How to re-run the build</span></a>
+        <a href="SHARE-PACK.md"><span class="name">SHARE-PACK.md</span><span class="for">Producer · how to send</span></a>
+      </div>
+      <div class="card doc">
+        <h3>Research / bilingual</h3>
+        <a href="../../anniversary-video-research/07-bilingual-creative-brief.md"><span class="name">07 · Creative brief</span><span class="for">All creatives</span></a>
+        <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md"><span class="name">06 · Trustee questions</span><span class="for">NGO owner</span></a>
+        <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md"><span class="name">14 · Rights (full)</span><span class="for">Producer · Trust</span></a>
+        <a href="../../anniversary-video-research/08-english-five-minute-script.md"><span class="name">08 · English script</span><span class="for">English cut later</span></a>
+        <a href="../../anniversary-video-research/09-kannada-five-minute-script.md"><span class="name">09 · Kannada source script</span><span class="for">Reference</span></a>
+        <a href="../../anniversary-video-research/04-media-inventory.csv"><span class="name">04 · Media inventory</span><span class="for">Consent worklist</span></a>
+        <a href="../../assets/images/timeline/"><span class="name">assets/images/timeline/</span><span class="for">Photography pool</span></a>
+        <a href="../../anniversary-video-research/00-project-map.md"><span class="name">00 · Project map</span><span class="for">Orientation</span></a>
+        <a href="../../anniversary-video-research/01-source-of-truth.md"><span class="name">01 · Source of truth</span><span class="for">What is established</span></a>
+        <a href="../../anniversary-video-research/02-evidence-table.csv"><span class="name">02 · Evidence table</span><span class="for">Backs every claim</span></a>
+        <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv"><span class="name">03 · Impact and milestone data</span><span class="for">Numbers on screen</span></a>
+        <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md"><span class="name">05 · Asset audit and gaps</span><span class="for">What still needs shooting</span></a>
+        <a href="../../anniversary-video-research/10-bilingual-storyboard-and-edit-plan.md"><span class="name">10 · Bilingual storyboard and edit plan</span><span class="for">English cut later</span></a>
+        <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md"><span class="name">11 · Short teaser scripts</span><span class="for">Social cutdowns</span></a>
+        <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><span class="name">12 · Onscreen text and lower thirds</span><span class="for">Designer · bilingual</span></a>
+        <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><span class="name">13 · Credits and acknowledgements</span><span class="for">Trustees · name check</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="credits">
+  <div class="wrap">
+    <p class="sec-kicker">10 &middot; Last shot of the film</p>
+    <h2>End roll and acknowledgements</h2>
+    <p class="sec-lead">The credit roll is written in both languages, but it is not buildable yet. The repository holds inconsistent spellings, near-duplicates and first-name-only entries, so the roll is gated on a trustee name check.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>The rule</h3>
+        <p style="margin:0 0 0.6rem"><strong>No name goes on screen until a trustee has confirmed its spelling and the person has agreed to be named.</strong></p>
+        <p style="margin:0;color:var(--muted);font-size:0.95rem">This covers trustees, staff, volunteers, donors and partner organisations. Getting a name wrong in a ten-year film is the one error the audience will remember, and it cannot be fixed after the screening.</p>
+      </div>
+      <div class="card">
+        <h3>What to do</h3>
+        <ol style="margin:0">
+          <li>Trustees work through the verification list in <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
+          <li>Producer records each confirmed spelling and each consent to be named.</li>
+          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 06</a>.</li>
+          <li>Tick the end-roll gate in <a href="#decisions">section 04</a> when it is done.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="share">
+  <div class="wrap">
+    <p class="sec-kicker">11 &middot; How to send this</p>
+    <h2>Share the pack</h2>
+    <p class="sec-lead">External creatives need the folder tree, not only this HTML, so relative links and the MP4 keep working.</p>
+    <div class="grid grid-2">
+      <div class="card">
+        <h3>Recommended zip</h3>
+        <p>From the repo root, zip at least:</p>
+        <ul>
+          <li><code>anniversary-video-production/kannada/</code> (this page, docs, animatic, tools)</li>
+          <li><code>anniversary-video-research/</code> (brief, trustee Qs, rights)</li>
+          <li><code>assets/images/timeline/</code> (source stills used in the cut)</li>
+        </ul>
+        <p>Then tell people to open:<br>
+        <code>anniversary-video-production/kannada/team-handoff.html</code></p>
+        <p class="player-note" style="margin-top:0.8rem"><strong>The zip will be about 110 MB</strong>, because the animatic alone is 105 MB. That is over the limit on Gmail (25 MB), Outlook (20 MB) and WhatsApp (about 100 MB for documents). Send it on Drive, WeTransfer or a shared folder, or zip without the MP4 and share the video as a separate unlisted upload. Full instructions: <a href="SHARE-PACK.md">SHARE-PACK.md</a>.</p>
+      </div>
+      <div class="card">
+        <h3>One-liner for WhatsApp / email</h3>
+        <p style="background:#f3efe6;padding:0.9rem;border-radius:8px;font-size:0.95rem;margin:0">
+          “Kannada 10-year film pack attached. Open <strong>team-handoff.html</strong> first: animatic, role briefs, trustee decisions, the full shot list with consent status, and links to script, design and rights. Narration will be a human Kannada voice; the voice in the preview is temporary and must not be shown in the hall.”
+        </p>
+        <p class="player-note" style="margin-top:0.8rem">Do not include <code>~/.elevenlabs_key</code>, API keys, or any generated ElevenLabs audition folder if you prefer to keep experiments private. Synthetic path is abandoned for delivery.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <p><strong>Law Park Educational Trust</strong> · 10th anniversary Kannada welcome film · coordination pack</p>
+    <p>Core message: for ten years the Trust has gone to the child rather than waiting for the child to come to it, and has made sure that a school fee never decides a child’s future.</p>
+    <p style="margin:0;opacity:0.75">Internal use. Not cleared for public release. Generated from production documents in this repository.</p>
+  </div>
+</footer>
+
+<script>
+const SHOTS = [{"sid": "K01", "tc_in": "00:00:00:00", "tc_out": "00:00:07:00", "dur": 7.0, "speech": 0.0, "narr": "", "osd": "", "kind": "PHOTO", "asset": "A228", "path": "assets/images/timeline/2025-government-primary-school-sign.jpg", "pause": 0.0, "hold": 7.0, "consent": "CLEAR - no identifiable person in the 16:9 window", "sec": "0 · ಆರಂಭಪೂರ್ವ", "note": "NO FACES. Kannada board: ಕರ್ನಾಟಕ ಸರ್ಕಾರ / ಜಿಲ್ಲಾ ಪಂಚಾಯತ್ ಮೈಸೂರು / ಸಾರ್ವಜನಿಕ ಶಿಕ್ಷಣ ಇಲಾಖೆ / ಸರ್ಕಾರಿ ಕಿರಿಯ ಪ್ರಾಥಮಿಕ ಶಾಲೆ / ಎನ್.ಎಸ್. ಹಳ್ಳಿ ಗಿರಿಜನ ಕಾಲೋನಿ (ಪ್ರಭಾನಗರ ಹಾಡಿ), ಹೆಚ್.ಡಿ. ಕೋಟೆ ತಾ. Reads the location for the audience without a caption."}, {"sid": "K02", "tc_in": "00:00:07:00", "tc_out": "00:00:14:13", "dur": 7.51, "speech": 7.51, "narr": "ಪ್ರತಿ ವರ್ಷ, ಕರ್ನಾಟಕದ ಹಳ್ಳಿಗಳಲ್ಲಿ, ಮಕ್ಕಳು ತಮ್ಮ ಬಳಿ ಇರುವುದೆಲ್ಲವನ್ನೂ ಒಂದೇ ಚೀಲದಲ್ಲಿ ಹೊತ್ತು ಶಾಲೆಗೆ ನಡೆಯುತ್ತಾರೆ.", "osd": "", "kind": "PHOTO", "asset": "A240", "path": "assets/images/timeline/2025-schoolwide-supplies-group-photo.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 60 identifiable children and adults", "sec": "ಎ · ಆರಂಭ", "note": "Whole school outdoors, Kannada school board legible top-left. CONSENT [C]."}, {"sid": "K03", "tc_in": "00:00:14:13", "tc_out": "00:00:18:04", "dur": 3.64, "speech": 2.64, "narr": "ಅವರಿಗೆ ಬುದ್ಧಿ ಇದೆ. ಕಲಿಯುವ ಹಂಬಲ ಇದೆ.", "osd": "", "kind": "PHOTO", "asset": "A206", "path": "assets/images/timeline/2025-child-with-school-kit-close-up.jpg", "pause": 1.0, "hold": 0.0, "consent": "[C] BLOCKING - two children in close-up, fully identifiable", "sec": "ಎ · ಆರಂಭ", "note": "The film's one moment of undirected joy. CONSENT [C], high priority for release."}, {"sid": "K04", "tc_in": "00:00:18:04", "tc_out": "00:00:25:08", "dur": 7.18, "speech": 5.18, "narr": "ಆದರೆ ಆ ನಡಿಗೆಗೂ ತರಗತಿಗೂ ನಡುವೆ, ಶಾಲಾ ಶುಲ್ಕ ಒಂದು ತೀರ್ಮಾನ ತೆಗೆದುಕೊಂಡು ಬಿಡುತ್ತದೆ.", "osd": "", "kind": "PHOTO", "asset": "A226", "path": "assets/images/timeline/2025-colorful-school-building.jpg", "pause": 2.0, "hold": 0.0, "consent": "CLEAR after crop - the one adult at bottom-left is cropped out", "sec": "ಎ · ಆರಂಭ", "note": "DIGNITY RULE. The fee line must not sit over a child's face. A painted government school, empty of people, carries it better. Kannada board: ಸರ್ಕಾರಿ ಹಿರಿಯ ಪ್ರಾಥಮಿಕ ಶಾಲೆ, ಮಂಟಿಹಾಡಿ."}, {"sid": "K05", "tc_in": "00:00:25:08", "tc_out": "00:00:29:19", "dur": 4.41, "speech": 3.91, "narr": "ಹತ್ತು ವರ್ಷಗಳಿಂದ, ಒಂದು ಟ್ರಸ್ಟ್ ಸರಿಯಾಗಿ ಅಲ್ಲಿಯೇ ಬಂದು ನಿಂತಿದೆ.", "osd": "ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್  //  ಹತ್ತು ವರ್ಷ · 2016 ರಿಂದ 2026", "kind": "CARD", "asset": "GFX-01", "path": "Title card", "pause": 0.0, "hold": 0.5, "consent": "n/a - graphics only", "sec": "ಎ · ಆರಂಭ", "note": "Navy #1c1c2e. Wordmark Noto Serif Kannada 700, 96px. Sub-line Noto Sans Kannada 600, 52px, #e0b06a. Logo mark logo.png at native 300x257, top-left of the lockup. 1.3x Kannada dwell already in the duration."}, {"sid": "K06", "tc_in": "00:00:29:19", "tc_out": "00:00:35:19", "dur": 6.0, "speech": 0.0, "narr": "", "osd": "\"ಶಿಕ್ಷಣದ ವಿಷಯದಲ್ಲಿ ಯಾವ ಮಗುವೂ ಹಿಂದೆ ಉಳಿಯಬಾರದು.\"  //  ಚಾರುಲತಾ ಎಂ. ಆರ್., ಸಂಸ್ಥಾಪಕರು", "kind": "CARD", "asset": "GFX-02", "path": "Founder quote card", "pause": 0.0, "hold": 6.0, "consent": "n/a - graphics only", "sec": "ಎ2 · ಸಂಸ್ಥಾಪಕರ ಮಾತು", "note": "NO NARRATION. NO PHOTOGRAPH. 6s, the longest silent card in the film. Typography only, so the sentence is the whole frame. [ಟ್ರಸ್ಟಿ ದೃಢೀಕರಣ ಅಗತ್ಯ] on the Kannada wording."}, {"sid": "K07", "tc_in": "00:00:35:19", "tc_out": "00:00:42:02", "dur": 6.35, "speech": 6.35, "narr": "ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್, ಬೆಂಗಳೂರಿನ ಎಚ್.ಎಸ್.ಆರ್. ಲೇಔಟ್‌ನಲ್ಲಿರುವ ನೋಂದಾಯಿತ ಶೈಕ್ಷಣಿಕ ಟ್ರಸ್ಟ್.", "osd": "ನೋಂದಾಯಿತ ಶೈಕ್ಷಣಿಕ ಟ್ರಸ್ಟ್  //  ಎಚ್.ಎಸ್.ಆರ್. ಲೇಔಟ್, ಬೆಂಗಳೂರು", "kind": "CARD", "asset": "GFX-03", "path": "Organisation card", "pause": 0.0, "hold": 0.0, "consent": "n/a - graphics only", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "Cream #faf8f3 ground, navy text, gold rule. ORG-04, ORG-05."}, {"sid": "K08", "tc_in": "00:00:42:02", "tc_out": "00:00:50:17", "dur": 8.57, "speech": 8.57, "narr": "ಇದನ್ನು ಸ್ಥಾಪಿಸಿದವರು ಚಾರುಲತಾ ಎಂ. ಆರ್. ಟ್ರಸ್ಟ್ ಶುರುವಾಗುವ ಮೊದಲೇ ಅವರು ತಮ್ಮ ಬಡಾವಣೆಯ ಮಕ್ಕಳ ಶಾಲಾ ಶುಲ್ಕವನ್ನು ತಾವೇ ಕಟ್ಟುತ್ತಿದ್ದರು.", "osd": "ಚಾರುಲತಾ ಎಂ. ಆರ್.  //  ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ಟ್ರಸ್ಟಿ", "kind": "PHOTOCARD", "asset": "A059", "path": "assets/images/magazine-gallery/Charulatha-MR.jpeg", "pause": 0.0, "hold": 0.0, "consent": "TRUSTEE LIKENESS - founder approval", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "Lower third enters at 1.0s, holds 4.5s, exits over 500ms. Kannada bar 1.5x English height. TRUSTEE LIKENESS approval."}, {"sid": "K09", "tc_in": "00:00:50:17", "tc_out": "00:00:58:07", "dur": 7.62, "speech": 7.62, "narr": "ಅವರ ಜೊತೆಗೂಡಿದವರು ಸಾದೇನಹಳ್ಳಿಯ ಎಸ್. ಎಂ. ಮಂಜುನಾಥ. ಓದಲೆಂದು ಊರು ಬಿಟ್ಟು ನಗರಕ್ಕೆ ಬಂದ ತಮ್ಮ ಕುಟುಂಬದ ಮೊದಲ ವ್ಯಕ್ತಿ.", "osd": "ಎಸ್. ಎಂ. ಮಂಜುನಾಥ  //  ಟ್ರಸ್ಟಿ", "kind": "PHOTOCARD", "asset": "A082", "path": "assets/images/magazine-gallery/trustee-mr-sm-manjunatha.webp", "pause": 0.0, "hold": 0.0, "consent": "TRUSTEE LIKENESS - trustee approval", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "ONLY WEBP EXISTS. No JPEG twin anywhere in the repository, so the house rule 'always grade from the JPEG' cannot be met. Request the original. A framed devotional picture is visible on the wall behind; the trustee should decide whether to keep or reframe."}, {"sid": "K10", "tc_in": "00:00:58:07", "tc_out": "00:01:03:22", "dur": 5.6, "speech": 3.6, "narr": "ತಮ್ಮ ಊರಿನ ಹಲವು ಮಕ್ಕಳನ್ನು ಅವರು ಆಗಲೇ ಓದಿಸಿದ್ದರು.", "osd": "", "kind": "PHOTO", "asset": "A234", "path": "assets/images/timeline/2025-saraswati-primary-school-sign.jpg", "pause": 2.0, "hold": 0.0, "consent": "CLEAR - no person in frame", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "NO FACES. A weathered village school board, ಸರ್ಕಾರಿ ಕಿರಿಯ ಪ್ರಾಥಮಿಕ ಶಾಲೆ. Carries 'the children of his own village' without putting anyone on screen."}, {"sid": "K11", "tc_in": "00:01:03:22", "tc_out": "00:01:07:17", "dur": 3.81, "speech": 3.81, "narr": "2016ರಲ್ಲಿ ಅವರು ಮೊದಲ ಶಾಲಾ ಭೇಟಿ ಮಾಡಿದರು.", "osd": "2016 · ಚಿಕ್ಕಬಳ್ಳಾಪುರ  //  ಮೊದಲ ಶಾಲಾ ಭೇಟಿ", "kind": "PHOTOCARD", "asset": "A061", "path": "assets/images/magazine-gallery/charu-talk.jpeg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - children seated with backs to camera, plus the founder", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "THE FILM'S MOST VALUABLE FRAME IF DATED. The founder teaching at the blackboard, children seated on the floor seen from behind. Same room, same wall charts, same uniforms and the same 747x1328 slide-deck extraction as A138 (2016-classroom-session-with-students.jpg, inventoried as 2016 Chickaballapur), so this is almost certainly the same 2016 visit. Inventory lists its year as UNKNOWN. [ಟ್ರಸ್ಟಿ ದೃಢೀಕರಣ ಅಗತ್ಯ] on the date. Do NOT also cut A138 anywhere in the film; they are two frames of one moment."}, {"sid": "K12", "tc_in": "00:01:07:17", "tc_out": "00:01:11:19", "dur": 4.07, "speech": 3.07, "narr": "ಚಿಕ್ಕಬಳ್ಳಾಪುರ. ಒಂದು ಮಗು. ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.", "osd": "ಒಂದು ಮಗು.  //  ಒಂದು ವಿದ್ಯಾರ್ಥಿವೇತನ.", "kind": "CARD", "asset": "GFX-04", "path": "One child card", "pause": 0.0, "hold": 1.0, "consent": "n/a - graphics only", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "REPLACES the rejected A140 handover photograph. Typography, not a staged handover. Navy, Noto Serif Kannada 700 at 84px."}, {"sid": "K13", "tc_in": "00:01:11:19", "tc_out": "00:01:16:18", "dur": 4.97, "speech": 4.97, "narr": "ಅದೇ ಭೇಟಿಯಲ್ಲಿ ನೂರೈವತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸ್ಟೀಲ್ ತಟ್ಟೆ ಮತ್ತು ಲೋಟ ವಿತರಿಸಲಾಯಿತು.", "osd": "150 ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ಸ್ಟೀಲ್ ತಟ್ಟೆ ಮತ್ತು ಲೋಟ", "kind": "PHOTO", "asset": "A254", "path": "assets/images/timeline/children-with-steel-plates-and-glasses-distribution.jpeg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 25 identifiable children at a meal", "sec": "ಬಿ · ಆರಂಭದ ದಿನಗಳು", "note": "NUM-01. Numeral 150 in Arabic figures on the card; ನೂರೈವತ್ತು spoken. CONSENT [C]. Use this asset path, not public/images/steel-plate-and-glass-distributed-to-these-children.jpeg (A468), which is the byte-identical undescriptive twin."}, {"sid": "K14", "tc_in": "00:01:16:18", "tc_out": "00:01:21:23", "dur": 5.18, "speech": 5.18, "narr": "2017ರಲ್ಲಿ ಒಂದು ಹತ್ತಾಯಿತು. ಹತ್ತು ವಿದ್ಯಾರ್ಥಿಗಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ.", "osd": "2017 · 10 ವಿದ್ಯಾರ್ಥಿಗಳು", "kind": "PHOTO", "asset": "A144", "path": "assets/images/timeline/2017-scholarship-group-photo-on-school-veranda.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 14 identifiable children and adults", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "Chosen over A146 (2017-school-group-photo.jpeg) on resolution, per 05 section 2.3. CONSENT [C]."}, {"sid": "K15", "tc_in": "00:01:21:23", "tc_out": "00:01:30:09", "dur": 8.45, "speech": 6.45, "narr": "ಆಮೇಲೆ ಕೆಲಸ ಹಾಗೇ ಮುಂದುವರಿಯಿತು. ವರ್ಷದಿಂದ ವರ್ಷಕ್ಕೆ. ಅದೇ ದಾರಿಗಳು, ಅದೇ ಶಾಲೆಗಳು, ಇನ್ನಷ್ಟು ಮಕ್ಕಳು.", "osd": "ಕೆಲಸ ಮುಂದುವರಿಯಿತು", "kind": "PHOTO", "asset": "A150", "path": "assets/images/timeline/2018-classroom-presentation-session.jpg", "pause": 2.0, "hold": 0.0, "consent": "[C] BLOCKING - adults identifiable, children in foreground from behind", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "Three-image dissolve chain across the thin years: A150 (2018) -> A156 (2019-community-group-photo-outdoors.jpg, 1600x777) -> A160 (2021-scholarship-distribution-crowd.jpg, 1600x1200). NO LOCATION NAMED anywhere in this shot. Sidesteps the 2019/2020/2021 KGF-versus-Chickaballapur conflict (06 A3). Children's faces are in all three: CONSENT [C]."}, {"sid": "K16", "tc_in": "00:01:30:09", "tc_out": "00:01:35:00", "dur": 4.65, "speech": 4.65, "narr": "2020ರಲ್ಲಿ ಶಾಲೆಗಳು ಮುಚ್ಚಿದವು, ಕುಟುಂಬಗಳ ದಿನಗೂಲಿ ನಿಂತಿತು.", "osd": "", "kind": "PHOTO", "asset": "A160", "path": "assets/images/timeline/2021-scholarship-distribution-crowd.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - large crowd, many identifiable", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "A large outdoor gathering. The inventory marks A160 'N/A - no identifiable person'; that is WRONG, the frame is full of identifiable faces. Corrected in deliverable 07."}, {"sid": "K17", "tc_in": "00:01:35:00", "tc_out": "00:01:45:05", "dur": 10.2, "speech": 9.2, "narr": "ಆಗ ಟ್ರಸ್ಟ್ ಒಂದೇ ಪುಟದ ಪ್ರಕಟಣೆ ಹೊರಡಿಸಿತು. ಪೋಷಕರನ್ನು ಕಳೆದುಕೊಂಡ ಮಕ್ಕಳಿಗೆ. ಕೆಲಸ ಕಳೆದುಕೊಂಡು ಶುಲ್ಕ ಕಟ್ಟಲಾಗದ ಪೋಷಕರಿಗೆ. ನೆರವು ನಿಲ್ಲಲಿಲ್ಲ.", "osd": "2020 · ಸಾಂಕ್ರಾಮಿಕ ಕಾಲದ ನೆರವು  //  ಪೋಷಕರನ್ನು ಕಳೆದುಕೊಂಡ ಮಕ್ಕಳಿಗೆ · ಕೆಲಸ ಕಳೆದುಕೊಂಡ ಪೋಷಕರಿಗೆ", "kind": "PHOTOCARD", "asset": "A158", "path": "assets/images/timeline/2020-pandemic-relief-announcement-poster.jpg", "pause": 1.0, "hold": 0.0, "consent": "CLEAR - LPET's own poster artwork, no person", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "KANNADA-SPECIFIC. The poster itself is in English. The two eligibility criteria are set as a Kannada lower-third strip beside it, left third, so a Kannada-only viewer is not excluded. LPET's own artwork; confirm it was not built from licensed stock (14 item 4.10)."}, {"sid": "K18", "tc_in": "00:01:45:05", "tc_out": "00:01:51:01", "dur": 5.82, "speech": 5.82, "narr": "2022ರಲ್ಲಿ ಪುಸ್ತಕದ ಕಪಾಟುಗಳು ಎದ್ದವು. ಗ್ರಾಮೀಣ ಶಾಲೆಗಳಲ್ಲಿ ಗ್ರಂಥಾಲಯಗಳು.", "osd": "2022 · ಗ್ರಾಮೀಣ ಶಾಲೆಗಳಲ್ಲಿ ಗ್ರಂಥಾಲಯ", "kind": "PHOTO", "asset": "A164", "path": "assets/images/timeline/2022-library-bookshelves.jpg", "pause": 0.0, "hold": 0.0, "consent": "CLEAR - no person in frame", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "NO PEOPLE. Full shelves, floor to ceiling. The cleanest asset in the library."}, {"sid": "K19", "tc_in": "00:01:51:01", "tc_out": "00:01:56:00", "dur": 4.97, "speech": 4.97, "narr": "ದಾನವಾಗಿ ಬಂದ ಕಥೆ ಪುಸ್ತಕಗಳು, ಪಠ್ಯ ಪುಸ್ತಕಗಳು, ಬಳಸದೇ ಉಳಿದ ನೋಟ್‌ಬುಕ್‌ಗಳು.", "osd": "", "kind": "PHOTO", "asset": "A168", "path": "assets/images/timeline/2022-students-in-school-library.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] - students browsing, almost all from behind", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "Students choosing books, almost all seen from behind. Consent-light by composition. Replaces the 2022 donation poster A166, which is REJECTED - see deliverable 06 rejects."}, {"sid": "K20", "tc_in": "00:01:56:00", "tc_out": "00:02:00:11", "dur": 4.44, "speech": 4.44, "narr": "2023ರಲ್ಲಿ ವ್ಯಾಪ್ತಿ ಹಿಗ್ಗಿತು. ಮೈಸೂರು. ಎಚ್.ಡಿ. ಕೋಟೆ.", "osd": "2023 · ಮೈಸೂರು · ಎಚ್.ಡಿ. ಕೋಟೆ", "kind": "PHOTO", "asset": "A176", "path": "assets/images/timeline/2023-students-in-tribal-school-hall.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 30 identifiable children", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "Thatched-roof hall, tribal school. CONSENT [C]."}, {"sid": "K21", "tc_in": "00:02:00:11", "tc_out": "00:02:07:21", "dur": 7.4, "speech": 7.4, "narr": "ಒಂಬತ್ತು ಮತ್ತು ಹತ್ತನೇ ತರಗತಿಯ ಮಕ್ಕಳಿಗೆ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ. ಬದುಕಿನ ದಾರಿ ಸದ್ದಿಲ್ಲದೆ ನಿರ್ಧಾರವಾಗುವ ವಯಸ್ಸು ಅದು.", "osd": "9 ಮತ್ತು 10ನೇ ತರಗತಿಗೆ ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ", "kind": "PHOTO", "asset": "A172", "path": "assets/images/timeline/2023-school-event-backdrop-photo.jpg", "pause": 0.0, "hold": 0.0, "consent": "ADULTS ONLY - four volunteers, no children", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "REPLACES A188 (2024-classroom-career-counselling-session.jpg), which is rejected on three grounds. This frame shows LPET's own printed 'Academics and Career Guidance Chart' with four volunteers beside it. NO CHILDREN IN FRAME. Adults are volunteers; clear under 14 item 3.7."}, {"sid": "K22", "tc_in": "00:02:07:21", "tc_out": "00:02:17:12", "dur": 9.63, "speech": 9.63, "narr": "2024ರಲ್ಲಿ ಎಂ.ಎಂ. ಹಿಲ್ಸ್‌ನ ಬುಡಕಟ್ಟು ಶಾಲೆಗಳಲ್ಲಿ ಇನ್ನೂರು ಶಾಲಾ ಚೀಲ, ನೋಟ್‌ಬುಕ್ ಮತ್ತು ಲೇಖನ ಸಾಮಗ್ರಿಗಳೊಂದಿಗೆ ಶೈಕ್ಷಣಿಕ ವರ್ಷ ಆರಂಭವಾಯಿತು.", "osd": "2024 · ಎಂ.ಎಂ. ಹಿಲ್ಸ್ · 200 ಶಾಲಾ ಚೀಲ", "kind": "PHOTO", "asset": "A180", "path": "assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg", "pause": 0.0, "hold": 0.0, "consent": "CLEAR - no person in frame", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "NO PEOPLE. A car boot packed with notebooks: the least sentimental and most truthful image of how this work actually travels. NUM-04. If the trustees confirm ಮಲೆ ಮಹದೇಶ್ವರ ಬೆಟ್ಟ, change the card here (7.6 in 14)."}, {"sid": "K23", "tc_in": "00:02:17:12", "tc_out": "00:02:24:05", "dur": 6.73, "speech": 4.23, "narr": "ಮತ್ತು 2025ರಲ್ಲಿ, ಎಚ್.ಡಿ. ಕೋಟೆಯಲ್ಲಿ, ಮುನ್ನೂರು.", "osd": "2025 · ಎಚ್.ಡಿ. ಕೋಟೆ · 300 ಶಾಲಾ ಚೀಲ", "kind": "PHOTO", "asset": "A220", "path": "assets/images/timeline/2025-children-with-volunteers-under-tree.jpg", "pause": 0.0, "hold": 2.5, "consent": "[C] BLOCKING - approx 20 identifiable children and adults", "sec": "ಸಿ · ಒಂದು ದಶಕದ ಹಾದಿ", "note": "The best single group photograph in the library, and one of only five true 1920px assets. NUM-05. CONSENT [C]."}, {"sid": "K24", "tc_in": "00:02:24:05", "tc_out": "00:02:27:02", "dur": 2.86, "speech": 2.86, "narr": "ಇದೆಲ್ಲ ಕಚೇರಿಯಲ್ಲಿ ಕುಳಿತು ಆಗುವ ಕೆಲಸವಲ್ಲ.", "osd": "", "kind": "PHOTO", "asset": "A236", "path": "assets/images/timeline/2025-school-front-group-photo.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - large group, faces small but identifiable", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "A school forecourt, dust, trees, the whole group at a distance. Faces are small at this width, which is the point of using it under this line. CONSENT [C]."}, {"sid": "K25", "tc_in": "00:02:27:02", "tc_out": "00:02:31:13", "dur": 4.44, "speech": 4.44, "narr": "ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ, ನೆರೆಹೊರೆಯವರೋ, ಊರಿನ ಹಿತೈಷಿಯೋ ಒಂದು ಹೆಸರು ಸೂಚಿಸುತ್ತಾರೆ.", "osd": "", "kind": "PHOTO", "asset": "A228", "path": "assets/images/timeline/2025-government-primary-school-sign.jpg", "pause": 0.0, "hold": 0.0, "consent": "CLEAR - no identifiable person in the 16:9 window", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "KANNADA-SPECIFIC, difference 5. Deliberate re-use of K01 at a different focal length, in a different act, 3 minutes later: a documentary rhyme, not a duplicate cut. If the QC editor objects, substitute the ಮಂಟಿಹಾಡಿ board from A226. Verify the 2.1x upscale on the projector; large flat lettering carries it, small lettering will not."}, {"sid": "K26", "tc_in": "00:02:31:13", "tc_out": "00:02:39:02", "dur": 7.56, "speech": 6.56, "narr": "ತಂಡ ಆ ಊರಿಗೆ ಹೋಗುತ್ತದೆ. ಮಕ್ಕಳನ್ನೂ ಪೋಷಕರನ್ನೂ ಒಂದೆಡೆ ಸೇರಿಸಿ, ಪ್ರತಿ ಕುಟುಂಬದ ಜೊತೆ ಕೂತು ಮಾತನಾಡುತ್ತದೆ.", "osd": "ಗುರುತಿಸುವುದು · ಪರಿಶೀಲಿಸುವುದು · ಒಳಗೊಳ್ಳುವುದು · ಬೆಳೆಸುವುದು", "kind": "PHOTO", "asset": "A025-crop", "path": "assets/images/children-stories/scholarship-interview-with-girl-and-guardian.jpeg", "pause": 1.0, "hold": 0.0, "consent": "CLEAR after crop - the hands-and-form window excludes every face", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "CONSENT-DRIVEN CROP. The full frame is a private conversation about a family's finances (14 item 2.10) and must not be shown. Cropped to the desk, the hands, the form and the pen, it becomes the best available illustration of ಪರಿಶೀಲಿಸುವುದು with nobody identifiable. Four-word card animates one word per 1.5s (not 1.0s: the Kannada words are longer). If the 2.2x upscale is unacceptable, replace with a navy four-step card and no photograph."}, {"sid": "K27", "tc_in": "00:02:39:02", "tc_out": "00:02:46:06", "dur": 7.18, "speech": 5.18, "narr": "ನಂತರ ಟ್ರಸ್ಟ್ ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು ಭರಿಸುತ್ತದೆ. ಪೂರ್ತಿ ಅಲ್ಲ.", "osd": "ಶಾಲಾ ಶುಲ್ಕದ ಶೇಕಡ 75ರವರೆಗೆ  //  ನೇರವಾಗಿ ಶಾಲೆಗೆ", "kind": "CARD", "asset": "GFX-05", "path": "75 per cent card", "pause": 2.0, "hold": 0.0, "consent": "n/a - graphics only", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "NUM-07. The quietest frame in the film. No photograph, no push, no swell. Card layout is shared with the English cut; only the text layer swaps."}, {"sid": "K28", "tc_in": "00:02:46:06", "tc_out": "00:02:53:03", "dur": 6.88, "speech": 6.88, "narr": "ಉಳಿದ ಪಾಲನ್ನು ಕುಟುಂಬವೇ ಕಟ್ಟುತ್ತದೆ. ಏಕೆಂದರೆ ತಾವೂ ಒಂದು ಪಾಲು ಹೊತ್ತ ಪೋಷಕರು ಮಗುವಿನ ಓದಿನ ಒಳಗೇ ಉಳಿಯುತ್ತಾರೆ.", "osd": "", "kind": "PHOTO", "asset": "A222", "path": "assets/images/timeline/2025-classroom-full-of-beneficiary-families.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - families, adults and children identifiable", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "Parents and children together in a hall. The right image for the line about the family carrying its share, because the parents are visibly present. CONSENT [C], adults included, 14 item 3.7."}, {"sid": "K29", "tc_in": "00:02:53:03", "tc_out": "00:02:57:06", "dur": 4.13, "speech": 4.13, "narr": "ಮತ್ತು ಆ ಹಣ ನೇರವಾಗಿ ಶಾಲೆಗೇ ಸಲ್ಲುತ್ತದೆ. ಬೇರೆ ಯಾರ ಕೈಗೂ ಅಲ್ಲ.", "osd": "ನೇರವಾಗಿ ಶಾಲೆಗೆ. ಬೇರೆ ಯಾರ ಕೈಗೂ ಅಲ್ಲ.", "kind": "CARD", "asset": "GFX-06", "path": "Direct-to-school card", "pause": 0.0, "hold": 0.0, "consent": "n/a - graphics only", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "MIS-04, PRC-04. The anti-leakage principle is the Trust's strongest claim on a donor's trust; give it its own frame."}, {"sid": "K30", "tc_in": "00:02:57:06", "tc_out": "00:03:05:05", "dur": 7.93, "speech": 7.93, "narr": "ಬುಡಕಟ್ಟು ಶಾಲೆಗಳ ಮಕ್ಕಳ ಜೊತೆ ತಂಡ ಕೆಲವು ದಿನ ಉಳಿಯುತ್ತದೆ. ಕಲಿಸುತ್ತದೆ, ಕಲಿಯುತ್ತದೆ. ಆಮೇಲೆ ಚೀಲಗಳು ಮಕ್ಕಳ ಕೈ ಸೇರುತ್ತವೆ.", "osd": "", "kind": "PHOTO", "asset": "A252", "path": "assets/images/timeline/2025-volunteer-tying-shoe-for-child.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - one volunteer and one child, both identifiable", "sec": "ಡಿ · ಕೆಲಸದ ಕ್ರಮ", "note": "A volunteer crouched down, helping one boy with something in his hands. Small, undramatic, nobody performing for the camera. Exactly the register 07 asks for. Note the filename says 'tying shoe'; the frame is a volunteer helping with a kit. Do not caption it. CONSENT [C]."}, {"sid": "K31", "tc_in": "00:03:05:05", "tc_out": "00:03:12:15", "dur": 7.4, "speech": 7.4, "narr": "ವಿದ್ಯಾರ್ಥಿವೇತನ ಒಂದರಿಂದಲೇ ಶಿಕ್ಷಣ ಪೂರ್ಣವಾಗುವುದಿಲ್ಲ. ಹಾಗಾಗಿ ಶಾಲಾ ಚೀಲ, ನೋಟ್‌ಬುಕ್, ಲೇಖನ ಸಾಮಗ್ರಿ, ಚಿತ್ರಕಲೆಯ ಪರಿಕರ.", "osd": "ಶಾಲಾ ಸಾಮಗ್ರಿ ವಿತರಣೆ", "kind": "PHOTO", "asset": "A244", "path": "assets/images/timeline/2025-stationery-and-snacks-arranged.jpg", "pause": 0.0, "hold": 0.0, "consent": "CLEAR - no person, no brand in frame", "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "note": "Pens, geometry boxes, small stationery laid out on a floor. NO FACES, NO BRANDS. Chosen over A200 (2024-school-supply-kit-on-floor.jpg) and A202 (2024-snack-packets-for-distribution.jpg), both REJECTED for prominent commercial packaging."}, {"sid": "K32", "tc_in": "00:03:12:15", "tc_out": "00:03:19:14", "dur": 6.98, "speech": 6.98, "narr": "ಗ್ರಂಥಾಲಯಗಳು. ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ. ಆಟಗಳು. ಮಕ್ಕಳು ಹಾಡಿ ಕುಣಿಯುವ ವೇದಿಕೆ, ಮತ್ತು ಅದನ್ನು ನೋಡಲೆಂದೇ ಬಂದ ಜನ.", "osd": "ಕಲಿಕೆಯ ಆಟಗಳು · ನಾಡು ನುಡಿಯ ಪರಿಚಯ · ಗ್ರಾಮೀಣ ಶಾಲೆಗಳಲ್ಲಿ ಗ್ರಂಥಾಲಯ", "kind": "PHOTOCARD", "asset": "A078", "path": "assets/images/magazine-gallery/kids-craft.jpeg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 8 identifiable children", "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "note": "Children making paper craft on a classroom floor. LABELS RUN 3s EACH, not 2s, per the Kannada dwell rule. CONSENT [C]."}, {"sid": "K33", "tc_in": "00:03:19:14", "tc_out": "00:03:22:13", "dur": 2.96, "speech": 2.96, "narr": "ಮಕ್ಕಳಿಗೆ ಮಾತ್ರವಲ್ಲ, ಪೋಷಕರಿಗೂ ಮಾರ್ಗದರ್ಶನ.", "osd": "ಪೋಷಕರಿಗೆ ಮಾರ್ಗದರ್ಶನ", "kind": "PHOTO", "asset": "A232", "path": "assets/images/timeline/2025-large-community-celebration-group-photo.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - large hall, many identifiable", "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "note": "A hall with a stage, children and parents together. Carries PRG-08 and PRG-09 in one frame. CONSENT [C]."}, {"sid": "K34", "tc_in": "00:03:22:13", "tc_out": "00:03:33:07", "dur": 10.73, "speech": 9.73, "narr": "ತಲುಪುವುದೇ ಕಷ್ಟವಾದ ಮಕ್ಕಳನ್ನೂ ಈ ಕೆಲಸ ತಲುಪಿದೆ. ಏಕ ಪೋಷಕರ ಮಕ್ಕಳು. ಎಚ್‌ಐವಿ ಇರುವ ಕುಟುಂಬಗಳ ಮಕ್ಕಳು. ದೀರ್ಘಕಾಲದ ಆರೋಗ್ಯ ಸಮಸ್ಯೆ ಇರುವ ಮಕ್ಕಳು.", "osd": "(no list on screen under this line)", "kind": "CARD", "asset": "GFX-07", "path": "Hardest to reach card", "pause": 1.0, "hold": 0.0, "consent": "n/a - graphics only", "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "note": "ABSOLUTE RULE, 14 item 2.4. Single-parent status, HIV in the family and chronic illness are spoken here. NO PHOTOGRAPH, NO FACE, NO ILLUSTRATION OF A CHILD may appear anywhere in this shot. The card carries no text beyond a gold rule while the line is spoken; the partner list arrives in K35, after the sentence has ended. Trustees choose between ಎಚ್‌ಐವಿ ಇರುವ (used here, Version B wording) and ಎಚ್‌ಐವಿ ಪೀಡಿತ (Version A wording); 09 section 3.5."}, {"sid": "K35", "tc_in": "00:03:33:07", "tc_out": "00:03:40:09", "dur": 7.09, "speech": 7.09, "narr": "ಈ ಕೆಲಸ ಬೆಳಕು ಟ್ರಸ್ಟ್, ಸೌಖ್ಯ ಸಮೃದ್ಧಿ ಸಂಸ್ಥೆ, ಜಿಲ್ಲಾ ಆರೋಗ್ಯ ಇಲಾಖೆ ಮತ್ತು ನಿಸರ್ಗ ಫೌಂಡೇಶನ್ ಜೊತೆಗೂಡಿ ನಡೆದಿದೆ.", "osd": "ಸಹಭಾಗಿತ್ವದಲ್ಲಿ  //  ನಿಸರ್ಗ ಫೌಂಡೇಶನ್  //  ಬೆಳಕು ಟ್ರಸ್ಟ್, ಬಂಗಾರಪೇಟೆ  //  ಸೌಖ್ಯ ಸಮೃದ್ಧಿ ಸಂಸ್ಥೆ, ಕೋಲಾರ  //  ಜಿಲ್ಲಾ ಆರೋಗ್ಯ ಮತ್ತು ಕುಟುಂಬ ಕಲ್ಯಾಣ ಇಲಾಖೆ, ಕೋಲಾರ", "kind": "CARD", "asset": "GFX-08", "path": "Partners card", "pause": 0.0, "hold": 0.0, "consent": "n/a - graphics only", "sec": "ಇ · ಸುತ್ತಲಿನ ಬೆಂಬಲ", "note": "1s LONGER THAN THE ENGLISH CARD to fit four Kannada names legibly at 48px. NO LOGOS until 14 item 4.2 is signed. NO GOVERNMENT EMBLEM until 4.3 is signed. Photographic corroboration for all four exists in A188 and A230 but neither frame may be screened; see deliverable 07."}, {"sid": "K36", "tc_in": "00:03:40:09", "tc_out": "00:03:50:11", "dur": 10.1, "speech": 9.1, "narr": "2024ರ ಜೂನ್‌ನಲ್ಲಿ ಒಂದು ಕನ್ನಡ ದಿನಪತ್ರಿಕೆ ಮುಳಬಾಗಿಲಿನ ಚಿತ್ರವನ್ನು ಪ್ರಕಟಿಸಿತು. ಏಕ ಪೋಷಕರ ಮಕ್ಕಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ ವಿತರಣೆ.", "osd": "ಉದಯವಾಣಿ · 19 ಜೂನ್ 2024", "kind": "PHOTOCARD", "asset": "A196", "path": "assets/images/timeline/2024-newspaper-coverage-clipping.jpg", "pause": 1.0, "hold": 0.0, "consent": "THIRD-PARTY COPYRIGHT - BLOCKING", "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "note": "KANNADA-SPECIFIC, difference 6, AND THE FILM'S ONLY INDEPENDENT VERIFICATION. Held 2s longer than in the English cut because in Kannada this is a document the audience reads, not a texture. Verified legible on inspection: headline ಪಾಲನೆಗೆ ಏಕ ಪೋಷಕರ ನಿರಾಸಕ್ತಿ ಸಲ್ಲ and the caption naming ಮುಳಬಾಗಿಲು ಮುತ್ತಲಪೇಟೆ, ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ and ಬೆಳಕು ಟ್ರಸ್ಟ್. BLOCKING: Udayavani permission, 14 item 4.1. Request the high-resolution page from epaper.udayavani.com/c/75279105; the repository copy will soften badly on a 4-metre screen."}, {"sid": "K37", "tc_in": "00:03:50:11", "tc_out": "00:04:00:12", "dur": 10.04, "speech": 8.04, "narr": "2025ರ ಡಿಸೆಂಬರ್‌ನಲ್ಲಿ, ನವದೆಹಲಿಯ ರಾಷ್ಟ್ರೀಯ ಶೃಂಗಸಭೆಯಲ್ಲಿ, ಸಂಸ್ಥಾಪಕರಿಗೆ ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ ಸಂದಿತು.", "osd": "ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ · 19 ಡಿಸೆಂಬರ್ 2025 · ನವದೆಹಲಿ  //  ಎಕನಾಮಿಕ್ ಅಂಡ್ ಸೋಶಿಯಲ್ ಡೆವಲಪ್‌ಮೆಂಟ್ ಫೌಂಡೇಶನ್", "kind": "PHOTOCARD", "asset": "A002", "path": "assets/images/awards/bharat-shiksha-ratan-award-certificate-scan.jpeg", "pause": 2.0, "hold": 0.0, "consent": "CLEAR - document only", "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "note": "Use A002 (1370x900), NOT A004 (framed version, 705x956), per 05 section 3.2. Certificate is in English; the Kannada card stays in the lower third throughout. NO MINISTER NAMES. NO 'one of 25'. 06 Q3, 14 item 6.3. The 2s pause after this line is the film's turn from recognition to gratitude; hold the certificate through it."}, {"sid": "K38", "tc_in": "00:04:00:12", "tc_out": "00:04:11:20", "dur": 11.32, "speech": 11.32, "narr": "ಆದರೆ ಮುಖ್ಯವಾದ ದಾಖಲೆ ಪ್ರಶಸ್ತಿ ಪತ್ರದಲ್ಲಿ ಇಲ್ಲ. ಅದು ಒಂದು ಹೆಸರುಗಳ ಪಟ್ಟಿಯಲ್ಲಿದೆ. ಬೆಂಗಳೂರು, ಚೆನ್ನೈ, ಅಮೆರಿಕ, ಬ್ರಿಟನ್, ಜರ್ಮನಿ, ಡೆನ್ಮಾರ್ಕ್, ದುಬೈನಲ್ಲಿದ್ದು ನೆರವು ನೀಡಿದವರು.", "osd": "ನೆರವು ನೀಡಿದವರಿಗೆ", "kind": "PHOTO", "asset": "A250", "path": "assets/images/timeline/2025-volunteer-group-at-school-garden.jpg", "pause": 0.0, "hold": 0.0, "consent": "ADULTS AND SOME CHILDREN - identifiable", "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "note": "Volunteers standing together in a school garden. The inventory marks A250 'N/A - no identifiable person'; that is WRONG, roughly thirteen adults and several children are identifiable. Corrected in deliverable 07. This is the gratitude section's opening frame precisely because it shows the helpers, not the helped."}, {"sid": "K39", "tc_in": "00:04:11:20", "tc_out": "00:04:18:12", "dur": 6.66, "speech": 6.66, "narr": "ವಕೀಲರು, ಎಂಜಿನಿಯರ್‌ಗಳು, ವೈದ್ಯರು, ಗೃಹಿಣಿಯರು ಆಗಿರುವ ಸ್ವಯಂಸೇವಕರು. ಒಂದು ಮಗುವಿಗಾಗಿ ಫೋನ್ ಮಾಡಿದ ಶಿಕ್ಷಕರು.", "osd": "ಸ್ವಯಂಸೇವಕರಿಗೆ  //  ವಕೀಲರು · ಎಂಜಿನಿಯರ್‌ಗಳು · ವೈದ್ಯರು · ಗೃಹಿಣಿಯರು", "kind": "PHOTO", "asset": "A230", "path": "assets/images/timeline/2025-hall-full-of-volunteers-and-children.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING after crop - approx 60 identifiable", "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "note": "CROP IS MANDATORY. The uncropped banner names L. H. INTERNATIONAL SCHOOL, Mulbagal, a third party with no permission on file (14 item 2.2). Cropped, the frame is a hall full of volunteers and families, which is what the line is about. The banner is however valuable EVIDENCE: it reads ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ + ಬೆಳಕು ಟ್ರಸ್ಟ್ (ರಿ), ತಂಬ್ರಹಳ್ಳಿ, ಬಂಗಾರಪೇಟೆ and ಮಕ್ಕಳ ವಿದ್ಯಾರ್ಥಿವೇತನ ವಿತರಣಾ ಕಾರ್ಯಕ್ರಮ, independently confirming PTR-02 and the glossary's choice of ವಿದ್ಯಾರ್ಥಿವೇತನ. Logged in deliverable 07."}, {"sid": "K40", "tc_in": "00:04:18:12", "tc_out": "00:04:21:11", "dur": 2.96, "speech": 2.96, "narr": "ಮತ್ತು ತಮ್ಮ ಪಾಲನ್ನು ತಪ್ಪದೇ ಕಟ್ಟಿದ ಪೋಷಕರು.", "osd": "ಪೋಷಕರಿಗೆ  //  ತಮ್ಮ ಪಾಲಿನ ಶುಲ್ಕವನ್ನು ತಪ್ಪದೇ ಹೊಂದಿಸಿದವರು", "kind": "PHOTO", "asset": "A238", "path": "assets/images/timeline/2025-schoolchildren-showing-school-bags-on-veranda.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 30 identifiable children", "sec": "ಎಫ್ · ಗುರುತಿಸುವಿಕೆ ಮತ್ತು ಕೃತಜ್ಞತೆ", "note": "Chosen over the near-identical magazine-gallery twin per 05 section 2.3, because the 2025- prefix carries the year attribution. CONSENT [C]."}, {"sid": "K41", "tc_in": "00:04:21:11", "tc_out": "00:04:31:17", "dur": 10.26, "speech": 10.26, "narr": "ಈ ವರ್ಷ, ತನ್ನ ಆರೈಕೆಯಲ್ಲಿರುವ ಎಲ್ಲ ಮಕ್ಕಳನ್ನೂ ಬೆಂಗಳೂರಿಗೆ ಕರೆತರಬೇಕೆಂಬುದು ಟ್ರಸ್ಟ್‌ನ ಆಸೆ. ಒಂದು ಕಾರ್ಯಕ್ರಮ, ಒಂದು ದಿನದ ಸುತ್ತಾಟ, ಮನೆಗೆ ಒಯ್ಯಲು ಒಂದು ಉಡುಗೊರೆ.", "osd": "", "kind": "PHOTO", "asset": "A216", "path": "assets/images/timeline/2025-children-showing-school-bags-outdoors.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 10 identifiable children", "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ", "note": "EVT-03. CONSENT [C]."}, {"sid": "K42", "tc_in": "00:04:31:17", "tc_out": "00:04:39:14", "dur": 7.88, "speech": 6.88, "narr": "ಅವರಲ್ಲಿ ಹಲವರಿಗೆ ಇದು ಈ ನಗರವನ್ನು ನೋಡುವ ಮೊದಲ ಬಾರಿ. ಕೆಲವರಿಗೆ ತಮ್ಮ ಊರು ಬಿಟ್ಟು ಹೊರಡುವ ಮೊದಲ ಬಾರಿ.", "osd": "", "kind": "PHOTO", "asset": "A186", "path": "assets/images/timeline/2024-children-with-supplies-outdoors.jpg", "pause": 1.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 15 identifiable children and adults", "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ", "note": "A true 1920px asset. A hillside village behind the children, which is the right backdrop for a line about never having left home. CONSENT [C]."}, {"sid": "K43", "tc_in": "00:04:39:14", "tc_out": "00:04:46:08", "dur": 6.77, "speech": 6.77, "narr": "ಮುಂದಿನ ಹತ್ತು ವರ್ಷವೂ ಹೀಗೇ. ಇನ್ನಷ್ಟು ಜಿಲ್ಲೆಗಳು. ಇನ್ನಷ್ಟು ಗ್ರಂಥಾಲಯಗಳು. ಓದು ನಿಲ್ಲದ ಇನ್ನಷ್ಟು ಮಕ್ಕಳು.", "osd": "", "kind": "PHOTO", "asset": "A240b", "path": "assets/images/timeline/2025-schoolwide-supplies-group-photo.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - as A240", "sec": "ಜಿ · ಮುಂದಿನ ದಾರಿ", "note": "Deliberate return to the K02 location at the film's forward-looking beat: the same school, the same board, at the end of the decade rather than the start. FORWARD COMMITMENT: this narration is a public promise and needs trustee approval before record. [ಟ್ರಸ್ಟಿ ದೃಢೀಕರಣ ಅಗತ್ಯ], 14 item 6.9."}, {"sid": "K44", "tc_in": "00:04:46:08", "tc_out": "00:04:51:04", "dur": 4.81, "speech": 3.81, "narr": "ಹತ್ತು ವರ್ಷ. ಒಂದೊಂದೇ ಮಗು. ಸದ್ದಿಲ್ಲದೆ ಉಳಿಸಿಕೊಂಡ ಒಂದು ಮಾತು.", "osd": "", "kind": "PHOTO", "asset": "A224", "path": "assets/images/timeline/2025-classroom-full-of-children-with-supplies.jpg", "pause": 1.0, "hold": 0.0, "consent": "[C] BLOCKING - approx 40 identifiable children", "sec": "ಎಚ್ · ಸ್ವಾಗತ ಮತ್ತು ಸಮಾರೋಪ", "note": "A yellow classroom, dozens of children with their bags. Reads as scale without stating a number, which is the whole solution to the unresolved impact figures. CONSENT [C]."}, {"sid": "K45", "tc_in": "00:04:51:04", "tc_out": "00:04:56:21", "dur": 5.71, "speech": 5.71, "narr": "ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್‌ನ ಹತ್ತನೇ ವರ್ಷದ ಸಂಭ್ರಮಕ್ಕೆ ನಿಮಗೆಲ್ಲರಿಗೂ ಆತ್ಮೀಯ ಸ್ವಾಗತ.", "osd": "", "kind": "PHOTO", "asset": "A224b", "path": "assets/images/timeline/2025-classroom-full-of-children-with-supplies.jpg", "pause": 0.0, "hold": 0.0, "consent": "[C] BLOCKING - as A224", "sec": "ಎಚ್ · ಸ್ವಾಗತ ಮತ್ತು ಸಮಾರೋಪ", "note": "THE PAYOFF LINE. Do not cut away from faces while the welcome is spoken. Listed as a separate row only because the subtitle cue changes; in the timeline it is one continuous 20.3s shot with K44."}, {"sid": "K46", "tc_in": "00:04:56:21", "tc_out": "00:05:03:21", "dur": 7.0, "speech": 0.0, "narr": "", "osd": "ಪ್ರತಿ ಮಗುವಿನ ಮೇಲೆ ನಂಬಿಕೆ ಇಟ್ಟ ಒಂದು ದಶಕ  //  ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ · 2016 ರಿಂದ 2026  //  ಒಂದು ಮಗುವಿನ ಹೆಸರು ಸೂಚಿಸಿ · ಸ್ವಯಂಸೇವಕರಾಗಿ · ಸಹಭಾಗಿಯಾಗಿ  //  journey.lawparkeducationaltrust.org  //  lawparktrust@gmail.com · +91 99456 65379", "kind": "CARD", "asset": "GFX-09", "path": "End card", "pause": 0.0, "hold": 7.0, "consent": "n/a - graphics only", "sec": "ಎಚ್ · ಸಮಾರೋಪ", "note": "1s LONGER THAN THE ENGLISH END CARD so the Kannada headline can be read. NO UPI ID. NO PAYMENT QR CODE. ORG-11 is verified but must never be on screen. Primary CTA is ಒಂದು ಮಗುವಿನ ಹೆಸರು ಸೂಚಿಸಿ, per 12 section 11."}];
+
+const body = document.getElementById("shotBody");
+const filter = document.getElementById("shotFilter");
+const spokenOnly = document.getElementById("spokenOnly");
+const blockedOnly = document.getElementById("blockedOnly");
+const shotCount = document.getElementById("shotCount");
+
+/* Consent wording comes from 04-media-inventory.csv via timeline.json.
+   Classify it so the blocker is visible per shot, not buried in a CSV. */
+function consentClass(c) {
+  const v = (c || "").toUpperCase();
+  if (!v || v === "N/A") return null;
+  if (v.includes("BLOCKING") || v.includes("COPYRIGHT")) return "block";
+  if (v.startsWith("CLEAR")) return "clear";
+  return "check";
+}
+const CFLAG_TEXT = { block: "Blocked", clear: "Clear", check: "Check" };
+
+function esc(s) {
+  return String(s ?? "").replace(/[&<>"']/g, c => ({
+    "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"
+  }[c]));
+}
+
+function render() {
+  const q = (filter.value || "").trim().toLowerCase();
+  const only = spokenOnly.checked;
+  const blocked = blockedOnly.checked;
+  body.innerHTML = "";
+  let shown = 0, shownBlocked = 0;
+  for (const s of SHOTS) {
+    const narr = s.narr || "";
+    if (only && !narr.trim()) continue;
+    if (blocked && consentClass(s.consent) !== "block") continue;
+    const blob = [s.sid, narr, s.osd, s.asset, s.path, s.sec, s.note, s.consent].join(" ").toLowerCase();
+    if (q && !blob.includes(q)) continue;
+    const tr = document.createElement("tr");
+    if (!narr.trim()) tr.className = "silent";
+    const cls = consentClass(s.consent);
+    if (cls === "block") tr.classList.add("blocked");
+    const isFile = /\/.+\.[a-z0-9]{2,4}$/i.test(s.path || "");
+    const assetLink = isFile
+      ? `<a href="../../${esc(s.path)}">${esc(s.asset || "n/a")}</a>`
+      : `${esc(s.asset || "n/a")}${s.path ? `<br><span style="color:#5c5c6e;font-size:0.8rem">${esc(s.path)}</span>` : ""}`;
+    const consentCell = cls
+      ? `<span class="cflag ${cls}">${CFLAG_TEXT[cls]}</span><br>${esc(s.consent)}`
+      : `<span style="color:#888">n/a</span>`;
+    tr.innerHTML = `
+      <th scope="row" class="mono rowhead"><strong>${esc(s.sid)}</strong><br><span class="kn" lang="kn">${esc(s.kind)} · ${esc(s.sec)}</span></th>
+      <td class="mono">${esc(s.tc_in)}</td>
+      <td class="mono">${esc(s.dur)}s</td>
+      <td class="mono">${narr.trim() ? esc(s.speech) + "s" : "n/a"}</td>
+      <td class="kn" lang="kn">${narr.trim() ? esc(narr) : "<em lang='en' style='color:#888'>silence / hold</em>"}</td>
+      <td class="kn" lang="kn">${esc(s.osd) || "<span lang='en' style='color:#888'>none</span>"}</td>
+      <td>${assetLink}</td>
+      <td class="consent">${consentCell}</td>
+      <td class="note">${esc(s.note) || ""}</td>`;
+    body.appendChild(tr);
+    shown++;
+    if (cls === "block") shownBlocked++;
+  }
+  shotCount.textContent = shown + " of " + SHOTS.length + " shots, " + shownBlocked + " consent-blocked";
+}
+
+filter.addEventListener("input", render);
+spokenOnly.addEventListener("change", render);
+blockedOnly.addEventListener("change", render);
+render();
+
+/* Role tabs: click plus full keyboard support (arrows, Home, End) */
+const tabs = Array.from(document.querySelectorAll(".tab"));
+
+function selectTab(btn, focus) {
+  tabs.forEach(b => {
+    const on = b === btn;
+    b.setAttribute("aria-selected", on ? "true" : "false");
+    b.tabIndex = on ? 0 : -1;
+    document.getElementById(b.dataset.panel).hidden = !on;
+  });
+  if (focus) btn.focus();
+}
+
+tabs.forEach((btn, i) => {
+  btn.addEventListener("click", () => selectTab(btn, false));
+  btn.addEventListener("keydown", e => {
+    const step = { ArrowRight: 1, ArrowDown: 1, ArrowLeft: -1, ArrowUp: -1 }[e.key];
+    let next = null;
+    if (step) next = tabs[(i + step + tabs.length) % tabs.length];
+    else if (e.key === "Home") next = tabs[0];
+    else if (e.key === "End") next = tabs[tabs.length - 1];
+    if (!next) return;
+    e.preventDefault();
+    selectTab(next, true);
+  });
+});
+
+/* Local checklist persistence */
+const KEY = "lpet-kannada-handoff-checks-v1";
+function loadChecks() {
+  try { return JSON.parse(localStorage.getItem(KEY) || "{}"); } catch { return {}; }
+}
+function saveChecks(map) {
+  localStorage.setItem(KEY, JSON.stringify(map));
+}
+const checks = loadChecks();
+document.querySelectorAll("input[type=checkbox][data-k]").forEach(el => {
+  const k = el.dataset.k;
+  el.checked = !!checks[k];
+  el.addEventListener("change", () => {
+    checks[k] = el.checked;
+    saveChecks(checks);
+  });
+});
+
+/* Owner and due-date fields persist the same way. Same caveat: this browser only. */
+document.querySelectorAll(".owner-field[data-k]").forEach(el => {
+  const k = el.dataset.k;
+  if (typeof checks[k] === "string") el.value = checks[k];
+  el.addEventListener("input", () => {
+    checks[k] = el.value;
+    saveChecks(checks);
+  });
+  /* Do not let a click on the field toggle the checkbox in the same label. */
+  el.addEventListener("click", e => e.stopPropagation());
+});
+
+/* ================================================================ Feedback
+
+   Submit shows a review of exactly what the PDF will say, then the PDF is
+   built on this device and handed to WhatsApp. Nothing is posted anywhere:
+   this page is opened from a filesystem or a static host and has no backend,
+   so a form POST would have nowhere to go and would fail silently, which is
+   worse than not offering it.
+
+   PDF: html2canvas paints the review document and jsPDF wraps it. That is a
+   picture of the document rather than selectable text, which is a real
+   tradeoff, taken because the trustees write in Kannada and jsPDF's built-in
+   fonts are WinAnsi only: Kannada through them comes out as empty boxes. The
+   browser already has Noto Sans Kannada loaded and shapes the script
+   correctly, so rendering through the browser is the only version that is
+   readable. If the two libraries cannot be reached, the fallback is the
+   browser's own print-to-PDF, which is text and also shapes Kannada properly.
+*/
+const FB_KEY = "lpet-kannada-feedback-draft-v1";
+const CDN = {
+  jspdf: "https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js",
+  h2c: "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js",
+};
+
+const fbForm = document.getElementById("fbForm");
+const fbReview = document.getElementById("fbReview");
+const fbDoc = document.getElementById("fbDoc");
+const fbStatus = document.getElementById("fbStatus");
+const fbStatus2 = document.getElementById("fbStatus2");
+const fbWaHint = document.getElementById("fbWaHint");
+
+/* Label, field name, and whether it is a section of prose or a one-line fact.
+   Order here is the order in the document and in the PDF. */
+const FB_FIELDS = [
+  ["Role", "role", "line"],
+  ["Cut watched", "cut", "line"],
+  ["Overall", "verdict", "verdict"],
+  ["Act 1, the opening, K01 to K06", "act1", "prose"],
+  ["Act 2, 2016 and the founders, K07 to K13", "act2", "prose"],
+  ["Act 3, the decade, K14 to K25", "act3", "prose"],
+  ["Act 4, the method and the community, K26 to K40", "act4", "prose"],
+  ["Act 5, the closing welcome, K41 to K46", "act5", "prose"],
+  ["The Kannada narration", "voice", "prose"],
+  ["Music and sound", "sound", "prose"],
+  ["On-screen Kannada and subtitles", "onscreen", "prose"],
+  ["Facts, names, numbers and spellings", "facts", "prose"],
+  ["Anything that must come out", "remove", "prose"],
+  ["Decision: sound effects, 07 items 5.7 and 5.8", "gateSfx", "line"],
+  ["Decision: guardian consent, 07 item 1.1", "gateConsent", "line"],
+  ["Decision: the Udayavani clipping at K36", "gateClip", "line"],
+  ["Decision: music, 07 item 5.1", "gateMusic", "line"],
+  ["Decision: public release", "gatePublic", "line"],
+  ["Notes", "notes", "prose"],
+];
+
+function fbVal(name) {
+  const el = fbForm.elements[name];
+  if (!el) return "";
+  if (el instanceof RadioNodeList || (el.length && !el.tagName)) {
+    const picked = Array.from(el).find(r => r.checked);
+    return picked ? picked.value : "";
+  }
+  return (el.value || "").trim();
+}
+
+/* ------------------------------------------------------------ draft saving */
+function fbSaveDraft() {
+  const out = {};
+  for (const [, name] of FB_FIELDS) out[name] = fbVal(name);
+  out.name = fbVal("name");
+  out.date = fbVal("date");
+  out.phone = fbVal("phone");
+  try { localStorage.setItem(FB_KEY, JSON.stringify(out)); } catch { /* private mode */ }
+}
+
+function fbLoadDraft() {
+  let d = {};
+  try { d = JSON.parse(localStorage.getItem(FB_KEY) || "{}"); } catch { d = {}; }
+  for (const [k, v] of Object.entries(d)) {
+    if (!v) continue;
+    const el = fbForm.elements[k];
+    if (!el) continue;
+    if (el instanceof RadioNodeList || (el.length && !el.tagName)) {
+      const hit = Array.from(el).find(r => r.value === v);
+      if (hit) hit.checked = true;
+    } else {
+      el.value = v;
+    }
+  }
+  if (!fbVal("date")) {
+    /* Local date, not toISOString, which shifts the day either side of UTC. */
+    const n = new Date();
+    fbForm.elements.date.value =
+      `${n.getFullYear()}-${String(n.getMonth() + 1).padStart(2, "0")}-${String(n.getDate()).padStart(2, "0")}`;
+  }
+}
+
+/* ------------------------------------------------------------- the document */
+function fbDocTitle() {
+  const who = fbVal("name") || "Unnamed";
+  /* \p{M} matters: Kannada vowel signs and the virama are combining marks,
+     not letters, so a set of L and N alone turns ಚಾರುಲತಾ into ಚ-ರ-ಲತ and
+     mangles the name of the person the document is from. */
+  return `LPET-10-years-Kannada-film-feedback-${who}-${fbVal("date") || "undated"}`
+    .replace(/[^\p{L}\p{M}\p{N}\-_]+/gu, "-").replace(/-+/g, "-").slice(0, 120);
+}
+
+function fbBuildDoc() {
+  /* An undecided gate is not feedback, and five "Decide later" rows in every
+     PDF bury the ones that were actually decided. They are collapsed into a
+     single closing line instead, so what is still open stays visible without
+     competing with what was answered. */
+  const deferred = [];
+  const rows = FB_FIELDS.map(([label, name, kind]) => {
+    const v = fbVal(name);
+    if (!v) return "";
+    if (name.startsWith("gate") && v === "Decide later") {
+      deferred.push(label.replace(/^Decision: /, "").replace(/,.*$/, ""));
+      return "";
+    }
+    const cls = kind === "verdict" ? ' class="fb-verdict"' : "";
+    return `<div><dt>${esc(label)}</dt><dd${cls} lang="kn">${esc(v)}</dd></div>`;
+  }).filter(Boolean).join("")
+    + (deferred.length
+       ? `<div><dt>Still to decide</dt><dd>${esc(deferred.join("; "))}</dd></div>`
+       : "");
+
+  fbDoc.innerHTML = `
+    <h3>Feedback on the Kannada 10-year welcome film</h3>
+    <p class="fb-doc-sub">${esc(fbVal("name"))}${fbVal("role") ? " &middot; " + esc(fbVal("role")) : ""}
+      ${fbVal("date") ? " &middot; " + esc(fbVal("date")) : ""}</p>
+    <dl>${rows}</dl>
+    <p class="fb-foot">Law Park Educational Trust &middot; reference cut
+      <span class="mono">00:05:37:22</span>, ElevenLabs narration, no music, effects unapproved
+      under <code>07</code> item 5.8. This document is feedback on that cut and is not an
+      approval to publish. Generated in the browser from team-handoff.html.</p>`;
+}
+
+/* --------------------------------------------------------------- validation */
+function fbFlag(id, bad) {
+  const el = document.getElementById(id);
+  if (el) el.classList.toggle("bad", bad);
+}
+
+function fbValidate() {
+  const missing = [];
+  const noName = !fbVal("name");
+  const noVerdict = !fbVal("verdict");
+  fbFlag("fbf-name", noName);
+  fbFlag("fbf-verdict", noVerdict);
+  if (noName) missing.push("your name");
+  if (noVerdict) missing.push("the overall verdict");
+  if (!missing.length) return true;
+  fbStatus.textContent = "Still needed: " + missing.join(" and ") + ".";
+  fbStatus.classList.add("err");
+  (noName ? document.getElementById("fbName")
+          : fbForm.elements.verdict[0]).focus();
+  return false;
+}
+
+/* -------------------------------------------------------------- submit flow */
+fbForm.addEventListener("submit", e => {
+  e.preventDefault();
+  if (!fbValidate()) return;
+  fbStatus.textContent = "";
+  fbStatus.classList.remove("err");
+  fbSaveDraft();
+  fbBuildDoc();
+  fbForm.hidden = true;
+  fbReview.hidden = false;
+  fbWaHint.hidden = true;
+  fbStatus2.textContent = "";
+  fbStatus2.classList.remove("err");
+  fbReview.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("fbBack").addEventListener("click", () => {
+  fbReview.hidden = true;
+  fbForm.hidden = false;
+  fbForm.scrollIntoView({ behavior: "smooth", block: "start" });
+});
+
+document.getElementById("fbClear").addEventListener("click", () => {
+  if (!confirm("Clear every answer on this form? The saved draft goes too.")) return;
+  try { localStorage.removeItem(FB_KEY); } catch { /* ignore */ }
+  fbForm.reset();
+  fbLoadDraft();
+  fbStatus.textContent = "Draft cleared.";
+  fbStatus.classList.remove("err");
+});
+
+fbForm.addEventListener("input", fbSaveDraft);
+fbForm.addEventListener("change", fbSaveDraft);
+
+/* ------------------------------------------------------------------ the PDF */
+function loadScript(src) {
+  return new Promise((ok, no) => {
+    if (document.querySelector(`script[src="${src}"]`)) return ok();
+    const el = document.createElement("script");
+    el.src = src;
+    el.onload = () => ok();
+    el.onerror = () => no(new Error("could not load " + src));
+    document.head.appendChild(el);
+  });
+}
+
+function printFallback(why) {
+  fbStatus2.textContent = why + " Using the browser's own print-to-PDF instead: "
+    + "choose Save as PDF as the destination.";
+  document.body.classList.add("printing-feedback");
+  const done = () => {
+    document.body.classList.remove("printing-feedback");
+    window.removeEventListener("afterprint", done);
+  };
+  window.addEventListener("afterprint", done);
+  window.print();
+  /* Safari has never fired afterprint reliably. Clear it either way. */
+  setTimeout(done, 4000);
+}
+
+let fbCache = null;   /* one build per set of answers, reused by both buttons */
+
+async function fbMakePdf() {
+  if (fbCache) return fbCache;
+  await loadScript(CDN.h2c);
+  await loadScript(CDN.jspdf);
+  if (!window.html2canvas || !window.jspdf) throw new Error("libraries missing");
+  /* Kannada must be shaped before it is painted, or the canvas gets fallback
+     glyphs for text the screen showed correctly. */
+  if (document.fonts && document.fonts.ready) await document.fonts.ready;
+
+  fbDoc.classList.add("capturing");
+  let canvas;
+  try {
+    canvas = await window.html2canvas(fbDoc, {
+      scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false,
+    });
+  } finally {
+    fbDoc.classList.remove("capturing");
+  }
+
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF({ unit: "mm", format: "a4", compress: true });
+  const pageW = pdf.internal.pageSize.getWidth();
+  const pageH = pdf.internal.pageSize.getHeight();
+  const m = 12;
+  const drawW = pageW - m * 2;
+  const drawH = pageH - m * 2;
+  /* Slice the canvas into page-height bands rather than redrawing the whole
+     image at a negative offset on every page: the offset trick overlaps
+     bands and prints the same line twice at each break. */
+  const bandPx = Math.floor(canvas.width * drawH / drawW);
+  const bands = [];
+  for (let y = 0; y < canvas.height; y += bandPx) {
+    bands.push([y, Math.min(bandPx, canvas.height - y)]);
+  }
+  /* A document that overruns a page by a hair otherwise ships a second page
+     carrying a 60px sliver of card border, which reads as a fault rather than
+     as a page. Fold a small tail back into the page before it and shrink that
+     page's image to fit instead. */
+  if (bands.length > 1 && bands[bands.length - 1][1] < bandPx * 0.18) {
+    bands[bands.length - 2][1] += bands.pop()[1];
+  }
+  bands.forEach(([y, h], page) => {
+    const band = document.createElement("canvas");
+    band.width = canvas.width;
+    band.height = h;
+    const ctx = band.getContext("2d");
+    ctx.fillStyle = "#ffffff";
+    ctx.fillRect(0, 0, band.width, band.height);
+    ctx.drawImage(canvas, 0, -y);
+    let w = drawW;
+    let dh = h * drawW / canvas.width;
+    if (dh > drawH) { w = drawW * drawH / dh; dh = drawH; }   /* the folded page */
+    if (page) pdf.addPage();
+    pdf.addImage(band.toDataURL("image/jpeg", 0.92), "JPEG",
+                 m + (drawW - w) / 2, m, w, dh);
+  });
+  fbCache = { blob: pdf.output("blob"), filename: fbDocTitle() + ".pdf" };
+  return fbCache;
+}
+
+function downloadBlob(blob, filename) {
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(url), 30000);
+}
+
+async function withBusy(btn, label, fn) {
+  const was = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = label;
+  try { await fn(); } finally { btn.disabled = false; btn.textContent = was; }
+}
+
+document.getElementById("fbPdf").addEventListener("click", e => {
+  fbStatus2.classList.remove("err");
+  withBusy(e.currentTarget, "Building the PDF", async () => {
+    try {
+      const { blob, filename } = await fbMakePdf();
+      downloadBlob(blob, filename);
+      fbStatus2.textContent = "Saved as " + filename;
+    } catch (err) {
+      printFallback("The PDF library could not be reached, which usually means no internet.");
+    }
+  });
+});
+
+/* --------------------------------------------------------------- WhatsApp */
+function fbSummary() {
+  const lines = [
+    "Feedback on the Kannada 10-year welcome film",
+    `${fbVal("name")}${fbVal("role") ? ", " + fbVal("role") : ""}${fbVal("date") ? ", " + fbVal("date") : ""}`,
+    "",
+    "Overall: " + (fbVal("verdict") || "not stated"),
+  ];
+  const commented = FB_FIELDS
+    .filter(([, n, k]) => k === "prose" && fbVal(n))
+    .map(([l]) => l.replace(/,.*$/, ""));
+  if (commented.length) lines.push("Comments on: " + commented.join("; "));
+  const decided = FB_FIELDS
+    .filter(([, n]) => n.startsWith("gate"))
+    .map(([l, n]) => [l.replace(/^Decision: /, "").replace(/,.*$/, ""), fbVal(n)])
+    .filter(([, v]) => v && v !== "Decide later");
+  if (decided.length) {
+    lines.push("", "Decisions:");
+    for (const [l, v] of decided) lines.push(`  ${l}: ${v}`);
+  }
+  lines.push("", "The full feedback is in the attached PDF.");
+  return lines.join("\n");
+}
+
+document.getElementById("fbSend").addEventListener("click", e => {
+  fbStatus2.classList.remove("err");
+  withBusy(e.currentTarget, "Preparing", async () => {
+    const text = fbSummary();
+    const phone = fbVal("phone").replace(/\D/g, "");
+    let pdf = null;
+    try {
+      pdf = await fbMakePdf();
+    } catch {
+      fbStatus2.textContent = "The PDF library could not be reached. Sending the "
+        + "summary as text only; make the PDF separately with Download the PDF.";
+      fbStatus2.classList.add("err");
+    }
+
+    /* A phone can hand the actual file to WhatsApp through the share sheet.
+       A desktop browser cannot: no URL scheme attaches a file, so the only
+       honest desktop flow is download, then attach by hand. */
+    if (pdf && navigator.canShare) {
+      const file = new File([pdf.blob], pdf.filename, { type: "application/pdf" });
+      if (navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({ files: [file], text, title: "Kannada film feedback" });
+          fbStatus2.textContent = "Handed to the share sheet. Pick WhatsApp.";
+          return;
+        } catch (err) {
+          if (err && err.name === "AbortError") { fbStatus2.textContent = "Cancelled."; return; }
+        }
+      }
+    }
+
+    if (pdf) downloadBlob(pdf.blob, pdf.filename);
+    window.open(`https://wa.me/${phone}?text=${encodeURIComponent(text)}`,
+                "_blank", "noopener");
+    fbWaHint.hidden = false;
+    if (!fbStatus2.classList.contains("err")) {
+      fbStatus2.textContent = pdf
+        ? "PDF downloaded and WhatsApp opened. Attach the PDF, then send."
+        : "WhatsApp opened with the summary.";
+    }
+  });
+});
+
+/* Any edit invalidates a built PDF, so it is rebuilt rather than resent. */
+fbForm.addEventListener("input", () => { fbCache = null; });
+fbForm.addEventListener("change", () => { fbCache = null; });
+
+fbLoadDraft();
+
+</script>
+</body>
+</html>

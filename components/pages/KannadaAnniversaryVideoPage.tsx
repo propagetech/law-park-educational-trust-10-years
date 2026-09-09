@@ -149,21 +149,33 @@ Consent gate: do not screen the warm cut with identifiable children until writte
           <Card className="p-6">
             <h2 className="text-xl font-bold mb-3 text-gray-900">Production pack (trustees / editors)</h2>
             <p className="text-gray-700 text-sm mb-4">
-              Scripts, storyboard, EDL, rights checklist and the team handoff live in the repository under{' '}
-              <code className="text-xs bg-gray-100 px-1.5 py-0.5 rounded">anniversary-video-production/kannada/</code>.
-              Open <code className="text-xs bg-gray-100 px-1.5 py-0.5 rounded">team-handoff.html</code> locally for review. It is not published on this site while consent is open.
+              Open the team handoff for the reference cut, feedback form, rights gates, and file list.
+              Relative links from that page open the Kannada scripts, EDL, and research checklists.
             </p>
-            <a
-              href={DONATION_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-5 py-2.5 font-semibold text-white hover:bg-primary-700"
-            >
-              Donate
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="/anniversary-video-production/kannada/team-handoff.html"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg bg-primary-600 px-5 py-2.5 font-semibold text-white hover:bg-primary-700"
+              >
+                Open team-handoff.html
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden>
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+              <a
+                href={DONATION_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-lg border-2 border-primary-600 px-5 py-2.5 font-semibold text-primary-700 hover:bg-primary-50"
+              >
+                Donate
+              </a>
+            </div>
+            <p className="text-xs text-gray-500 mt-3">
+              Path: <code className="bg-gray-100 px-1.5 py-0.5 rounded">/anniversary-video-production/kannada/team-handoff.html</code>
+            </p>
           </Card>
         </div>
       </div>

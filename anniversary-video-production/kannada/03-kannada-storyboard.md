@@ -168,7 +168,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `TRUSTEE LIKENESS - internal approval required` |
 | **ಧ್ವನಿ** | ಇದನ್ನು ಸ್ಥಾಪಿಸಿದವರು ಚಾರುಲತಾ ಎಂ. ಆರ್. ಟ್ರಸ್ಟ್ ಶುರುವಾಗುವ ಮೊದಲೇ ಅವರು ತಮ್ಮ ಬಡಾವಣೆಯ ಮಕ್ಕಳ ಶಾಲಾ ಶುಲ್ಕವನ್ನು ತಾವೇ ಕಟ್ಟುತ್ತಿದ್ದರು. |
 | **ಪರದೆ ಪಠ್ಯ** | ಚಾರುಲತಾ ಎಂ. ಆರ್.  //  ಸಂಸ್ಥಾಪಕರು ಮತ್ತು ವ್ಯವಸ್ಥಾಪಕ ಟ್ರಸ್ಟಿ |
-| **Frame and crop** | 1280x853 placed at 1280px wide inside a navy 1920x1080 frame (67% width, native, no upscale). Crop the LG monitor badge out of the left edge. |
+| **Frame and crop** | 1280x853. FULL FRAME. 16:9 window x 40-1280 upscaled 1.50x, which also crops the LG monitor badge off the left edge. Was placed at 1280px on navy, 67% width, leaving a third of the frame flat. |
 | **Motion** | 2% push. |
 | **Transition in** | Cut |
 | **Music** | continues from the previous shot |
@@ -184,7 +184,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `TRUSTEE LIKENESS - internal approval required` |
 | **ಧ್ವನಿ** | ಅವರ ಜೊತೆಗೂಡಿದವರು ಸಾದೇನಹಳ್ಳಿಯ ಎಸ್. ಎಂ. ಮಂಜುನಾಥ. ಓದಲೆಂದು ಊರು ಬಿಟ್ಟು ನಗರಕ್ಕೆ ಬಂದ ತಮ್ಮ ಕುಟುಂಬದ ಮೊದಲ ವ್ಯಕ್ತಿ. |
 | **ಪರದೆ ಪಠ್ಯ** | ಎಸ್. ಎಂ. ಮಂಜುನಾಥ  //  ಟ್ರಸ್ಟಿ |
-| **Frame and crop** | 853x853 square, placed at 853px inside the navy frame (44% width, native). WEBP ONLY - see note. |
+| **Frame and crop** | 853x853 square. FULL FRAME. Centre 16:9 window 853x480 upscaled 2.25x; the window also drops the framed devotional picture the note flags on the wall behind. WEBP ONLY - see note. |
 | **Motion** | Static. |
 | **Transition in** | Cut |
 | **Music** | continues from the previous shot |
@@ -218,7 +218,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `TRUSTEE LIKENESS - internal approval required` |
 | **ಧ್ವನಿ** | 2016ರಲ್ಲಿ ಅವರು ಮೊದಲ ಶಾಲಾ ಭೇಟಿ ಮಾಡಿದರು. |
 | **ಪರದೆ ಪಠ್ಯ** | 2016 · ಚಿಕ್ಕಬಳ್ಳಾಪುರ  //  ಮೊದಲ ಶಾಲಾ ಭೇಟಿ |
-| **Frame and crop** | 747x1328 portrait. Place at 640px wide, left third of a cream 1920x1080 card. Native, no upscale. |
+| **Frame and crop** | 747x1328 portrait. FULL FRAME. Window y 300-1120 then 16:9, a 2.57x upscale and the softest frame in the cut. A collage would be sharper and A138 is the only sensible partner, which this pack forbids cutting: see the note. 4.0s shot, so softness is the cheaper cost. |
 | **Motion** | Static. |
 | **Transition in** | Cut |
 | **Music** | continues from the previous shot |
@@ -319,7 +319,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `N/A - no identifiable person` |
 | **ಧ್ವನಿ** | ಆಗ ಟ್ರಸ್ಟ್ ಒಂದೇ ಪುಟದ ಪ್ರಕಟಣೆ ಹೊರಡಿಸಿತು. ಪೋಷಕರನ್ನು ಕಳೆದುಕೊಂಡ ಮಕ್ಕಳಿಗೆ. ಕೆಲಸ ಕಳೆದುಕೊಂಡು ಶುಲ್ಕ ಕಟ್ಟಲಾಗದ ಪೋಷಕರಿಗೆ. ನೆರವು ನಿಲ್ಲಲಿಲ್ಲ. |
 | **ಪರದೆ ಪಠ್ಯ** | 2020 · ಸಾಂಕ್ರಾಮಿಕ ಕಾಲದ ನೆರವು  //  ಪೋಷಕರನ್ನು ಕಳೆದುಕೊಂಡ ಮಕ್ಕಳಿಗೆ · ಕೆಲಸ ಕಳೆದುಕೊಂಡ ಪೋಷಕರಿಗೆ |
-| **Frame and crop** | 1440x1377. Place at 900px tall, right of frame, on navy. Native, no upscale. |
+| **Frame and crop** | 1440x1377. TWO PANELS, EDGE TO EDGE. The navy gloss plate owns the left 760px and the poster covers the remaining 1160x1080, which is a downscale. No margin, no bare ground. |
 | **Motion** | Static. No push on a document. |
 | **Transition in** | Cut |
 | **Music** | Drone only |
@@ -553,7 +553,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `CONSENT VERIFICATION REQUIRED - likely shows minors` |
 | **ಧ್ವನಿ** | ವಿದ್ಯಾರ್ಥಿವೇತನ ಒಂದರಿಂದಲೇ ಶಿಕ್ಷಣ ಪೂರ್ಣವಾಗುವುದಿಲ್ಲ. ಹಾಗಾಗಿ ಶಾಲಾ ಚೀಲ, ನೋಟ್‌ಬುಕ್, ಲೇಖನ ಸಾಮಗ್ರಿ, ಚಿತ್ರಕಲೆಯ ಪರಿಕರ. |
 | **ಪರದೆ ಪಠ್ಯ** | ಶಾಲಾ ಸಾಮಗ್ರಿ ವಿತರಣೆ |
-| **Frame and crop** | 513x911, the smallest asset in the cut. DO NOT FILL FRAME. Place at native 513px inside a cream card, 27% width, left third, with the Kannada programme labels stacked right. |
+| **Frame and crop** | 513x911, the smallest asset in the cut. THREE-TILE COLLAGE, full frame. School bags, this stationery, then books, in the order the line names them. Each tile is 640x1080 so this file is enlarged 1.25x and barely cropped; a full-bleed 16:9 window of it alone would be 513x289 pushed 3.74x. All three tiles are CLEAR in the consent register. |
 | **Motion** | Static. |
 | **Transition in** | Cut |
 | **Music** | Tempo lifts slightly |
@@ -569,7 +569,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `CONSENT VERIFICATION REQUIRED - likely shows minors` |
 | **ಧ್ವನಿ** | ಗ್ರಂಥಾಲಯಗಳು. ವೃತ್ತಿ ಮಾರ್ಗದರ್ಶನ. ಆಟಗಳು. ಮಕ್ಕಳು ಹಾಡಿ ಕುಣಿಯುವ ವೇದಿಕೆ, ಮತ್ತು ಅದನ್ನು ನೋಡಲೆಂದೇ ಬಂದ ಜನ. |
 | **ಪರದೆ ಪಠ್ಯ** | ಕಲಿಕೆಯ ಆಟಗಳು · ನಾಡು ನುಡಿಯ ಪರಿಚಯ · ಗ್ರಾಮೀಣ ಶಾಲೆಗಳಲ್ಲಿ ಗ್ರಂಥಾಲಯ |
-| **Frame and crop** | 720x1560 portrait. Place at native 720px, 37% width, on cream, with labels stacked beside. |
+| **Frame and crop** | 720x1560 portrait. TWO-TILE COLLAGE, full frame. K18's library plate and this craft session, for the line that names libraries and games. 960x1080 tiles, so this file is enlarged 1.33x against 2.67x for a full-bleed window of it alone. |
 | **Motion** | Static. |
 | **Transition in** | Cross-dissolve 16f |
 | **Music** | continues from the previous shot |
@@ -635,7 +635,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `N/A - no identifiable person` |
 | **ಧ್ವನಿ** | 2024ರ ಜೂನ್‌ನಲ್ಲಿ ಒಂದು ಕನ್ನಡ ದಿನಪತ್ರಿಕೆ ಮುಳಬಾಗಿಲಿನ ಚಿತ್ರವನ್ನು ಪ್ರಕಟಿಸಿತು. ಏಕ ಪೋಷಕರ ಮಕ್ಕಳಿಗೆ ವಿದ್ಯಾರ್ಥಿವೇತನ ವಿತರಣೆ. |
 | **ಪರದೆ ಪಠ್ಯ** | ಉದಯವಾಣಿ · 19 ಜೂನ್ 2024 |
-| **Frame and crop** | 513x733, the second-lowest-resolution asset in the cut. Crop OFF the burned-in epaper URL strip at the foot. Place the remaining ~513x660 at native size on navy, 27% width, then push to 40% over the shot. NEVER full frame. |
+| **Frame and crop** | 513x733, the second-lowest-resolution asset in the cut. Crop OFF the burned-in epaper URL strip at the foot. Place the remaining ~513x660 at native size on navy, 27% width, then push to 40% over the shot. NEVER full frame. THE ONE SHOT THAT IS STILL A CARD: it is the film's only independent verification and the headline is verified legible, which a 3.74x enlargement would destroy. The frame around it is a blurred copy of the clipping at 55% back toward navy, so the frame is full even though the image is not. |
 | **Motion** | Slow 5% push toward the headline and the caption, the only two legible text blocks. DO NOT push into the body text; it is unreadable at this resolution and pushing into it advertises the fact. |
 | **Transition in** | Dissolve 20f |
 | **Music** | Music holds, no swell |
@@ -652,7 +652,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `N/A - no identifiable person` |
 | **ಧ್ವನಿ** | 2025ರ ಡಿಸೆಂಬರ್‌ನಲ್ಲಿ, ನವದೆಹಲಿಯ ರಾಷ್ಟ್ರೀಯ ಶೃಂಗಸಭೆಯಲ್ಲಿ, ಸಂಸ್ಥಾಪಕರಿಗೆ ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ ಸಂದಿತು. |
 | **ಪರದೆ ಪಠ್ಯ** | ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ · 19 ಡಿಸೆಂಬರ್ 2025 · ನವದೆಹಲಿ  //  ಎಕನಾಮಿಕ್ ಅಂಡ್ ಸೋಶಿಯಲ್ ಡೆವಲಪ್‌ಮೆಂಟ್ ಫೌಂಡೇಶನ್ |
-| **Frame and crop** | 1370x900. The scan shows an open folder with TWO documents. Crop to the RIGHT-HAND certificate only: window x 700-1370, y 40-870, then place at 830px tall on navy, right of frame. |
+| **Frame and crop** | 1370x900. FULL FRAME, whole scan, 16:9 window upscaled 1.40x. Both documents are shown rather than a 670px window of the right-hand one, and at 1.40x both stay legible. |
 | **Motion** | Static. No push on a document. |
 | **Transition in** | Cut |
 | **Music** | One gentle lift, then settle |
@@ -669,7 +669,7 @@ Carried from [`10`](../../anniversary-video-research/10-bilingual-storyboard-and
 | **Inventory says** | `N/A - no identifiable person` |
 | **ಧ್ವನಿ** | ಆದರೆ ಮುಖ್ಯವಾದ ದಾಖಲೆ ಪ್ರಶಸ್ತಿ ಪತ್ರದಲ್ಲಿ ಇಲ್ಲ. ಅದು ಒಂದು ಹೆಸರುಗಳ ಪಟ್ಟಿಯಲ್ಲಿದೆ. ಬೆಂಗಳೂರು, ಚೆನ್ನೈ, ಅಮೆರಿಕ, ಬ್ರಿಟನ್, ಜರ್ಮನಿ, ಡೆನ್ಮಾರ್ಕ್, ದುಬೈನಲ್ಲಿದ್ದು ನೆರವು ನೀಡಿದವರು. |
 | **ಪರದೆ ಪಠ್ಯ** | ನೆರವು ನೀಡಿದವರಿಗೆ |
-| **Frame and crop** | 941x529, sub-HD. Upscale 2.04x to 1920x1080 OR place at native inside a cream card. Editor's call on the projector; prefer the card. |
+| **Frame and crop** | 941x529, sub-HD, and already 16:9. FULL FRAME at 2.04x. The card option is withdrawn: it left half the frame flat for no gain the projector could see. |
 | **Motion** | Static. |
 | **Transition in** | Dissolve 20f |
 | **Music** | Piano or nylon guitar enters here for the first time |

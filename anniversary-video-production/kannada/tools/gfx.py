@@ -278,7 +278,7 @@ for n in range(3):
     card(f"GLOSS_K17_{n}", f"""
 <div style="position:absolute;left:0;top:0;bottom:0;width:760px;background:{NAVY}"></div>
 <div style="position:absolute;left:0;top:0;bottom:0;width:760px;display:flex;
-     flex-direction:column;justify-content:center;padding:0 70px">
+     flex-direction:column;justify-content:center;padding:0 100px">
   <div class="lat" style="font-size:120px;line-height:.9;color:{GOLD}">2020</div>
   <div class="kn600" style="font-size:52px;line-height:1.5;color:{WHITE};margin-top:18px">
     ಸಾಂಕ್ರಾಮಿಕ ಕಾಲದ ನೆರವು</div>

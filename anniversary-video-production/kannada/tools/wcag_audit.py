@@ -173,8 +173,82 @@ def main():
     fails = [r for r in rows if r[3] < AA_LARGE]
     print(f"\n{len(fails)} below AA-large 3.0:1, "
           f"{len([r for r in rows if r[3] < AA_NORMAL])} below 4.5:1")
-    if fails:
+
+    bad_safe = title_safe()
+    bad_time = subtitle_timing()
+    if fails or bad_safe or bad_time:
         sys.exit(1)
+
+
+def title_safe():
+    """Every glyph inside the 90 percent box, for projector overscan.
+
+    Measured on the type, not on the plate: a full-bleed navy card reaches the
+    frame edge by design and a lower-third scrim spans the full width on
+    purpose, so measuring plates reports 53 false failures and hides the one
+    real one. Rows that are more than half filled are dropped first, because a
+    gold divider is a rule and shares the type's colour.
+    """
+    import glob
+    mx, my = int(1920 * SCALE * 0.05), int(1080 * SCALE * 0.05)
+    bad, tot = [], 0
+    for p in sorted(glob.glob(f"{GFXDIR}/*.png")):
+        a = np.asarray(Image.open(p).convert("RGBA")).astype(float)
+        rgb, al = a[..., :3], a[..., 3]
+        for name, ink in INKS.items():
+            m = (al > 200) & (np.linalg.norm(rgb - np.array(ink), axis=-1) < 26)
+            if m.sum() < 400 or classify(m, SCALE) != "type":
+                continue
+            m = m.copy()
+            m[(m.sum(1) / float(m.shape[1])) > 0.5, :] = False
+            if m.sum() < 300:
+                continue
+            tot += 1
+            ys, xs = np.nonzero(m)
+            W, H = a.shape[1], a.shape[0]
+            if (xs.min() < mx or W - 1 - xs.max() < mx
+                    or ys.min() < my or H - 1 - ys.max() < my):
+                bad.append((os.path.basename(p)[:-4], name, int(xs.min()),
+                            int(W - 1 - xs.max()), int(ys.min()),
+                            int(H - 1 - ys.max())))
+    print(f"\ntitle safe: {tot} runs of type against the 90% box "
+          f"({mx}px sides, {my}px top and bottom), {len(bad)} outside")
+    for n, i, l, r, t, b in bad:
+        print(f"  OUTSIDE {n:16}{i:12} left {l} right {r} top {t} bottom {b}")
+    return bad
+
+
+def subtitle_timing():
+    """Reading speed and duration, against the Netflix Kannada timed-text guide.
+
+    17 characters per second for adults, and a floor of 5/6 of a second. Both
+    are about whether a viewer can finish the line, which is the same question
+    the contrast check asks and belongs in the same place.
+    """
+    subs = json.load(open("subs.json", encoding="utf-8"))
+    MAXCPS, MINDUR = 17.0, 5 / 6.0
+    bad = []
+    cps = []
+    for i, c in enumerate(subs):
+        n = len(" ".join(c["lines"]).replace(" ", ""))
+        d = c["end"] - c["start"]
+        v = n / d if d > 0 else 999
+        cps.append(v)
+        if v > MAXCPS:
+            bad.append(f"cue {i}: {v:.1f} cps, over {MAXCPS}")
+        if d < MINDUR:
+            bad.append(f"cue {i}: {d:.2f}s, under {MINDUR:.2f}s")
+    for a, b in zip(subs, subs[1:]):
+        if b["start"] < a["end"] - 1e-6:
+            bad.append(f"cues overlap at {a['end']:.3f}s")
+    cps.sort()
+    d = sorted(c["end"] - c["start"] for c in subs)
+    print(f"\nsubtitles: {len(subs)} cues, {cps[len(cps)//2]:.1f} cps median, "
+          f"{cps[-1]:.1f} max (guide {MAXCPS}); shortest {d[0]:.2f}s "
+          f"(floor {MINDUR:.2f}s); {len(bad)} problems")
+    for b in bad[:10]:
+        print(f"  {b}")
+    return bad
 
 
 if __name__ == "__main__":

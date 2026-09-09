@@ -62,47 +62,113 @@ DISCOURAGED = {
     "K37": "the award shot is marked no fanfare",
     "K43": "this shot lifts but must not climax",
 }
-MAX_EFFECTS = 14          # `11` section 3
+MAX_EFFECTS = 32          # `11` section 3 capped this at 14. Raised on the
+                          # Trust's instruction to place every licensed file.
 HEADROOM_DB = 12.0        # `14` item 8.7, effects at least 12 dB under narration
+
+# WHY THE HEADROOM IS MEASURED LOCALLY AND NOT OVER THE WHOLE FILM
+# `14` item 8.7 reads "music bed at least 12 dB below narration". It says
+# nothing about effects, and the point of it is that nothing may compete with
+# the voice WHILE THE VOICE IS SPEAKING.
+#
+# This script used to read it as a global ceiling: one RMS taken across the
+# entire narration stem, every effect held under that. The result measured as
+# an inaudible sound design. The narration's speech RMS is -17.8 dBFS, so the
+# ceiling sat at -29.8 dBFS and the school bell that opens the film, alone in
+# seven seconds of silence with no voice anywhere near it, was pulled down to
+# -36 dBFS. Eleven of the fourteen effects contributed between 0.00 and 0.19 dB
+# to the mix. They were placed, they were correct, and nobody could hear them.
+#
+# The ceiling is now taken over the window each effect actually occupies. Under
+# narration the rule bites exactly as before, against the voice that is really
+# there. In a silence it does not bite at all, and the effect plays at
+# SOLO_TARGET instead of ducking under a voice that is not speaking.
+# Where the threshold sits, and why it is not lower. The narration stem is not
+# digitally silent between lines: the ElevenLabs render leaves a floor around
+# -35 to -41 dBFS, while spoken Kannada in this read sits at -15 to -18 dBFS.
+# A threshold of -45 dBFS classified that floor as speech, so the bell at K01,
+# the whoosh at K15 and the applause at K46 all ducked 16 to 20 dB beneath a
+# voice that was not there and came out at -53 to -57 dBFS. -28 dBFS sits in
+# the gap between the two populations with about 7 dB of margin on each side.
+SPEECH_FLOOR_DBFS = -28.0   # a window quieter than this carries no voice to duck under
+SOLO_ACCENT_DBFS = -22.0    # an accent alone in a silence, unless solo_dbfs says otherwise
+SOLO_BED_DBFS = -30.0       # an ambience bed alone in a silence
+BED_SPLIT_FADE = 0.40       # fade either side of a silence cue carved out of a bed
 
 
 def die(msg):
     sys.exit(f"refusing to build.\n{msg}")
 
 
-def decode(path, tmp, in_s=0.0, dur_s=None, fin=0.0, fout=0.0):
+def decode(path, tmp, in_s=0.0, dur_s=None, fin=0.0, fout=0.0,
+           loop=False, win_s=None):
     """Decode to 48k mono, optionally taking one excerpt with fades.
 
     Most library effects are far longer than the moment they are used for: a
     26-second applause bed or a 21-second bag handle. Trimming here rather than
     pre-cutting new files keeps one file on disk per licence-log row, so the
     log still describes what shipped.
+
+    `loop` tiles the excerpt until it reaches `dur_s`, which is how a 27-second
+    wind recording covers a 90-second act. `win_s` bounds the part of the source
+    the tile is cut from, and that is not a convenience: the village ambience
+    carries human speech everywhere except one 12.5-second window, so the bed
+    has to be built from that window and nothing else (`14` item 2.4).
+
+    ffmpeg's own -stream_loop is not used. Combined with an input -ss it does
+    not honour the output duration, and a bed that quietly runs long or short
+    is exactly the class of error this pack keeps trying to design out.
     """
     out = os.path.join(tmp, "e.wav")
+    take = win_s if (loop and win_s) else dur_s
     cmd = ["ffmpeg", "-v", "error", "-y"]
     if in_s:
         cmd += ["-ss", f"{in_s:.3f}"]
-    if dur_s:
-        cmd += ["-t", f"{dur_s:.3f}"]
-    cmd += ["-i", path, "-ar", str(SR), "-ac", "1"]
-    af = []
-    if fin:
-        af.append(f"afade=t=in:st=0:d={fin:.3f}")
-    if fout and dur_s:
-        af.append(f"afade=t=out:st={max(0, dur_s - fout):.3f}:d={fout:.3f}")
-    if af:
-        cmd += ["-af", ",".join(af)]
-    cmd += ["-c:a", "pcm_s16le", out]
+    if take:
+        cmd += ["-t", f"{take:.3f}"]
+    cmd += ["-i", path, "-ar", str(SR), "-ac", "1", "-c:a", "pcm_s16le", out]
     r = subprocess.run(cmd, capture_output=True, text=True)
     if r.returncode:
         die(f"ffmpeg cannot read {path}\n{r.stderr.strip()[:400]}")
     w = wave.open(out)
     n = w.getnframes()
-    s = struct.unpack("<%dh" % n, w.readframes(n))
+    s = list(struct.unpack("<%dh" % n, w.readframes(n)))
     w.close()
     if not n:
         die(f"{path}: the in_s/dur_s excerpt is empty")
-    return list(s)
+
+    if loop and dur_s:
+        s = tile(s, int(round(dur_s * SR)))
+    if fin:
+        f = min(int(fin * SR), len(s))
+        for k in range(f):
+            s[k] *= k / f
+    if fout:
+        f = min(int(fout * SR), len(s))
+        for k in range(f):
+            s[len(s) - 1 - k] *= k / f
+    return s
+
+
+def tile(src, want, xfade_s=0.6):
+    """Repeat `src` up to `want` samples, crossfading each seam.
+
+    A hard butt-join in a wind or insect bed reads as a click and then as a
+    loop, which is worse than no bed at all. The crossfade costs the seam
+    length per repeat and makes the repetition hard to place by ear.
+    """
+    if len(src) >= want:
+        return src[:want]
+    x = min(int(xfade_s * SR), len(src) // 3)
+    out = list(src)
+    while len(out) < want:
+        head = out[-x:] if x else []
+        body = list(src)
+        for k in range(x):
+            a = (x - k) / x
+            body[k] = head[k] * a + body[k] * (1 - a)
+        out = out[:len(out) - x] + body
+    return out[:want]
 
 
 def probe(path):
@@ -122,6 +188,10 @@ def num(row, key, default=0.0):
 
 def rms(seq):
     return math.sqrt(sum(v * v for v in seq) / len(seq)) if seq else 0.0
+
+
+def dbfs(v):
+    return 20 * math.log10(v / 32768.0) if v > 0 else -120.0
 
 
 def logged_files():
@@ -220,6 +290,8 @@ def main():
             errs.append(f"row {i}: offset {off}s falls outside {sid} "
                         f"({tl[sid]['t_out'] - tl[sid]['t_in']:.2f}s long)")
             continue
+        # A bed is anchored to the shot it starts on and then runs across the
+        # act. Only its start has to sit inside that shot.
 
         # An effect that STARTS legally can still run over the cut into a
         # silence cue. A riser on the title card reaching into K06 is the
@@ -231,6 +303,16 @@ def main():
             for fsid, why in FORBIDDEN.items():
                 f0, f1 = tl[fsid]["t_in"], tl[fsid]["t_out"]
                 if t0 < f1 and t1 > f0:
+                    # A bed runs for a whole act and will always cross one of
+                    # these. The mix carves the cue out of it with a fade either
+                    # side, so the cue stays silent and the bed stays a bed. An
+                    # accent has no such defence and is still refused.
+                    if (r.get("kind") or "accent").strip().lower() == "bed":
+                        warns.append(
+                            f"row {i}: bed crosses {fsid} ({f0:.2f}s to "
+                            f"{f1:.2f}s), {why}. The mix will carve it out "
+                            f"with a {BED_SPLIT_FADE:.2f}s fade either side")
+                        continue
                     errs.append(
                         f"row {i}: runs {t0:.2f}s to {t1:.2f}s and bleeds into "
                         f"{fsid} ({f0:.2f}s to {f1:.2f}s), {why}. "
@@ -252,29 +334,151 @@ def main():
     track = list(struct.unpack("<%dh" % n, w.readframes(n)))
     w.close()
     narration_rms = rms([v for v in track if v])
-    ceiling = narration_rms * (10 ** (-HEADROOM_DB / 20))
+    print(f"narration speech RMS {dbfs(narration_rms):.1f} dBFS over the whole "
+          f"film. Each effect is levelled against the window it occupies, not "
+          f"against this.\n")
 
+    # The four silence cues, as sample ranges, so a bed can be carved around them.
+    holes = [(int(tl[k]["t_in"] * SR), int(tl[k]["t_out"] * SR))
+             for k in FORBIDDEN if k in tl]
+
+    # Effects are summed onto their own bus, not straight into the narration.
+    # Levelling each effect against the voice on its own is not enough once
+    # several of them overlap: a riser, an impact, a room-tone floor and an act
+    # bed can each sit 14 dB under the voice and still add up to 8 dB under it,
+    # which is over the line `14` item 8.7 draws. The bus is what the rule
+    # applies to, so the rule is enforced on the bus, after everything is on it.
+    fx = [0.0] * len(track)
+
+    print(f"{'shot':5} {'kind':6} {'at':>7} {'len':>6} {'voice':>8} "
+          f"{'effect':>8} {'under':>7}  file")
     with tempfile.TemporaryDirectory() as tmp:
         for r in rows:
             sid = r["shot"].strip()
             at = tl[sid]["t_in"] + float(r["offset_s"])
+            kind = (r.get("kind") or "accent").strip().lower() or "accent"
             gain = 10 ** (float(r["gain_db"]) / 20)
             s = [v * gain for v in decode(
                 os.path.join(SFXDIR, r["file"].strip()), tmp,
                 num(r, "in_s"), num(r, "dur_s") or None,
-                num(r, "fade_in"), num(r, "fade_out"))]
-            got = rms(s)
-            if got > ceiling:
-                cut = 20 * math.log10(ceiling / got) if got else 0
-                s = [v * (ceiling / got) for v in s]
-                print(f"  {r['file']}: {cut:+.1f} dB applied to hold "
-                      f"{HEADROOM_DB:.0f} dB under narration")
+                num(r, "fade_in"), num(r, "fade_out"),
+                loop=(kind == "bed"), win_s=num(r, "win_s") or None)]
             i0 = int(round(at * SR))
+
+            # ---------------------------------------------- level, locally
+            # The voice in the window this effect actually covers, not the
+            # voice averaged over the whole film.
+            local = rms([v for v in track[i0:i0 + len(s)]])
+            got = rms(s)
+            if dbfs(local) > SPEECH_FLOOR_DBFS:
+                want = local * (10 ** (float(r["level_rel_narr_db"]) / 20))
+                law = f"{float(r['level_rel_narr_db']):+.0f} under voice"
+            else:
+                solo = num(r, "solo_dbfs") or (
+                    SOLO_BED_DBFS if kind == "bed" else SOLO_ACCENT_DBFS)
+                want = 32768.0 * (10 ** (solo / 20))
+                law = f"solo {solo:+.0f}"
+            if got:
+                s = [v * (want / got) for v in s]
+
+            # ---------------------------------------------- carve the silences
+            # A bed is minutes long and will cross a silence cue. Rather than
+            # refuse the build, take the cue out of the bed with a fade either
+            # side, so K06/K12/K27/K34 stay as silent as the edit designs them.
+            carved = 0
+            if kind == "bed":
+                f = int(BED_SPLIT_FADE * SR)
+                for h0, h1 in holes:
+                    a0, a1 = max(i0, h0), min(i0 + len(s), h1)
+                    if a0 >= a1:
+                        continue
+                    carved += 1
+                    for j in range(a0, a1):
+                        s[j - i0] = 0.0
+                    for k in range(f):                       # fade down into it
+                        j = a0 - f + k
+                        if i0 <= j < i0 + len(s):
+                            s[j - i0] *= (f - k) / f
+                    for k in range(f):                       # fade up out of it
+                        j = a1 + k
+                        if i0 <= j < i0 + len(s):
+                            s[j - i0] *= k / f
+
             for k, v in enumerate(s):
                 j = i0 + k
-                if j < len(track):
-                    track[j] = max(-32768, min(32767, int(track[j] + v)))
-            print(f"  {sid} +{float(r['offset_s']):.2f}s  {r['file']}")
+                if j < len(fx):
+                    fx[j] += v
+            print(f"{sid:5} {kind:6} {at:7.2f} {len(s)/SR:6.2f} "
+                  f"{dbfs(local):8.1f} {dbfs(rms(s)):8.1f} {law:>7}  "
+                  f"{r['file'][:40]}"
+                  + (f"   [{carved} silence cue carved]" if carved else ""))
+
+    # ------------------------------------------------- hold the bus under 8.7
+    # Walked in 1.5 second windows on a 0.5 second hop. The window length is the
+    # point: `14` item 8.7 is a rule about a BED, an integrated level, and read
+    # at 200 ms it becomes a rule about peaks instead. Measured that way the bus
+    # ran 16.7 dB over at its worst and the correction that follows would have
+    # flattened every page turn and impact back to where this rebuild found
+    # them. At 1.5 seconds a sustained bed still registers in full and a 0.3
+    # second transient averages down to roughly what it contributes, which is
+    # what the rule is actually asking about.
+    W = int(1.500 * SR)
+    hop = int(0.500 * SR)
+    # Half a dB of margin, and up to four passes. One pass does not converge:
+    # the envelope is smoothed and interpolated, so the ramp either side of a
+    # correction still lands a little over, and the next pass sees the bus it
+    # actually produced rather than the one it started from.
+    lim = 10 ** (-(HEADROOM_DB + 0.5) / 20)
+    floor = 32768.0 * (10 ** (SPEECH_FLOOR_DBFS / 20))
+    first_over, first_worst = 0, 0.0
+    for _pass in range(4):
+        env = [1.0] * (len(fx) // hop + 2)
+        over, worst = 0, 0.0
+        for wi in range(len(env)):
+            i0 = wi * hop
+            seg = fx[i0:i0 + W]
+            if not seg:
+                continue
+            vr = rms(track[i0:i0 + W])
+            fr = rms(seg)
+            if vr > floor and fr > vr * lim:
+                env[wi] = (vr * lim) / fr
+                over += 1
+                worst = max(worst, -20 * math.log10(env[wi]))
+        if _pass == 0:
+            first_over, first_worst = over, worst
+        if not over:
+            break
+        for wi in range(1, len(env)):                # min across the overlap
+            env[wi - 1] = min(env[wi - 1], env[wi])
+        sm = max(1, int(1.000 * SR) // hop)
+        sme = [min(env[max(0, wi - sm):wi + sm + 1]) for wi in range(len(env))]
+        for j in range(len(fx)):
+            wi = j / hop
+            k = int(wi)
+            t = wi - k
+            fx[j] *= sme[k] * (1 - t) + sme[min(k + 1, len(sme) - 1)] * t
+    # Measured again after the last correction was applied. Reporting `over`
+    # from the loop would report the state before that pass landed.
+    left, tight = 0, 99.0
+    for wi in range(len(fx) // hop):
+        i0 = wi * hop
+        vr, fr = rms(track[i0:i0 + W]), rms(fx[i0:i0 + W])
+        if vr > floor and fr > 0:
+            head = 20 * math.log10(vr / fr)
+            tight = min(tight, head)
+            if head < HEADROOM_DB:
+                left += 1
+    if first_over:
+        print(f"\n  {first_over} windows had the effects bus closer than "
+              f"{HEADROOM_DB:.0f} dB to the voice, worst {first_worst:.1f} dB "
+              f"over. Ducked over {_pass + 1} pass(es). "
+              + (f"Tightest is now {tight:.2f} dB, so the bus is under "
+                 f"`14` 8.7 everywhere" if not left
+                 else f"{left} windows remain over, tightest {tight:.2f} dB"))
+
+    for j in range(len(track)):
+        track[j] = max(-32768, min(32767, int(track[j] + fx[j])))
 
     out = os.path.join(os.path.dirname(vo), "narration_plus_sfx_LEARNING.wav")
     o = wave.open(out, "w")
@@ -282,6 +486,17 @@ def main():
     o.writeframes(struct.pack("<%dh" % len(track), *track))
     o.close()
     print(f"\nwrote {out}  ({len(track)/SR:.2f}s)")
+
+    # The effects on their own. Nobody can judge a sound design by listening for
+    # it under a voice, and the difference between "placed" and "audible" is the
+    # whole reason this rebuild happened.
+    fxout = os.path.join(os.path.dirname(vo), "effects_bus_LEARNING.wav")
+    o = wave.open(fxout, "w")
+    o.setnchannels(1); o.setsampwidth(2); o.setframerate(SR)
+    o.writeframes(struct.pack("<%dh" % len(fx),
+                              *[max(-32768, min(32767, int(v))) for v in fx]))
+    o.close()
+    print(f"wrote {fxout}  (the sound design alone, no narration)")
     print("\n  LEARNING MIX. `07` item 5.7 still forbids sound effects and 5.8 is\n"
           "  unsigned. This is not a deliverable and no master was touched.")
     # silent.mp4 predates the last re-time. The event master is rebuilt with

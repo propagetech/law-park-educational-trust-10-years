@@ -101,3 +101,8 @@ anniversary-video-production/kannada-voice/manifests/narration-generation-log.cs
 anniversary-video-production/kannada-voice/reports/audition-plan.json
 anniversary-video-production/kannada-voice/reports/audition-measurements.json
 anniversary-video-production/kannada-voice/reports/final-narration-plan.json
+
+# Python build artefacts. These were tracked before and churn on every edit
+# to a tool, which puts noise in unrelated diffs.
+__pycache__/
+*.pyc

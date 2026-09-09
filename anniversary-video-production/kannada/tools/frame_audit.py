@@ -44,11 +44,11 @@ def main():
             rowsn = (len(g["tiles"]) + cols - 1) // cols
             cw, ch = W / cols, H / rowsn
             worst, which = 0.0, ""
-            for p, box in g["tiles"]:
-                im = film.cover(film.src(p), box, aspect=cw / ch)
+            for t in g["tiles"]:
+                im = film.cover(film.src(t[0]), t[1], aspect=cw / ch)
                 s = cw / im.size[0] * z
                 if s > worst:
-                    worst, which = s, os.path.basename(p)[:34]
+                    worst, which = s, os.path.basename(t[0])[:34]
             rows.append((sid, mode, worst, 100.0, which))
         elif mode == "panel":
             pw = film.o(g.get("panel_w", 760))

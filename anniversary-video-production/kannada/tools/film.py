@@ -154,7 +154,7 @@ G = {
  "K31": dict(mode="collage", cols=3, push=(1.0, 1.03), tiles=[
              ("assets/images/timeline/2024-car-trunk-filled-with-school-bags.jpg", None),
              ("assets/images/timeline/2025-stationery-and-snacks-arranged.jpg", None),
-             ("assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg", None)]),
+             ("assets/images/timeline/2024-car-trunk-filled-with-books-and-supplies.jpg", None, 0.77)]),
  "K32": dict(mode="collage", cols=2, push=(1.0, 1.02), tiles=[
              ("assets/images/timeline/2022-library-bookshelves.jpg", None),
              ("assets/images/magazine-gallery/kids-craft.jpeg", None)]),
@@ -301,7 +301,8 @@ def enlargement(sid):
         cols = g.get("cols", len(g["tiles"]))
         rows = (len(g["tiles"]) + cols - 1) // cols
         cw, ch = W / cols, H / rows
-        v = max(cw / cover(src(p), b, aspect=cw / ch).size[0] for p, b in g["tiles"])
+        v = max(cw / cover(src(t[0]), t[1], aspect=cw / ch).size[0]
+                for t in g["tiles"])
     elif g["mode"] == "panel":
         pw = o(g.get("panel_w", 760))
         v = (W - pw) / cover(src(sh["path"]), g.get("box"),
@@ -346,6 +347,17 @@ def collage_plate(sid, g):
     """Tile several photographs edge to edge across the full frame."""
     if sid in _collage:
         return _collage[sid]
+    # Tiles carry an optional third value, a midtone gamma.
+    #
+    # K31 puts three photographs side by side and their mean luminance ran 85.7,
+    # 125.6 and 61.2, a two-to-one spread that reads as one panel being wrong
+    # rather than as three photographs of three things. The books tile is a car
+    # interior and is genuinely underexposed; a gamma lift opens its midtones
+    # without touching either end, so nothing is clipped and nothing that was
+    # not in the frame appears in it. That is grading, not retouching, and it is
+    # set per tile by hand rather than matched automatically, because deciding
+    # that a documentary photograph is too dark is a decision and not a
+    # calculation.
     tiles = g["tiles"]
     n = len(tiles)
     cols = g.get("cols", n)
@@ -355,12 +367,17 @@ def collage_plate(sid, g):
     # colour shows between tiles at either scale.
     xs = [round(i * W / cols) for i in range(cols + 1)]
     ys = [round(i * H / rows) for i in range(rows + 1)]
-    for i, (path, box) in enumerate(tiles):
+    for i, spec in enumerate(tiles):
+        path, box = spec[0], spec[1]
+        gamma = spec[2] if len(spec) > 2 else 1.0
         c, r = i % cols, i // cols
         x0, x1, y0, y1 = xs[c], xs[c + 1], ys[r], ys[r + 1]
         cw, ch = x1 - x0, y1 - y0
-        im = cover(src(path), box, aspect=cw / ch)
-        base.paste(im.resize((cw, ch), Image.LANCZOS), (x0, y0))
+        im = cover(src(path), box, aspect=cw / ch).resize((cw, ch), Image.LANCZOS)
+        if abs(gamma - 1.0) > 1e-3:
+            im = im.point([min(255, int(round(255 * (v / 255.0) ** gamma)))
+                           for v in range(256)] * 3)
+        base.paste(im, (x0, y0))
     # A hairline between tiles reads as a deliberate grid rather than as three
     # photographs that happen to touch.
     if g.get("rule", True):

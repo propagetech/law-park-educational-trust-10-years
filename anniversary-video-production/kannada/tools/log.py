@@ -58,16 +58,53 @@ ASSETS = {
    ("boom geomorphism cinematic trailer", "submority",
     "https://pixabay.com/sound-effects/"
     "boom-geomorphism-cinematic-trailer-sound-effects-123876/"),
+ # Downloaded before the licence-evidence run, so they are not in the JSON
+ # record below and their page URLs are reconstructed from the filename.
+ "universfield-cinematic-low-hit-291095.mp3":
+   ("cinematic low hit", "universfield",
+    "https://pixabay.com/sound-effects/cinematic-low-hit-291095/"),
+ "vvqne-applause-383901.mp3":
+   ("applause", "vvqne",
+    "https://pixabay.com/sound-effects/applause-383901/"),
+ "audiopapkin-riser-hit-sfx-001-289802.mp3":
+   ("riser hit sfx 001", "audiopapkin",
+    "https://pixabay.com/sound-effects/riser-hit-sfx-001-289802/"),
+ "soundreality-riser-wildfire-285209.mp3":
+   ("riser wildfire", "soundreality",
+    "https://pixabay.com/sound-effects/riser-wildfire-285209/"),
+ "dbsound-insects-birds-field-596099.mp3":
+   ("insects birds field", "dbsound",
+    "https://pixabay.com/sound-effects/insects-birds-field-596099/"),
+ "tape-echo-spring-spring-is-coming_25sec-596343.mp3":
+   ("spring is coming, 25 sec", "tape-echo",
+    "https://pixabay.com/sound-effects/spring-is-coming-25sec-596343/"),
 }
 
-# Specified in Kannada-cue-sheet.csv, not yet downloaded, so there is nothing
-# to licence yet. They are listed so the gap is visible in the rights record.
-PENDING = {
- "k21-pencil": ("pencil writing", "K21", 1.00, -20, 0.10, 0.50,
-   "https://pixabay.com/sound-effects/search/pencil%20writing/"),
- "k46-chime": ("gentle chime", "K46", 2.00, -22, 0.0, 2.50,
-   "https://pixabay.com/sound-effects/search/gentle%20chime/"),
-}
+# The rest come from the licence-evidence run's own record, so a file downloaded
+# with evidence does not also have to be typed in above. That record carries the
+# page URL the screenshot was taken from, which is better provenance than a URL
+# reconstructed from a filename.
+# EVIDENCE is the screenshot `07` item 5.9 asks for, per file. A file that has
+# one is not NOT CAPTURED, and saying so by hand in twenty-eight rows is how the
+# previous log came to disagree with the folder it describes.
+EVIDENCE = {}
+_SEL = os.path.join(os.path.dirname(os.path.abspath(__file__)), "sfx",
+                    "licence-evidence", "pixabay_sound_effects_selections.json")
+if os.path.exists(_SEL):
+    for _e in json.load(open(_SEL, encoding="utf-8")):
+        ASSETS.setdefault(_e["original_filename"],
+                          (_e["title"], _e["uploader"], _e["page_url"]))
+        if _e.get("verified_evidence_exists"):
+            EVIDENCE[_e["original_filename"]] = (
+                "sfx/licence-evidence/"
+                + os.path.basename(_e["evidence_path"]))
+
+# Cues that were specified but had nothing downloaded for them. Both are now
+# filled: K21 carries the Audiopapkin riser rather than a pencil, and K46 the
+# applause `11` section 1 sanctions for the end card rather than a chime. Kept
+# empty rather than deleted, because the next cue that gets specified before it
+# is sourced belongs here and the gap should stay visible in the rights record.
+PENDING = {}
 
 # Rebuilt every run. Everything else in the file is a person's work.
 DERIVED = {"asset_title", "uploader", "pixabay_page_url", "edit_file_name",
@@ -76,11 +113,12 @@ DERIVED = {"asset_title", "uploader", "pixabay_page_url", "edit_file_name",
            "fade_out_s", "status"}
 HUMAN = ["download_date", "licence_status_on_download_date",
          "licence_evidence_file", "approved_by", "notes"]
-COLS = ["cue_key", "status", "asset_title", "uploader", "pixabay_page_url",
+COLS = ["cue_key", "kind", "status", "asset_title", "uploader", "pixabay_page_url",
         "download_date", "licence_status_on_download_date",
         "licence_evidence_file", "edit_file_name", "shot", "timecode_in",
         "offset_s", "excerpt_in_s", "duration_s", "level_db_rel_narration",
-        "gain_db_applied", "fade_in_s", "fade_out_s", "approved_by", "notes"]
+        "gain_db_applied", "solo_dbfs", "window_s", "fade_in_s", "fade_out_s",
+        "approved_by", "notes"]
 
 LICENCE_CLASS = ("public event screening, YouTube monetised or not, social "
                  "media and website embedding, worldwide, in perpetuity. "
@@ -124,20 +162,28 @@ def main():
         title, up, url = ASSETS[f]
         dur = num(r, "dur_s")
         row = {
-            "cue_key": key, "status": "PLACED", "asset_title": title,
+            "cue_key": key, "kind": r.get("kind", "accent"),
+            "status": "PLACED", "asset_title": title,
             "uploader": up, "pixabay_page_url": url, "edit_file_name": f,
             "shot": sid, "timecode_in": tc(by[sid]["t_in"] + num(r, "offset_s")),
             "offset_s": r["offset_s"], "excerpt_in_s": r["in_s"],
             "duration_s": f"{dur:.2f}" if dur else "whole file",
             "level_db_rel_narration": r["level_rel_narr_db"],
-            "gain_db_applied": r["gain_db"], "fade_in_s": r["fade_in"],
-            "fade_out_s": r["fade_out"],
+            "gain_db_applied": r["gain_db"],
+            "solo_dbfs": r.get("solo_dbfs", ""), "window_s": r.get("win_s", ""),
+            "fade_in_s": r["fade_in"], "fade_out_s": r["fade_out"],
             "download_date": "2026-09-09",
-            "licence_status_on_download_date": "NOT CAPTURED",
-            "licence_evidence_file": "NOT CAPTURED", "approved_by": "",
-            "notes": f"{r['note']} | URL reconstructed from the filename, not "
-                     f"verified against Pixabay | licence must cover "
-                     f"{LICENCE_CLASS}",
+            "licence_status_on_download_date":
+                "Free for use under the Pixabay Content Licence"
+                if f in EVIDENCE else "NOT CAPTURED",
+            "licence_evidence_file": EVIDENCE.get(f, "NOT CAPTURED"),
+            "approved_by": "",
+            "notes": f"{r['note']} | "
+                     + ("page URL taken from the licence-evidence record"
+                        if f in EVIDENCE else
+                        "URL reconstructed from the filename, not verified "
+                        "against Pixabay")
+                     + f" | licence must cover {LICENCE_CLASS}",
         }
         row.update({c: v for c, v in kept.get(key, {}).items() if v.strip()})
         rows.append(row)

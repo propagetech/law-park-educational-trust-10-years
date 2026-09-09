@@ -1,7 +1,7 @@
 # Timeline and render tools
 
-Ten scripts. Together they rebuild the Kannada cut from the repository photographs
-and the Kannada script, with no manual step.
+Eighteen scripts. Together they rebuild the Kannada cut from the repository
+photographs and the Kannada script, with no manual step.
 
 ```bash
 python3 build_timeline.py timeline.json            # the timing table + consent register
@@ -11,6 +11,8 @@ python3 gfx.py ../05-kannada-subtitles.srt         # 133 Kannada graphics, via C
 python3 vo.py                                      # scratch narration, fitted per line
 python3 stem.py <VOICE_ID>                         # ElevenLabs lines -> one aligned WAV
 python3 sfx.py --check                             # validate sound-effect placements
+python3 sfx_voicecheck.py sfx/<file>.mp3           # screen an ambience bed for human voice
+python3 make_logo.py                               # recover the 976px logo from the purple lockup
 python3 cue.py                                     # regenerate the cinematic cue sheet
 python3 cue.py --audit-docs                        # timecodes typed into the audio docs
 python3 log.py                                     # regenerate the SFX licence log
@@ -20,11 +22,26 @@ python3 film.py silent.mp4                         # full warm cut, burned subs
 python3 film.py silent-fallback.mp4 --fallback     # Part 12 consent fallback
 python3 film.py out.mp4 --stills                   # one PNG per shot, fast
 python3 film.py out.mp4 --range 30 45              # one stretch only
+python3 wcag_audit.py                              # contrast, title safe, subtitle timing
+python3 frame_audit.py                             # enlargement and frame use per shot
+python3 rebuild_deliverables.py                    # re-mux the four deliverables
 ```
+
+`wcag_audit.py` and `frame_audit.py` are the two that answer "is this good
+enough to show". The first measures every glyph against the background it really
+sits on, checks all type is inside the 90 percent title-safe box, and checks
+subtitle reading speed; it exits non-zero on any failure. The second reports how
+hard each shot's photography is enlarged and how much of the frame is
+photograph, which are the two numbers a framing decision trades against.
 
 `--fallback` keeps the full narration timing and swaps every consent-blocked /
 Udayavani shot for a face-free still. Use it when `07` item 1.1 is unsigned;
 see `12-cursor-event-master-prompt.md` and `13-event-playback-notes.md`.
+
+**Re-render the graphics for the scale you are rendering.** `gfx/` and `gfx@2x/`
+are separate caches, and a 4K render against a stale `gfx@2x/` silently ships
+the previous version of every card. `film.py` refuses if `gfx.py` is newer than
+the manifest of the directory it is about to read.
 
 No video is committed to this repository: `.gitignore` excludes `*.mp4` and the
 other video containers. Every render below is reproducible from `timeline.json`
@@ -188,8 +205,11 @@ Offsets are measured from each shot's `t_in`, so placements survive a re-time.
 
 It refuses more than it accepts, on purpose. No placement may land in the
 silence cues `K06`, `K12`, `K27` or `K34`; `K37` and `K43` warn, and fail under
-`--strict`; the film is capped at 14 effects; and any effect that would sit less
-than 12 dB under the narration is pulled down to that ceiling. An effect with no
+`--strict`; and the effects BUS, not each effect on its own, is held 12 dB under
+the voice, measured in the window each effect occupies rather than across the
+whole film. An effect playing where there is no voice takes a stated solo level
+instead. Beds are looped with a crossfade and have the silence cues carved out
+of them with a 0.40s fade either side. An effect with no
 row in `Kannada-sfx-licence-log.csv` warns, because `07` item 5.9 makes the
 log the record of what shipped.
 
@@ -211,6 +231,48 @@ PNGs from `gfx.py`.
 
 Card-to-card transitions dip through the shared navy rather than cross-dissolving,
 because cross-dissolving two typographic cards overlays two blocks of Kannada.
+
+## wcag_audit.py
+
+Composites every graphic over its own shot at full opacity and reports the
+contrast of each run of type against the background it is really sitting on.
+Then checks that all type is inside the 90 percent title-safe box, and that
+subtitle reading speed and duration are inside the Netflix Kannada guideline.
+Exits non-zero on any failure. `--scale 2` audits the 4K set.
+
+It measures rather than reasons because a palette check missed two real
+failures: the K31 and K32 labels, which were navy type over bare photography
+after those shots went full-bleed, and the logo, three quarters of whose pixels
+are 1.04:1 against navy while the two colours anyone would check passed easily.
+
+It has to tell type from scrims and rules, which share the type's colours, so it
+classifies by shape: a scrim fills 0.86 to 0.90 of its own bounding box and
+glyphs fill 0.15 to 0.19.
+
+## frame_audit.py
+
+Per shot, how far the photography is enlarged including `push`, and how much of
+the frame is photograph. Those are the two numbers a framing decision trades
+against, and the card treatment traded them without saying so: it never enlarged
+its photograph and left up to 79.5 percent of the frame flat.
+
+## make_logo.py
+
+Keys the flat purple ground out of `logo-purple.png` and writes
+`tools/logo-hires.png` at 976x833. The repository's `logo.png` is 300x257, and
+gfx.py draws the mark at 238 CSS px, which at `--scale 2` is 476 device pixels;
+the two files are the same artwork, matching to a mean of 3.8/255 when logo.png
+is composited over that purple.
+
+## rebuild_deliverables.py
+
+Re-muxes the four deliverables onto whatever audio and picture are on disk,
+stream-copying the video, which is four minutes rather than forty. Each output
+is measured once and given a single fixed gain, because single-pass loudnorm is
+dynamic and would lift the noise floor inside K06, K12, K27 and K34. Bounded by
+`-t` from the picture's own duration and not by `-shortest`, which took the 4K
+master to 350.88s and lost its whole end card, because a subtitle stream ends at
+its last cue.
 
 ## vo.py
 

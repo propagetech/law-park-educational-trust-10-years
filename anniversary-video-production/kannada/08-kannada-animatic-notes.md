@@ -126,7 +126,7 @@ Watch it once through without stopping. Then these ten moments.
 cd anniversary-video-production/kannada/tools
 python3 build_timeline.py timeline.json          # timing + consent register
 python3 make_srt.py timeline.json ../05-kannada-subtitles.srt
-python3 gfx.py ../05-kannada-subtitles.srt       # 133 Kannada graphics, via Chrome
+python3 gfx.py ../05-kannada-subtitles.srt       # 138 Kannada graphics, via Chrome
 python3 vo.py                                    # scratch narration, fitted per line
 python3 film.py silent.mp4                       # 7,596 frames, ~3.5 min
 ```

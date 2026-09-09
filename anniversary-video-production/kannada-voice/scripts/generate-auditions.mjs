@@ -126,7 +126,7 @@ try {
     modelId,
     voices: voices.map((v) => ({ voice_id: v.voice_id, name: v.name })),
     texts: jobs.map((j) => j.passage.text),
-    dryRun,
+    dryRun, outputFormat,
     allowNoncommercial: flag("--allow-noncommercial"),
     allowMissingVoices: flag("--allow-missing-voices"),
   });

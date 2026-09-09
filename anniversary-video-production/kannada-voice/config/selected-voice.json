@@ -1,36 +1,29 @@
 {
-  "_status": "TEMPLATE, NOT YET DECIDED",
-  "_comment": [
-    "generate-final-narration.mjs refuses to run while voice_id is null.",
-    "Fill this in only after a human has listened to the auditions and two",
-    "Kannada-native listeners have signed off on the proper nouns.",
-    "",
-    "Nothing in this pipeline can hear audio, so nothing in this pipeline is",
-    "entitled to fill this file in."
-  ],
-  "voice_id": null,
-  "voice_name": null,
+  "_status": "SELECTED BY THE CLIENT AFTER LISTENING. CAVEATS ON THE RECORD BELOW.",
+  "voice_id": "EXAVITQu4vr4xnSDxMaL",
+  "voice_name": "Sarah - Mature, Reassuring, Confident",
   "model_id": "eleven_v3",
-  "chosen_take": null,
-  "stability_band": null,
-  "similarity_boost": null,
-  "decided_by": null,
-  "decided_on": null,
-  "trustee_approval": {
-    "opening_30s_sample_approved": false,
-    "approved_by": null,
-    "approved_on": null,
-    "_note": "02 section 7 and 14 item 7.1. The 30 second opening test must be approved before the full read is generated."
-  },
-  "kannada_native_review": {
-    "reviewer_1": null,
-    "reviewer_2": null,
-    "proper_nouns_confirmed": false,
-    "_note": "14 item 7.1 requires a native Kannada speaker who is not the translator. A synthesised read does not discharge it."
+  "chosen_take": "a",
+  "stability_band": "natural",
+  "similarity_boost": 0.75,
+  "decided_by": "Chetan, after hearing the film passage (K12, K25, K27, K45)",
+  "decided_on": "2026-09-09",
+  "what_was_heard": "23.4s of eleven_v3 at stability natural, similarity_boost 0.75, on the four decisive lines. See audition-audio/DIAGNOSTIC-v3-reachability- premade-sarah-NOT-AN-AUDITION.mp3.",
+  "caveats_on_the_record": [
+    "This is an English premade voice. Its verified_languages carries no Kannada entry, so the Kannada is unverified by ElevenLabs.",
+    "The brief's 'must not sound like' list includes 'an English speaker reading Kannada phonetically'. This voice is that case, and was chosen anyway on the strength of the listening test.",
+    "labels.age reads 'young'. The brief asks for an age impression of 35 to 50.",
+    "Being premade is why it works here at all: a free plan is refused Voice Library voices via the API with HTTP 402."
+  ],
+  "outstanding": {
+    "commercial_licence": "NOT RESOLVED. The plan is free and carries no commercial licence, so audio generated now is a non-commercial draft. Upgrade and regenerate before the film is screened or published. 14 item 5.2.",
+    "native_kannada_review": "NOT DONE. 14 item 7.1 needs a native Kannada speaker who is not the translator. Give them reports/pronunciation-and-pickups.md.",
+    "trustee_approval": "NOT DONE. 02 section 7 wants trustee sign-off on an opening sample.",
+    "credits_disclosure": "One line in the end credits stating the narration is synthesised. 09 section 8 point 4 recommends it."
   },
   "fallback": {
     "voice_id": null,
     "voice_name": null,
-    "why": null
+    "why": "An Instant Voice Clone of a real Kannada speaker remains the only route where the Kannada is verified by construction. 09 section 2, 05 rank 5."
   }
 }

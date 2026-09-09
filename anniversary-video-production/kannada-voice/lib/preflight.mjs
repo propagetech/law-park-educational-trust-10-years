@@ -20,7 +20,8 @@
  * as the music and photo consents already tracked in `14`.
  */
 
-import { subscription, listVoices, isKannadaCapable, KANNADA_MODELS } from "./eleven.mjs";
+import { subscription, listVoices, isKannadaCapable, KANNADA_MODELS,
+         formatAllowedForTier } from "./eleven.mjs";
 import { hasKey, keySource } from "./key.mjs";
 import { assertYearMapMatchesPython, assertNoStrayTags, speakText } from "./speak-text.mjs";
 
@@ -41,7 +42,7 @@ export class PreflightError extends Error {}
  * @param {boolean} o.allowMissingVoices  proceed though a voice is not in the account
  */
 export async function preflight({
-  modelId, voices, texts, dryRun = false,
+  modelId, voices, texts, dryRun = false, outputFormat,
   allowNoncommercial = false, allowMissingVoices = false,
 }) {
   const notes = [];
@@ -116,6 +117,16 @@ export async function preflight({
     }
   }
 
+  // 5b. The output format must be permitted by the plan. Checked here because
+  //     a format the plan disallows fails on every request with a 403 that
+  //     reads like a rejected key.
+  if (outputFormat && sub) {
+    const fmt = formatAllowedForTier(outputFormat, sub.tier);
+    if (!fmt.allowed) blockers.push(fmt.why);
+    else notes.push(`output format ${outputFormat} allowed on ${sub.tier}` +
+      (fmt.why ? ` (${fmt.why})` : ""));
+  }
+
   // 6. Every voice must be in the account. Library voices are not usable
   //    until added, and adding one is an account change.
   let account = [];
@@ -145,6 +156,7 @@ export async function preflight({
     notes,
     characters,
     subscription: sub,
+    outputFormat,
     accountVoiceCount: account.length,
     missingVoices: missing,
   };

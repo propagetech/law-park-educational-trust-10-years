@@ -11,20 +11,20 @@ beside exactly what the API will be sent in
 
 ---
 
-## 1 · The brief's checklist does not match the film
+## 1 · The brief's checklist against the film, corrected
 
-The voice brief lists words to check that the narration never speaks. They are
-on-screen text and lower thirds, not narration, so a voice can pass the brief's
-stress test and still fail the film.
+An earlier version of this document said the trust's own name and the eastern
+place names were not narrated. **That was wrong.** It came from searching for
+the Latin string "Law Park" when the script writes the name in Kannada script as
+ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್. Corrected below and checked in Kannada script
+throughout.
 
 | In the brief's checklist | In the narrated script? |
 |---|---|
-| ಸ್ಕಾಲರ್‌ಶಿಪ್ | no. The narration says ವಿದ್ಯಾರ್ಥಿವೇತನ |
-| ಹೆಚ್. ಡಿ. ಕೋಟೆ | no. On-screen only |
-| ಎಂ. ಎಂ. ಹಿಲ್ಸ್ | no. On-screen only |
-| ಉದಯವಾಣಿ | no. It is a visual clipping moment |
-| ಮುಳಬಾಗಿಲು | no |
-| Law Park Educational Trust | no, not in the 43 narrated lines |
+| Law Park Educational Trust | **yes.** Full name in **K07** and **K45**; ಟ್ರಸ್ಟ್ alone in K05 K08 K17 K27 K35 K41 |
+| ಹೆಚ್. ಡಿ. ಕೋಟೆ | **yes**, written ಎಚ್.ಡಿ. ಕೋಟೆ in **K20** and **K23** |
+| ಎಂ. ಎಂ. ಹಿಲ್ಸ್ | **yes**, written ಎಂ.ಎಂ. ಹಿಲ್ಸ್ in **K22** |
+| ಮೈಸೂರು | **yes**, K20 |
 | ಚಿಕ್ಕಬಳ್ಳಾಪುರ | **yes**, K12 |
 | ವಿದ್ಯಾರ್ಥಿವೇತನ | **yes**, K12 K14 K31 K36 |
 | ಗ್ರಂಥಾಲಯ | **yes**, K18 K32 K43 |
@@ -33,12 +33,28 @@ stress test and still fail the film.
 | ಎಸ್. ಎಂ. ಮಂಜುನಾಥ | **yes**, K09 |
 | ಸಾದೇನಹಳ್ಳಿ | **yes**, K09 |
 | ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ | **yes**, K37 |
+| ಸ್ಕಾಲರ್‌ಶಿಪ್ | no. The narration uses ವಿದ್ಯಾರ್ಥಿವೇತನ throughout |
+| ಉದಯವಾಣಿ | no. It is a visual clipping moment, not narration |
+| ಮುಳಬಾಗಿಲು | no |
 
-Three words that decide this film are missing from the brief's list entirely:
-**ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ** (K25), **ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು** (K27) and **ಸಂಭ್ರಮ** (K45).
+So the brief's checklist is mostly right, and **the trust's own name is the most
+important proper noun in the film**: it carries the welcome line, K45, which is
+the last thing the audience hears.
+
+Note how the initialisms are actually written, because it changes what the voice
+is being asked to do: ಎಚ್.ಡಿ. and ಎಂ.ಎಂ. are set with no space after the first
+full stop, while ಎಂ. ಆರ್. and ಎಸ್. ಎಂ. are spaced. v3 reads punctuation, so the
+two forms may be delivered differently. Check both.
+
+### Three words the brief misses entirely
+
+**ಮುಖ್ಯೋಪಾಧ್ಯಾಯರೋ** (K25), **ಎಪ್ಪತ್ತೈದರಷ್ಟನ್ನು** (K27) and **ಸಂಭ್ರಮ** (K45) are
+absent from the brief's stress test, and they are the three that actually decide
+a Kannada voice on this script.
 
 That is why `--passages film` exists. It is built live from K12, K25, K27 and
-K45, and it is the passage that predicts the read.
+K45, so it covers the two automatic-fail lines, the hardest word in the script,
+and the trust name in the welcome line. It is the passage that predicts the read.
 
 ## 2 · The words that break a Kannada voice
 
@@ -54,6 +70,9 @@ K45, and it is the passage that predicts the read.
 | ಭಾರತ್ ಶಿಕ್ಷಾ ರತ್ನ ಪ್ರಶಸ್ತಿ | K37 | An award title rushed. It has to be audible and unhurried |
 | ಸಾದೇನಹಳ್ಳಿ | K09 | The ಳ್ಳಿ ending |
 | ಚಾರುಲತಾ ಎಂ. ಆರ್. | K08 | The initials read as a word instead of letters |
+| ಲಾ ಪಾರ್ಕ್ ಎಜುಕೇಷನಲ್ ಟ್ರಸ್ಟ್ | K07 K45 | Over-Indianised, or spelled out as Kannada letters. It should sound like the English name inside a Kannada sentence. K45 is the welcome line and the last thing the audience hears |
+| ಎಚ್.ಡಿ. ಕೋಟೆ | K20 K23 | Read as a word rather than the letters H D, then ಕೋಟೆ |
+| ಎಂ.ಎಂ. ಹಿಲ್ಸ್ | K22 | Same, plus the English "Hills" and its non-joiner |
 
 ## 3 · Years
 

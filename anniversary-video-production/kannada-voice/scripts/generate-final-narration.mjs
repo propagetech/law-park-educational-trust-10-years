@@ -172,7 +172,7 @@ try {
     modelId,
     voices: [{ voice_id: voiceId, name: voiceName }],
     texts: jobs.map((j) => j.line.text),
-    dryRun,
+    dryRun, outputFormat,
     allowNoncommercial: flag("--allow-noncommercial"),
     allowMissingVoices: flag("--allow-missing-voices"),
   });
@@ -326,9 +326,13 @@ for (const j of jobs) {
   }
 }
 
-fs.writeFileSync(durPath, JSON.stringify(durations, null, 1) + "\n");
+// An empty durations.json is worse than none: build_timeline.py --from-audio
+// would read it and re-time the film to nothing.
+if (Object.keys(durations).length) {
+  fs.writeFileSync(durPath, JSON.stringify(durations, null, 1) + "\n");
+}
 
-if (alsoVoEleven) {
+if (alsoVoEleven && Object.keys(durations).length) {
   const dst = path.join(VO_ELEVEN, voiceId);
   fs.mkdirSync(dst, { recursive: true });
   for (const j of jobs) {

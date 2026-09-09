@@ -68,11 +68,44 @@ export function isKannadaCapable(modelId) {
  * mp3_44100_192 needs Creator or above; PCM/WAV at 44.1k needs Pro.
  * 128 works on every paid tier and is transparent enough for an audition.
  */
+/** Plan tiers, cheapest first, for gating output formats. */
+export const TIER_ORDER = [
+  "free", "starter", "creator", "pro", "scale", "business", "enterprise",
+];
+
 export const OUTPUT_FORMATS = {
-  "mp3_44100_128": { ext: "mp3", tier: "any paid", note: "audition default" },
-  "mp3_44100_192": { ext: "mp3", tier: "Creator+", note: "final default" },
-  "pcm_44100": { ext: "pcm", tier: "Pro+", note: "raw, needs a WAV header" },
+  "mp3_44100_128": { ext: "mp3", minTier: "free", note: "works on every plan" },
+  "mp3_44100_192": { ext: "mp3", minTier: "creator", note: "best mp3, Creator and above" },
+  "pcm_44100": { ext: "pcm", minTier: "pro", note: "raw, needs a WAV header" },
 };
+
+/**
+ * Whether a plan may request this output format.
+ *
+ * Worth checking before a run rather than after: asking for
+ * mp3_44100_192 on a free plan returns 403 output_format_not_allowed on every
+ * single request, which looks exactly like a rejected API key and costs a
+ * whole run to diagnose.
+ */
+export function formatAllowedForTier(format, tier) {
+  const f = OUTPUT_FORMATS[format];
+  if (!f) return { allowed: false, why: `unknown output format "${format}"` };
+  if (!tier) return { allowed: true, why: "plan tier unknown, not checked" };
+  const have = TIER_ORDER.indexOf(String(tier).toLowerCase());
+  const need = TIER_ORDER.indexOf(f.minTier);
+  if (have < 0) return { allowed: true, why: `unrecognised tier "${tier}", not checked` };
+  if (have >= need) return { allowed: true, why: "" };
+  const fallback = Object.entries(OUTPUT_FORMATS)
+    .filter(([, v]) => TIER_ORDER.indexOf(v.minTier) <= have)
+    .map(([k]) => k);
+  return {
+    allowed: false,
+    why: `output format ${format} needs the ${f.minTier} tier or above and ` +
+         `this plan is ${tier}.\n      Usable on this plan: ` +
+         `${fallback.join(", ") || "none"}.\n      Pass --output-format ` +
+         `${fallback[0] ?? "mp3_44100_128"}, or upgrade.`,
+  };
+}
 
 /** Nearest of the three v3 stability points, and the band's name. */
 function snapStability(value) {
@@ -214,6 +247,14 @@ async function call(pathname, { method = "GET", body, query, accept } = {}, labe
     const detail = (await res.text().catch(() => "")).slice(0, 600);
 
     if (res.status === 401 || res.status === 403) {
+      // A 403 carrying output_format_not_allowed or subscription_required is
+      // the plan refusing a feature, not a bad key. Saying "the key was
+      // rejected" for those sends you off checking the wrong thing.
+      if (/output_format_not_allowed|subscription_required/.test(detail)) {
+        throw new Error(
+          `${res.status} on ${label || pathname}: the plan will not allow this ` +
+          `request. This is NOT a key problem.\n  ${detail}`);
+      }
       throw new Error(
         `${res.status}: the API key was rejected or lacks permission. ` +
         `Check the key in ELEVENLABS_API_KEY or ~/.elevenlabs_key. ${detail}`);

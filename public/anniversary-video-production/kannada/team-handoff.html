@@ -770,7 +770,7 @@ a.btn:hover { text-decoration: none; }
       <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved twice, 00:05:36:01 to 00:05:37:22 to <span class="mono">00:05:57:22</span>, and hand-typed timecodes went stale within the hour.</p>
     </div>
 
-    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(min(25rem,100%),1fr))">
+    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(min(25rem,100%),1fr));align-items:start">
       <div class="card">
         <h3>Download</h3>
       <div class="res-group">
@@ -859,34 +859,13 @@ a.btn:hover { text-decoration: none; }
       </div>
 
       <div class="card">
-        <h3>What is deliberately not here</h3>
-        <p style="margin:0 0 0.8rem;font-size:0.95rem">No video, no audio and no rendered graphic is in the pack. All of it is reproducible from <code>timeline.json</code> plus the photographs, so shipping it would only guarantee that someone edits a stale copy. The reference cut streams from YouTube for watching, not for cutting.</p>
-        <div class="table-wrap">
-          <table style="font-size:0.86rem">
-            <thead><tr><th scope="col">Missing</th><th scope="col">Rebuild it with</th></tr></thead>
-            <tbody>
-              <tr><td>Every <code>.mp4</code></td><td><code>python3 film.py</code>, then <code>master.py</code></td></tr>
-              <tr><td><code>tools/gfx/</code>, the cards</td><td><code>python3 gfx.py ../05-kannada-subtitles.srt --scale 2</code></td></tr>
-              <tr><td><code>tools/stills/</code>, the crops</td><td><code>python3 film.py</code> makes them on the way through</td></tr>
-              <tr><td>The narration <code>.wav</code></td><td><code>python3 stem.py &lt;VOICE_ID&gt;</code></td></tr>
-              <tr><td>Stems, masters, previews</td><td><code>python3 mix.py --calibrate</code></td></tr>
-              <tr><td>The effect <code>.mp3</code> files</td><td>Download from the URLs in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-sfx-licence-log.csv">the licence log</a>, into <code>tools/sfx/</code></td></tr>
-              <tr><td>The music bed</td><td><strong>Does not exist.</strong> See <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-music-map.md">the music map</a>, section 6</td></tr>
-            </tbody>
-          </table>
-        </div>
-        <h3 style="margin-top:1.25rem">Rebuild the whole film</h3>
-        <p style="margin:0 0 0.6rem;font-size:0.95rem">About 13 minutes on a recent laptop. Needs Python 3, ffmpeg and Playwright.</p>
-        <pre style="margin:0;overflow-x:auto;background:#1c1c2e;color:#e8e6e1;padding:0.9rem 1rem;border-radius:8px;font-size:0.82rem;line-height:1.6"><code>cd anniversary-video-production/kannada/tools
-
-python3 gfx.py ../05-kannada-subtitles.srt --scale 2
-python3 film.py silent.mp4
-python3 stem.py &lt;VOICE_ID&gt;
-python3 sfx.py --strict
-python3 mix.py --calibrate
-python3 master.py            # 4K review master
-python3 master.py --check    # what still blocks a release</code></pre>
-        <p style="margin:0.8rem 0 0;font-size:0.9rem;color:var(--muted)"><code>master.py --release</code> is the only path to a publishable file, and it refuses to run while any of the five gates is open.</p>
+        <h3>Two things nobody has, whichever way you build</h3>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem">The pack is documents, scripts and photographs. It carries no rendered video or audio, because the reference cut is on YouTube for watching and everything else is yours to make. These two gaps are not ours to close, and they constrain any version of the film, cut our way or yours.</p>
+        <ul style="margin:0 0 0.9rem">
+          <li><strong>There is no music.</strong> No licence has been cleared, and clearing one is BLOCKING under <code>14</code> item 5.1. <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-music-map.md">The music map</a> carries the palette, the motif and the composer brief if you want to commission it.</li>
+          <li><strong>The sound effects are not in the pack.</strong> Each one has to be downloaded from the source in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-sfx-licence-log.csv">the licence log</a>, which is also the record of what was licensed and how. Two of the fourteen in the reference cut are still placeholders.</li>
+        </ul>
+        <p style="margin:0;font-size:0.92rem;color:var(--muted)">If you do want to rebuild the reference cut rather than start over, the exact commands, the runtime and what each script does are in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/00-creative-team-read-me-first.md">00 read me first</a>, section 4, and <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/tools-README.md">tools/README.md</a>. Neither is required reading.</p>
       </div>
     </div>
   </div>

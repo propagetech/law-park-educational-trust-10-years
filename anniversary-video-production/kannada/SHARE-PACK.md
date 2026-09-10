@@ -2,7 +2,7 @@
 
 ## Open this first
 
-**[`team-handoff.html`](team-handoff.html)** . One page for the NGO owner, director, narrator, designer and producer.
+**[The hand-off page](https://journey.lawparkeducationaltrust.org/anniversary-video-production/kannada/team-handoff)** . One page for the NGO owner, director, narrator, designer and producer. It is the live page, not a file in this pack: the pack is what the page hands out, so there is only ever one copy of it to keep current.
 
 It includes the animatic player with Kannada subtitles, role briefs, the trustee decision checklist with owner and date fields, the full shot list with per-shot consent status, the end-roll name gate, design tokens, and links to every document in the pack.
 
@@ -57,44 +57,36 @@ not (largest source still is 1920x1446). The reason to deliver 4K is that YouTub
 gives a 2160p upload a better codec and bitrate, so even 1080p viewers see a
 cleaner picture. Details in `08-kannada-animatic-notes.md` section 9.
 
-## Size warning: read before you attach anything
+## Do not hand-zip this any more
 
-The animatic is **105 MB**, so a full zip lands at about **110 MB**. That is over the limit almost everywhere:
+The pack is published as a **GitHub release** and the hand-off page links to it.
+Nobody assembles a zip by hand, nobody attaches 110 MB to an email, and nobody
+is given the repository.
 
-| Channel | Limit |
-|---|---|
-| Gmail | 25 MB |
-| Outlook / Microsoft 365 | 20 MB |
-| WhatsApp (document) | about 100 MB |
-| Google Drive / WeTransfer / shared folder | fine |
+**The release:** `film-pack` on
+`propagetech/law-park-educational-trust-10-years`. It carries
+`kannada-film-pack.zip` (11 MB: every document, the build scripts,
+`timeline.json` and all 34 source photographs), `kannada-photographs.zip`
+(9.9 MB), and each document again as its own file so that every link on the
+hand-off page resolves to one download.
 
-Send the pack on Drive, WeTransfer or a shared folder. If you must email it, zip **without** the MP4 and share the animatic separately as an unlisted upload.
-
-## Make a zip for external creatives
-
-From the **repository root**:
+**To rebuild and re-upload it** after any document or tool changes:
 
 ```bash
-zip -r LPET-kannada-film-handoff.zip \
-  anniversary-video-production/kannada \
-  anniversary-video-research \
-  assets/images/timeline \
-  -x "*.DS_Store" \
-  -x "anniversary-video-production/kannada/tools/vo_eleven/*" \
-  -x "anniversary-video-production/kannada/tools/__pycache__/*"
+bash scripts/build-asset-drop.sh     # stages .asset-drop/, prints the upload command
 ```
 
-To exclude the animatic for an email-sized zip, add:
+The filenames never change, so every link on the hand-off page keeps working and
+the site does not need a redeploy. `build-asset-drop.sh` refuses to run if two
+files ever share a basename, because release assets are flat.
 
-```bash
-  -x "anniversary-video-production/kannada/08-kannada-animatic-preview.mp4"
-```
+**What the site serves:** `team-handoff.html` and its favicon, and nothing else.
+`scripts/sync-kannada-handoff.sh` copies only those two and fails the build if
+the page has picked up a relative asset link, which would 404 in production.
 
-Then tell recipients:
-
-> Open `anniversary-video-production/kannada/team-handoff.html` in a browser.
-
-Recipients must **unzip first**. Opening the page from inside a zip viewer breaks the relative links and the subtitle track. The review video streams from YouTube, so it needs a network connection rather than the zip.
+**Send one link, not a zip:** the hand-off page. It is the only door. The
+reference cut streams into it from YouTube and every file downloads from it out
+of the release, with no account, invitation or repository access.
 
 ## Do not include
 

@@ -392,10 +392,10 @@ def _positional(argv, valued=("--scale",)):
     return out
 
 _pos = _positional(sys.argv[1:])
+# Default to the subtitle file next door, so the pack rebuilds wherever it is unzipped.
+_HERE = os.path.dirname(os.path.abspath(__file__))
 SRT = load_srt(_pos[0] if _pos
-               else "../../../../../../Users/chetan/Downloads/jeevitha/"
-                    "law-park-educational-trust-10-years/anniversary-video-production/"
-                    "kannada/05-kannada-subtitles.srt")
+               else os.path.join(_HERE, "..", "05-kannada-subtitles.srt"))
 for i, c in enumerate(SRT):
     CARDS[f"SUB_{i:03d}"] = sub_html(c["lines"])
 json.dump(SRT, open("subs.json", "w"), ensure_ascii=False)

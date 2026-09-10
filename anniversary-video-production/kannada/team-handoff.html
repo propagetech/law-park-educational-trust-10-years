@@ -419,6 +419,21 @@ footer strong { color: var(--gold); }
 .res-list a strong { display: block; color: var(--navy); font-weight: 600; }
 .res-list a span { color: var(--muted); font-size: 0.82rem; }
 
+/* The asset drop: the one block on the page that hands the whole pack over. */
+.drop { border: 2px solid var(--gold-dim); background: #fffdf7; }
+.drop h3 { margin-top: 0; }
+.drop-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; margin: 1.1rem 0 0.9rem; }
+a.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  text-decoration: none; line-height: 1.2; text-align: center;
+}
+a.btn:hover { text-decoration: none; }
+.drop-note { font-size: 0.88rem; color: var(--muted); margin: 0; }
+
+/* Section 12 prints URLs as their own link text. Let them break rather
+   than set the width of the document on a phone. */
+#share p a, #share p strong { overflow-wrap: anywhere; }
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
@@ -468,6 +483,7 @@ footer strong { color: var(--gold); }
       <a href="#script">Script</a>
       <a href="#design">Design</a>
       <a href="#docs">Files</a>
+      <a href="#assets-index">All files</a>
       <a href="#credits">Credits</a>
       <a href="#share">Share</a>
     </nav>
@@ -490,7 +506,9 @@ footer strong { color: var(--gold); }
       <strong>Status:</strong> Full ElevenLabs Kannada narration is cut in and the picture is re-timed to it.
       Cast and record a live Kannada narrator. Do not ship the scratch track.
       Nothing is cleared for public screening until the consent and rights items in
-      <a href="#decisions" style="color:var(--gold)">section 04, Decisions and clearances</a>, are done.
+      <a href="#decisions" style="color:var(--gold)">section 06, Decisions and clearances</a>, are done.
+      The cut in the player is a <strong>reference, not a final render</strong>. The creative team takes the
+      whole pack from <a href="#resources" style="color:var(--gold)">section 03</a> and is free to re-plan the film.
     </div>
   </div>
 </header>
@@ -505,18 +523,19 @@ footer strong { color: var(--gold); }
       <h3>This is a reference cut, not the final render</h3>
       <p>The video below exists so that pacing, shot order, on-screen Kannada and the placement of sound can be judged. It is <strong>not</strong> a finished film and it is not what anybody should publish, re-post or hand to a printer, a sponsor or a news desk.</p>
       <p>What is temporary in it: the narration is a synthetic ElevenLabs read and not a human Kannada voice; there is <strong>no music at all</strong>, because no licence has been cleared; the 14 sound effects are an audition sitting under an unsigned Trust decision (<code>07</code> item 5.8); and two of them are placeholder files that have to be replaced. The picture uses the consent fallback, so several photographs are stand-ins.</p>
-      <p><strong>Creative team:</strong> everything needed to re-cut or re-grade it is in <a href="#resources">section 03, Resources</a>. Do not work from the YouTube stream. <strong>Trustees:</strong> your notes go in <a href="#feedback">section 02, Feedback</a>.</p>
+      <p><strong>Creative team:</strong> this cut is one reading of the brief, and you are not being asked to accept it. If it is not the film you would make, take the whole pack from <a href="#resources">section 03, Resources</a>, which is a single download, and plan and build your own version. The script, the facts, the brief and the consent status are the only things that carry over. Do not cut from the YouTube stream: it is a re-compression of a re-compression.</p>
+      <p><strong>Trustees:</strong> your notes go in <a href="#feedback">section 02, Feedback</a>.</p>
     </div>
     <div class="player">
       <iframe
-        src="https://www.youtube-nocookie.com/embed/I6iZCH88RYU?rel=0&amp;modestbranding=1"
-        title="Kannada 1080p picture and SFX preview, scratch narration"
+        src="https://www.youtube-nocookie.com/embed/IQMH4r-9tcs?rel=0&amp;modestbranding=1"
+        title="V3 Kannada 2160p review cut, reference only, synthetic narration"
         loading="lazy" allowfullscreen
         referrerpolicy="strict-origin-when-cross-origin"
         allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe>
     </div>
-    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>, which is <code>08-kannada-sfx-learning-mix.mp4</code>: 1920x1080, 00:05:57:22, ElevenLabs narration plus the 14-cue effects pack, at -16 LUFS. Streaming it keeps the render out of this repository, so no MP4 is committed. Rebuild it locally with <code>tools/film.py</code> and <code>tools/sfx.py</code>, or the 4K equivalent with <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
-    <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
+    <p class="player-note"><strong>Source:</strong> <a href="https://youtu.be/IQMH4r-9tcs">youtu.be/IQMH4r-9tcs</a>, titled <em>V3 Kannada 2160p review</em>, which is <code>kannada-2160p-review.mp4</code>: 3840x2160, 00:05:57:22, ElevenLabs narration plus the effects pack, at -14.4 LUFS, with a soft Kannada subtitle track. It supersedes the earlier 1080p SFX cut, which has been retired from this page so that nobody gives notes on a stale picture. Streaming it keeps the render out of the repository, so no MP4 is committed anywhere. Rebuild it from the pack with <code>tools/film.py</code>, <code>tools/sfx.py</code> and <code>tools/master.py</code>. Three intentional silences: cold open <strong>K01</strong>, founder quote <strong>K06</strong> (6s, no voice), end card <strong>K46</strong>.</p>
+    <p class="player-note"><strong>Captions:</strong> this cut has no burned-in subtitles. Turn on the Kannada captions with the CC button, or read them from <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.srt"><code>05-kannada-subtitles.srt</code></a>. If the captions have not been attached to the upload yet, that file is what to upload as the caption track.</p>
     <p class="player-note"><strong>If the player is blank</strong>, the video visibility has been changed to Private, which blocks embedding for everyone except explicitly named accounts. Set it to Unlisted to make this page work again, or ask the owner of the upload for access.</p>
   </div>
 </section>
@@ -719,87 +738,129 @@ footer strong { color: var(--gold); }
   <div class="wrap">
     <p class="sec-kicker">03 &middot; Resources</p>
     <h2>Everything the creative team needs to re-cut this</h2>
-    <p class="sec-lead">The video is a reference. These files are the source. Anyone re-cutting, re-grading, re-scoring or re-subtitling the film should work from this list and never from the YouTube stream, which is a 1080p H.264 re-compression of a re-compression.</p>
+    <p class="sec-lead">The video is a reference. These files are the source. Anyone re-cutting, re-grading, re-scoring, re-subtitling or completely re-planning the film works from here and never from the YouTube stream, which is a re-compression of a re-compression.</p>
+
+    <div class="card drop">
+      <h3>Take the whole pack. One download, and no repository access.</h3>
+      <p style="margin:0 0 0.2rem">Every document, every build script, the subtitle files, the timing source of truth and all 34 source photographs, in one archive. It is published as a release on GitHub rather than served from this site, so the link goes to <code>github.com</code> and downloads a file. You are not being given the website code, and you do not need it.</p>
+      <div class="drop-actions">
+        <a class="btn gold" href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-film-pack.zip">Download the complete pack (11 MB)</a>
+        <a class="btn ghost" href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-photographs.zip">Photographs only (9.9 MB)</a>
+        <a class="btn ghost" href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/00-creative-team-read-me-first.md">Read me first</a>
+      </div>
+      <p class="drop-note">Unzip anywhere. Keep the folder layout inside the archive as it is: the build scripts work out where they are sitting, and every photograph path in <code>timeline.json</code> is relative to the top of the archive. Start with <code>READ-ME-FIRST.md</code>.</p>
+    </div>
+
+    <div class="notice block">
+      <h3>If this is not the film you would make, make yours instead</h3>
+      <p>The cut in <a href="#watch">section 01</a> is a <strong>reference, not a final render</strong>, and it is not being put to you for approval. It exists so that pacing, shot order, on-screen Kannada and the placement of sound are arguable rather than abstract. If your plan for the film is a different one, take the pack above and build it your way. Nobody has to justify discarding the reference cut.</p>
+      <p><strong>Four things carry over into any version, and only these four:</strong></p>
+      <ul style="margin:0 0 0.5rem">
+        <li><strong>The facts.</strong> <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-source-of-truth.md">01 source of truth</a> and <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-evidence-table.csv">02 evidence table</a> back every claim. Nothing goes on screen that is not in there.</li>
+        <li><strong>The words.</strong> <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-kannada-final-script.md">01 final script</a> is the approved Kannada narration and <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-kannada-onscreen-text.md">04 on-screen text</a> is every string as it appears. Changing either needs trustee sign-off.</li>
+        <li><strong>The brief.</strong> <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-bilingual-creative-brief.md">07 creative brief</a> carries tone, typography and the words that are never used.</li>
+        <li><strong>Consent.</strong> <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-media-inventory.csv">04 media inventory</a> gives the status of every photograph. A still marked blocked stays out of every cut, including yours.</li>
+      </ul>
+      <p>Structure, shot order, graphics language, grade and sound are yours to redesign inside those four.</p>
+    </div>
 
     <div class="notice">
       <h3>Start with three files</h3>
-      <p><a href="tools/timeline.json"><code>tools/timeline.json</code></a> is the timing source of truth: 46 shots with in and out points, durations, narration, holds, pauses, crop windows, motion, transitions, consent status and the music cue for every one. Every other document and every render is derived from it. <a href="06-kannada-edit-decision-list.md"><code>06</code></a> is the same thing as a plain-text EDL so the film can be rebuilt in five years without a project file. <a href="Kannada-cue-sheet.csv"><code>Kannada-cue-sheet.csv</code></a> is the audio.</p>
+      <p><a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/timeline.json"><code>tools/timeline.json</code></a> is the timing source of truth: 46 shots with in and out points, durations, narration, holds, pauses, crop windows, motion, transitions, consent status and the music cue for every one. Every other document and every render is derived from it. <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-kannada-edit-decision-list.md"><code>06</code></a> is the same thing as a plain-text EDL so the film can be rebuilt in five years without a project file. <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-cue-sheet.csv"><code>Kannada-cue-sheet.csv</code></a> is the audio.</p>
       <p><strong>If you re-time anything, re-derive rather than re-type.</strong> Run <code>python3 cue.py</code> and <code>python3 cue.py --audit-docs</code> afterwards. The film has already moved twice, 00:05:36:01 to 00:05:37:22 to <span class="mono">00:05:57:22</span>, and hand-typed timecodes went stale within the hour.</p>
     </div>
 
-    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(25rem,1fr))">
+    <div class="grid grid-2" style="grid-template-columns:repeat(auto-fit,minmax(min(25rem,100%),1fr))">
       <div class="card">
         <h3>Download</h3>
       <div class="res-group">
+        <h4>Start here</h4>
+        <div class="res-list">
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-film-pack.zip"><strong>kannada-film-pack.zip</strong><span>The complete pack, 11 MB</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/00-creative-team-read-me-first.md"><strong>00 &middot; Read me first</strong><span>What is reference, what is fixed, how to rebuild</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-photographs.zip"><strong>kannada-photographs.zip</strong><span>All 34 source stills the cut uses</span></a>
+        </div>
+      </div>
+      <div class="res-group">
         <h4>Timing and structure</h4>
         <div class="res-list">
-          <a href="tools/timeline.json" download><strong>tools/timeline.json</strong><span>46 shots, the timing source of truth</span></a>
-          <a href="06-kannada-edit-decision-list.md"><strong>06 &middot; Edit decision list</strong><span>The cut as plain text, plus the grade notes</span></a>
-          <a href="03-kannada-storyboard.md"><strong>03 &middot; Storyboard</strong><span>Crop windows, motion and per-shot direction</span></a>
-          <a href="tools/subs.json" download><strong>tools/subs.json</strong><span>Subtitle cue data, derived</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/timeline.json" download><strong>tools/timeline.json</strong><span>46 shots, the timing source of truth</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-kannada-edit-decision-list.md"><strong>06 &middot; Edit decision list</strong><span>The cut as plain text, plus the grade notes</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/03-kannada-storyboard.md"><strong>03 &middot; Storyboard</strong><span>Crop windows, motion and per-shot direction</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/subs.json" download><strong>tools/subs.json</strong><span>Subtitle cue data, derived</span></a>
         </div>
       </div>
       <div class="res-group">
         <h4>Audio</h4>
         <div class="res-list">
-          <a href="Kannada-cinematic-audio-direction.md"><strong>Cinematic audio direction</strong><span>Five acts, the effect palette, the gates</span></a>
-          <a href="Kannada-music-map.md"><strong>Music map</strong><span>Palette, motif, intensity curve, composer brief</span></a>
-          <a href="Kannada-cue-sheet.csv" download><strong>Cue sheet</strong><span>46 music cues and 28 effect events</span></a>
-          <a href="Kannada-final-mix-checklist.md"><strong>Final mix checklist</strong><span>Mix, master, five-system test, sign-off</span></a>
-          <a href="Kannada-sfx-licence-log.csv" download><strong>SFX licence log</strong><span>What shipped, and what is still uncaptured</span></a>
-          <a href="11-kannada-sound-design-and-sfx-sources.md"><strong>11 &middot; Sound design sources</strong><span>Where to find effects, and licence discipline</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-cinematic-audio-direction.md"><strong>Cinematic audio direction</strong><span>Five acts, the effect palette, the gates</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-music-map.md"><strong>Music map</strong><span>Palette, motif, intensity curve, composer brief</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-cue-sheet.csv" download><strong>Cue sheet</strong><span>46 music cues and 28 effect events</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-final-mix-checklist.md"><strong>Final mix checklist</strong><span>Mix, master, five-system test, sign-off</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-sfx-licence-log.csv" download><strong>SFX licence log</strong><span>What shipped, and what is still uncaptured</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/11-kannada-sound-design-and-sfx-sources.md"><strong>11 &middot; Sound design sources</strong><span>Where to find effects, and licence discipline</span></a>
         </div>
       </div>
       <div class="res-group">
         <h4>Words and text</h4>
         <div class="res-list">
-          <a href="01-kannada-final-script.md"><strong>01 &middot; Final script</strong><span>The approved Kannada narration</span></a>
-          <a href="04-kannada-onscreen-text.md"><strong>04 &middot; On-screen text</strong><span>Every card, exactly as it appears</span></a>
-          <a href="05-kannada-subtitles.srt" download><strong>05 &middot; Subtitles, .srt</strong><span>84 cues. Upload this as the caption track</span></a>
-          <a href="05-kannada-subtitles.vtt" download><strong>05 &middot; Subtitles, .vtt</strong><span>For web players</span></a>
-          <a href="02-kannada-voice-audition-plan.md"><strong>02 &middot; Voice audition plan</strong><span>How to cast and record the human read</span></a>
-          <a href="09-elevenlabs-narration-guide.md"><strong>09 &middot; Narration guide</strong><span>The interim synthetic read only</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-kannada-final-script.md"><strong>01 &middot; Final script</strong><span>The approved Kannada narration</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-kannada-onscreen-text.md"><strong>04 &middot; On-screen text</strong><span>Every card, exactly as it appears</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.srt" download><strong>05 &middot; Subtitles, .srt</strong><span>84 cues. Upload this as the caption track</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.vtt" download><strong>05 &middot; Subtitles, .vtt</strong><span>For web players</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-kannada-voice-audition-plan.md"><strong>02 &middot; Voice audition plan</strong><span>How to cast and record the human read</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/09-elevenlabs-narration-guide.md"><strong>09 &middot; Narration guide</strong><span>The interim synthetic read only</span></a>
         </div>
       </div>
       <div class="res-group">
         <h4>Rights, facts and credits</h4>
         <div class="res-list">
-          <a href="07-final-rights-and-approval-checklist.md"><strong>07 &middot; Rights and approval</strong><span>Every gate, including the five that block release</span></a>
-          <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md"><strong>14 &middot; Rights and publishing</strong><span>Consent, music and accessibility rules</span></a>
-          <a href="../../anniversary-video-research/01-source-of-truth.md"><strong>01 &middot; Source of truth</strong><span>Every verified fact and where it came from</span></a>
-          <a href="../../anniversary-video-research/02-evidence-table.csv" download><strong>02 &middot; Evidence table</strong><span>Claim by claim, with sources</span></a>
-          <a href="../../anniversary-video-research/04-media-inventory.csv" download><strong>04 &middot; Media inventory</strong><span>Every photograph, with consent status</span></a>
-          <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><strong>13 &middot; Credits</strong><span>End-roll names, not yet spelling-verified</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md"><strong>07 &middot; Rights and approval</strong><span>Every gate, including the five that block release</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/14-rights-consent-and-publishing-checklist.md"><strong>14 &middot; Rights and publishing</strong><span>Consent, music and accessibility rules</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-source-of-truth.md"><strong>01 &middot; Source of truth</strong><span>Every verified fact and where it came from</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-evidence-table.csv" download><strong>02 &middot; Evidence table</strong><span>Claim by claim, with sources</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-media-inventory.csv" download><strong>04 &middot; Media inventory</strong><span>Every photograph, with consent status</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md"><strong>13 &middot; Credits</strong><span>End-roll names, not yet spelling-verified</span></a>
         </div>
       </div>
       <div class="res-group">
         <h4>Brief and design</h4>
         <div class="res-list">
-          <a href="../../anniversary-video-research/07-bilingual-creative-brief.md"><strong>07 &middot; Creative brief</strong><span>Tone, typography, and what to avoid</span></a>
-          <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><strong>12 &middot; On-screen text, bilingual</strong><span>Both language versions</span></a>
-          <a href="../../logo.png" download><strong>logo.png</strong><span>The mark, as used on the title card</span></a>
-          <a href="../../logo-purple.png" download><strong>logo-purple.png</strong><span>Alternate mark</span></a>
-          <a href="08-kannada-animatic-poster.jpg" download><strong>Poster frame</strong><span>For slides and thumbnails</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-bilingual-creative-brief.md"><strong>07 &middot; Creative brief</strong><span>Tone, typography, and what to avoid</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/12-bilingual-onscreen-text-and-lower-thirds.md"><strong>12 &middot; On-screen text, bilingual</strong><span>Both language versions</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/logo.png" download><strong>logo.png</strong><span>The mark, as used on the title card</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/logo-purple.png" download><strong>logo-purple.png</strong><span>Alternate mark</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/08-kannada-animatic-poster.jpg" download><strong>Poster frame</strong><span>For slides and thumbnails</span></a>
         </div>
+      </div>
+      <div class="res-group">
+        <h4>Generate it instead</h4>
+        <div class="res-list">
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-prompt-pack.md"><strong>Runway prompt pack</strong><span>Which shots a model can take, and which it must not</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-shot-prompts.csv"><strong>Runway shot prompts</strong><span>All 46 shots, lane, plate, prompt, reject reason</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-kannada-vo-transcript.txt"><strong>Kannada VO transcript</strong><span>Timecoded per shot, for a lip-free generative pass</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/runway_plates.py"><strong>runway_plates.py</strong><span>Writes clean plates, no lower thirds burned in</span></a>
+        </div>
+        <p class="drop-note" style="margin-top:0.4rem">Read the prompt pack before spending credits. It is blunt about the arithmetic: 4 cuts are safely generative, 19 must keep the render, and 23 are behind the consent gate.</p>
       </div>
       <div class="res-group">
         <h4>Build tools</h4>
         <div class="res-list">
-          <a href="tools/README.md"><strong>tools/README.md</strong><span>What every script does, and in what order</span></a>
-          <a href="tools/film.py" download><strong>film.py</strong><span>Renders the picture from timeline.json</span></a>
-          <a href="tools/gfx.py" download><strong>gfx.py</strong><span>Renders the typographic cards and subtitles</span></a>
-          <a href="tools/master.py" download><strong>master.py</strong><span>Builds the master, checks the release gates</span></a>
-          <a href="tools/mix.py" download><strong>mix.py</strong><span>Stems, both masters, the four previews</span></a>
-          <a href="tools/cue.py" download><strong>cue.py</strong><span>Regenerates the cue sheet and audits timecodes</span></a>
-          <a href="tools/sfx.py" download><strong>sfx.py</strong><span>Places effects, refuses the silence cues</span></a>
-          <a href="tools/stem.py" download><strong>stem.py</strong><span>Assembles the narration into one aligned WAV</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/tools-README.md"><strong>tools/README.md</strong><span>What every script does, and in what order</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/film.py" download><strong>film.py</strong><span>Renders the picture from timeline.json</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/gfx.py" download><strong>gfx.py</strong><span>Renders the typographic cards and subtitles</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/master.py" download><strong>master.py</strong><span>Builds the master, checks the release gates</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/mix.py" download><strong>mix.py</strong><span>Stems, both masters, the four previews</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/cue.py" download><strong>cue.py</strong><span>Regenerates the cue sheet and audits timecodes</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/sfx.py" download><strong>sfx.py</strong><span>Places effects, refuses the silence cues</span></a>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/stem.py" download><strong>stem.py</strong><span>Assembles the narration into one aligned WAV</span></a>
         </div>
       </div>
       </div>
 
       <div class="card">
         <h3>What is deliberately not here</h3>
-        <p style="margin:0 0 0.8rem;font-size:0.95rem">No video, no audio and no rendered graphic is committed to this repository. All of it is reproducible from <code>timeline.json</code> plus the photographs, so committing it would only guarantee that someone edits a stale copy.</p>
+        <p style="margin:0 0 0.8rem;font-size:0.95rem">No video, no audio and no rendered graphic is in the pack. All of it is reproducible from <code>timeline.json</code> plus the photographs, so shipping it would only guarantee that someone edits a stale copy. The reference cut streams from YouTube for watching, not for cutting.</p>
         <div class="table-wrap">
           <table style="font-size:0.86rem">
             <thead><tr><th scope="col">Missing</th><th scope="col">Rebuild it with</th></tr></thead>
@@ -809,8 +870,8 @@ footer strong { color: var(--gold); }
               <tr><td><code>tools/stills/</code>, the crops</td><td><code>python3 film.py</code> makes them on the way through</td></tr>
               <tr><td>The narration <code>.wav</code></td><td><code>python3 stem.py &lt;VOICE_ID&gt;</code></td></tr>
               <tr><td>Stems, masters, previews</td><td><code>python3 mix.py --calibrate</code></td></tr>
-              <tr><td>The effect <code>.mp3</code> files</td><td>Download from the URLs in <a href="Kannada-sfx-licence-log.csv">the licence log</a>, into <code>tools/sfx/</code></td></tr>
-              <tr><td>The music bed</td><td><strong>Does not exist.</strong> See <a href="Kannada-music-map.md">the music map</a>, section 6</td></tr>
+              <tr><td>The effect <code>.mp3</code> files</td><td>Download from the URLs in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-sfx-licence-log.csv">the licence log</a>, into <code>tools/sfx/</code></td></tr>
+              <tr><td>The music bed</td><td><strong>Does not exist.</strong> See <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-music-map.md">the music map</a>, section 6</td></tr>
             </tbody>
           </table>
         </div>
@@ -839,16 +900,18 @@ python3 master.py --check    # what still blocks a release</code></pre>
     <div class="grid grid-2">
       <div class="card">
         <h3>The five versions</h3>
+        <div class="table-wrap">
         <table style="font-size:0.88rem">
           <thead><tr><th scope="col">File</th><th scope="col">For</th></tr></thead>
           <tbody>
-            <tr><td><code>08-kannada-elevenlabs-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 28 SFX placements over 8 ambience beds, -16 LUFS, 145 MB</span></td><td><strong>This is what the player above streams</strong>, as <a href="https://youtu.be/I6iZCH88RYU">youtu.be/I6iZCH88RYU</a>. Picture and effects review. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
-            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 145 MB, 00:05:57:22</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
+            <tr><td><code>08-kannada-elevenlabs-sfx-learning-mix.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration + 28 SFX placements over 8 ambience beds, -16 LUFS, 145 MB</span></td><td>The 1080p picture and effects review. Superseded by the 2160p review below, which is what the player streams. The effects are still under unsigned <code>07</code> item 5.8, so it is an audition, not a deliverable.</td></tr>
+            <tr><td><code>kannada-1080p-EVENT-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, subtitles burned in, -23 LUFS, 145 MB, 00:05:57:22</span></td><td>The file to play in the hall. Local playback only, never streamed. See <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-event-playback-notes.md"><code>13-event-playback-notes.md</code></a>.</td></tr>
             <tr><td><code>08-kannada-elevenlabs-preview.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">1920x1080, narration only, no effects, -16 LUFS, 145 MB</span></td><td>Small local copy for a phone or a WhatsApp send. Not committed. Current: 00:05:57:22, rebuilt with the ElevenLabs read.</td></tr>
-            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, soft Kannada subtitle track (not burned), 481 MB, 00:05:57:22, -14.4 LUFS</span></td><td>Hall projection test and quality review. ElevenLabs narration + SFX. Built by <code>tools/rebuild_deliverables.py</code>. Current. <strong>Note:</strong> the photography is a median 2.40x upscale at this size; the type is natively 4K, the photographs are not.</td></tr>
+            <tr><td><code>kannada-2160p-review.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, soft Kannada subtitle track (not burned), 481 MB, 00:05:57:22, -14.4 LUFS</span></td><td>Hall projection test and quality review. ElevenLabs narration + SFX. Built by <code>tools/rebuild_deliverables.py</code>. Current. <strong>This is what the player above streams</strong>, as <em>V3 Kannada 2160p review</em>. <strong>Note:</strong> the photography is a median 2.40x upscale at this size; the type is natively 4K, the photographs are not.</td></tr>
             <tr><td><code>kannada-2160p-youtube-master.mp4</code><br><span style="color:var(--muted);font-size:0.82rem">3840x2160, human narration, -14 LUFS</span></td><td><strong>Does not exist yet.</strong> Needs the human read and all five clearances.</td></tr>
           </tbody>
         </table>
+        </div>
       </div>
       <div class="card">
         <h3>Why 4K, when no photograph is 4K</h3>
@@ -858,12 +921,12 @@ python3 master.py --check    # what still blocks a release</code></pre>
           <li><strong>The photography is not.</strong> The largest still in the library is 1920x1446 and 29 of 34 are under 1920px, so at 2160p they are enlarged 2x to 4x.</li>
           <li><strong>YouTube is the reason.</strong> A 2160p upload gets a better codec and a higher bitrate than a 1080p one, so even a viewer watching at 1080p sees a cleaner picture.</li>
         </ul>
-        <p style="margin:0;font-size:0.92rem;color:var(--muted)">Judge the master on type crispness, not on photographic detail. Full measurements in <a href="08-kannada-animatic-notes.md">08 animatic notes</a>, section 9.</p>
+        <p style="margin:0;font-size:0.92rem;color:var(--muted)">Judge the master on type crispness, not on photographic detail. Full measurements in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/08-kannada-animatic-notes.md">08 animatic notes</a>, section 9.</p>
       </div>
     </div>
     <div class="alert" style="margin-top:1rem">
       <strong>A YouTube upload is public release.</strong> All five gates in
-      <a href="#decisions">section 04</a> are still open, so nothing goes up yet. Run
+      <a href="#decisions">section 06</a> are still open, so nothing goes up yet. Run
       <code>python3 tools/master.py --check</code> for the current list. The build script
       refuses to produce a release master while any gate is unwaived, and refuses outright
       while the narration is the scratch track.
@@ -893,9 +956,9 @@ python3 master.py --check    # what still blocks a release</code></pre>
         <li>Approve the 40-second narrator audition sample before the full booth session.</li>
         <li>Approve <span class="mono">K43</span> next-decade wording before it is recorded into the master.</li>
         <li>Start guardian consent for children in 22 shots. Longest lead item.</li>
-        <li><strong>Confirm every name in the end roll.</strong> The repository holds inconsistent spellings, near-duplicates and first-name-only entries. No name goes on screen until a trustee confirms the spelling and the person agrees to be named: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
-        <li>Read: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06 trustee questions</a>, <a href="07-final-rights-and-approval-checklist.md">07 rights checklist</a>.</li>
-        <li>Evidence behind every claim in the script: <a href="../../anniversary-video-research/02-evidence-table.csv">02 evidence table</a>, <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv">03 impact and milestone data</a>, <a href="../../anniversary-video-research/01-source-of-truth.md">01 source of truth</a>.</li>
+        <li><strong>Confirm every name in the end roll.</strong> The repository holds inconsistent spellings, near-duplicates and first-name-only entries. No name goes on screen until a trustee confirms the spelling and the person agrees to be named: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
+        <li>Read: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-fact-check-and-trustee-questions.md">06 trustee questions</a>, <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md">07 rights checklist</a>.</li>
+        <li>Evidence behind every claim in the script: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-evidence-table.csv">02 evidence table</a>, <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/03-impact-and-milestone-data.csv">03 impact and milestone data</a>, <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-source-of-truth.md">01 source of truth</a>.</li>
       </ul>
     </div>
 
@@ -903,8 +966,8 @@ python3 master.py --check    # what still blocks a release</code></pre>
       <span class="who">Director · picture editor</span>
       <h3>Picture is largely locked; narration stem will replace the scratch</h3>
       <ul>
-        <li>Source of timing truth: <a href="tools/timeline.json"><code>tools/timeline.json</code></a> (46 shots).</li>
-        <li>Storyboard + crops: <a href="03-kannada-storyboard.md">03</a> · EDL: <a href="06-kannada-edit-decision-list.md">06</a>.</li>
+        <li>Source of timing truth: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/timeline.json"><code>tools/timeline.json</code></a> (46 shots).</li>
+        <li>Storyboard + crops: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/03-kannada-storyboard.md">03</a> · EDL: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-kannada-edit-decision-list.md">06</a>.</li>
         <li>When human WAV arrives: re-time with <code>build_timeline.py --from-audio</code> if line lengths drift; picture follows voice.</li>
         <li>Protect silences and holds. Do not fill <strong>K06</strong>, the drop under <span class="kn" lang="kn">ಪೂರ್ತಿ ಅಲ್ಲ.</span>, or the refusal to climax on <strong>K43</strong>.</li>
         <li>Photography lives under <code>assets/images/timeline/</code> (paths in the shot table).</li>
@@ -916,11 +979,11 @@ python3 master.py --check    # what still blocks a release</code></pre>
       <h3>Female, 35 to 50 · warm, composed, dignified · about 105 wpm</h3>
       <ul>
         <li>Register: respected Kannada-medium headmistress addressing a hall. Not orator, not vlogger, not newsreader.</li>
-        <li>Booth script: <a href="01-kannada-final-script.md">01 final script</a> (print pronunciation sheet in section 4).</li>
+        <li>Booth script: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-kannada-final-script.md">01 final script</a> (print pronunciation sheet in section 4).</li>
         <li>Audition first with Test B only (K11, K12, K13, K27, K29), listed in the table below. Full script only after trustee approval.</li>
         <li>Deliver: WAV 48 kHz 24-bit mono; no limiter on the recorded file; 3 takes/line, 5 of K45; pickups P1 to P7; 30 s room tone; signed release.</li>
-        <li>Full direction: <a href="02-kannada-voice-audition-plan.md">02 audition plan</a> section 8.</li>
-        <li><strong>Interim synthetic read</strong> (for a trustee preview only, never for the hall): <a href="09-elevenlabs-narration-guide.md">09 ElevenLabs guide</a> and the paste-ready <a href="10-cursor-elevenlabs-prompt.md">10 Cursor prompt</a>. Kannada works on <code>eleven_v3</code> only.</li>
+        <li>Full direction: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-kannada-voice-audition-plan.md">02 audition plan</a> section 8.</li>
+        <li><strong>Interim synthetic read</strong> (for a trustee preview only, never for the hall): <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/09-elevenlabs-narration-guide.md">09 ElevenLabs guide</a> and the paste-ready <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/10-cursor-elevenlabs-prompt.md">10 Cursor prompt</a>. Kannada works on <code>eleven_v3</code> only.</li>
         <li><strong>Brief:</strong> this is a welcome, not an appeal. Read it to the people in the hall, not about them.</li>
       </ul>
       <p style="margin:1rem 0 0.4rem;font-weight:600">Audition copy (Test B)</p>
@@ -943,12 +1006,12 @@ python3 master.py --check    # what still blocks a release</code></pre>
       <span class="who">Motion / graphics designer</span>
       <h3>Every on-screen string is already specified</h3>
       <ul>
-        <li>Build sheet: <a href="04-kannada-onscreen-text.md">04 onscreen text</a>.</li>
+        <li>Build sheet: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-kannada-onscreen-text.md">04 onscreen text</a>.</li>
         <li>Fonts: Noto Serif Kannada (titles), Noto Sans Kannada (body/lower thirds). <strong>Never track Kannada. Never force-uppercase Kannada.</strong></li>
         <li>Palette: navy <code>#1c1c2e</code>, gold body on navy <code>#e0b06a</code>, white titles.</li>
         <li>Repo tool <code>gfx.py</code> renders cards via headless Chrome (HarfBuzz). Do not move Kannada text to Pillow/ffmpeg drawtext.</li>
-        <li>Bilingual string reference for an English cut later: <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md">12 onscreen text and lower thirds</a>.</li>
-        <li>End roll copy in both languages: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>. Build it only after trustees confirm spellings.</li>
+        <li>Bilingual string reference for an English cut later: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/12-bilingual-onscreen-text-and-lower-thirds.md">12 onscreen text and lower thirds</a>.</li>
+        <li>End roll copy in both languages: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md">13 credits</a>. Build it only after trustees confirm spellings.</li>
         <li>See <a href="#design">Design tokens</a> on this page.</li>
       </ul>
     </div>
@@ -960,11 +1023,11 @@ python3 master.py --check    # what still blocks a release</code></pre>
         <li>Share this HTML pack (see <a href="#share">Share</a>).</li>
         <li>Book narrator auditions; schedule trustee listen.</li>
         <li>Drive consent + Udayavani + music licence in parallel with booth booking.</li>
-        <li>Run the end-roll name verification with the trustees in parallel: <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits</a>, section 4. It gates the last shot of the film.</li>
-        <li>Do not hand-edit timecodes in 01/03/05/06. Re-run the tools from <code>timeline.json</code>: <a href="tools/README.md">tools/README.md</a>.</li>
-        <li>Governing checklists: <a href="07-final-rights-and-approval-checklist.md">07</a> and research <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md">14</a>.</li>
-        <li>After the film is approved, social cutdowns are already written: <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md">11 teaser scripts</a>.</li>
-        <li>Packing and sending this folder: <a href="SHARE-PACK.md">SHARE-PACK.md</a>.</li>
+        <li>Run the end-roll name verification with the trustees in parallel: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md">13 credits</a>, section 4. It gates the last shot of the film.</li>
+        <li>Do not hand-edit timecodes in 01/03/05/06. Re-run the tools from <code>timeline.json</code>: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/tools-README.md">tools/README.md</a>.</li>
+        <li>Governing checklists: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md">07</a> and research <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/14-rights-consent-and-publishing-checklist.md">14</a>.</li>
+        <li>After the film is approved, social cutdowns are already written: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/11-bilingual-short-teaser-scripts.md">11 teaser scripts</a>.</li>
+        <li>Packing and sending this folder: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/SHARE-PACK.md">SHARE-PACK.md</a>.</li>
       </ol>
     </div>
   </div>
@@ -974,7 +1037,7 @@ python3 master.py --check    # what still blocks a release</code></pre>
   <div class="wrap">
     <p class="sec-kicker">06 &middot; Open gates</p>
     <h2>Decisions and clearances</h2>
-    <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
+    <p class="sec-lead">Every gate needs a named owner and a date, not just a tick. Type into the two fields on each row. Everything you enter is saved in your own browser only, so it is a working aid: the record of record is <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md">07</a>, signed by the Trust.</p>
     <div class="card no-print" style="margin-bottom:1rem;background:#fffdf7;border-left:4px solid var(--gold)">
       <p style="margin:0 0 0.35rem;font-weight:600">Who chases these</p>
       <p style="margin:0;font-size:0.95rem;color:var(--muted)">Producer / coordinator: <input class="owner-field" style="min-width:11rem" type="text" data-k="coord-name" placeholder="name" aria-label="Coordinator name"> · <input class="owner-field" style="min-width:13rem" type="text" data-k="coord-contact" placeholder="phone or email" aria-label="Coordinator contact"> · target screening date <input class="owner-field" type="date" data-k="coord-date" aria-label="Target screening date">. Send every answer to this one person so the documents stay a single source of truth.</p>
@@ -999,11 +1062,11 @@ python3 master.py --check    # what still blocks a release</code></pre>
         <label><input type="checkbox" data-k="c5"> <span class="ck-label">Music licence (event + YouTube + web; no vocals)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c5-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c5-by" aria-label="Due date"></span></label>
         <label><input type="checkbox" data-k="c6"> <span class="ck-label">Narrator release signed (event, site, YT, social, donors)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c6-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c6-by" aria-label="Due date"></span></label>
         <label><input type="checkbox" data-k="c7"> <span class="ck-label">Native Kannada speaker (not translator) read-aloud of full script</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c7-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c7-by" aria-label="Due date"></span></label>
-        <label><input type="checkbox" data-k="c9"> <span class="ck-label">End-roll names verified: spelling confirmed by a trustee and consent to be named (<a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13</a>, section 4)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c9-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c9-by" aria-label="Due date"></span></label>
+        <label><input type="checkbox" data-k="c9"> <span class="ck-label">End-roll names verified: spelling confirmed by a trustee and consent to be named (<a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md">13</a>, section 4)</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c9-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c9-by" aria-label="Due date"></span></label>
         <label><input type="checkbox" data-k="c8"> <span class="ck-label">Trustee approval of narrator sample before full record</span><span class="ck-meta no-print"><input class="owner-field" type="text" data-k="c8-who" placeholder="owner" aria-label="Owner"><input class="owner-field" type="date" data-k="c8-by" aria-label="Due date"></span></label>
       </div>
     </div>
-    <p class="player-note" style="margin-top:1rem">Full question list: <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md">06-fact-check-and-trustee-questions.md</a>. Kannada cut checklist: <a href="07-final-rights-and-approval-checklist.md">07</a>.</p>
+    <p class="player-note" style="margin-top:1rem">Full question list: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-fact-check-and-trustee-questions.md">06-fact-check-and-trustee-questions.md</a>. Kannada cut checklist: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md">07</a>.</p>
   </div>
 </section>
 
@@ -1017,6 +1080,8 @@ python3 master.py --check    # what still blocks a release</code></pre>
       <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="spokenOnly"> Spoken lines only</label>
       <label style="font-size:0.9rem;color:var(--muted)"><input type="checkbox" id="blockedOnly"> Consent-blocked only</label>
       <span id="shotCount" class="mono" style="color:var(--muted)"></span>
+      <p class="drop-note" style="flex:1 1 100%;margin:0.4rem 0 0">The asset column names the still each shot uses and the path it sits at inside the pack. The stills themselves are in
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-photographs.zip">kannada-photographs.zip</a>; they are not served from this site.</p>
     </div>
     <div class="table-wrap shot-scroll">
       <table id="shotTable">
@@ -1037,7 +1102,7 @@ python3 master.py --check    # what still blocks a release</code></pre>
         <tbody id="shotBody"></tbody>
       </table>
     </div>
-    <p class="player-note">Consent wording comes straight from <a href="../../anniversary-video-research/04-media-inventory.csv">04 media inventory</a>; the worklist to clear it is <a href="07-final-rights-and-approval-checklist.md">07</a>. Subtitles: <a href="05-kannada-subtitles.srt">05-kannada-subtitles.srt</a> (editor) and <a href="05-kannada-subtitles.vtt">.vtt</a> (this page). Creative brief: <a href="../../anniversary-video-research/07-bilingual-creative-brief.md">07 brief</a>. Asset gaps and rejected duplicates: <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md">05 asset audit</a>.</p>
+    <p class="player-note">Consent wording comes straight from <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-media-inventory.csv">04 media inventory</a>; the worklist to clear it is <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md">07</a>. Subtitles: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.srt">05-kannada-subtitles.srt</a> (editor) and <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.vtt">.vtt</a> (this page). Creative brief: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-bilingual-creative-brief.md">07 brief</a>. Asset gaps and rejected duplicates: <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-duplicate-low-quality-and-missing-assets.md">05 asset audit</a>.</p>
     <p class="player-note no-print"><strong>Printing this table:</strong> use your browser print dialog. The print stylesheet unclips the scroll box, so all 46 rows come out, and it hides the player, filters and navigation. Landscape is the right orientation.</p>
   </div>
 </section>
@@ -1076,44 +1141,79 @@ python3 master.py --check    # what still blocks a release</code></pre>
   <div class="wrap">
     <p class="sec-kicker">09 &middot; Library</p>
     <h2>Documents and assets</h2>
-    <p class="sec-lead">Every document in the pack is listed here. Markdown opens in any editor; CSV opens in Excel or Numbers. Keep relative paths intact when you zip, or the links break. No video file is in the repository: the review cut streams from YouTube, and the renders are rebuilt with <code>tools/master.py</code>.</p>
+    <p class="sec-lead">Every document in the pack is listed here, and every link downloads that one file from the GitHub release. Markdown opens in any editor; CSV opens in Excel or Numbers. If you want all of them at once, use the complete pack in <a href="#resources">section 03</a> instead of clicking through this list. No video file is in the pack: the reference cut streams from YouTube, and the renders are rebuilt with <code>tools/master.py</code>.</p>
     <div class="grid grid-2">
       <div class="card doc">
         <h3>Kannada production</h3>
-        <a href="01-kannada-final-script.md"><span class="name">01 · Final narration script</span><span class="for">Narrator · booth</span></a>
-        <a href="02-kannada-voice-audition-plan.md"><span class="name">02 · Voice audition plan</span><span class="for">Casting · audio</span></a>
-        <a href="03-kannada-storyboard.md"><span class="name">03 · Storyboard</span><span class="for">Director · editor</span></a>
-        <a href="04-kannada-onscreen-text.md"><span class="name">04 · On-screen text</span><span class="for">Designer</span></a>
-        <a href="05-kannada-subtitles.srt"><span class="name">05 · Subtitles (.srt)</span><span class="for">Editor</span></a>
-        <a href="06-kannada-edit-decision-list.md"><span class="name">06 · Edit decision list</span><span class="for">Editor</span></a>
-        <a href="07-final-rights-and-approval-checklist.md"><span class="name">07 · Rights &amp; approval</span><span class="for">Trust · producer</span></a>
-        <a href="https://youtu.be/I6iZCH88RYU"><span class="name">08 · Picture and SFX preview (YouTube)</span><span class="for">Everyone · streams, not in the repo</span></a>
-        <a href="08-kannada-animatic-notes.md"><span class="name">08 · Animatic notes</span><span class="for">Everyone</span></a>
-        <a href="05-kannada-subtitles.vtt"><span class="name">05 · Subtitles (.vtt)</span><span class="for">This page only</span></a>
-        <a href="09-elevenlabs-narration-guide.md"><span class="name">09 · ElevenLabs narration guide</span><span class="for">Interim scratch read</span></a>
-        <a href="10-cursor-elevenlabs-prompt.md"><span class="name">10 · Cursor prompt (ElevenLabs)</span><span class="for">Whoever runs the TTS</span></a>
-        <a href="tools/timeline.json"><span class="name">tools/timeline.json</span><span class="for">Timing source of truth</span></a>
-        <a href="tools/README.md"><span class="name">tools/README.md</span><span class="for">How to re-run the build</span></a>
-        <a href="SHARE-PACK.md"><span class="name">SHARE-PACK.md</span><span class="for">Producer · how to send</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/00-creative-team-read-me-first.md"><span class="name">00 · Read me first</span><span class="for">Creative team · start here</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-kannada-final-script.md"><span class="name">01 · Final narration script</span><span class="for">Narrator · booth</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-kannada-voice-audition-plan.md"><span class="name">02 · Voice audition plan</span><span class="for">Casting · audio</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/03-kannada-storyboard.md"><span class="name">03 · Storyboard</span><span class="for">Director · editor</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-kannada-onscreen-text.md"><span class="name">04 · On-screen text</span><span class="for">Designer</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.srt"><span class="name">05 · Subtitles (.srt)</span><span class="for">Editor</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-kannada-edit-decision-list.md"><span class="name">06 · Edit decision list</span><span class="for">Editor</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-final-rights-and-approval-checklist.md"><span class="name">07 · Rights &amp; approval</span><span class="for">Trust · producer</span></a>
+        <a href="https://youtu.be/IQMH4r-9tcs"><span class="name">V3 · 2160p review cut (YouTube)</span><span class="for">Everyone · reference only, streams</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/08-kannada-animatic-notes.md"><span class="name">08 · Animatic notes</span><span class="for">Everyone</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-kannada-subtitles.vtt"><span class="name">05 · Subtitles (.vtt)</span><span class="for">This page only</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/09-elevenlabs-narration-guide.md"><span class="name">09 · ElevenLabs narration guide</span><span class="for">Interim scratch read</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/10-cursor-elevenlabs-prompt.md"><span class="name">10 · Cursor prompt (ElevenLabs)</span><span class="for">Whoever runs the TTS</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/timeline.json"><span class="name">tools/timeline.json</span><span class="for">Timing source of truth</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/tools-README.md"><span class="name">tools/README.md</span><span class="for">How to re-run the build</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/SHARE-PACK.md"><span class="name">SHARE-PACK.md</span><span class="for">Producer · how to send</span></a>
       </div>
       <div class="card doc">
         <h3>Research / bilingual</h3>
-        <a href="../../anniversary-video-research/07-bilingual-creative-brief.md"><span class="name">07 · Creative brief</span><span class="for">All creatives</span></a>
-        <a href="../../anniversary-video-research/06-fact-check-and-trustee-questions.md"><span class="name">06 · Trustee questions</span><span class="for">NGO owner</span></a>
-        <a href="../../anniversary-video-research/14-rights-consent-and-publishing-checklist.md"><span class="name">14 · Rights (full)</span><span class="for">Producer · Trust</span></a>
-        <a href="../../anniversary-video-research/08-english-five-minute-script.md"><span class="name">08 · English script</span><span class="for">English cut later</span></a>
-        <a href="../../anniversary-video-research/09-kannada-five-minute-script.md"><span class="name">09 · Kannada source script</span><span class="for">Reference</span></a>
-        <a href="../../anniversary-video-research/04-media-inventory.csv"><span class="name">04 · Media inventory</span><span class="for">Consent worklist</span></a>
-        <a href="../../assets/images/timeline/"><span class="name">assets/images/timeline/</span><span class="for">Photography pool</span></a>
-        <a href="../../anniversary-video-research/00-project-map.md"><span class="name">00 · Project map</span><span class="for">Orientation</span></a>
-        <a href="../../anniversary-video-research/01-source-of-truth.md"><span class="name">01 · Source of truth</span><span class="for">What is established</span></a>
-        <a href="../../anniversary-video-research/02-evidence-table.csv"><span class="name">02 · Evidence table</span><span class="for">Backs every claim</span></a>
-        <a href="../../anniversary-video-research/03-impact-and-milestone-data.csv"><span class="name">03 · Impact and milestone data</span><span class="for">Numbers on screen</span></a>
-        <a href="../../anniversary-video-research/05-duplicate-low-quality-and-missing-assets.md"><span class="name">05 · Asset audit and gaps</span><span class="for">What still needs shooting</span></a>
-        <a href="../../anniversary-video-research/10-bilingual-storyboard-and-edit-plan.md"><span class="name">10 · Bilingual storyboard and edit plan</span><span class="for">English cut later</span></a>
-        <a href="../../anniversary-video-research/11-bilingual-short-teaser-scripts.md"><span class="name">11 · Short teaser scripts</span><span class="for">Social cutdowns</span></a>
-        <a href="../../anniversary-video-research/12-bilingual-onscreen-text-and-lower-thirds.md"><span class="name">12 · Onscreen text and lower thirds</span><span class="for">Designer · bilingual</span></a>
-        <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md"><span class="name">13 · Credits and acknowledgements</span><span class="for">Trustees · name check</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/07-bilingual-creative-brief.md"><span class="name">07 · Creative brief</span><span class="for">All creatives</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/06-fact-check-and-trustee-questions.md"><span class="name">06 · Trustee questions</span><span class="for">NGO owner</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/14-rights-consent-and-publishing-checklist.md"><span class="name">14 · Rights (full)</span><span class="for">Producer · Trust</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/08-english-five-minute-script.md"><span class="name">08 · English script</span><span class="for">English cut later</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/09-kannada-five-minute-script.md"><span class="name">09 · Kannada source script</span><span class="for">Reference</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/04-media-inventory.csv"><span class="name">04 · Media inventory</span><span class="for">Consent worklist</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-photographs.zip"><span class="name">kannada-photographs.zip</span><span class="for">All 34 source stills</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/00-project-map.md"><span class="name">00 · Project map</span><span class="for">Orientation</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/01-source-of-truth.md"><span class="name">01 · Source of truth</span><span class="for">What is established</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/02-evidence-table.csv"><span class="name">02 · Evidence table</span><span class="for">Backs every claim</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/03-impact-and-milestone-data.csv"><span class="name">03 · Impact and milestone data</span><span class="for">Numbers on screen</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/05-duplicate-low-quality-and-missing-assets.md"><span class="name">05 · Asset audit and gaps</span><span class="for">What still needs shooting</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/10-bilingual-storyboard-and-edit-plan.md"><span class="name">10 · Bilingual storyboard and edit plan</span><span class="for">English cut later</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/11-bilingual-short-teaser-scripts.md"><span class="name">11 · Short teaser scripts</span><span class="for">Social cutdowns</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/12-bilingual-onscreen-text-and-lower-thirds.md"><span class="name">12 · Onscreen text and lower thirds</span><span class="for">Designer · bilingual</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md"><span class="name">13 · Credits and acknowledgements</span><span class="for">Trustees · name check</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="assets-index">
+  <div class="wrap">
+    <p class="sec-kicker">10 &middot; The rest of the drop</p>
+    <h2>Everything else in the pack</h2>
+    <p class="sec-lead">The pack holds more than the shortlists above. These are the remaining files, so that nothing in the download is reachable only by unzipping it. All of them come down from the same release.</p>
+    <div class="grid grid-2">
+      <div class="card doc">
+        <h3>Prompt packs and briefs</h3>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-prompt-pack.md"><span class="name">Runway prompt pack</span><span class="for">Generative route</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-shot-prompts.csv"><span class="name">Runway shot prompts</span><span class="for">46 rows, per shot</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Runway-kannada-vo-transcript.txt"><span class="name">Kannada VO transcript</span><span class="for">Timecoded narration</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/12-cursor-event-master-prompt.md"><span class="name">12 · Event master prompt</span><span class="for">Rebuilding the hall master</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/10-cursor-elevenlabs-prompt.md"><span class="name">10 · ElevenLabs prompt</span><span class="for">The interim synthetic read</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/Kannada-pause-sfx-shopping-list.md"><span class="name">Pause and SFX shopping list</span><span class="for">What still has to be sourced</span></a>
+      </div>
+      <div class="card doc">
+        <h3>The rest of the tools</h3>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/rebuild_deliverables.py"><span class="name">rebuild_deliverables.py</span><span class="for">Rebuilds all four renders</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/build_timeline.py"><span class="name">build_timeline.py</span><span class="for">Derives timeline.json</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/frame_audit.py"><span class="name">frame_audit.py</span><span class="for">Measures upscale per shot</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/wcag_audit.py"><span class="name">wcag_audit.py</span><span class="for">Contrast audit on the graphics</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/runway_plates.py"><span class="name">runway_plates.py</span><span class="for">Clean plates for a model</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/make_srt.py"><span class="name">make_srt.py</span><span class="for">Writes the .srt</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/make_vtt.py"><span class="name">make_vtt.py</span><span class="for">Writes the .vtt</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/make_logo.py"><span class="name">make_logo.py</span><span class="for">The hi-res mark</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/vo.py"><span class="name">vo.py</span><span class="for">Narration helper</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/tts_eleven.py"><span class="name">tts_eleven.py</span><span class="for">ElevenLabs calls, needs your own key</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/sfx_voicecheck.py"><span class="name">sfx_voicecheck.py</span><span class="for">Checks effects against the voice</span></a>
+        <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/log.py"><span class="name">log.py</span><span class="for">Shared logging</span></a>
       </div>
     </div>
   </div>
@@ -1121,7 +1221,7 @@ python3 master.py --check    # what still blocks a release</code></pre>
 
 <section id="credits">
   <div class="wrap">
-    <p class="sec-kicker">10 &middot; Last shot of the film</p>
+    <p class="sec-kicker">11 &middot; Last shot of the film</p>
     <h2>End roll and acknowledgements</h2>
     <p class="sec-lead">The credit roll is written in both languages, but it is not buildable yet. The repository holds inconsistent spellings, near-duplicates and first-name-only entries, so the roll is gated on a trustee name check.</p>
     <div class="grid grid-2">
@@ -1133,10 +1233,10 @@ python3 master.py --check    # what still blocks a release</code></pre>
       <div class="card">
         <h3>What to do</h3>
         <ol style="margin:0">
-          <li>Trustees work through the verification list in <a href="../../anniversary-video-research/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
+          <li>Trustees work through the verification list in <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/13-credits-and-acknowledgements.md">13 credits and acknowledgements</a>, section 4.</li>
           <li>Producer records each confirmed spelling and each consent to be named.</li>
-          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 06</a>.</li>
-          <li>Tick the end-roll gate in <a href="#decisions">section 04</a> when it is done.</li>
+          <li>Designer builds the roll only from the confirmed list, using the fonts and tokens in <a href="#design">section 08</a>.</li>
+          <li>Tick the end-roll gate in <a href="#decisions">section 06</a> when it is done.</li>
         </ol>
       </div>
     </div>
@@ -1145,9 +1245,9 @@ python3 master.py --check    # what still blocks a release</code></pre>
 
 <section id="share">
   <div class="wrap">
-    <p class="sec-kicker">11 &middot; How to send this</p>
+    <p class="sec-kicker">12 &middot; How to send this</p>
     <h2>Share the pack</h2>
-    <p class="sec-lead">Do not share the GitHub repo. Send these public links. Docs and scripts open from this page; the picture reference streams from YouTube.</p>
+    <p class="sec-lead">Do not share the repository. Send this one page. It is the only door: the reference cut streams into it from YouTube, and every document, script and photograph downloads from it out of a GitHub release. Nobody needs an account, an invitation or repository access to use it.</p>
     <div class="grid grid-2">
       <div class="card">
         <h3>Public links (no repo access)</h3>
@@ -1157,14 +1257,17 @@ python3 master.py --check    # what still blocks a release</code></pre>
           <a href="https://journey.lawparkeducationaltrust.org/content/kannada-anniversary-video">https://journey.lawparkeducationaltrust.org/content/kannada-anniversary-video</a></p>
         <p><strong>Content hub</strong><br>
           <a href="https://journey.lawparkeducationaltrust.org/content">https://journey.lawparkeducationaltrust.org/content</a></p>
-        <p class="player-note" style="margin-top:0.8rem">Cloudflare may strip <code>.html</code> from the URL. Both forms work. Source stills and hall masters are not on this site; request those separately if an editor needs to re-cut.</p>
+        <p class="player-note" style="margin-top:0.8rem">Cloudflare may strip <code>.html</code> from the URL. Both forms work.</p>
+        <p><strong>Asset drop (what the download links point at)</strong><br>
+          <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-film-pack.zip">https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/kannada-film-pack.zip</a></p>
+        <p class="player-note">A release file on <code>github.com</code>, not a page in the repository. It is deliberately not served from this site, so the site stays one small page and the pack can be re-cut without a redeploy. Hall masters are not in it; ask for those separately.</p>
       </div>
       <div class="card">
         <h3>One-liner for WhatsApp / email</h3>
         <p style="background:#f3efe6;padding:0.9rem;border-radius:8px;font-size:0.95rem;margin:0">
-          “Kannada 10-year film pack (no repo): open <strong>https://journey.lawparkeducationaltrust.org/anniversary-video-production/kannada/team-handoff</strong> first. Watch the cut, use the feedback form, and follow the linked scripts / rights docs. Narration will be a human Kannada voice; the preview voice is temporary and must not be shown in the hall.”
+          “Kannada 10-year film pack (no repo access needed): open <strong>https://journey.lawparkeducationaltrust.org/anniversary-video-production/kannada/team-handoff</strong> first. The video on it is a <strong>reference cut, not the final render</strong>. Watch it, then either give notes in the form or download the complete pack from the same page and plan your own version. Everything is on that one page. Narration will be a human Kannada voice; the preview voice is temporary and must never be shown in the hall.”
         </p>
-        <p class="player-note" style="margin-top:0.8rem">Optional full zip (stills + tools) is only for editors who must rebuild locally. See <a href="SHARE-PACK.md">SHARE-PACK.md</a>. Never include API keys or <code>~/.elevenlabs_key</code>.</p>
+        <p class="player-note" style="margin-top:0.8rem">Rebuild the release after any document changes with <code>scripts/build-asset-drop.sh</code>, which prints the upload command. The filenames and therefore every link on this page stay the same. Never put API keys or <code>~/.elevenlabs_key</code> in it. See <a href="https://github.com/propagetech/law-park-educational-trust-10-years/releases/download/film-pack/SHARE-PACK.md">SHARE-PACK.md</a>.</p>
       </div>
     </div>
   </div>
@@ -1223,7 +1326,7 @@ function render() {
     if (cls === "block") tr.classList.add("blocked");
     const isFile = /\/.+\.[a-z0-9]{2,4}$/i.test(s.path || "");
     const assetLink = isFile
-      ? `<a href="../../${esc(s.path)}">${esc(s.asset || "n/a")}</a>`
+      ? `${esc(s.asset || "n/a")}<br><span style="color:#5c5c6e;font-size:0.8rem">${esc(s.path)}</span>`
       : `${esc(s.asset || "n/a")}${s.path ? `<br><span style="color:#5c5c6e;font-size:0.8rem">${esc(s.path)}</span>` : ""}`;
     const consentCell = cls
       ? `<span class="cflag ${cls}">${CFLAG_TEXT[cls]}</span><br>${esc(s.consent)}`

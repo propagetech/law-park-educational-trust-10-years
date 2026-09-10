@@ -55,6 +55,8 @@ anniversary-video-production/**/tools/gfx/
 anniversary-video-production/**/tools/gfx@*x/
 anniversary-video-production/**/tools/stills/
 anniversary-video-production/**/tools/stills@*x/
+anniversary-video-production/**/tools/runway-plates/
+anniversary-video-production/**/tools/runway-plates@*x/
 anniversary-video-production/**/tools/vo/
 anniversary-video-production/**/tools/subs.json
 anniversary-video-production/**/tools/*.wav
@@ -106,3 +108,9 @@ anniversary-video-production/kannada-voice/reports/final-narration-plan.json
 # to a tool, which puts noise in unrelated diffs.
 __pycache__/
 *.pyc
+
+# The creative-team asset drop, staged by scripts/build-asset-drop.sh and
+# uploaded to the GitHub release that team-handoff.html links to. Every file in
+# it is a copy of something already tracked, or a zip of them, so it rebuilds
+# in seconds and committing it would only duplicate the pack.
+.asset-drop/

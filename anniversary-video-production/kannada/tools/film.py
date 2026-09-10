@@ -33,7 +33,8 @@ captions stay toggleable, searchable and translatable.
 import json, os, subprocess, sys
 from PIL import Image, ImageDraw, ImageFilter
 
-REPO = "/Users/chetan/Downloads/jeevitha/law-park-educational-trust-10-years"
+# Repository root, derived from this file so the pack rebuilds wherever it is unzipped.
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "..", ".."))
 
 def _arg(flag, cast, default):
     if flag in sys.argv:

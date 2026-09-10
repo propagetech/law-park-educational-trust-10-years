@@ -70,47 +70,44 @@ Three files first:
 3. **[`Kannada-cue-sheet.csv`](Kannada-cue-sheet.csv)** is the audio: 46 music
    cues and 28 effect events.
 
-If you re-time anything, re-derive rather than re-type. Run `python3 cue.py` and
-`python3 cue.py --audit-docs` afterwards. The film has already moved twice and
-hand-typed timecodes went stale within the hour.
+If you re-time anything, change the timing data and let the documents follow.
+Do not hand-type a new timecode into a document. The film has already moved twice
+and hand-typed timecodes went stale within the hour.
 
 ---
 
-## 4 · Rebuilding the film from this pack
+## 4 · Two things nobody has, whichever way you build
 
-Unzip anywhere. The scripts find their own way from where they sit, so the
-folder layout inside the zip has to stay as it is. You need Python 3, ffmpeg and
-Playwright. About 13 minutes on a recent laptop.
+These are not ours to close, and they constrain any version of the film, cut our
+way or yours.
 
-```
-cd anniversary-video-production/kannada/tools
+- **There is no music.** No licence has been cleared, and clearing one is
+  BLOCKING under `14` item 5.1. [`Kannada-music-map.md`](Kannada-music-map.md)
+  carries the palette, the motif, the intensity curve and a composer brief if
+  you want to commission it.
+- **The sound effects are not in the pack.** Each one has to be downloaded from
+  the source recorded in [`Kannada-sfx-licence-log.csv`](Kannada-sfx-licence-log.csv),
+  which is also the record of what was licensed and how. Two of the fourteen in
+  the reference cut are still placeholders.
 
-python3 gfx.py ../05-kannada-subtitles.srt --scale 2
-python3 film.py silent.mp4
-python3 stem.py <VOICE_ID>          # needs your own ElevenLabs key, or skip and drop in a human read
-python3 sfx.py --strict             # needs the effect files, see the licence log
-python3 mix.py --calibrate
-python3 master.py                   # 4K review master
-python3 master.py --check           # what still blocks a release
-```
+Nothing else is missing. There is no rendered video or audio in the pack because
+all of it is reproducible from the timing data plus the photographs, so shipping
+a render would only guarantee that somebody edits a stale copy.
 
-`master.py --release` is the only path to a publishable file, and it refuses to
-run while any of the five gates is open.
+### If you want to reproduce our cut exactly
 
-[`tools/README.md`](tools/README.md) says what every script does and in what
-order. What is not in the pack, because all of it is reproducible:
+You almost certainly do not need this. It exists so the film can be rebuilt years
+from now without a project file.
 
-| Missing | Rebuild it with |
-|---|---|
-| Every `.mp4` | `python3 film.py`, then `master.py` |
-| `tools/gfx/`, the cards | `python3 gfx.py ../05-kannada-subtitles.srt --scale 2` |
-| `tools/stills/`, the crops | `python3 film.py` makes them on the way through |
-| The narration `.wav` | `python3 stem.py <VOICE_ID>` |
-| Stems, masters, previews | `python3 mix.py --calibrate` |
-| The effect `.mp3` files | Download from the URLs in [`Kannada-sfx-licence-log.csv`](Kannada-sfx-licence-log.csv) |
-| The music bed | **Does not exist.** See [`Kannada-music-map.md`](Kannada-music-map.md), section 6 |
+The scripts that produced the reference cut are in `tools/` inside this pack, and
+[`tools/README.md`](tools/README.md) lists what each one does and the order to run
+them in. They are Python, and they need ffmpeg and Playwright. Unzip anywhere, but
+keep the folder layout inside the archive as it is: the scripts work out where they
+are sitting, and every photograph path is relative to the top of the archive.
 
----
+If you are cutting this in Premiere, Resolve, Final Cut or a generative tool,
+ignore all of that. The documents and the photographs are what you need, and the
+timing data reads as plain JSON in any editor.
 
 ## 5 · Where to send notes
 

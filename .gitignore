@@ -114,3 +114,171 @@ __pycache__/
 # it is a copy of something already tracked, or a zip of them, so it rebuilds
 # in seconds and committing it would only duplicate the pack.
 video/.asset-drop/
+
+# ---- generated images (do not commit) ----------------------------------
+# Each path below is copied from assets/ by website/scripts/sync-images-from-assets.mjs,
+# driven by website/image-manifest.json and run automatically before `next build`.
+# assets/ is the master library and the only tracked copy; committing these again
+# would reintroduce the duplicates and let the two copies drift apart.
+website/public/android-chrome-192x192.png
+website/public/android-chrome-192x192.webp
+website/public/android-chrome-512x512.png
+website/public/android-chrome-512x512.webp
+website/public/apple-touch-icon.png
+website/public/apple-touch-icon.webp
+website/public/favicon-16x16.png
+website/public/favicon-16x16.webp
+website/public/favicon-32x32.png
+website/public/favicon-32x32.webp
+website/public/images/1st-Child-1.webp
+website/public/images/1st-Child-2.webp
+website/public/images/1st-Child-3.webp
+website/public/images/2017-1.webp
+website/public/images/2017-2.webp
+website/public/images/2017-3.jpeg
+website/public/images/2017.webp
+website/public/images/Bharat-Shiksha-Ratan-Award-Certificate.webp
+website/public/images/FB_IMG_1558335171738.jpeg
+website/public/images/HIV.jpeg
+website/public/images/Magazine photos/mag_01.jpeg
+website/public/images/Magazine photos/mag_02.jpeg
+website/public/images/Magazine photos/mag_03.jpeg
+website/public/images/Magazine photos/mag_04.jpeg
+website/public/images/Magazine photos/mag_05.jpeg
+website/public/images/Magazine photos/mag_06.jpeg
+website/public/images/Magazine photos/mag_07.jpeg
+website/public/images/Magazine photos/mag_09.jpeg
+website/public/images/Magazine photos/mag_10.jpeg
+website/public/images/Magazine photos/mag_12.jpeg
+website/public/images/Magazine photos/mag_13.jpeg
+website/public/images/Magazine photos/mag_15.jpeg
+website/public/images/Magazine photos/mag_17.jpeg
+website/public/images/Magazine photos/mag_18.jpeg
+website/public/images/Magazine photos/mag_19.jpeg
+website/public/images/cover-bg.webp
+website/public/images/hero.png
+website/public/images/hero.webp
+website/public/images/logo-copy.png
+website/public/images/logo-copy.webp
+website/public/images/magazine-gallery/Charulatha-MR.jpeg
+website/public/images/magazine-gallery/child-on-floor.jpeg
+website/public/images/magazine-gallery/trustee-mr-sm-manjunatha.webp
+website/public/images/mhaks.16@oksbi.jpg
+website/public/images/mosaic-spread/boy-holding-school-supplies.jpeg
+website/public/images/mosaic-spread/charu-talk.jpeg
+website/public/images/mosaic-spread/child-opening-school-bag.jpeg
+website/public/images/mosaic-spread/children-reaching-for-supplies.jpeg
+website/public/images/mosaic-spread/children-showing-school-bags-on-veranda.jpeg
+website/public/images/mosaic-spread/girl-holding-school-bag-in-corridor.jpeg
+website/public/images/mosaic-spread/girls-opening-school-bags-outdoors.jpeg
+website/public/images/mosaic-spread/group-of-children-with-school-supplies.jpeg
+website/public/images/mosaic-spread/kids-craft.jpeg
+website/public/images/mosaic-spread/smiling-child-close-up.jpeg
+website/public/images/slide_03_Picture_1_00.jpg
+website/public/images/slide_03_Picture_1_00.webp
+website/public/images/slide_04_Picture_4_00.webp
+website/public/images/slide_05_Picture_1_00.webp
+website/public/images/slide_05_Picture_2_01.webp
+website/public/images/slide_05_Picture_4_02.webp
+website/public/images/slide_06_Picture_1_00.webp
+website/public/images/slide_06_Picture_3_01.webp
+website/public/images/slide_07_Picture_1_00.webp
+website/public/images/slide_08_Picture_5_00.webp
+website/public/images/slide_09_Picture_1_00.webp
+website/public/images/slide_09_Picture_3_01.webp
+website/public/images/slide_09_Picture_4_02.webp
+website/public/images/slide_10_Picture_1_00.webp
+website/public/images/slide_11_Picture_1_00.webp
+website/public/images/slide_11_Picture_2_01.webp
+website/public/images/slide_12_Picture_1_00.webp
+website/public/images/slide_13_Picture_1_00.webp
+website/public/images/slide_13_Picture_3_01.webp
+website/public/images/slide_14_Picture_1_00.webp
+website/public/images/slide_15_Picture_1_00.webp
+website/public/images/slide_16_Picture_1_00.webp
+website/public/images/slide_17_Picture_1_00.webp
+website/public/images/slide_18_Picture_2_00.webp
+website/public/images/slide_18_Picture_3_01.webp
+website/public/images/slide_18_Picture_4_02.webp
+website/public/images/slide_18_Picture_5_03.webp
+website/public/images/slide_19_Picture_1_00.webp
+website/public/images/slide_19_Picture_2_01.webp
+website/public/images/slide_19_Picture_3_02.webp
+website/public/images/slide_19_Picture_4_03.webp
+website/public/images/slide_20_Picture_3_00.webp
+website/public/images/slide_21_Picture_1_00.webp
+website/public/images/slide_23_Picture_1_00.webp
+website/public/images/slide_23_Picture_2_01.webp
+website/public/images/slide_23_Picture_3_02.webp
+website/public/images/slide_23_Picture_5_03.webp
+website/public/images/slide_24_Picture_1_00.webp
+website/public/images/slide_24_Picture_2_01.webp
+website/public/images/slide_24_Picture_3_02.webp
+website/public/images/slide_24_Picture_4_03.webp
+website/public/images/slide_24_Picture_5_04.webp
+website/public/images/slide_24_Picture_6_05.webp
+website/public/images/slide_25_Picture_1_00.webp
+website/public/images/slide_25_Picture_2_01.webp
+website/public/images/slide_27_Picture_10_07.webp
+website/public/images/slide_27_Picture_1_00.webp
+website/public/images/slide_27_Picture_2_01.webp
+website/public/images/slide_27_Picture_3_02.webp
+website/public/images/slide_27_Picture_4_03.webp
+website/public/images/slide_27_Picture_5_04.webp
+website/public/images/slide_27_Picture_6_05.webp
+website/public/images/slide_27_Picture_8_06.webp
+website/public/images/slide_28_Picture_3_00.webp
+website/public/images/slide_29_Picture_5_00.webp
+website/public/images/steel-plate-and-glass-distributed-to-these-children.webp
+website/public/images/tech-hat-pvt-ltd-logo.svg
+website/public/logo.png
+website/public/logo.webp
+website/public/magazine/print/Aishwarya-K.jpeg
+website/public/magazine/print/Anand-Gopi.jpeg
+website/public/magazine/print/Arun-AK.jpeg
+website/public/magazine/print/Bhavya-Shravanth.jpeg
+website/public/magazine/print/Damodaran,.jpeg
+website/public/magazine/print/Dr.-Adarsh-Babu,.jpeg
+website/public/magazine/print/Dr.-Varalakshmi-and-Dr.-Nandakumar,.jpeg
+website/public/magazine/print/Jayanthi-Subramanian,.jpeg
+website/public/magazine/print/K.V.-Ramani.jpeg
+website/public/magazine/print/Kavitha-Hari.jpeg
+website/public/magazine/print/Krishnapriya,.jpeg
+website/public/magazine/print/Latha-s.jpeg
+website/public/magazine/print/Mr.-Nihar-Panigrahi.jpeg
+website/public/magazine/print/Ms.-Pooja-Banadka.jpeg
+website/public/magazine/print/P.V.-Rangaiah..jpeg
+website/public/magazine/print/R.-Guru-Subramanian.jpeg
+website/public/magazine/print/Rajesh-Reddy.jpeg
+website/public/magazine/print/Ramya-Balaji.jpeg
+website/public/magazine/print/Reshma.jpeg
+website/public/magazine/print/S.-Sumesh.jpeg
+website/public/magazine/print/Sai-Prasanth.jpeg
+website/public/magazine/print/Sangeetha-Arun.jpeg
+website/public/magazine/print/Sathyabrata,.jpeg
+website/public/magazine/print/Sreekanth.jpeg
+website/public/magazine/testimonial-images/image1.jpeg
+website/public/magazine/testimonial-images/image10.jpeg
+website/public/magazine/testimonial-images/image11.jpeg
+website/public/magazine/testimonial-images/image12.jpeg
+website/public/magazine/testimonial-images/image13.jpeg
+website/public/magazine/testimonial-images/image14.jpeg
+website/public/magazine/testimonial-images/image15.jpeg
+website/public/magazine/testimonial-images/image16.jpeg
+website/public/magazine/testimonial-images/image17.jpeg
+website/public/magazine/testimonial-images/image18.jpeg
+website/public/magazine/testimonial-images/image19.jpeg
+website/public/magazine/testimonial-images/image2.jpeg
+website/public/magazine/testimonial-images/image20.jpeg
+website/public/magazine/testimonial-images/image21.jpeg
+website/public/magazine/testimonial-images/image22.jpeg
+website/public/magazine/testimonial-images/image23.jpeg
+website/public/magazine/testimonial-images/image24.jpeg
+website/public/magazine/testimonial-images/image25.jpeg
+website/public/magazine/testimonial-images/image3.jpeg
+website/public/magazine/testimonial-images/image4.jpeg
+website/public/magazine/testimonial-images/image5.jpeg
+website/public/magazine/testimonial-images/image6.jpeg
+website/public/magazine/testimonial-images/image7.jpeg
+website/public/magazine/testimonial-images/image8.jpeg
+website/public/magazine/testimonial-images/image9.jpeg

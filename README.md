@@ -52,8 +52,21 @@ law-park-educational-trust-10-years/
 │   ├── event-day/        # event playback material
 │   └── scripts/          # handoff sync, asset-drop builder
 ├── assets/           # master photo library, shared by both projects
+│                     # the ONLY tracked copy of every photograph
 └── docs/             # project notes and status
 ```
+
+### Images
+
+`assets/` is the single source of truth for photographs. The images the site
+serves are generated into `website/public/` before every build, from the map in
+`website/image-manifest.json`, and are git-ignored rather than committed twice.
+Served paths are unchanged from when they were committed, so no image URL moves.
+
+To add or replace an image: put it in `assets/`, add the served path to
+`website/image-manifest.json`, then `npm run sync:images` (the build runs it
+automatically). A manifest entry whose source is missing fails the build rather
+than deploying a gap.
 
 The website build no longer touches the film project. To republish the film
 handoff page at its public URL, run the sync deliberately:

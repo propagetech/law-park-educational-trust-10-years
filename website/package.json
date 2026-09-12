@@ -7,11 +7,13 @@
   },
   "scripts": {
     "dev": "next dev",
+    "sync:images": "node scripts/sync-images-from-assets.mjs",
     "optimize-images": "node scripts/optimize-images.mjs",
     "sync:kannada-handoff": "bash ../video/scripts/sync-kannada-handoff.sh",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "prebuild": "npm run sync:images"
   },
   "dependencies": {
     "autoprefixer": "^10.4.27",

@@ -6,6 +6,18 @@ Each still is named **`{year}-{event}__{shot-id}.{ext}`**.
 Folder: `video/production/photo-pack-10-years/`  
 Enhanced phone frames (AI cleanup): `enhanced/`
 
+> **This folder is generated.** Every still below is rebuilt from `assets/`, the master
+> photo library, by `video/scripts/sync-photo-pack.mjs` using `photo-manifest.json`.
+> The stills are not committed; run the script to produce them:
+>
+> ```bash
+> node video/scripts/sync-photo-pack.mjs
+> ```
+>
+> Do not edit a still here: the next sync overwrites it. Edit the master in `assets/`.
+> `enhanced/` is the exception. Those AI-cleanup renders exist nowhere else and are
+> tracked in git.
+
 **Grade rule from production docs:** for picture lock, prefer original `.jpg` / `.jpeg` and color-grade in the NLE. Use `enhanced/` only after a trustee face-check confirms identity fidelity.
 
 ---

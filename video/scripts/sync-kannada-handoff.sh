@@ -25,7 +25,7 @@ rm -rf "$DEST" "$WEB/public/anniversary-video-research"
 mkdir -p "$DEST"
 
 cp "$SRC_K/team-handoff.html" "$DEST/"
-cp "$SRC_K/favicon-32x32.png" "$DEST/"
+cp "$ROOT/assets/images/icons/favicon-32.png" "$DEST/favicon-32x32.png"
 
 # Guard: the page must not ship a relative asset link, because nothing beside it
 # is deployed any more. The favicon is the one local file it is allowed to want.

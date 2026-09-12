@@ -63,10 +63,20 @@ serves are generated into `website/public/` before every build, from the map in
 `website/image-manifest.json`, and are git-ignored rather than committed twice.
 Served paths are unchanged from when they were committed, so no image URL moves.
 
-To add or replace an image: put it in `assets/`, add the served path to
-`website/image-manifest.json`, then `npm run sync:images` (the build runs it
-automatically). A manifest entry whose source is missing fails the build rather
-than deploying a gap.
+The film's shot-id photo pack is generated the same way:
+
+```bash
+node video/scripts/sync-photo-pack.mjs   # video/production/photo-pack-10-years/
+```
+
+Its `enhanced/` renders are the exception and stay tracked, because they exist
+nowhere else.
+
+To add or replace an image: put it in `assets/`, add the served path to the
+relevant manifest (`website/image-manifest.json` or the pack's
+`photo-manifest.json`), then run the sync. The website's runs automatically
+before every build. A manifest entry whose source is missing fails loudly rather
+than leaving a gap.
 
 The website build no longer touches the film project. To republish the film
 handoff page at its public URL, run the sync deliberately:

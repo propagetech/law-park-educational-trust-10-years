@@ -119,6 +119,8 @@ When setting up CI/CD or local environments:
 
 - This is a static site deployed to GitHub Pages
 - Uses Next.js static export (`output: 'export'` in `next.config.js`)
-- All images should be in `public/` directory
-- Gallery images are in `public/images/` directory
+- The Next.js app lives in `website/`; run npm commands from there
+- All images should be in `website/public/` directory
+- Gallery images are in `website/public/images/` directory
+- `assets/` at the repo root is the master photo library, shared with `video/`
 

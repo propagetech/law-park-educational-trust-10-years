@@ -19,6 +19,7 @@ Anniversary microsite showcasing the 10-year journey of Law Park Educational Tru
 ### Development
 
 ```bash
+cd website
 npm install
 npm run dev
 # open http://localhost:3000
@@ -27,21 +28,38 @@ npm run dev
 ### Production Build
 
 ```bash
+cd website
 npm run build
-# static output in out/
+# static output in website/out/
 npx serve out
 ```
 
 ## Project Structure
 
+Two independent projects share one repository and one photo library.
+
 ```
 law-park-educational-trust-10-years/
-├── app/              # Next.js routes (/, /content/*, /invite)
-├── components/       # React components (layout, sections, ui)
-├── data/             # Milestones, activities, website content
-├── public/           # Static assets (images, magazine templates)
-├── assets/           # Processed image manifest
-└── scripts/          # Image optimization, face extraction, etc.
+├── website/          # the Next.js microsite (this is the deployed app)
+│   ├── app/              # routes (/, /content/*, /invite)
+│   ├── components/       # React components (layout, sections, ui)
+│   ├── data/             # milestones, activities, website content
+│   ├── public/           # served static assets
+│   └── scripts/          # image optimization, face extraction
+├── video/            # the anniversary film project
+│   ├── production/       # Kannada film: script, tools, render chain
+│   ├── research/         # research and bilingual briefs
+│   ├── event-day/        # event playback material
+│   └── scripts/          # handoff sync, asset-drop builder
+├── assets/           # master photo library, shared by both projects
+└── docs/             # project notes and status
+```
+
+The website build no longer touches the film project. To republish the film
+handoff page at its public URL, run the sync deliberately:
+
+```bash
+cd website && npm run sync:kannada-handoff
 ```
 
 ## Deploy (Cloudflare Pages)
@@ -52,8 +70,13 @@ Connect repo in **Workers & Pages** → **Create** → **Pages** → **Connect t
 |---------|--------|
 | Production branch | `main` |
 | Framework preset | **Next.js (Static HTML Export)** |
+| Root directory | `website` |
 | Build command | `npm ci && npm run build` |
 | Build output directory | `out` |
+
+If the Pages project predates the `website/` split, set **Root directory** to
+`website` in the build configuration. Without it the build runs at the repo
+root, finds no `package.json`, and fails.
 
 Add custom domain: `journey.lawparkeducationaltrust.org`.
 

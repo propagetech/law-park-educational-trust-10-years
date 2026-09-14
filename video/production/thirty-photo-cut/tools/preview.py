@@ -440,6 +440,7 @@ TEMPLATE = r"""<title>Ten Years, Thirty Frames</title>
   --shadow:0 1px 2px rgba(0,0,0,.5), 0 10px 30px -14px rgba(0,0,0,.8);
 }
 *{box-sizing:border-box}
+[hidden]{display:none!important}
 body{
   margin:0; background:var(--paper); color:var(--body);
   font:400 15px/1.6 "IBM Plex Sans", system-ui, -apple-system, sans-serif;
@@ -721,12 +722,21 @@ button.chip .ck::before{content:"\25B8\00a0"}
 .galnote{margin:0}
 .galgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(184px,1fr));
   gap:10px; overflow-y:auto; padding:2px}
-.galitem{appearance:none; cursor:pointer; position:relative; display:block;
-  padding:0; border:2px solid transparent; border-radius:2px; background:none;
-  outline-offset:2px}
-.galitem img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
+.galitem{position:relative; border:2px solid transparent; border-radius:2px}
+.galpick{appearance:none; cursor:pointer; display:block; width:100%; padding:0;
+  border:0; background:none; text-align:left; outline-offset:2px}
+.galpick img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
   border-radius:1px; background:#0d0b09}
 .galitem:hover{border-color:var(--laterite)}
+.galpick[disabled]{cursor:default}
+.galitem:has(.galpick[disabled]):hover{border-color:var(--laterite)}
+
+/* the corner icon: look closer without choosing */
+.galzoom{appearance:none; cursor:pointer; position:absolute; top:5px; right:5px;
+  display:inline-flex; align-items:center; justify-content:center;
+  width:26px; height:26px; padding:0; border:0; border-radius:2px;
+  background:rgba(8,6,5,.62); color:#fff; opacity:.85}
+.galzoom:hover,.galzoom:focus-visible{opacity:1; background:var(--laterite)}
 .galname{display:block; padding:5px 2px 0;
   font:400 10px/1.35 "IBM Plex Mono",monospace; color:var(--muted);
   overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
@@ -735,7 +745,18 @@ button.chip .ck::before{content:"\25B8\00a0"}
   text-transform:uppercase; color:#fff; background:var(--muted);
   padding:4px 6px; border-radius:2px}
 .galitem.current{border-color:var(--laterite)}
+.galfull{display:flex; flex-direction:column; gap:12px; min-height:0}
+.galfull img{display:block; width:100%; max-height:64vh; object-fit:contain;
+  background:#0d0b09; border-radius:2px}
+.galfullbar{display:flex; align-items:center; gap:10px; flex-wrap:wrap}
+#galfullname{flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;
+  white-space:nowrap; font:400 12px/1.4 "IBM Plex Mono",monospace;
+  color:var(--muted)}
+.btn[disabled]{opacity:.5; cursor:default; border-color:var(--rule2);
+  color:var(--muted)}
+.btn[disabled]:hover{border-color:var(--rule2); color:var(--muted)}
 .galitem.current .galtag{background:var(--laterite)}
+.galitem.current .galname{color:var(--ink)}
 .galitem.current.taken{border-color:var(--clay)}
 /* Every photograph in a 1:1 cut is already carrying a shot, so being taken is
    the normal state, not a warning. The tag says whose it is; the picture stays
@@ -870,9 +891,18 @@ body.lang-kn .en{display:none}
     <button type="button" class="btn ghost" id="galClose">Close</button>
   </div>
   <p class="galnote">Every photograph in the pack, at the 16:9 crop the film uses.
-    One already carrying another shot is marked: <code>build.py</code> refuses a
-    cut that uses the same photograph twice.</p>
+    Picking one that already carries another shot <strong>swaps the two</strong>,
+    so no photograph is ever on two shots at once: <code>build.py</code> refuses
+    that cut. Use the corner icon to see a photograph full size.</p>
   <div class="galgrid" id="galgrid"></div>
+  <div class="galfull" id="galfull" hidden>
+    <img id="galfullimg" alt="">
+    <div class="galfullbar">
+      <span id="galfullname"></span>
+      <button type="button" class="btn" id="galfullUse">Put on this shot</button>
+      <button type="button" class="btn ghost" id="galfullBack">Back to gallery</button>
+    </div>
+  </div>
 </div></dialog>
 
 <dialog id="dlg"><form method="dialog" class="dlg">
@@ -1079,12 +1109,22 @@ body.lang-kn .en{display:none}
     Object.keys(photoSrc).sort().forEach(function (photo) {
       var others = (used[photo] || []).filter(function (x) { return x !== sid; });
       var isMine = photo === mine;
+
+      var cell = document.createElement("div");
+      cell.className = "galitem" + (isMine ? " current" : "") +
+                       (others.length ? " taken" : "");
+      cell.setAttribute("data-photo", photo);
+
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "galitem" + (isMine ? " current" : "") +
-                    (others.length ? " taken" : "");
+      b.className = "galpick";
       b.setAttribute("data-photo", photo);
       b.setAttribute("aria-pressed", String(isMine));
+      b.title = isMine ? "Already on " + sid
+              : others.length ? "Put on " + sid + ", swapping with " + others[0]
+              : "Put on " + sid;
+      b.setAttribute("aria-label", b.title);
+      if (isMine) b.disabled = true;
 
       var im = document.createElement("img");
       im.src = photoSrc[photo];
@@ -1096,15 +1136,27 @@ body.lang-kn .en{display:none}
         var tag = document.createElement("em");
         tag.className = "galtag";
         tag.textContent = isMine
-          ? (others.length ? "current, also " + others.join(", ") : "current")
-          : "in " + others.join(", ");
+          ? (others.length ? "on " + sid + ", also " + others.join(", ") : "on " + sid)
+          : "swap with " + others.join(", ");
         b.appendChild(tag);
       }
       var nm = document.createElement("span");
       nm.className = "galname";
       nm.textContent = label(photo);
       b.appendChild(nm);
-      galGrid.appendChild(b);
+      cell.appendChild(b);
+
+      var zoom = document.createElement("button");
+      zoom.type = "button";
+      zoom.className = "galzoom";
+      zoom.setAttribute("data-photo", photo);
+      zoom.title = "View full size";
+      zoom.setAttribute("aria-label", "View " + label(photo) + " full size");
+      zoom.innerHTML = '<svg viewBox="0 0 16 16" width="13" height="13" ' +
+        'aria-hidden="true"><path fill="currentColor" d="M1 1h6v2H3v4H1V1zm14 0v6h-2V3H9V1h6zM1 9h2v4h4v2H1V9zm12 0h2v6H9v-2h4V9z"/></svg>';
+      cell.appendChild(zoom);
+
+      galGrid.appendChild(cell);
     });
     if (typeof gal.showModal === "function") gal.showModal();
     var cur = galGrid.querySelector(".galitem.current") || galGrid.firstChild;
@@ -1125,14 +1177,84 @@ body.lang-kn .en{display:none}
     save();
   }
 
+  // No photograph may end up on two shots: build.py refuses that cut. Blocking
+  // every taken tile would make the gallery inert, because in a one-to-one cut
+  // every photograph is already on a shot. So picking one that belongs to
+  // another shot EXCHANGES the two, which is what reordering a cut actually
+  // means and cannot produce a duplicate.
+  function assignPhoto(sid, photo) {
+    var owner = null;
+    CUT.shots.forEach(function (b) {
+      if (b.sid !== sid && currentPhoto(b.sid) === photo) owner = b.sid;
+    });
+    if (owner) {
+      var mine = currentPhoto(sid);
+      setPhoto(owner, mine);
+      setPhoto(sid, photo);
+      note(sid + " and " + owner + " swapped photographs.");
+    } else {
+      setPhoto(sid, photo);
+    }
+  }
+
   galGrid.addEventListener("click", function (ev) {
-    var item = ev.target.closest(".galitem");
-    if (!item || !galSid) return;
-    setPhoto(galSid, item.getAttribute("data-photo"));
+    if (!galSid) return;
+    var zoom = ev.target.closest(".galzoom");
+    if (zoom) { openFull(zoom.getAttribute("data-photo")); return; }
+    var pick = ev.target.closest(".galpick");
+    if (!pick || pick.disabled) return;
+    assignPhoto(galSid, pick.getAttribute("data-photo"));
     gal.close();
   });
   document.getElementById("galClose").addEventListener("click", function () {
     gal.close();
+  });
+
+  // Full view. A 184px tile is enough to recognise a photograph and not enough
+  // to judge one, so the zoom icon opens it at the size the frame will be.
+  var full = document.getElementById("galfull");
+  var fullImg = document.getElementById("galfullimg");
+  var fullName = document.getElementById("galfullname");
+  var fullUse = document.getElementById("galfullUse");
+  var fullPhoto = null;
+
+  function openFull(photo) {
+    fullPhoto = photo;
+    fullImg.src = photoSrc[photo];
+    fullImg.alt = label(photo);
+    fullName.textContent = label(photo);
+    var owner = null;
+    CUT.shots.forEach(function (b) {
+      if (b.sid !== galSid && currentPhoto(b.sid) === photo) owner = b.sid;
+    });
+    var isMine = currentPhoto(galSid) === photo;
+    fullUse.disabled = isMine;
+    fullUse.textContent = isMine ? "Already on " + galSid
+      : owner ? "Put on " + galSid + ", swap with " + owner
+      : "Put on " + galSid;
+    full.hidden = false;
+    galGrid.hidden = true;
+    fullUse.focus();
+  }
+  function closeFull() {
+    full.hidden = true;
+    galGrid.hidden = false;
+    fullImg.removeAttribute("src");
+    var back = galGrid.querySelector('.galzoom[data-photo="' + fullPhoto + '"]');
+    if (back && back.focus) back.focus();
+    fullPhoto = null;
+  }
+  document.getElementById("galfullBack").addEventListener("click", closeFull);
+  fullUse.addEventListener("click", function () {
+    if (!fullPhoto || !galSid) return;
+    assignPhoto(galSid, fullPhoto);
+    closeFull();
+    gal.close();
+  });
+  gal.addEventListener("close", function () { if (!full.hidden) closeFull(); });
+  gal.addEventListener("cancel", function (ev) {
+    // Escape steps back out of the full view before it closes the gallery.
+    if (!full.hidden) { ev.preventDefault(); closeFull(); }
   });
 
   // ------------------------------------------------------------------- shot

@@ -86,12 +86,20 @@ needs a change, replace) and a note.
 
 The photograph control opens **the pack as pictures**, not as a list of file
 names: thirty thumbnails at the same 16:9 crop the film uses, the current one
-ringed, and every other one tagged with the shot already carrying it. Nobody can
-pick a photograph from `2025-schoolwide-supplies-group-photo__K02-K43`, and a
-clash is worth seeing before it becomes a build error: `build.py` refuses a cut
-that uses one photograph twice, and a doubly-claimed tile is flagged in red the
-moment it happens. The gallery reuses the frames already on the page, so it adds
-no bytes.
+ringed and disabled, every other one tagged with the shot carrying it. Nobody
+can pick a photograph from `2025-schoolwide-supplies-group-photo__K02-K43`. The
+corner icon opens any of them **full size** before you commit to it, with the
+same assign button on the large view.
+
+**No photograph can end up on two shots.** `build.py` refuses that cut, so the
+gallery makes it unreachable rather than reporting it afterwards. Blocking every
+taken tile would leave the gallery inert, because in a one-to-one cut every
+photograph is already on a shot, so picking one that belongs elsewhere
+**exchanges the two**. That is what reordering a cut means, it cannot produce a
+duplicate, and the export records both halves of the swap so `apply_review.py`
+writes both.
+
+The gallery reuses the frames already on the page, so it adds no bytes.
 
 Edit a line and the held time recalculates as you type, using the same two
 models `build.py` uses, so the page and the build agree: English at 140 wpm,

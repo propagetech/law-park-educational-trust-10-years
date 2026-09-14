@@ -33,7 +33,8 @@ narration without moving a frame.
 | [`timeline-30-photos.json`](timeline-30-photos.json) | The machine-readable cut, for the renderer |
 | `tools/shots.py` | **The source.** One entry per shot |
 | `tools/build.py` | Generates everything above |
-| `tools/preview.py` | Renders the cut as a browsable HTML review page |
+| `tools/preview.py` | Renders the cut as a review page you can listen to, mark up and print |
+| `tools/apply_review.py` | Writes a review exported from that page back into `shots.py` |
 
 ## Rebuilding
 
@@ -44,30 +45,87 @@ python3 tools/build.py           # write every deliverable
 
 ## The review page
 
-Neither the transcripts nor the timeline show what the film actually looks like,
-so `preview.py` renders the cut as an HTML page: every shot as its real 16:9
-crop with the heading composited over it, an English and Kannada toggle, and the
-sound events, consent state and direction beside each frame. It is the fastest
-way to judge whether a heading sits well on its photograph.
+Neither the transcripts nor the timeline show what the film looks or sounds
+like, so `preview.py` renders the cut as an HTML page: every shot as its real
+16:9 crop with the heading composited over it, an English and Kannada toggle,
+and the sound, consent state and direction beside each frame.
 
 ```bash
-python3 tools/preview.py preview                            # index.html plus img/
-python3 tools/preview.py ten-years-thirty-frames.html --inline   # one file, 4 MB
+python3 tools/preview.py preview                               # index.html plus img/ and audio/
+python3 tools/preview.py ten-years-thirty-frames.html --inline # one file, 7 MB
+python3 tools/preview.py preview --fragment                    # body only, to publish as an Artifact
+python3 tools/preview.py preview --no-audio                    # skip the ffmpeg pass
 ```
 
-The folder form is the one to host, or to open from a checkout. The `--inline`
-form embeds every frame as a data URI, so it is a single file that can be
-emailed to a trustee or opened from a USB stick with nothing beside it. Both are
-complete HTML documents; `--fragment` drops the document shell for publishing
-the same page as an Artifact, where the host supplies its own.
+The folder form is the one to host, or to open from a checkout. `--inline`
+embeds every frame and every sound clip as a data URI, so it is a single file
+that can be emailed to a trustee or opened from a USB stick with nothing beside
+it. Both are complete HTML documents.
 
-Neither output is committed. They are regenerated from the photo pack in a few
-seconds, and `.gitignore` in this folder keeps 5 MB of JPEG out of the history,
-the same rule the Kannada pack applies to video.
+### Listening
 
-The only thing the page needs from the network is the Google Fonts stylesheet
-for Playfair Display, IBM Plex and Noto Sans Kannada. Offline it falls back to
-system faces and stays readable, Kannada included.
+Every placement in `sfx-placements.csv` is pre-trimmed by ffmpeg to its own
+window, carrying that cue's own fades, and encoded as a small mono MP3. Pressing
+a cue auditions **the placement**, not the source file, which is the only version
+worth an opinion: the K23 low hit is 1.4 s of a 2.4 s recording, and the village
+bed exists only as one cleared 12.5 s window inside a 9 MB file. **Play shot**
+fires a shot's cues at their real offsets. Beds are cut to 15 s, which is enough
+to judge one, and 27 of the cut's 27 placements have a clip.
+
+**Solo** plays every cue at full level, so you can hear what it is. **In mix**
+drops each cue to its written level relative to the loudest cue in the film, so
+you can hear the balance between them. Neither is the mix: levels in this film
+are written against the narration's own speech RMS, and there is no narration
+yet.
+
+### Marking up
+
+**Mark up** makes the headings, the narration and the durations editable, lets a
+shot point at a different photograph from the pack or at a file on your machine,
+and gives every shot a status (approve, needs a change, replace) and a note.
+
+Edit a line and the held time recalculates as you type, using the same two
+models `build.py` uses, so the page and the build agree: English at 140 wpm,
+Kannada by display cluster. It turns red the moment the read no longer fits the
+shot. That is the fastest way to find out whether a rewrite is even possible in
+the time available.
+
+Edits live in this browser only. **Export review** writes a `review.json`:
+
+```bash
+python3 tools/apply_review.py review.json           # show what would change
+python3 tools/apply_review.py review.json --write   # write it, after a backup
+python3 tools/build.py                              # re-derive everything
+```
+
+`apply_review.py` applies a change only when the old value is still in
+`shots.py`, character for character. If the file has moved on since the review
+was made, the edit is refused and reported rather than guessed at, and nothing is
+half-applied. Statuses and notes are review opinion rather than film content, so
+they are printed for the creative team and never written into `shots.py`.
+
+A photograph chosen from your own machine is recorded by name, not carried: the
+page cannot put a file into the repository. Drop it into
+`photo-pack-10-years/enhanced/`, re-run `build.py`, then point the shot at it.
+
+**The page is never a second source of truth.** It exports old-value and
+new-value pairs; `shots.py` stays the one place the film is written.
+
+### Saving as PDF
+
+**Save as PDF** prints through a stylesheet built for it: A4 landscape, controls
+and navigation gone, one shot per block with no shot split across a page, the
+current language only, and every edit, status and note included. Print to PDF
+from the browser dialog. That PDF is the thing to send the creative team,
+because it carries the frames, the headings, the sound and the notes in one
+file that needs nothing installed.
+
+Neither preview output is committed. They regenerate from the photo pack in
+under a minute, and `.gitignore` in this folder keeps 7 MB of JPEG and MP3 out of
+the history, the same rule the Kannada pack applies to video.
+
+The only thing the page needs from the network is the Google Fonts stylesheet.
+Offline it falls back to system faces and stays readable, Kannada included.
 
 Nothing in this folder is hand-edited. Change `tools/shots.py` and re-run, and
 the timeline, both transcripts, both caption sets, the heading sheet and both

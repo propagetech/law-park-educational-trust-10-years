@@ -1,4 +1,8 @@
 User-agent: *
 Allow: /
 
+# Production review pages. Photographs of identifiable children, most of them
+# still consent-blocked, and unreleased narration. Not for indexing.
+Disallow: /anniversary-video-production/
+
 Sitemap: https://journey.lawparkeducationaltrust.org/sitemap.xml

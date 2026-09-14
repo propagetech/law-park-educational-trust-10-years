@@ -1,0 +1,4 @@
+# Generated review pages. Rebuild with tools/preview.py rather than committing
+# 5 MB of JPEG that build.py can regenerate from the photo pack at any time.
+preview/
+ten-years-thirty-frames.html

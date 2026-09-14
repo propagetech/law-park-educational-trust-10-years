@@ -6,6 +6,9 @@ import Card from '../ui/Card'
 const TEAM_HANDOFF_URL =
   'https://journey.lawparkeducationaltrust.org/anniversary-video-production/kannada/team-handoff'
 
+const THIRTY_PHOTO_CUT_URL =
+  'https://journey.lawparkeducationaltrust.org/anniversary-video-production/thirty-photo-cut/'
+
 function ContentLandingPage() {
   return (
     <div className="min-h-screen bg-gray-50 py-12">
@@ -20,9 +23,9 @@ function ContentLandingPage() {
         </div>
 
         <div className="max-w-6xl mx-auto mb-8 rounded-lg border border-primary-200 bg-primary-50 px-5 py-4 text-left">
-          <p className="text-sm font-semibold text-primary-900 mb-1">Creative team · Kannada film (no repo)</p>
-          <p className="text-sm text-primary-800 break-all">
-            Handoff:{' '}
+          <p className="text-sm font-semibold text-primary-900 mb-1">Creative team · anniversary film (no repo)</p>
+          <p className="text-sm text-primary-800 break-all mb-1">
+            Kannada handoff:{' '}
             <a
               href={TEAM_HANDOFF_URL}
               target="_blank"
@@ -30,6 +33,17 @@ function ContentLandingPage() {
               className="underline font-medium"
             >
               {TEAM_HANDOFF_URL}
+            </a>
+          </p>
+          <p className="text-sm text-primary-800 break-all">
+            30-photo cut review:{' '}
+            <a
+              href={THIRTY_PHOTO_CUT_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline font-medium"
+            >
+              {THIRTY_PHOTO_CUT_URL}
             </a>
           </p>
         </div>
@@ -54,6 +68,33 @@ function ContentLandingPage() {
                 </p>
                 <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
                   Open handoff
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                  </svg>
+                </span>
+              </div>
+            </Card>
+          </a>
+
+          <a
+            href={THIRTY_PHOTO_CUT_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="block focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-600 focus-visible:ring-offset-2 rounded-lg"
+          >
+            <Card className="p-8 h-full" hover>
+              <div className="flex flex-col h-full">
+                <div className="mb-4 text-4xl" aria-hidden>
+                  🎞️
+                </div>
+                <h2 className="text-2xl font-bold mb-3 text-gray-900">
+                  30-Photo Cut · Review Page
+                </h2>
+                <p className="text-gray-600 flex-1 mb-6">
+                  Five-minute alternative cut, shot by shot in English and Kannada. Hear every sound cue as placed, mark up the script and photographs, then save the whole thing as a PDF.
+                </p>
+                <span className="text-primary-600 font-semibold inline-flex items-center gap-2">
+                  Open review page
                   <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
                   </svg>

@@ -254,9 +254,6 @@ def main():
               % (a["n"], a["first"], a["n"], esc(a["en"]), esc(a["kn"]),
                  esc(a["first"]), esc(a["last"]), a["run"]) for a in acts]
 
-    photo_opts = "".join('<option value="%s">%s</option>' % (esc(p), esc(stem(p)))
-                         for p in photos)
-
     rows, cur_act = [], None
     for r in cut:
         if r["act"] != cur_act:
@@ -298,7 +295,8 @@ def main():
             ak="%.1f" % r["air_kn"], chips="".join(chips),
             cls=("ok" if consent.startswith("CLEAR") else
                  "rev" if consent.startswith("REVIEW") else "blk"),
-            consent=esc(consent), note=esc(r["note"]), photoopts=photo_opts,
+            consent=esc(consent), note=esc(r["note"]),
+            photolabel=esc(stem(r["photo"])),
             playshot=('<button type="button" class="playshot" data-shot="%s">'
                       'Play shot</button>' % r["sid"]) if has_audio else "")))
 
@@ -346,8 +344,15 @@ SHOT = r"""<article class="shot a{{act}}" id="{{sid}}" data-sid="{{sid}}">
     </div>
     <p class="inframe"><b>In frame</b> {{see}}</p>
     <div class="editrow">
-      <label>Photograph<select class="photopick">{{photoopts}}</select></label>
-      <label>Or a file from this machine
+      <div class="photofield">
+        <span class="fieldlabel">Photograph</span>
+        <button type="button" class="photobtn">
+          <img class="photothumb" alt="" width="72" height="41">
+          <span class="photoname">{{photolabel}}</span>
+          <span class="photoswap">Change</span>
+        </button>
+      </div>
+      <label class="filefield">Or a file from this machine
         <input type="file" class="photofile" accept="image/*"></label>
     </div>
   </div>
@@ -684,12 +689,59 @@ button.chip .ck::before{content:"\25B8\00a0"}
   background:var(--raised); color:var(--ink); border-radius:2px; padding:8px 10px;
   font:400 13px/1.5 "IBM Plex Sans",sans-serif}
 .editrow{display:none; gap:12px; flex-wrap:wrap; margin-top:10px}
-.editrow label{display:flex; flex-direction:column; gap:4px; flex:1 1 170px;
-  font:600 9.5px/1 "IBM Plex Sans",sans-serif; letter-spacing:.11em;
-  text-transform:uppercase; color:var(--muted)}
-.editrow select,.editrow input,.duredit input{border:1px solid var(--rule2);
+.editrow label,.editrow .photofield{display:flex; flex-direction:column; gap:4px;
+  flex:1 1 170px; font:600 9.5px/1 "IBM Plex Sans",sans-serif;
+  letter-spacing:.11em; text-transform:uppercase; color:var(--muted)}
+.editrow .photofield{flex:2 1 250px}
+.editrow input,.duredit input{border:1px solid var(--rule2);
   background:var(--raised); color:var(--ink); border-radius:2px; padding:6px 8px;
   font:400 12px/1.3 "IBM Plex Mono",monospace; max-width:100%}
+
+/* the photograph control: the picture, not its file name */
+.photobtn{appearance:none; cursor:pointer; display:flex; align-items:center;
+  gap:10px; width:100%; text-align:left; padding:5px 9px 5px 5px;
+  border:1px solid var(--rule2); border-radius:2px; background:var(--raised)}
+.photobtn:hover{border-color:var(--laterite)}
+.photothumb{width:72px; height:41px; object-fit:cover; border-radius:1px;
+  flex:0 0 auto; background:#0d0b09}
+.photoname{flex:1 1 auto; min-width:0; overflow:hidden; text-overflow:ellipsis;
+  white-space:nowrap; font:400 11px/1.3 "IBM Plex Mono",monospace;
+  letter-spacing:0; text-transform:none; color:var(--ink)}
+.photoswap{flex:0 0 auto; color:var(--laterite);
+  font:600 9px/1 "IBM Plex Sans",sans-serif; letter-spacing:.11em;
+  text-transform:uppercase}
+
+/* the gallery */
+#gal{max-width:min(1040px,94vw); width:min(1040px,94vw)}
+.galwrap{padding:20px 22px 22px; display:flex; flex-direction:column; gap:12px;
+  max-height:86vh}
+.galhead{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+.galhead h3{flex:1 1 auto}
+.galhead span{font:500 13px/1 "IBM Plex Mono",monospace; color:var(--laterite)}
+.galnote{margin:0}
+.galgrid{display:grid; grid-template-columns:repeat(auto-fill,minmax(184px,1fr));
+  gap:10px; overflow-y:auto; padding:2px}
+.galitem{appearance:none; cursor:pointer; position:relative; display:block;
+  padding:0; border:2px solid transparent; border-radius:2px; background:none;
+  outline-offset:2px}
+.galitem img{display:block; width:100%; aspect-ratio:16/9; object-fit:cover;
+  border-radius:1px; background:#0d0b09}
+.galitem:hover{border-color:var(--laterite)}
+.galname{display:block; padding:5px 2px 0;
+  font:400 10px/1.35 "IBM Plex Mono",monospace; color:var(--muted);
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap}
+.galtag{position:absolute; top:5px; left:5px; font-style:normal;
+  font:600 8.5px/1 "IBM Plex Sans",sans-serif; letter-spacing:.1em;
+  text-transform:uppercase; color:#fff; background:var(--muted);
+  padding:4px 6px; border-radius:2px}
+.galitem.current{border-color:var(--laterite)}
+.galitem.current .galtag{background:var(--laterite)}
+.galitem.current.taken{border-color:var(--clay)}
+/* Every photograph in a 1:1 cut is already carrying a shot, so being taken is
+   the normal state, not a warning. The tag says whose it is; the picture stays
+   at full strength because swapping to it is an ordinary move. */
+.galitem.taken .galtag{background:var(--slate)}
+.galitem.current.taken .galtag{background:var(--clay)}
 .duredit{display:none; flex-direction:column; gap:3px;
   font:600 9px/1 "IBM Plex Sans",sans-serif; letter-spacing:.11em;
   text-transform:uppercase; color:var(--muted)}
@@ -810,6 +862,18 @@ body.lang-kn .en{display:none}
 <nav class="actindex" aria-label="Acts">@@ACTNAV@@</nav>
 
 <main class="wrap">@@ROWS@@</main>
+
+<dialog id="gal"><div class="galwrap">
+  <div class="galhead">
+    <h3>Choose a photograph</h3>
+    <span id="galfor"></span>
+    <button type="button" class="btn ghost" id="galClose">Close</button>
+  </div>
+  <p class="galnote">Every photograph in the pack, at the 16:9 crop the film uses.
+    One already carrying another shot is marked: <code>build.py</code> refuses a
+    cut that uses the same photograph twice.</p>
+  <div class="galgrid" id="galgrid"></div>
+</div></dialog>
 
 <dialog id="dlg"><form method="dialog" class="dlg">
   <h3>Review export</h3>
@@ -984,6 +1048,93 @@ body.lang-kn .en{display:none}
     if (ev.key === "Escape") stopAll();
   });
 
+  // ---------------------------------------------------------------- gallery
+  // Picking a photograph by file name is guesswork, so the control opens the
+  // pack as pictures. The frames are the ones already on the page, so this
+  // costs no extra bytes.
+  var gal = document.getElementById("gal");
+  var galGrid = document.getElementById("galgrid");
+  var galSid = null;
+
+  function currentPhoto(sid) {
+    var st = state[sid] || {};
+    return st.photo != null ? st.photo : baseline(sid).photo;
+  }
+  function label(photo) { return photo.replace("-enhanced.png", ""); }
+
+  function openGallery(sid) {
+    galSid = sid;
+    document.getElementById("galfor").textContent = "for " + sid;
+    // Every shot on each photograph right now, so a clash is visible before it
+    // becomes a build error rather than after. A photograph can legitimately be
+    // claimed twice mid-edit, and build.py refuses that, so list all claimants.
+    var used = {};
+    CUT.shots.forEach(function (b) {
+      var p = currentPhoto(b.sid);
+      (used[p] = used[p] || []).push(b.sid);
+    });
+    var mine = currentPhoto(sid);
+
+    galGrid.innerHTML = "";
+    Object.keys(photoSrc).sort().forEach(function (photo) {
+      var others = (used[photo] || []).filter(function (x) { return x !== sid; });
+      var isMine = photo === mine;
+      var b = document.createElement("button");
+      b.type = "button";
+      b.className = "galitem" + (isMine ? " current" : "") +
+                    (others.length ? " taken" : "");
+      b.setAttribute("data-photo", photo);
+      b.setAttribute("aria-pressed", String(isMine));
+
+      var im = document.createElement("img");
+      im.src = photoSrc[photo];
+      im.alt = label(photo);
+      im.loading = "lazy";
+      b.appendChild(im);
+
+      if (isMine || others.length) {
+        var tag = document.createElement("em");
+        tag.className = "galtag";
+        tag.textContent = isMine
+          ? (others.length ? "current, also " + others.join(", ") : "current")
+          : "in " + others.join(", ");
+        b.appendChild(tag);
+      }
+      var nm = document.createElement("span");
+      nm.className = "galname";
+      nm.textContent = label(photo);
+      b.appendChild(nm);
+      galGrid.appendChild(b);
+    });
+    if (typeof gal.showModal === "function") gal.showModal();
+    var cur = galGrid.querySelector(".galitem.current") || galGrid.firstChild;
+    if (cur && cur.scrollIntoView) cur.scrollIntoView({block: "nearest"});
+    if (cur && cur.focus) cur.focus();
+  }
+
+  function setPhoto(sid, photo) {
+    var el = shotEl(sid), st = shotState(sid);
+    st.photo = photo;
+    delete st.photoFile;
+    if (photoSrc[photo]) {
+      el.querySelector(".frame img").src = photoSrc[photo];
+      el.querySelector(".photothumb").src = photoSrc[photo];
+    }
+    el.querySelector(".photoname").textContent = label(photo);
+    refresh(sid);
+    save();
+  }
+
+  galGrid.addEventListener("click", function (ev) {
+    var item = ev.target.closest(".galitem");
+    if (!item || !galSid) return;
+    setPhoto(galSid, item.getAttribute("data-photo"));
+    gal.close();
+  });
+  document.getElementById("galClose").addEventListener("click", function () {
+    gal.close();
+  });
+
   // ------------------------------------------------------------------- shot
   function readHead(el, lang) {
     return Array.prototype.map.call(
@@ -1050,21 +1201,19 @@ body.lang-kn .en{display:none}
       refresh(base.sid);
       save();
     });
-    el.querySelector(".photopick").addEventListener("change", function (e) {
-      var st = shotState(base.sid);
-      st.photo = e.target.value;
-      delete st.photoFile;
-      if (photoSrc[st.photo]) el.querySelector(".frame img").src = photoSrc[st.photo];
-      refresh(base.sid);
-      save();
+    el.querySelector(".photobtn").addEventListener("click", function () {
+      openGallery(base.sid);
     });
     el.querySelector(".photofile").addEventListener("change", function (e) {
       var f = e.target.files && e.target.files[0];
       if (!f) return;
       // The file stays on this machine. What is recorded is the choice, so the
       // creative team knows which file to put into the photo pack.
+      var url = URL.createObjectURL(f);
       shotState(base.sid).photoFile = f.name;
-      el.querySelector(".frame img").src = URL.createObjectURL(f);
+      el.querySelector(".frame img").src = url;
+      el.querySelector(".photothumb").src = url;
+      el.querySelector(".photoname").textContent = f.name;
       refresh(base.sid);
       save();
       note("Recorded " + f.name + " for " + base.sid +
@@ -1087,6 +1236,8 @@ body.lang-kn .en{display:none}
   function applySaved() {
     CUT.shots.forEach(function (base) {
       var st = state[base.sid], el = shotEl(base.sid);
+      // Same string as the frame already holds, not a second copy of it.
+      el.querySelector(".photothumb").src = photoSrc[base.photo];
       if (st) {
         if (st.voEn != null) el.querySelector(".vo.en").textContent = st.voEn;
         if (st.voKn != null) el.querySelector(".vo.kn").textContent = st.voKn;
@@ -1098,14 +1249,13 @@ body.lang-kn .en{display:none}
           });
         });
         if (st.dur != null) el.querySelector(".durinput").value = st.dur;
-        if (st.photo != null) {
-          el.querySelector(".photopick").value = st.photo;
-          if (photoSrc[st.photo]) el.querySelector(".frame img").src = photoSrc[st.photo];
+        if (st.photo != null && photoSrc[st.photo]) {
+          el.querySelector(".frame img").src = photoSrc[st.photo];
+          el.querySelector(".photothumb").src = photoSrc[st.photo];
+          el.querySelector(".photoname").textContent = label(st.photo);
         }
         if (st.notes) el.querySelector(".notes").value = st.notes;
       }
-      el.querySelector(".photopick").value =
-        (st && st.photo != null) ? st.photo : base.photo;
       refresh(base.sid);
     });
   }

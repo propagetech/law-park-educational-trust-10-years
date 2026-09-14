@@ -81,8 +81,17 @@ yet.
 ### Marking up
 
 **Mark up** makes the headings, the narration and the durations editable, lets a
-shot point at a different photograph from the pack or at a file on your machine,
-and gives every shot a status (approve, needs a change, replace) and a note.
+shot point at a different photograph, and gives every shot a status (approve,
+needs a change, replace) and a note.
+
+The photograph control opens **the pack as pictures**, not as a list of file
+names: thirty thumbnails at the same 16:9 crop the film uses, the current one
+ringed, and every other one tagged with the shot already carrying it. Nobody can
+pick a photograph from `2025-schoolwide-supplies-group-photo__K02-K43`, and a
+clash is worth seeing before it becomes a build error: `build.py` refuses a cut
+that uses one photograph twice, and a doubly-claimed tile is flagged in red the
+moment it happens. The gallery reuses the frames already on the page, so it adds
+no bytes.
 
 Edit a line and the held time recalculates as you type, using the same two
 models `build.py` uses, so the page and the build agree: English at 140 wpm,

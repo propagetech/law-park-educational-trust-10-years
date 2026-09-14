@@ -423,7 +423,9 @@ body.lang-kn .en{display:none}
   :root{--paper:#fff; --raised:#fff; --ink:#000; --body:#2b2520; --muted:#5d554c;
         --rule:#ccc; --rule2:#bbb}
   body{background:#fff; font-size:10.5pt}
-  .bar,.actindex,.editrow,.duredit,.playshot,.chip.mute,footer,dialog,
+  /* The burned-in timecode repeats the one beside the shot id, and on a bright
+     frame it prints as white on white. */
+  .bar,.actindex,.editrow,.duredit,.playshot,.chip.mute,footer,dialog,.tcburn,
   .status button:not([aria-pressed="true"]){display:none!important}
   header{border:0}
   .mast{padding:0 0 12pt; gap:10pt 24pt}
@@ -431,9 +433,34 @@ body.lang-kn .en{display:none}
   .vitals div{font-size:8.5pt}
   main{padding:0}
   .actrule{margin:0 0 10pt; break-after:avoid; page-break-after:avoid}
-  .shot{break-inside:avoid; page-break-inside:avoid; padding:10pt 0 10pt 8pt;
-        margin-left:0; grid-template-columns:1.15fr 1fr; gap:14pt}
+  /* Two shots to a sheet, measured rather than guessed. A4 landscape at 12mm
+     margins gives a 1032x703px page box; an act rule eats 52px of it, so a
+     shot has to fit in 326px for two to share the sheet that opens an act.
+     At 0.72fr the tallest shot measures 321px. Widen the frame past that and
+     the document runs to 23 pages instead of 17, with pairing that comes and
+     goes depending on which shots carry a note. */
+  .shot{break-inside:avoid; page-break-inside:avoid; padding:9pt 0 9pt 8pt;
+        margin-left:0; grid-template-columns:0.72fr 1fr; gap:12pt}
+  .shot .vo{font-size:11pt; line-height:1.45; padding-left:10pt}
+  .shot .inframe{margin-top:7pt; font-size:8pt; line-height:1.45}
+  .metatop{padding-bottom:7pt; gap:9pt}
+  .metatop .sid{font-size:17pt}
+  .meta{gap:8pt}
+  .sound{gap:5pt}
+  .chip{padding:4px 7px}
+  .consent,.direction{font-size:8.5pt; line-height:1.45}
+  .notes{font-size:9pt; padding:6pt 8pt}
+  .review{padding-top:8pt; gap:6pt}
   .frame{box-shadow:none; border:1px solid #ddd}
+  /* Mark up leaves editing chrome on screen. None of it belongs on paper:
+     the dashed contenteditable outlines printed as boxes round the narration
+     and round the heading on the frame. */
+  [contenteditable]{outline:none!important}
+  /* text-shadow makes Chrome draw each glyph twice in the PDF, so every
+     heading and timecode appeared twice in the text layer, breaking copy and
+     search in the file the creative team is sent. The scrim already carries
+     the contrast. */
+  .head,.tcburn{text-shadow:none!important}
   .notes:placeholder-shown{display:none}
   .notes{border:1px solid #bbb; background:#fafafa}
   .review{display:flex; border-top:1px solid #ddd}

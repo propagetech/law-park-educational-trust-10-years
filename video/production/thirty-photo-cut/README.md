@@ -35,6 +35,7 @@ narration without moving a frame.
 | `tools/build.py` | Generates everything above |
 | `tools/preview.py` | Renders the cut as a review page you can listen to, mark up and print |
 | `tools/apply_review.py` | Writes a review exported from that page back into `shots.py` |
+| `tools/pdf_test.py` | Drives a markup session and validates the printed PDF |
 
 ## Rebuilding
 
@@ -130,12 +131,35 @@ new-value pairs; `shots.py` stays the one place the film is written.
 
 ### Saving as PDF
 
-**Save as PDF** prints through a stylesheet built for it: A4 landscape, controls
-and navigation gone, one shot per block with no shot split across a page, the
-current language only, and every edit, status and note included. Print to PDF
-from the browser dialog. That PDF is the thing to send the creative team,
-because it carries the frames, the headings, the sound and the notes in one
-file that needs nothing installed.
+**Save as PDF** prints through a stylesheet built for it: A4 landscape, **two
+shots to a sheet, 17 pages**, no shot split across a page, controls and
+navigation gone, the current language only, and every edit, status and note
+included. A shot with no status and no note prints without its review block, so
+an unmarked cut prints clean.
+
+The two-up layout is measured, not guessed. A4 landscape at 12mm margins gives a
+1032x703px page box, an act rule eats 52px of it, so a shot has to fit in 326px
+for two to share the sheet that opens an act. At `0.72fr` for the frame column
+the tallest shot measures 321px. Widen the frame and the document runs to 23
+pages with pairing that comes and goes depending on which shots carry a note.
+
+`tools/pdf_test.py` drives a realistic markup session, prints both languages and
+checks the result:
+
+```bash
+python3 tools/pdf_test.py http://localhost:8788/ /tmp/out
+```
+
+It asserts the page geometry, that no shot straddles a break, that every edit,
+status and note reached the paper, that the controls did not, that the overrun
+warning prints in clay ink rather than black, and that the Kannada print carries
+real Kannada glyphs rather than boxes. It prints from the exact state a person
+would be in: flipping Chrome's media emulation before `page.pdf()` changes the
+pagination, so the check runs on a second page and the printed one is never
+emulated.
+
+That PDF is the thing to send the creative team, because it carries the frames,
+the headings, the sound and the notes in one file that needs nothing installed.
 
 Neither preview output is committed. They regenerate from the photo pack in
 under a minute, and `.gitignore` in this folder keeps 7 MB of JPEG and MP3 out of

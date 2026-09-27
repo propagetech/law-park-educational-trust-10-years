@@ -130,17 +130,26 @@ activities: anyone can add, edit or remove one (date, time, title, description),
 give it one or more owners, and add and tick off its to-dos. No passwords, by
 design: every change is logged with the name of whoever made it.
 
+Sign-in is one search box: people type their name or any part of their mobile
+number (with or without the country code) and pick themselves from the team
+list, or add themselves if they are not on it. Mobiles are stored with the
+country code, so numbers outside India work. Anyone can change their own name;
+it changes on every duty and activity they are on.
+
 | Piece | File |
 |-------|------|
 | Page | `website/app/event-duties/page.tsx`, `website/components/pages/EventDutiesPage.tsx` |
 | Duty list, pillar groups, starting schedule | `website/data/eventDuties.ts` |
+| Starting team roster (server only) | `website/data/eventTeam.ts` |
+| Sign-in screen | `website/components/event-duties/SignIn.tsx` |
 | Schedule tab | `website/components/event-duties/Schedule.tsx` |
 | API (Cloudflare Pages Function) | `website/functions/api/duties.js` |
 | Database schema (Cloudflare D1) | `website/migrations/0001_event_duties.sql` |
 | App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |
 | Build stamp for the refresh button | `website/scripts/write-build-version.mjs` (runs in prebuild) |
 
-The starting schedule (`SEED_ACTIVITIES`) is copied into D1 once, on first use.
+The starting schedule (`SEED_ACTIVITIES`) and team roster (`SEED_MEMBERS`) are
+each copied into D1 once, on first use.
 After that the page is the only place to change it: editing the seed list does
 nothing to a database that already has a schedule.
 

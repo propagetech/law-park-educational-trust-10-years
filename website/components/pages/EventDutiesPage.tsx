@@ -5,16 +5,22 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DUTY_SECTIONS, EVENT_FACTS, PILLAR_GROUPS, type Duty } from '@/data/eventDuties'
 import {
   PeopleEditor,
+  cleanMobile,
+  formatMobile,
+  inputClass,
+  primaryButtonClass,
   sameName,
   tidy,
   timeAgo,
   type Assignment,
   type EventActivity,
   type Filter,
+  type Member,
   type Post,
   type Todo,
 } from '@/components/event-duties/shared'
 import { Schedule, formatTime, sortActivities } from '@/components/event-duties/Schedule'
+import { SignIn } from '@/components/event-duties/SignIn'
 
 interface CustomDuty {
   id: string
@@ -33,11 +39,6 @@ interface Activity {
   person: string | null
 }
 
-interface Member {
-  name: string
-  mobile: string
-}
-
 interface State {
   assignments: Assignment[]
   custom: CustomDuty[]
@@ -47,10 +48,7 @@ interface State {
   todos: Todo[]
 }
 
-interface User {
-  name: string
-  mobile: string
-}
+type User = Member
 
 type View = 'duties' | 'schedule'
 
@@ -59,7 +57,6 @@ const VIEW_KEY = 'lpet-duties-view'
 const API = '/api/duties'
 const VERSION_URL = '/duties-version.json'
 const BUILD_ID = process.env.NEXT_PUBLIC_BUILD_ID || 'dev'
-const LOGO_FULL = '/images/event-duties/lawpark-trust-logo.webp' // 480x545, white lettering
 const LOGO_ICON = '/images/event-duties/lawpark-trust-tree-icon.webp' // 252x256
 const REFRESH_MS = 20000
 const VERSION_CHECK_MS = 60000
@@ -83,18 +80,6 @@ function saveUser(user: User | null) {
   } catch {
     // Private mode: the details just last for this visit.
   }
-}
-
-// Indian mobile numbers: keep the 10 digits, drop +91 or a leading 0.
-function cleanMobile(value: unknown) {
-  let digits = String(value ?? '').replace(/\D/g, '')
-  if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2)
-  if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1)
-  return /^[6-9]\d{9}$/.test(digits) ? digits : ''
-}
-
-function showMobile(mobile: string) {
-  return `${mobile.slice(0, 5)} ${mobile.slice(5)}`
 }
 
 // Drops cached files and reloads, so the newest pushed version is what runs.
@@ -137,120 +122,6 @@ function saveView(view: View) {
   } catch {
     // Not remembered in private mode; harmless.
   }
-}
-
-/* ------------------------------------------------------------------ */
-
-function NameGate({ initial, onEnter }: { initial: User | null; onEnter: (user: User) => void }) {
-  const [draft, setDraft] = useState(initial?.name ?? '')
-  const [mobile, setMobile] = useState(initial?.mobile ?? '')
-  const [error, setError] = useState<{ field: 'name' | 'mobile'; text: string } | null>(null)
-
-  return (
-    <div className="min-h-screen bg-primary-700 flex flex-col items-center justify-center px-4 py-12">
-      {/* The logo's lettering is white, so it stays on navy; a soft light
-          circle sits behind the tree only, so its brown and black read.
-          Geometry is measured from the logo: the circle is centred on the
-          tree and fades out just above the lettering. */}
-      <div className="relative mb-8 mt-2 w-40 sm:w-48">
-        <span
-          aria-hidden
-          className="absolute aspect-square rounded-full"
-          style={{
-            left: '5%',
-            top: '-2.3%',
-            width: '90%',
-            background: 'radial-gradient(circle closest-side, rgb(253 246 234) 0, rgb(253 246 234) 92%, rgb(253 246 234 / 0) 100%)',
-          }}
-        />
-        <Image
-          src={LOGO_FULL}
-          alt="Law Park Educational Trust, +91 99456 65379"
-          width={480}
-          height={545}
-          priority
-          className="relative h-auto w-full"
-        />
-      </div>
-      <form
-        className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
-        onSubmit={(e) => {
-          e.preventDefault()
-          const name = tidy(draft)
-          if (name.length < 2) {
-            setError({ field: 'name', text: 'Please enter your name.' })
-            return
-          }
-          const number = cleanMobile(mobile)
-          if (!number) {
-            setError({ field: 'mobile', text: 'Please enter a 10-digit mobile number.' })
-            return
-          }
-          onEnter({ name, mobile: number })
-        }}
-      >
-        <p className="text-sm font-semibold uppercase tracking-wide text-gold-700 mb-2">
-          10 years · team only
-        </p>
-        <h1 className="font-serif text-3xl font-bold text-primary-700 mb-3">Event day duties</h1>
-        <p className="text-gray-600 mb-6">
-          Enter your name and mobile number so the team can see who signed up for what, and call you on the day. No
-          password needed. This phone remembers you next time.
-        </p>
-        <label htmlFor="gate-name" className="block text-sm font-semibold text-gray-800 mb-2">
-          Your name
-        </label>
-        <input
-          id="gate-name"
-          type="text"
-          autoComplete="name"
-          maxLength={60}
-          value={draft}
-          onChange={(e) => {
-            setDraft(e.target.value)
-            setError(null)
-          }}
-          aria-invalid={error?.field === 'name'}
-          aria-describedby={error?.field === 'name' ? 'gate-error' : undefined}
-          className="w-full rounded-lg border border-gray-300 px-4 py-3 text-lg focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500"
-        />
-        <label htmlFor="gate-mobile" className="mt-5 block text-sm font-semibold text-gray-800 mb-2">
-          Mobile number
-        </label>
-        <div className="flex rounded-lg border border-gray-300 focus-within:ring-2 focus-within:ring-primary-500 focus-within:border-primary-500">
-          <span className="flex items-center border-r border-gray-300 px-3 text-lg text-gray-600" aria-hidden>
-            +91
-          </span>
-          <input
-            id="gate-mobile"
-            type="tel"
-            inputMode="numeric"
-            autoComplete="tel-national"
-            maxLength={16}
-            value={mobile}
-            onChange={(e) => {
-              setMobile(e.target.value)
-              setError(null)
-            }}
-            aria-invalid={error?.field === 'mobile'}
-            aria-describedby={error?.field === 'mobile' ? 'gate-error' : undefined}
-            className="min-w-0 flex-1 rounded-r-lg px-4 py-3 text-lg focus:outline-none"
-          />
-        </div>
-        {error && (
-          <p id="gate-error" role="alert" className="mt-2 text-sm text-red-700">
-            {error.text}
-          </p>
-        )}
-        <button
-          type="submit"
-          className="mt-6 w-full rounded-lg bg-primary-700 px-4 py-3 text-lg font-semibold text-white hover:bg-primary-600 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2"
-        >
-          Enter
-        </button>
-      </form>
-    </div>
-  )
 }
 
 /* ------------------------------------------------------------------ */
@@ -409,6 +280,7 @@ const ACTION_TEXT: Record<string, string> = {
   addDuty: 'added the duty',
   removeDuty: 'removed the duty',
   joined: 'joined the page',
+  renamed: 'is now',
   addEvent: 'added the activity',
   updateEvent: 'edited the activity',
   removeEvent: 'removed the activity',
@@ -423,6 +295,8 @@ const TODO_ACTIONS = new Set(['addTodo', 'doneTodo', 'undoTodo', 'removeTodo'])
 function EventDutiesPage() {
   const [user, setUser] = useState<User | null | undefined>(undefined)
   const [editing, setEditing] = useState(false)
+  const [renaming, setRenaming] = useState(false)
+  const [newName, setNewName] = useState('')
   const [updateReady, setUpdateReady] = useState(false)
   const me = user?.name ?? ''
   const [state, setState] = useState<State | null>(null)
@@ -479,15 +353,27 @@ function EventDutiesPage() {
     }
   }, [])
 
-  // Save the name and mobile to the team list each time someone enters.
+  // A returning phone signs in again on each visit, which also picks up a
+  // name changed from another phone.
+  const userMobile = user?.mobile
   useEffect(() => {
-    if (!user) return
+    if (!userMobile) return
+    const saved = readSavedUser()
+    if (!saved || saved.mobile !== userMobile) return
     fetch(API, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ action: 'hello', by: user.name, mobile: user.mobile }),
-    }).catch(() => {})
-  }, [user])
+      body: JSON.stringify({ action: 'hello', by: saved.name, mobile: saved.mobile }),
+    })
+      .then((res) => res.json())
+      .then((body) => {
+        if (body.me && body.me.name !== saved.name) {
+          saveUser(body.me)
+          setUser(body.me)
+        }
+      })
+      .catch(() => {})
+  }, [userMobile])
 
   const load = useCallback(async () => {
     try {
@@ -571,6 +457,13 @@ function EventDutiesPage() {
     for (const a of state?.assignments ?? []) names.set(a.person.toLowerCase(), a.person)
     return [...names.values()].sort((a, b) => a.localeCompare(b))
   }, [state])
+  // Name suggestions for the duty inputs: the whole team plus anyone typed in.
+  const knownNames = useMemo(() => {
+    const names = new Map<string, string>()
+    for (const m of state?.members ?? []) names.set(m.name.toLowerCase(), m.name)
+    for (const n of everyone) names.set(n.toLowerCase(), n)
+    return [...names.values()].sort((a, b) => a.localeCompare(b))
+  }, [state, everyone])
   const phones = useMemo(() => {
     const map = new Map<string, string>()
     for (const m of state?.members ?? []) map.set(m.name.toLowerCase(), m.mobile)
@@ -601,9 +494,8 @@ function EventDutiesPage() {
   if (user === undefined) return <div className="min-h-screen bg-primary-700" />
   if (!user || editing) {
     return (
-      <NameGate
-        initial={user}
-        onEnter={(next) => {
+      <SignIn
+        onSignedIn={(next) => {
           saveUser(next)
           setUser(next)
           setEditing(false)
@@ -634,7 +526,7 @@ function EventDutiesPage() {
   return (
     <div className="min-h-screen bg-gray-50 pb-20 print:bg-white">
       <datalist id="known-names">
-        {everyone.map((n) => (
+        {knownNames.map((n) => (
           <option key={n} value={n} />
         ))}
       </datalist>
@@ -810,14 +702,29 @@ function EventDutiesPage() {
             </div>
             <p className="text-sm text-gray-600 print:hidden">
               You are <strong className="text-gray-900">{me}</strong>
-              <span className="text-gray-500"> ({showMobile(user.mobile)})</span>
+              <span className="text-gray-500"> ({formatMobile(user.mobile)})</span>
               {' · '}
               <button
                 type="button"
-                onClick={() => setEditing(true)}
+                onClick={() => {
+                  setNewName(me)
+                  setRenaming(true)
+                }}
                 className="underline hover:text-primary-700"
               >
-                change
+                change name
+              </button>
+              {' · '}
+              <button
+                type="button"
+                onClick={() => {
+                  saveUser(null)
+                  setUser(null)
+                  setRenaming(false)
+                }}
+                className="underline hover:text-primary-700"
+              >
+                switch user
               </button>
               {' · '}
               <button type="button" onClick={() => window.print()} className="underline hover:text-primary-700">
@@ -825,6 +732,61 @@ function EventDutiesPage() {
               </button>
             </p>
           </div>
+          {renaming && (
+            <form
+              className="mt-3 flex flex-wrap items-end gap-2 print:hidden"
+              onSubmit={async (e) => {
+                e.preventDefault()
+                const name = tidy(newName)
+                if (name.length < 2) return
+                if (name === me) {
+                  setRenaming(false)
+                  return
+                }
+                const res = await fetch(API, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({ action: 'rename', by: me, mobile: user.mobile, name }),
+                }).catch(() => null)
+                const body = res ? await res.json().catch(() => ({})) : {}
+                if (!res || !res.ok || !body.me) {
+                  setError(body.error || 'Could not change your name. Check your connection and try again.')
+                  return
+                }
+                saveUser(body.me)
+                setUser(body.me)
+                setState(body)
+                setError('')
+                setRenaming(false)
+              }}
+            >
+              <div>
+                <label htmlFor="rename-input" className="block text-sm font-semibold text-gray-800">
+                  Your name
+                </label>
+                <input
+                  id="rename-input"
+                  type="text"
+                  maxLength={60}
+                  value={newName}
+                  onChange={(e) => setNewName(e.target.value)}
+                  autoFocus
+                  className={`mt-1 w-56 ${inputClass}`}
+                />
+              </div>
+              <button type="submit" disabled={tidy(newName).length < 2} className={primaryButtonClass}>
+                Save name
+              </button>
+              <button
+                type="button"
+                onClick={() => setRenaming(false)}
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+              >
+                Cancel
+              </button>
+              <p className="basis-full text-xs text-gray-500">Your name also changes on every duty and activity you are on.</p>
+            </form>
+          )}
           <p role="status" aria-live="polite" className={error ? 'mt-2 text-sm font-semibold text-red-700' : 'sr-only'}>
             {error}
           </p>
@@ -920,7 +882,9 @@ function EventDutiesPage() {
               {state?.activity.slice(0, 15).map((a) => (
                 <li key={a.id} className="text-gray-700">
                   <strong className="text-gray-900">{a.by_name}</strong> {ACTION_TEXT[a.action] ?? a.action}{' '}
-                  {a.action === 'joined' ? null : a.action === 'assign' || a.action === 'unassign' ? (
+                  {a.action === 'joined' ? null : a.action === 'renamed' ? (
+                    <strong className="text-gray-900">{a.person}</strong>
+                  ) : a.action === 'assign' || a.action === 'unassign' ? (
                     <>
                       <strong className="text-gray-900">{a.person}</strong> {a.action === 'assign' ? 'to' : 'from'}{' '}
                       {titleOf(a.duty_id) || 'a removed item'}

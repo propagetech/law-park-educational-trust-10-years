@@ -31,6 +31,11 @@ export interface Todo {
   added_by: string
 }
 
+export interface Member {
+  name: string
+  mobile: string
+}
+
 export type Filter = 'all' | 'open' | 'mine'
 
 export type Post = (payload: Record<string, unknown>, busyKey?: string) => Promise<boolean>
@@ -44,6 +49,30 @@ export function splitNames(value: string) {
     .split(/[,\n;]/)
     .map(tidy)
     .filter((n) => n.length >= 2)
+}
+
+// Mobile numbers are kept with their country code, like +919876543210.
+// Without a + (or 00) prefix a number is read as Indian. Mirrors cleanMobile
+// in functions/api/duties.js.
+export function cleanMobile(value: unknown) {
+  const raw = String(value ?? '').trim()
+  let digits = raw.replace(/\D/g, '')
+  if (raw.startsWith('+') || raw.startsWith('00')) {
+    if (raw.startsWith('00')) digits = digits.slice(2)
+    if (digits.startsWith('91')) return /^91[6-9]\d{9}$/.test(digits) ? `+${digits}` : ''
+    return /^[1-9]\d{7,14}$/.test(digits) ? `+${digits}` : ''
+  }
+  if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2)
+  if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1)
+  return /^[6-9]\d{9}$/.test(digits) ? `+91${digits}` : ''
+}
+
+// +919876543210 -> +91 98765 43210, +12025550123 -> +1 202 555 0123
+export function formatMobile(mobile: string) {
+  const d = mobile.replace(/\D/g, '')
+  if (d.startsWith('91') && d.length === 12) return `+91 ${d.slice(2, 7)} ${d.slice(7)}`
+  if (d.startsWith('1') && d.length === 11) return `+1 ${d.slice(1, 4)} ${d.slice(4, 7)} ${d.slice(7)}`
+  return mobile.startsWith('+') ? mobile : `+${d}`
 }
 
 export function sameName(a: string, b: string) {
@@ -104,7 +133,7 @@ export function PeopleEditor({ id, label, people, phones, me, busy, post, emptyT
             >
               {phone ? (
                 <a
-                  href={`tel:+91${phone}`}
+                  href={`tel:${phone}`}
                   className="underline decoration-dotted underline-offset-2 hover:decoration-solid"
                   aria-label={`Call ${p.person}`}
                 >

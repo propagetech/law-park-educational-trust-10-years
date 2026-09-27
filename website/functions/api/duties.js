@@ -6,6 +6,7 @@
 // an activity id is just another duty id there.
 
 import { SEED_ACTIVITIES } from '../../data/eventDuties'
+import { SEED_MEMBERS } from '../../data/eventTeam'
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS duty_assignments (
@@ -107,11 +108,30 @@ async function seedActivities(db) {
   await db.batch(writes)
 }
 
+// Copies the team roster in once. A number that is already registered keeps
+// the name its owner chose. last_seen stays '' until they first sign in.
+async function seedMembers(db) {
+  const seeded = await db.prepare("SELECT 1 FROM duty_meta WHERE key = 'members_seeded'").first()
+  if (seeded) return
+  const at = new Date().toISOString()
+  await db.batch([
+    db.prepare("INSERT INTO duty_meta (key, value) VALUES ('members_seeded', ?) ON CONFLICT (key) DO NOTHING").bind(at),
+    ...SEED_MEMBERS.map((m) =>
+      db.prepare("INSERT OR IGNORE INTO duty_members (mobile, name, first_seen, last_seen) VALUES (?, ?, ?, '')").bind(m.mobile, m.name, at),
+    ),
+  ])
+}
+
 function ensureSchema(db) {
   if (!schemaReady) {
     schemaReady = db
-      .batch(SCHEMA.map((sql) => db.prepare(sql)))
+      .batch([
+        ...SCHEMA.map((sql) => db.prepare(sql)),
+        // Numbers saved before country codes were kept were Indian 10-digit.
+        db.prepare("UPDATE OR IGNORE duty_members SET mobile = '+91' || mobile WHERE mobile NOT LIKE '+%'"),
+      ])
       .then(() => seedActivities(db))
+      .then(() => seedMembers(db))
       .catch((err) => {
         schemaReady = undefined
         throw err
@@ -131,13 +151,24 @@ function json(status, body) {
   })
 }
 
-// Indian mobile numbers: keep the 10 digits, drop +91 or a leading 0.
+// Mobile numbers are stored with their country code, like +919876543210.
+// Without a + (or 00) prefix a number is read as Indian. Mirrors cleanMobile
+// in components/event-duties/shared.tsx.
 function cleanMobile(value) {
-  let digits = String(value || '').replace(/\D/g, '')
+  const raw = String(value || '').trim()
+  let digits = raw.replace(/\D/g, '')
+  if (raw.startsWith('+') || raw.startsWith('00')) {
+    if (raw.startsWith('00')) digits = digits.slice(2)
+    if (digits.startsWith('91')) return /^91[6-9]\d{9}$/.test(digits) ? `+${digits}` : ''
+    return /^[1-9]\d{7,14}$/.test(digits) ? `+${digits}` : ''
+  }
   if (digits.length === 12 && digits.startsWith('91')) digits = digits.slice(2)
   if (digits.length === 11 && digits.startsWith('0')) digits = digits.slice(1)
-  return /^[6-9]\d{9}$/.test(digits) ? digits : ''
+  return /^[6-9]\d{9}$/.test(digits) ? `+91${digits}` : ''
 }
+
+const MOBILE_HELP = 'Enter a mobile number. Add the country code, like +1, if it is not an Indian number.'
+const NAME_TAKEN = 'Someone on the team already uses that name. Add an initial or surname.'
 
 function cleanName(value, max = 60) {
   if (typeof value !== 'string') return ''
@@ -212,26 +243,61 @@ export async function onRequestPost({ request, env }) {
   const by = cleanName(body.by)
   if (by.length < 2) return json(400, { error: 'Enter your name first.' })
   const at = new Date().toISOString()
+  let me // set by sign-in and rename: who the browser should now remember
 
   switch (body.action) {
     case 'hello': {
-      // Sent once when someone enters their name and mobile on the gate.
+      // Sign-in. A known number signs in under its saved name; a new one is
+      // added to the team with the name typed.
       const mobile = cleanMobile(body.mobile)
-      if (!mobile) return json(400, { error: 'Enter a 10-digit mobile number.' })
-      const known = await db.prepare('SELECT name FROM duty_members WHERE mobile = ?').bind(mobile).first()
-      if (!known) {
-        const { total } = await db.prepare('SELECT COUNT(*) AS total FROM duty_members').first()
-        if (total >= MAX_MEMBERS) return json(429, { error: 'The team list is full.' })
+      if (!mobile) return json(400, { error: MOBILE_HELP })
+      const known = await db.prepare('SELECT name, last_seen FROM duty_members WHERE mobile = ?').bind(mobile).first()
+      if (known) {
+        await db.batch([
+          db.prepare('UPDATE duty_members SET last_seen = ? WHERE mobile = ?').bind(at, mobile),
+          ...(known.last_seen ? [] : [logActivity(db, at, known.name, 'joined', null, null)]),
+        ])
+        me = { name: known.name, mobile }
+        break
       }
+      const taken = await db.prepare('SELECT 1 FROM duty_members WHERE name = ? COLLATE NOCASE').bind(by).first()
+      if (taken) return json(409, { error: NAME_TAKEN })
+      const { total } = await db.prepare('SELECT COUNT(*) AS total FROM duty_members').first()
+      if (total >= MAX_MEMBERS) return json(429, { error: 'The team list is full.' })
       await db.batch([
-        db
-          .prepare(
-            `INSERT INTO duty_members (mobile, name, first_seen, last_seen) VALUES (?, ?, ?, ?)
-             ON CONFLICT (mobile) DO UPDATE SET name = excluded.name, last_seen = excluded.last_seen`,
-          )
-          .bind(mobile, by, at, at),
-        ...(known && known.name === by ? [] : [logActivity(db, at, by, 'joined', null, null)]),
+        db.prepare('INSERT INTO duty_members (mobile, name, first_seen, last_seen) VALUES (?, ?, ?, ?)').bind(mobile, by, at, at),
+        logActivity(db, at, by, 'joined', null, null),
       ])
+      me = { name: by, mobile }
+      break
+    }
+
+    case 'rename': {
+      // Changes a person's name everywhere it is used as theirs: the team
+      // list, the duties and activities they are on, and to-dos they ticked.
+      const mobile = cleanMobile(body.mobile)
+      const name = cleanName(body.name)
+      if (name.length < 2) return json(400, { error: 'Enter your new name.' })
+      const member = await db.prepare('SELECT name FROM duty_members WHERE mobile = ?').bind(mobile).first()
+      if (!member) return json(404, { error: 'Sign in again, then change your name.' })
+      if (name !== member.name) {
+        const taken = await db
+          .prepare('SELECT 1 FROM duty_members WHERE name = ? COLLATE NOCASE AND mobile != ?')
+          .bind(name, mobile)
+          .first()
+        if (taken) return json(409, { error: NAME_TAKEN })
+        const old = member.name
+        const caseOnly = old.toLowerCase() === name.toLowerCase()
+        await db.batch([
+          db.prepare('UPDATE duty_members SET name = ? WHERE mobile = ?').bind(name, mobile),
+          // Where the new name is already on a duty, the old entry is a duplicate.
+          db.prepare('UPDATE OR IGNORE duty_assignments SET person = ? WHERE person = ? COLLATE NOCASE').bind(name, old),
+          ...(caseOnly ? [] : [db.prepare('DELETE FROM duty_assignments WHERE person = ? COLLATE NOCASE').bind(old)]),
+          db.prepare('UPDATE duty_todos SET done_by = ? WHERE done_by = ? COLLATE NOCASE').bind(name, old),
+          logActivity(db, at, old, 'renamed', null, name),
+        ])
+      }
+      me = { name, mobile }
       break
     }
 
@@ -403,5 +469,5 @@ export async function onRequestPost({ request, env }) {
       return json(400, { error: 'Unknown action.' })
   }
 
-  return json(200, await readState(db))
+  return json(200, { ...(await readState(db)), ...(me ? { me } : {}) })
 }

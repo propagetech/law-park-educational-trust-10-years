@@ -2,6 +2,8 @@
 // so no AWS, Docker or Java is needed. Data resets when it stops.
 //   npm run dev            -> http://localhost:8790/duties
 // Loads ../team-roster.json (git-ignored) if it is there.
+// With TABLE_NAME set it uses that DynamoDB table instead (your AWS login),
+// e.g. a throwaway test table; never point it at the live table for tests.
 import { createServer } from 'node:http'
 import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
@@ -13,10 +15,10 @@ const allowed = process.env.ALLOWED_ORIGINS.split(',')
 const { handler, useStore } = await import('../src/handlers/duties.js')
 const { memoryStore } = await import('../src/lib/store.js')
 const store = memoryStore()
-useStore(store)
+if (!process.env.TABLE_NAME) useStore(store)
 
 const roster = fileURLToPath(new URL('../../team-roster.json', import.meta.url))
-if (existsSync(roster)) {
+if (!process.env.TABLE_NAME && existsSync(roster)) {
   const people = JSON.parse(readFileSync(roster, 'utf8'))
   const at = new Date().toISOString()
   for (const p of people) await store.put({ pk: 'MEMBER', sk: p.mobile, name: p.name, first_seen: at, last_seen: '' }, { ifAbsent: true })
@@ -45,4 +47,4 @@ createServer(async (req, res) => {
     isBase64Encoded: false,
   })
   res.writeHead(result.statusCode, result.headers).end(result.body)
-}).listen(PORT, () => console.log(`Duties API on http://localhost:${PORT}/duties`))
+}).listen(PORT, () => console.log(`Duties API on http://localhost:${PORT}/duties (${process.env.TABLE_NAME ? `table ${process.env.TABLE_NAME}` : 'in memory'})`))

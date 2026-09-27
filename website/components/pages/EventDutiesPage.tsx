@@ -148,15 +148,30 @@ function NameGate({ initial, onEnter }: { initial: User | null; onEnter: (user: 
 
   return (
     <div className="min-h-screen bg-primary-700 flex flex-col items-center justify-center px-4 py-12">
-      {/* The full logo has white lettering, so it sits on navy, not on the card. */}
-      <Image
-        src={LOGO_FULL}
-        alt="Law Park Educational Trust, +91 99456 65379"
-        width={480}
-        height={545}
-        priority
-        className="mb-8 h-auto w-40 sm:w-48"
-      />
+      {/* The logo's lettering is white, so it stays on navy; a soft light
+          circle sits behind the tree only, so its brown and black read.
+          Geometry is measured from the logo: the circle is centred on the
+          tree and fades out just above the lettering. */}
+      <div className="relative mb-8 mt-2 w-40 sm:w-48">
+        <span
+          aria-hidden
+          className="absolute aspect-square rounded-full"
+          style={{
+            left: '5%',
+            top: '-2.3%',
+            width: '90%',
+            background: 'radial-gradient(circle closest-side, rgb(253 246 234) 0, rgb(253 246 234) 92%, rgb(253 246 234 / 0) 100%)',
+          }}
+        />
+        <Image
+          src={LOGO_FULL}
+          alt="Law Park Educational Trust, +91 99456 65379"
+          width={480}
+          height={545}
+          priority
+          className="relative h-auto w-full"
+        />
+      </div>
       <form
         className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
         onSubmit={(e) => {

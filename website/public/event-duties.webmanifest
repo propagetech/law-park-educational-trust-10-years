@@ -1,0 +1,16 @@
+{
+  "id": "/event-duties",
+  "name": "Law Park 10 Years · Event Duties",
+  "short_name": "LPET Duties",
+  "description": "Team duty sheet for the Law Park Educational Trust 10-year celebration, 4 October 2026.",
+  "start_url": "/event-duties",
+  "scope": "/event-duties",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f9fafb",
+  "theme_color": "#1c1c2e",
+  "icons": [
+    { "src": "/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

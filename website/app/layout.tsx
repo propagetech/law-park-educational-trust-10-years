@@ -4,6 +4,7 @@ import Header from '@/components/layout/Header'
 import Footer from '@/components/layout/Footer'
 import SkipLink from '@/components/shared/SkipLink'
 import WhatsAppButton from '@/components/shared/WhatsAppButton'
+import HideOnApp from '@/components/layout/HideOnApp'
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://journey.lawparkeducationaltrust.org'),
@@ -128,7 +129,6 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
-        <link rel="manifest" href="/site.webmanifest" />
         <meta name="theme-color" content="#15803d" />
         <meta name="msapplication-navbutton-color" content="#15803d" />
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
@@ -151,13 +151,19 @@ export default function RootLayout({
       <body>
         <SkipLink />
         <div className="flex min-h-screen flex-col">
-          <Header />
+          <HideOnApp>
+            <Header />
+          </HideOnApp>
           <main id="main-content" className="flex-1">
             {children}
           </main>
-          <Footer />
+          <HideOnApp>
+            <Footer />
+          </HideOnApp>
         </div>
-        <WhatsAppButton />
+        <HideOnApp>
+          <WhatsAppButton />
+        </HideOnApp>
       </body>
     </html>
   )

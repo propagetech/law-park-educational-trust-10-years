@@ -5,4 +5,8 @@ Allow: /
 # still consent-blocked, and unreleased narration. Not for indexing.
 Disallow: /anniversary-video-production/
 
+# Team duty sheet for the event: names and mobile numbers of volunteers.
+Disallow: /event-duties
+Disallow: /api/
+
 Sitemap: https://journey.lawparkeducationaltrust.org/sitemap.xml

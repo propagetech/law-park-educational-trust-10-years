@@ -119,3 +119,47 @@ No environment variables required.
 ## License
 
 Private and proprietary.
+
+## Event day duties app (`/event-duties`)
+
+A team sign-up sheet for the celebration on 4 October 2026, installable as an
+app from the phone browser (Add to Home Screen). Visitors enter their name and
+mobile number once; the browser remembers both. They then add one or more names
+to each duty, or add a duty that is missing. The **Schedule** tab holds the event
+activities: anyone can add, edit or remove one (date, time, title, description),
+give it one or more owners, and add and tick off its to-dos. No passwords, by
+design: every change is logged with the name of whoever made it.
+
+| Piece | File |
+|-------|------|
+| Page | `website/app/event-duties/page.tsx`, `website/components/pages/EventDutiesPage.tsx` |
+| Duty list, pillar groups, starting schedule | `website/data/eventDuties.ts` |
+| Schedule tab | `website/components/event-duties/Schedule.tsx` |
+| API (Cloudflare Pages Function) | `website/functions/api/duties.js` |
+| Database schema (Cloudflare D1) | `website/migrations/0001_event_duties.sql` |
+| App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |
+| Build stamp for the refresh button | `website/scripts/write-build-version.mjs` (runs in prebuild) |
+
+The starting schedule (`SEED_ACTIVITIES`) is copied into D1 once, on first use.
+After that the page is the only place to change it: editing the seed list does
+nothing to a database that already has a schedule.
+
+**One-time Cloudflare setup** (the function creates its tables on first use):
+
+1. Create the database: `npx wrangler d1 create lawpark-event-duties`
+   (or Cloudflare dashboard, Storage and Databases, D1).
+2. In the Pages project, Settings, Bindings, add a **D1 database** binding named
+   `DB` pointing at `lawpark-event-duties`, for Production (and Preview if wanted).
+3. Redeploy. Until the binding exists, the page shows "Database is not connected yet."
+
+**Local run with a local D1:**
+
+```bash
+cd website
+npm run build
+npm run preview:duties   # http://localhost:8789/event-duties
+```
+
+**New code on phones:** every build writes a new version. An open or installed
+copy checks for it every minute and shows "Update now"; the round refresh icon in
+the header always clears the app's cache and loads the latest version.

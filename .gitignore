@@ -323,3 +323,7 @@ video/production/photo-pack-10-years/founders-charulatha-mr-founder-portrait__K0
 video/production/photo-pack-10-years/founders-trustee-sm-manjunatha-portrait__K09.webp
 video/production/photo-pack-10-years/method-scholarship-interview-hands-form__K26.jpeg
 video/production/photo-pack-10-years/programs-kids-craft-learning-games__K32.jpeg
+
+# /event-duties: build stamp (prebuild) and local wrangler D1 state
+website/public/duties-version.json
+website/.wrangler/

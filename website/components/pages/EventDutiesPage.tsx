@@ -21,11 +21,11 @@ import {
   type Todo,
   type TodoStatus,
 } from '@/components/event-duties/shared'
-import { Schedule, formatTime, sortActivities } from '@/components/event-duties/Schedule'
+import { Schedule, formatShortDate, formatTime, sortActivities } from '@/components/event-duties/Schedule'
 import { SignIn } from '@/components/event-duties/SignIn'
 import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
-import { MyTasks } from '@/components/event-duties/MyTasks'
-import { STATUS, statusOf } from '@/components/event-duties/Tasks'
+import { MyTasks, type TaskParent } from '@/components/event-duties/MyTasks'
+import { STATUS, TaskList, statusOf } from '@/components/event-duties/Tasks'
 import { TOUR_STEPS, Tour, TourOffer } from '@/components/event-duties/Tour'
 
 interface CustomDuty {
@@ -163,6 +163,9 @@ interface DutyCardProps {
   duty: Duty
   custom?: CustomDuty
   people: Assignment[]
+  todos: Todo[]
+  commentsByTodo: Map<number, Comment[]>
+  members: Member[]
   phones: Map<string, string>
   me: string
   busy: boolean
@@ -170,7 +173,10 @@ interface DutyCardProps {
   onRemoveDuty: (id: string) => void
 }
 
-function DutyCard({ duty, custom, people, phones, me, busy, post, onRemoveDuty }: DutyCardProps) {
+function DutyCard({ duty, custom, people, todos, commentsByTodo, members, phones, me, busy, post, onRemoveDuty }: DutyCardProps) {
+  // Folded by default, so 82 cards stay easy to scan.
+  const [tasksOpen, setTasksOpen] = useState(false)
+  const done = todos.filter((t) => statusOf(t) === 'done').length
   return (
     <article className="flex flex-col rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line print:break-inside-avoid print:shadow-none">
       <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
@@ -204,6 +210,40 @@ function DutyCard({ duty, custom, people, phones, me, busy, post, onRemoveDuty }
         post={post}
         className="mt-4 flex flex-1 flex-col"
       />
+      <div className="mt-4 border-t border-line pt-2">
+        <button
+          type="button"
+          aria-expanded={tasksOpen}
+          onClick={() => setTasksOpen(!tasksOpen)}
+          className="flex min-h-11 w-full items-center justify-between gap-3 rounded-md text-left text-sm font-semibold text-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-focus"
+        >
+          <span>
+            Tasks
+            {todos.length > 0 && (
+              <span className="font-normal text-ink-muted">
+                {' '}
+                ({done} of {todos.length} done)
+              </span>
+            )}
+          </span>
+          <span className="text-link">{tasksOpen ? 'Hide' : todos.length ? 'Show' : 'Add a task'}</span>
+        </button>
+        {tasksOpen && (
+          <div className="mt-2">
+            <TaskList
+              parentId={duty.id}
+              parentTitle={duty.title}
+              todos={todos}
+              commentsByTodo={commentsByTodo}
+              members={members}
+              me={me}
+              busy={busy}
+              post={post}
+              heading={false}
+            />
+          </div>
+        )}
+      </div>
     </article>
   )
 }
@@ -522,11 +562,40 @@ function EventDutiesPage() {
     },
     [allItems, events, state],
   )
-  const todos = state?.todos ?? []
+  const todos = useMemo(() => state?.todos ?? [], [state])
+  const todosByParent = useMemo(() => {
+    const map = new Map<string, Todo[]>()
+    for (const t of todos) {
+      const list = map.get(t.event_id) ?? []
+      list.push(t)
+      map.set(t.event_id, list)
+    }
+    return map
+  }, [todos])
+  const commentsByTodo = useMemo(() => {
+    const map = new Map<number, Comment[]>()
+    for (const c of state?.comments ?? []) {
+      const list = map.get(c.todo_id) ?? []
+      list.push(c)
+      map.set(c.todo_id, list)
+    }
+    return map
+  }, [state])
+  // Everything a task can belong to, as My tasks shows it.
+  const parents = useMemo(() => {
+    const map = new Map<string, TaskParent>()
+    for (const e of events) {
+      map.set(e.id, { caption: `${formatShortDate(e.date)} · ${formatTime(e.time)} · ${e.title}`, sortKey: `${e.date} ${e.time || '23:59'}` })
+    }
+    for (const section of sections) {
+      for (const { duty } of section.items) map.set(duty.id, { caption: `${section.title} · ${duty.title}`, sortKey: section.sortKey })
+    }
+    return map
+  }, [events, sections])
   const liveEventIds = new Set(events.map((e) => e.id))
   const openTodos = todos.filter((t) => statusOf(t) !== 'done' && liveEventIds.has(t.event_id)).length
   const myOpenTasks = todos.filter(
-    (t) => statusOf(t) !== 'done' && liveEventIds.has(t.event_id) && t.assignee && sameName(t.assignee, me),
+    (t) => statusOf(t) !== 'done' && parents.has(t.event_id) && t.assignee && sameName(t.assignee, me),
   ).length
   const myDuties = allItems.filter(({ duty }) => byDuty.get(duty.id)?.some((p) => sameName(p.person, me))).map(({ duty }) => duty.title)
   const ownerless = events.filter((e) => !byDuty.get(e.id)?.length).length
@@ -555,7 +624,8 @@ function EventDutiesPage() {
     return (
       duty.title.toLowerCase().includes(q) ||
       duty.detail.toLowerCase().includes(q) ||
-      people.some((p) => p.person.toLowerCase().includes(q))
+      people.some((p) => p.person.toLowerCase().includes(q)) ||
+      (todosByParent.get(duty.id) ?? []).some((t) => t.text.toLowerCase().includes(q) || (t.assignee ?? '').toLowerCase().includes(q))
     )
   }
 
@@ -890,7 +960,7 @@ function EventDutiesPage() {
       <div className="container-custom mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         {view === 'mine' ? (
           <MyTasks
-            events={events}
+            parents={parents}
             todos={todos}
             comments={state?.comments ?? []}
             members={state?.members ?? []}
@@ -958,6 +1028,9 @@ function EventDutiesPage() {
                         duty={duty}
                         custom={custom}
                         people={byDuty.get(duty.id) ?? []}
+                        todos={todosByParent.get(duty.id) ?? []}
+                        commentsByTodo={commentsByTodo}
+                        members={state?.members ?? []}
                         phones={phones}
                         me={me}
                         busy={busyDuty === duty.id}

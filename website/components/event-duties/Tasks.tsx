@@ -8,7 +8,6 @@ import {
   tidy,
   timeAgo,
   type Comment,
-  type EventActivity,
   type Member,
   type Post,
   type Todo,
@@ -274,7 +273,9 @@ export function TaskRow({ todo, comments, members, me, busy, post, busyKey, capt
 }
 
 interface TaskListProps {
-  event: EventActivity
+  // What the tasks belong to: an activity or a duty.
+  parentId: string
+  parentTitle: string
   todos: Todo[]
   commentsByTodo: Map<number, Comment[]>
   members: Member[]
@@ -283,21 +284,23 @@ interface TaskListProps {
   post: Post
 }
 
-// The task list inside an activity on the Schedule.
-export function TaskList({ event, todos, commentsByTodo, members, me, busy, post }: TaskListProps) {
+// The task list inside an activity or a duty.
+export function TaskList({ parentId, parentTitle, todos, commentsByTodo, members, me, busy, post, heading = true }: TaskListProps & { heading?: boolean }) {
   const [draft, setDraft] = useState('')
   const done = todos.filter((t) => statusOf(t) === 'done').length
 
   return (
-    <div className="mt-5">
-      <h4 className="text-sm font-semibold text-ink">
-        Tasks{' '}
-        {todos.length > 0 && (
-          <span className="font-normal text-ink-muted">
-            ({done} of {todos.length} done)
-          </span>
-        )}
-      </h4>
+    <div className={heading ? 'mt-5' : ''}>
+      {heading && (
+        <h4 className="text-sm font-semibold text-ink">
+          Tasks{' '}
+          {todos.length > 0 && (
+            <span className="font-normal text-ink-muted">
+              ({done} of {todos.length} done)
+            </span>
+          )}
+        </h4>
+      )}
       {todos.length > 0 && (
         <ul className="mt-2 space-y-2">
           {todos.map((t) => (
@@ -309,7 +312,7 @@ export function TaskList({ event, todos, commentsByTodo, members, me, busy, post
               me={me}
               busy={busy}
               post={post}
-              busyKey={event.id}
+              busyKey={parentId}
             />
           ))}
         </ul>
@@ -320,14 +323,14 @@ export function TaskList({ event, todos, commentsByTodo, members, me, busy, post
           e.preventDefault()
           const text = tidy(draft)
           if (text.length < 2) return
-          if (await post({ action: 'addTodo', eventId: event.id, text }, event.id)) setDraft('')
+          if (await post({ action: 'addTodo', eventId: parentId, text }, parentId)) setDraft('')
         }}
       >
-        <label htmlFor={`new-todo-${event.id}`} className="sr-only">
-          Add a task to {event.title}
+        <label htmlFor={`new-todo-${parentId}`} className="sr-only">
+          Add a task to {parentTitle}
         </label>
         <input
-          id={`new-todo-${event.id}`}
+          id={`new-todo-${parentId}`}
           type="text"
           maxLength={200}
           value={draft}

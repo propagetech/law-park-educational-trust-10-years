@@ -5,7 +5,7 @@
 // Schedule activities (duty_events) are owned through duty_assignments too:
 // an activity id is just another duty id there.
 
-import { SEED_ACTIVITIES } from '../../data/eventDuties'
+import { SEED_ACTIVITIES, SEED_DUTY_TASKS } from '../../data/eventDuties'
 import { SEED_MEMBERS } from '../../data/eventTeam'
 
 const SCHEMA = [
@@ -151,6 +151,32 @@ async function seedActivities(db) {
   await db.batch(writes)
 }
 
+// Copies the starting duty task lists in once, the same way as the schedule.
+// Tasks live in duty_todos for both: event_id is an activity id (e-...) or a
+// duty id.
+async function seedDutyTasks(db) {
+  const seeded = await db.prepare("SELECT 1 FROM duty_meta WHERE key = 'duty_tasks_seeded'").first()
+  if (seeded) return
+  const at = new Date().toISOString()
+  const writes = [
+    db.prepare("INSERT INTO duty_meta (key, value) VALUES ('duty_tasks_seeded', ?) ON CONFLICT (key) DO NOTHING").bind(at),
+  ]
+  for (const [dutyId, tasks] of Object.entries(SEED_DUTY_TASKS)) {
+    for (const text of tasks) {
+      writes.push(
+        db
+          .prepare(
+            `INSERT INTO duty_todos (event_id, text, added_by, added_at)
+             SELECT ?1, ?2, 'Planning team', ?3
+             WHERE NOT EXISTS (SELECT 1 FROM duty_todos WHERE event_id = ?1 AND text = ?2)`,
+          )
+          .bind(dutyId, text, at),
+      )
+    }
+  }
+  await db.batch(writes)
+}
+
 // Copies the team roster in once. A number that is already registered keeps
 // the name its owner chose. last_seen stays '' until they first sign in.
 async function seedMembers(db) {
@@ -175,6 +201,7 @@ function ensureSchema(db) {
       ])
       .then(() => addMissingColumns(db))
       .then(() => seedActivities(db))
+      .then(() => seedDutyTasks(db))
       .then(() => seedMembers(db))
       .catch((err) => {
         schemaReady = undefined
@@ -477,10 +504,11 @@ export async function onRequestPost({ request, env }) {
     }
 
     case 'addTodo': {
+      // eventId names what the task belongs to: an activity or a duty.
       const eventId = String(body.eventId || '')
       const text = cleanName(body.text, 200)
       const assignee = cleanName(body.assignee) || null
-      if (!EVENT_ID.test(eventId)) return json(400, { error: 'Unknown activity.' })
+      if (!ID.test(eventId)) return json(400, { error: 'Unknown activity or duty.' })
       if (text.length < 2) return json(400, { error: 'Write the task first.' })
       const { total } = await db.prepare('SELECT COUNT(*) AS total FROM duty_todos').first()
       if (total >= MAX_TODOS) return json(429, { error: 'Too many tasks.' })

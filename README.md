@@ -127,8 +127,9 @@ app from the phone browser (Add to Home Screen). Visitors enter their name and
 mobile number once; the browser remembers both. They then add one or more names
 to each duty, or add a duty that is missing. The **Schedule** tab holds the event
 activities: anyone can add, edit or remove one (date, time, title, description)
-and put people in charge of it. Each activity has a task list at micro level
-(the starting schedule has 131 tasks). Any task can be given to a team member,
+and put people in charge of it. Each activity and each duty has a task list at
+micro level (131 tasks on the schedule and 171 on 37 duties to start with; a
+duty's list is folded behind a Tasks button). Any task can be given to a team member,
 moved through Not started, Working on it, Need help and Done, and commented on.
 **My tasks**, the first tab, shows each person only what is theirs, anyone who
 needs help, tasks on their activities with no one yet, and tasks they could
@@ -157,8 +158,8 @@ it changes on every duty and activity they are on.
 | App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |
 | Build stamp for the refresh button | `website/scripts/write-build-version.mjs` (runs in prebuild) |
 
-The starting schedule (`SEED_ACTIVITIES`) and team roster (`SEED_MEMBERS`) are
-each copied into D1 once, on first use.
+The starting schedule (`SEED_ACTIVITIES`), duty task lists (`SEED_DUTY_TASKS`)
+and team roster (`SEED_MEMBERS`) are each copied into D1 once, on first use.
 After that the page is the only place to change it: editing the seed list does
 nothing to a database that already has a schedule.
 

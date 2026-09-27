@@ -14,6 +14,9 @@ export interface DutySection {
   id: string
   title: string
   when: string
+  // Roughly when this section's work happens (YYYY-MM-DD HH:MM), so duty
+  // tasks sort among the schedule's activities in My tasks.
+  sortKey: string
   duties: Duty[]
 }
 
@@ -339,6 +342,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'before',
     title: 'Before the day',
     when: 'Now to 2 October',
+    sortKey: '2026-09-30 00:00',
     duties: [
       { id: 'event-lead', title: 'Overall event lead', detail: 'Has the final say on the day. Every problem that a duty owner cannot solve comes here.', need: 1 },
       { id: 'deputy-lead', title: 'Deputy event lead', detail: 'Runs the floor whenever the lead is on stage or with the chief guests.', need: 1 },
@@ -366,6 +370,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'setup',
     title: 'Venue setup',
     when: 'Saturday 3 October, from 3 PM',
+    sortKey: '2026-10-03 15:00',
     duties: [
       { id: 'setup-lead', title: 'Setup lead', detail: 'Owns the setup checklist and signs it off before leaving the venue.', need: 1 },
       { id: 'stage', title: 'Stage', detail: 'Backdrop, chairs for guests on stage, podium, lamp position, a table for mementos and kits.', need: 2 },
@@ -384,6 +389,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'night',
     title: 'Night stay, HD Kote group',
     when: 'Saturday 3 October night, church at Chandapura (60 people)',
+    sortKey: '2026-10-03 20:00',
     duties: [
       { id: 'stay-coord', title: 'Stay coordinator', detail: 'Confirm with the church: arrival time, rooms, headcount. First point of contact for the group that night.', need: 1 },
       { id: 'stay-bedding', title: 'Bedding, toilets and drinking water', detail: 'Mats and blankets for 60. Separate sleeping areas for girls and boys, with women adults for the girls.', need: 2 },
@@ -396,6 +402,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'travel',
     title: 'Group captains',
     when: 'Sunday 4 October, to and from the venue',
+    sortKey: '2026-10-04 06:00',
     duties: [
       { id: 'captain-radhamani', title: 'Radhamani group (Beluku)', when: 'Srinivasapura, Mulbagal, KGF, Kolar · 86 people', detail: 'Headcount at boarding and at arrival, water and snacks on the vehicle, call the arrival desk when 30 minutes away, same count before leaving.', need: 2 },
       { id: 'captain-prabhu', title: 'Prabhu group (Nisarga)', when: 'HD Kote · 60 people, staying overnight', detail: 'Same as every captain. This group has the longest trip home, so it leaves first after lunch.', need: 2 },
@@ -412,6 +419,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'floor',
     title: 'At the venue',
     when: 'Sunday 4 October, from 8 AM',
+    sortKey: '2026-10-04 08:00',
     duties: [
       { id: 'roll-call', title: 'Core team roll call at 8 AM', detail: 'Tick who has arrived, hand out the contact sheet, fill gaps from this page.', need: 1 },
       { id: 'registration', title: 'Registration and welcome desk', when: 'From 9:15', detail: 'Sign-in, name tags, programme sheet. Also the lost child and lost and found point.', need: 3 },
@@ -432,6 +440,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'protocol',
     title: 'Chief guests and protocol',
     when: 'Sunday 4 October, from arrival to send-off',
+    sortKey: '2026-10-04 09:30',
     duties: [
       { id: 'escort-divya', title: 'Escort for Divya Prabhu G R J, IAS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
       { id: 'escort-guled', title: 'Escort for Bheemashankar S Guled, IPS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
@@ -444,6 +453,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'programme',
     title: 'Programme and stage',
     when: 'Sunday 4 October, 10:00 AM start',
+    sortKey: '2026-10-04 10:00',
     duties: [
       { id: 'emcee', title: 'Emcee', detail: 'Runs the programme in Kannada and English from the script.', need: 2 },
       { id: 'stage-manager', title: 'Stage manager', detail: 'Moves people on and off the stage, keeps the next item ready in the wings.', need: 1 },
@@ -462,6 +472,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     id: 'after',
     title: 'Lunch and wrap-up',
     when: 'Sunday 4 October, from 12:20 PM',
+    sortKey: '2026-10-04 12:20',
     duties: [
       { id: 'lunch', title: 'Lunch service', detail: 'Children first, queue marshals, guests served separately.', need: 3 },
       { id: 'departures', title: 'Group departures', detail: 'Each captain confirms the same headcount before the vehicle leaves. HD Kote leaves first.', need: 1 },
@@ -473,3 +484,253 @@ export const DUTY_SECTIONS: DutySection[] = [
     ],
   },
 ]
+
+// Starting task lists for duties with several steps. Copied into D1 once,
+// like the schedule; after that the team edits them on the page.
+export const SEED_DUTY_TASKS: Record<string, string[]> = {
+  'judge-confirm': [
+    'Call the judge\'s office to confirm',
+    'Get the exact name and designation in writing',
+    'Confirm arrival time and car number',
+    'Update the flex, emcee script and memento with the name',
+  ],
+  'guest-brief': [
+    'Write the one-page note about the trust',
+    'A trustee checks the note',
+    'Send it to Divya Prabhu G R J, IAS',
+    'Send it to Bheemashankar S Guled, IPS',
+    'Send it to the judge once confirmed',
+    'Tell each guest they have 15 to 20 minutes to speak',
+  ],
+  'venue-booking': [
+    'Confirm hall access from 3 PM on 3 October',
+    'Confirm power backup',
+    'Confirm the AC works',
+    'Confirm parking for buses and guest cars',
+    'Save the venue contact person\'s number',
+    'Pay the balance and keep the receipt',
+  ],
+  'invites-rsvp': [
+    'Make the invite list: donors, partners, headmasters, parents',
+    'Send the invite on WhatsApp',
+    'Call everyone who has not replied',
+    'Share the final count with catering by 30 September',
+  ],
+  headcount: [
+    'Numbers from Radhamani (Beluku)',
+    'Numbers from Prabhu (Nisarga)',
+    'Numbers from Komathi',
+    'Numbers from Rufus',
+    'Numbers from Rani',
+    'Numbers from Suma (pending)',
+    'Numbers from Sumesh',
+    'Numbers from Mangala Gowri (pending)',
+    'Recheck the adults total',
+    'Share final numbers with catering and transport',
+  ],
+  'transport-confirm': [
+    'Driver name and phone for each group',
+    'Vehicle number for each group',
+    'Pickup point and departure time for each group',
+    'Share the details with each group captain',
+    'Tell drivers where to park at the venue',
+  ],
+  catering: [
+    'Get two quotes',
+    'Fix the menu',
+    'Give the final plate count',
+    'Confirm lunch is ready by 12:15 PM',
+    'Confirm tea and snacks at 9:15 AM',
+    'Order drinking water',
+    'Pay the advance and keep the receipt',
+  ],
+  printing: [
+    'Main flex design approved by a trustee',
+    'Entrance banner',
+    'Direction signs',
+    'Seat labels',
+    'Programme sheet',
+    'Certificates',
+    'Name lists for the emcee',
+    'Collect everything by 2 October',
+  ],
+  mementos: [
+    'Final list of names',
+    'Order the mementos',
+    'Check the spelling of every name',
+    'Buy the shawls',
+    'Order bouquets for the morning of 4 October',
+    'Label each item in calling order',
+  ],
+  kits: [
+    'Final list of children',
+    'Buy the kit items',
+    'Pack one kit per child',
+    'Label each kit with the child\'s name',
+    'Sort kits by group and calling order',
+    'Take the kits to the venue on 3 October',
+  ],
+  toppers: [
+    'Get topper names from each pillar',
+    'Check the spellings',
+    'Print the certificates',
+    'Buy the medals',
+    'Sort in calling order',
+  ],
+  consent: [
+    'Print consent forms',
+    'Send forms to each pillar',
+    'Collect the signed forms',
+    'Give the photographer a list of children without consent',
+  ],
+  'dress-code': [
+    'Decide the dress code',
+    'Share it in the team group',
+    'Remind everyone the day before',
+  ],
+  ncc: [
+    'Call the NCC officer to confirm 30 cadets',
+    'Fix the reporting time',
+    'Plan where the cadets stand',
+    'Arrange water, snacks and lunch for the cadets',
+    'Print a thank-you certificate',
+  ],
+  'video-ready': [
+    'Get the final video file',
+    'Copy it to a pen drive',
+    'Copy it to the laptop',
+    'Test it on the venue projector',
+  ],
+  'emcee-script': [
+    'Write the script',
+    'Add the chief guest introductions',
+    'Add the felicitation list',
+    'Add the scholarship batches with names',
+    'Print two copies in large font',
+  ],
+  budget: [
+    'Make the budget sheet',
+    'Keep a cash float for the day',
+    'Collect every receipt',
+  ],
+  'contact-sheet': [
+    'Collect the phone number of every duty owner',
+    'Add drivers, venue, caterer and NCC officer',
+    'Add the nearest hospital',
+    'Print 10 copies',
+  ],
+  'photo-booth': [
+    'Get the frame and props',
+    'Choose a spot away from the entrance',
+    'Check the lighting',
+    'Test with a phone photo',
+  ],
+  'donation-setup': [
+    'Table and cloth',
+    'Receipt book with 80G details',
+    'Print the UPI QR standee',
+    'Lockable cash box',
+    'Two pens',
+  ],
+  'sound-check': [
+    'Test both cordless mics',
+    'Test the podium mic',
+    'Keep spare batteries',
+    'Play the full video once with sound',
+  ],
+  'stay-bedding': [
+    'Count mats and blankets for 60',
+    'Set up the girls\' area, with women adults',
+    'Set up the boys\' area',
+    'Check the toilets are clean',
+    'Keep drinking water cans',
+  ],
+  'stay-food': [
+    'Order dinner for 60',
+    'Order breakfast for 60',
+    'Confirm the serving times',
+    'Plates, cups and water',
+  ],
+  'first-aid': [
+    'Pack the first aid kit',
+    'ORS packets',
+    'Basic medicines',
+    'Note the route to the nearest hospital',
+    'One car and driver on standby',
+  ],
+  'donation-counter': [
+    'Two people at the counter at all times',
+    'A receipt for every donation',
+    'Count the cash with two people at close',
+    'Hand cash and receipts to a trustee',
+  ],
+  registration: [
+    'Sign-in sheet',
+    'Name tags and markers',
+    'Programme sheets',
+    'Lost and found box',
+  ],
+  water: [
+    'Order water cans',
+    'Place water in the hall and near the stage',
+    'Paper cups',
+    'Refill every hour',
+  ],
+  'child-safety': [
+    'Brief the volunteers',
+    'Women volunteers for girls',
+    'Lost child point at registration',
+    'Headcount after lunch',
+  ],
+  'guest-lounge': [
+    'Book a quiet room',
+    'Water, tea and snacks',
+    'Washroom nearby',
+    'Chairs for 6',
+  ],
+  'guard-of-honour': [
+    'Brief the NCC cadets on the order of guests',
+    'Mark where the cadets stand',
+    'Cue plan for each guest',
+  ],
+  av: [
+    'Laptop with the video',
+    'Pen drive backup',
+    'Mic batteries',
+    'List of light cues',
+  ],
+  'photo-video': [
+    'Make a shot list',
+    'Charge all batteries',
+    'Spare memory cards',
+    'Know which children have no photo consent',
+  ],
+  'social-media': [
+    'Plan the posts',
+    'Only children with photo consent',
+    'Post by the evening',
+  ],
+  'pack-up': [
+    'Count leftover kits and gifts',
+    'Return the LED screen',
+    'Take down the flex',
+    'Return the chairs',
+  ],
+  accounts: [
+    'Total the donations',
+    'Pay pending bills',
+    'File all receipts',
+  ],
+  'thank-you': [
+    'Thank the chief guests',
+    'Thank the NCC officer and cadets',
+    'Thank the venue',
+    'Thank the caterer',
+    'Thank donors and partners',
+  ],
+  'photos-collect': [
+    'Create one shared folder',
+    'Collect from the photographer',
+    'Collect from the team\'s phones',
+  ],
+}

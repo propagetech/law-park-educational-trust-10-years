@@ -28,7 +28,7 @@ export const TOUR_STEPS: TourStep[] = [
   {
     target: 'tab-duties',
     title: 'Duties',
-    body: 'Roles for the day, like usher or first aid. Tap "Add me" on any duty you can do.',
+    body: 'Roles for the day, like usher or first aid. Tap "Add me" on any duty you can do. Tap "Tasks" on a duty to see its steps.',
   },
   { target: 'text-size', title: 'Bigger text', body: 'Tap A+ to make the words bigger, and A− to make them smaller.' },
   { target: 'theme', title: 'Light or dark', body: 'Tap here to switch between a light screen and a dark one.' },

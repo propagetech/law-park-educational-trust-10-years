@@ -1,11 +1,16 @@
 'use client'
 
-import { formatTime, sortActivities } from './Schedule'
-import { primaryButtonClass, sameName, type Assignment, type Comment, type EventActivity, type Member, type Post, type Todo } from './shared'
+import { primaryButtonClass, sameName, type Assignment, type Comment, type Member, type Post, type Todo } from './shared'
 import { TaskRow, statusOf } from './Tasks'
 
+// What a task belongs to (an activity or a duty), as My tasks shows it.
+export interface TaskParent {
+  caption: string
+  sortKey: string // YYYY-MM-DD HH:MM
+}
+
 interface MyTasksProps {
-  events: EventActivity[]
+  parents: Map<string, TaskParent>
   todos: Todo[]
   comments: Comment[]
   members: Member[]
@@ -19,14 +24,9 @@ interface MyTasksProps {
   openDuties: () => void
 }
 
-function shortDate(date: string) {
-  return new Date(`${date}T00:00:00`).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })
-}
-
 // The first screen after sign-in: only what this person needs to do, in the
 // order they will do it.
-export function MyTasks({ events, todos, comments, members, byDuty, myDuties, me, busyKey, loaded, post, openSchedule, openDuties }: MyTasksProps) {
-  const eventsById = new Map(sortActivities(events).map((e, i) => [e.id, { event: e, order: i }]))
+export function MyTasks({ parents, todos, comments, members, byDuty, myDuties, me, busyKey, loaded, post, openSchedule, openDuties }: MyTasksProps) {
   const commentsByTodo = new Map<number, Comment[]>()
   for (const c of comments) {
     const list = commentsByTodo.get(c.todo_id) ?? []
@@ -34,20 +34,19 @@ export function MyTasks({ events, todos, comments, members, byDuty, myDuties, me
     commentsByTodo.set(c.todo_id, list)
   }
 
-  // Tasks on removed activities are hidden everywhere.
+  // Tasks on removed activities or duties are hidden everywhere. The rest
+  // come in the order they happen, so preparation comes first.
   const live = todos
-    .filter((t) => eventsById.has(t.event_id))
-    .sort((a, b) => eventsById.get(a.event_id)!.order - eventsById.get(b.event_id)!.order || a.id - b.id)
-  const caption = (t: Todo) => {
-    const e = eventsById.get(t.event_id)!.event
-    return `${shortDate(e.date)} · ${formatTime(e.time)} · ${e.title}`
-  }
+    .filter((t) => parents.has(t.event_id))
+    .sort((a, b) => parents.get(a.event_id)!.sortKey.localeCompare(parents.get(b.event_id)!.sortKey) || a.id - b.id)
+  const caption = (t: Todo) => parents.get(t.event_id)!.caption
 
   const mine = live.filter((t) => t.assignee && sameName(t.assignee, me))
   const mineOpen = mine.filter((t) => statusOf(t) !== 'done')
   const mineDone = mine.filter((t) => statusOf(t) === 'done')
   const needHelp = live.filter((t) => statusOf(t) === 'stuck' && !(t.assignee && sameName(t.assignee, me)))
-  const leading = new Set(events.filter((e) => byDuty.get(e.id)?.some((p) => sameName(p.person, me))).map((e) => e.id))
+  // Activities you are in charge of, and duties you are on.
+  const leading = new Set([...parents.keys()].filter((id) => byDuty.get(id)?.some((p) => sameName(p.person, me))))
   // Open and not already listed under "needs help".
   const unclaimed = live.filter((t) => !t.assignee && statusOf(t) !== 'done' && statusOf(t) !== 'stuck')
   const toHandOut = unclaimed.filter((t) => leading.has(t.event_id))
@@ -125,9 +124,9 @@ export function MyTasks({ events, todos, comments, members, byDuty, myDuties, me
       {toHandOut.length > 0 && (
         <section aria-labelledby="h-handout">
           <h2 id="h-handout" className="text-lg font-semibold text-ink">
-            Tasks on your activities that no one has yet ({toHandOut.length})
+            Tasks on your duties and activities that no one has yet ({toHandOut.length})
           </h2>
-          <p className="mt-1 text-sm text-ink-soft">You are in charge of these activities. Tap a task and choose who is doing it.</p>
+          <p className="mt-1 text-sm text-ink-soft">These are yours to share out. Tap a task and choose who is doing it.</p>
           <ul className="mt-3 space-y-2">{toHandOut.map(row)}</ul>
         </section>
       )}

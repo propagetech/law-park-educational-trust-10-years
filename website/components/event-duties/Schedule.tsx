@@ -26,6 +26,11 @@ export function formatDate(date: string) {
   return d.toLocaleDateString('en-IN', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' })
 }
 
+// 2026-10-04 -> Sun, 4 Oct
+export function formatShortDate(date: string) {
+  return new Date(`${date}T00:00:00`).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })
+}
+
 export function formatTime(time: string) {
   if (!time) return 'Any time'
   const [h, m] = time.split(':').map(Number)
@@ -204,7 +209,7 @@ function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, 
             className="mt-2"
           />
 
-          <TaskList event={event} todos={todos} commentsByTodo={commentsByTodo} members={members} me={me} busy={busy} post={post} />
+          <TaskList parentId={event.id} parentTitle={event.title} todos={todos} commentsByTodo={commentsByTodo} members={members} me={me} busy={busy} post={post} />
 
           <p className="mt-4 text-xs text-ink-muted">
             Last edited by {event.updated_by}, {timeAgo(event.updated_at)}

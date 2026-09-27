@@ -327,5 +327,7 @@ video/production/photo-pack-10-years/method-scholarship-interview-hands-form__K2
 video/production/photo-pack-10-years/programs-kids-craft-learning-games__K32.jpeg
 
 # /event-duties: build stamp (prebuild) and local wrangler D1 state
+# team-roster.sql holds team members' mobile numbers; this repo is public.
+team-roster.sql
 website/public/duties-version.json
 website/.wrangler/

@@ -148,7 +148,6 @@ it changes on every duty and activity they are on.
 |-------|------|
 | Page | `website/app/event-duties/page.tsx`, `website/components/pages/EventDutiesPage.tsx` |
 | Duty list, pillar groups, starting schedule | `website/data/eventDuties.ts` |
-| Starting team roster (server only) | `website/data/eventTeam.ts` |
 | Sign-in screen | `website/components/event-duties/SignIn.tsx` |
 | Schedule tab | `website/components/event-duties/Schedule.tsx` |
 | Tasks, and the My tasks tab | `website/components/event-duties/Tasks.tsx`, `MyTasks.tsx` |
@@ -158,8 +157,21 @@ it changes on every duty and activity they are on.
 | App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |
 | Build stamp for the refresh button | `website/scripts/write-build-version.mjs` (runs in prebuild) |
 
-The starting schedule (`SEED_ACTIVITIES`), duty task lists (`SEED_DUTY_TASKS`)
-and team roster (`SEED_MEMBERS`) are each copied into D1 once, on first use.
+The starting schedule (`SEED_ACTIVITIES`) and duty task lists
+(`SEED_DUTY_TASKS`) are each copied into D1 once, on first use.
+
+The team roster is **not in this repo**, because the repo is public and the
+roster holds mobile numbers. It lives in `team-roster.sql` at the repo root,
+which git ignores; keep it somewhere private (it is also easy to rebuild).
+Load it once the database exists:
+
+```bash
+npx wrangler d1 execute lawpark-event-duties --remote --file team-roster.sql
+```
+
+Until then the sign-in list is empty and people add themselves. For local
+testing, open the page once (so the local database exists), then from the repo
+root: `sqlite3 "$(ls website/.wrangler/state/v3/d1/miniflare-D1DatabaseObject/[0-9a-f]*.sqlite)" < team-roster.sql`.
 After that the page is the only place to change it: editing the seed list does
 nothing to a database that already has a schedule.
 

@@ -6,7 +6,6 @@
 // an activity id is just another duty id there.
 
 import { SEED_ACTIVITIES, SEED_DUTY_TASKS } from '../../data/eventDuties'
-import { SEED_MEMBERS } from '../../data/eventTeam'
 
 const SCHEMA = [
   `CREATE TABLE IF NOT EXISTS duty_assignments (
@@ -177,20 +176,6 @@ async function seedDutyTasks(db) {
   await db.batch(writes)
 }
 
-// Copies the team roster in once. A number that is already registered keeps
-// the name its owner chose. last_seen stays '' until they first sign in.
-async function seedMembers(db) {
-  const seeded = await db.prepare("SELECT 1 FROM duty_meta WHERE key = 'members_seeded'").first()
-  if (seeded) return
-  const at = new Date().toISOString()
-  await db.batch([
-    db.prepare("INSERT INTO duty_meta (key, value) VALUES ('members_seeded', ?) ON CONFLICT (key) DO NOTHING").bind(at),
-    ...SEED_MEMBERS.map((m) =>
-      db.prepare("INSERT OR IGNORE INTO duty_members (mobile, name, first_seen, last_seen) VALUES (?, ?, ?, '')").bind(m.mobile, m.name, at),
-    ),
-  ])
-}
-
 function ensureSchema(db) {
   if (!schemaReady) {
     schemaReady = db
@@ -202,7 +187,6 @@ function ensureSchema(db) {
       .then(() => addMissingColumns(db))
       .then(() => seedActivities(db))
       .then(() => seedDutyTasks(db))
-      .then(() => seedMembers(db))
       .catch((err) => {
         schemaReady = undefined
         throw err

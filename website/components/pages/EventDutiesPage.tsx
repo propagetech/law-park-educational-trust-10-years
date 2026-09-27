@@ -1,5 +1,6 @@
 'use client'
 
+import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DUTY_SECTIONS, EVENT_FACTS, PILLAR_GROUPS, type Duty } from '@/data/eventDuties'
 import {
@@ -58,6 +59,8 @@ const VIEW_KEY = 'lpet-duties-view'
 const API = '/api/duties'
 const VERSION_URL = '/duties-version.json'
 const BUILD_ID = process.env.NEXT_PUBLIC_BUILD_ID || 'dev'
+const LOGO_FULL = '/images/event-duties/lawpark-trust-logo.webp' // 480x545, white lettering
+const LOGO_ICON = '/images/event-duties/lawpark-trust-tree-icon.webp' // 252x256
 const REFRESH_MS = 20000
 const VERSION_CHECK_MS = 60000
 
@@ -144,9 +147,18 @@ function NameGate({ initial, onEnter }: { initial: User | null; onEnter: (user: 
   const [error, setError] = useState<{ field: 'name' | 'mobile'; text: string } | null>(null)
 
   return (
-    <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4 py-16">
+    <div className="min-h-screen bg-primary-700 flex flex-col items-center justify-center px-4 py-12">
+      {/* The full logo has white lettering, so it sits on navy, not on the card. */}
+      <Image
+        src={LOGO_FULL}
+        alt="Law Park Educational Trust, +91 99456 65379"
+        width={480}
+        height={545}
+        priority
+        className="mb-8 h-auto w-40 sm:w-48"
+      />
       <form
-        className="w-full max-w-md bg-white rounded-xl shadow-md p-8"
+        className="w-full max-w-md bg-white rounded-xl shadow-lg p-8"
         onSubmit={(e) => {
           e.preventDefault()
           const name = tidy(draft)
@@ -571,7 +583,7 @@ function EventDutiesPage() {
   const ownerless = events.filter((e) => !byDuty.get(e.id)?.length).length
   const myEvents = events.filter((e) => byDuty.get(e.id)?.some((p) => sameName(p.person, me))).length
 
-  if (user === undefined) return <div className="min-h-screen bg-gray-50" />
+  if (user === undefined) return <div className="min-h-screen bg-primary-700" />
   if (!user || editing) {
     return (
       <NameGate
@@ -640,10 +652,20 @@ function EventDutiesPage() {
           {updateReady && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-primary-700" aria-hidden />}
         </button>
         <div className="container-custom py-10 md:py-14">
-          <p className="pr-12 text-sm font-semibold uppercase tracking-wide text-gold-300 print:text-black">
-            Law Park Educational Trust · 10 years
-          </p>
-          <h1 className="mt-2 font-serif text-4xl md:text-5xl font-bold text-white print:text-black">Event day duties</h1>
+          <div className="flex items-center gap-4 pr-12">
+            {/* Brown and green need a light tile to read on navy. */}
+            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-md md:h-20 md:w-20 print:shadow-none">
+              <Image src={LOGO_ICON} alt="" width={252} height={256} priority className="h-full w-auto" />
+            </span>
+            <div className="min-w-0">
+              <p className="text-sm font-semibold uppercase tracking-wide text-gold-300 print:text-black">
+                Law Park Educational Trust · 10 years
+              </p>
+              <h1 className="mt-1 font-serif text-3xl sm:text-4xl md:text-5xl font-bold text-white print:text-black">
+                Event day duties
+              </h1>
+            </div>
+          </div>
           <p className="mt-3 max-w-2xl text-lg text-primary-100 print:text-black">
             Pick up a duty, keep the schedule up to date, and tick off to-dos. Every duty needs a name before 3 October.
           </p>

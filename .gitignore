@@ -120,6 +120,8 @@ video/.asset-drop/
 # driven by website/image-manifest.json and run automatically before `next build`.
 # assets/ is the master library and the only tracked copy; committing these again
 # would reintroduce the duplicates and let the two copies drift apart.
+website/public/images/event-duties/lawpark-trust-logo.webp
+website/public/images/event-duties/lawpark-trust-tree-icon.webp
 website/public/android-chrome-192x192.png
 website/public/android-chrome-192x192.webp
 website/public/android-chrome-512x512.png

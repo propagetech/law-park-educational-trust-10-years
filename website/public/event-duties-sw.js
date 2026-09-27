@@ -6,7 +6,13 @@
 
 const VERSION = new URL(self.location.href).searchParams.get('v') || 'dev'
 const CACHE = `duties-${VERSION}`
-const SHELL = ['/event-duties', '/event-duties.webmanifest', '/android-chrome-192x192.png']
+const SHELL = [
+  '/event-duties',
+  '/event-duties.webmanifest',
+  '/android-chrome-192x192.png',
+  '/images/event-duties/lawpark-trust-logo.webp',
+  '/images/event-duties/lawpark-trust-tree-icon.webp',
+]
 
 self.addEventListener('install', (event) => {
   event.waitUntil(

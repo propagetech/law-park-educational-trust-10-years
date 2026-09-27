@@ -14,7 +14,7 @@
     "start": "next start",
     "lint": "eslint .",
     "prebuild": "npm run sync:images && node scripts/write-build-version.mjs",
-    "preview:duties": "wrangler pages dev out --d1 DB --port 8789"
+    "preview:duties": "wrangler pages dev out --port 8789"
   },
   "dependencies": {
     "autoprefixer": "^10.4.27",

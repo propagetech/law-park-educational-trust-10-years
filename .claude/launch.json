@@ -4,15 +4,36 @@
     {
       "name": "thirty-photo-cut-preview",
       "runtimeExecutable": "python3",
-      "runtimeArgs": ["-m", "http.server", "8788",
-                      "-d", "video/production/thirty-photo-cut/preview"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8788",
+        "-d",
+        "video/production/thirty-photo-cut/preview"
+      ],
       "port": 8788
     },
     {
       "name": "event-duties",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["--prefix", "website", "run", "preview:duties"],
+      "runtimeArgs": [
+        "--prefix",
+        "website",
+        "run",
+        "preview:duties"
+      ],
       "port": 8789
+    },
+    {
+      "name": "event-duties-api",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "--prefix",
+        "backend",
+        "run",
+        "dev"
+      ],
+      "port": 8790
     }
   ]
 }

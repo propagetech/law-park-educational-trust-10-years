@@ -1,10 +1,13 @@
 // Service worker for the /event-duties app.
-// The page registers it as /event-duties-sw.js?v=<build id>, so every deploy
-// is a new worker and old caches are dropped on activate.
+// The page registers it as /event-duties-sw.js?v=<build id>&api=<API url>, so
+// every deploy is a new worker and old caches are dropped on activate. The API
+// is on AWS (another origin), so its address comes in the same way.
 // Pages and data are network-first (a new deploy wins whenever there is
 // signal); the cache only answers when the phone is offline.
 
-const VERSION = new URL(self.location.href).searchParams.get('v') || 'dev'
+const params = new URL(self.location.href).searchParams
+const VERSION = params.get('v') || 'dev'
+const API = params.get('api') || ''
 const CACHE = `duties-${VERSION}`
 const SHELL = [
   '/event-duties',
@@ -59,13 +62,16 @@ self.addEventListener('fetch', (event) => {
   const { request } = event
   if (request.method !== 'GET') return
   const url = new URL(request.url)
+  // The team's data: newest from the API, last copy when offline.
+  if (API && request.url.startsWith(API)) {
+    event.respondWith(networkFirst(request))
+    return
+  }
   if (url.origin !== self.location.origin) return
 
   if (url.pathname === '/duties-version.json') return // always live
   if (request.mode === 'navigate') {
     event.respondWith(networkFirst(request, '/event-duties'))
-  } else if (url.pathname.startsWith('/api/')) {
-    event.respondWith(networkFirst(request))
   } else if (url.pathname.startsWith('/_next/static/')) {
     event.respondWith(cacheFirst(request)) // file names carry a content hash
   } else {

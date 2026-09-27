@@ -277,7 +277,7 @@ interface TaskListProps {
   parentId: string
   parentTitle: string
   todos: Todo[]
-  commentsByTodo: Map<number, Comment[]>
+  commentsByTodo: Map<string, Comment[]>
   members: Member[]
   me: string
   busy: boolean

@@ -141,7 +141,7 @@ interface EventCardProps {
   event: EventActivity
   owners: Assignment[]
   todos: Todo[]
-  commentsByTodo: Map<number, Comment[]>
+  commentsByTodo: Map<string, Comment[]>
   members: Member[]
   phones: Map<string, string>
   me: string
@@ -247,7 +247,7 @@ export function Schedule({ events, todos, comments, members, byDuty, phones, me,
     todosByEvent.set(t.event_id, list)
   }
 
-  const commentsByTodo = new Map<number, Comment[]>()
+  const commentsByTodo = new Map<string, Comment[]>()
   for (const c of comments) {
     const list = commentsByTodo.get(c.todo_id) ?? []
     list.push(c)

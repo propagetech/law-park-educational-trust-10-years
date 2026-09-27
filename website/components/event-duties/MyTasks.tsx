@@ -27,7 +27,7 @@ interface MyTasksProps {
 // The first screen after sign-in: only what this person needs to do, in the
 // order they will do it.
 export function MyTasks({ parents, todos, comments, members, byDuty, myDuties, me, busyKey, loaded, post, openSchedule, openDuties }: MyTasksProps) {
-  const commentsByTodo = new Map<number, Comment[]>()
+  const commentsByTodo = new Map<string, Comment[]>()
   for (const c of comments) {
     const list = commentsByTodo.get(c.todo_id) ?? []
     list.push(c)
@@ -38,7 +38,7 @@ export function MyTasks({ parents, todos, comments, members, byDuty, myDuties, m
   // come in the order they happen, so preparation comes first.
   const live = todos
     .filter((t) => parents.has(t.event_id))
-    .sort((a, b) => parents.get(a.event_id)!.sortKey.localeCompare(parents.get(b.event_id)!.sortKey) || a.id - b.id)
+    .sort((a, b) => parents.get(a.event_id)!.sortKey.localeCompare(parents.get(b.event_id)!.sortKey) || a.id.localeCompare(b.id))
   const caption = (t: Todo) => parents.get(t.event_id)!.caption
 
   const mine = live.filter((t) => t.assignee && sameName(t.assignee, me))

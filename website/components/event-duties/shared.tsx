@@ -2,10 +2,16 @@
 
 import { useState } from 'react'
 
-// Shapes returned by /api/duties (functions/api/duties.js).
+// Where the duties API lives (AWS: backend/ in this repo), set at build time.
+// Empty means the page was built without it and shows "not connected".
+export const DUTIES_API = process.env.NEXT_PUBLIC_DUTIES_API || ''
+export const NOT_CONNECTED = 'The app is not connected to its server yet.'
+
+// Shapes returned by the duties API (backend/src/handlers/duties.js).
+// Ids are strings: DynamoDB has no auto-numbering.
 
 export interface Assignment {
-  id: number
+  id: string
   duty_id: string
   person: string
   added_by: string
@@ -25,7 +31,7 @@ export interface EventActivity {
 export type TodoStatus = 'todo' | 'doing' | 'stuck' | 'done'
 
 export interface Todo {
-  id: number
+  id: string
   event_id: string
   text: string
   done: number
@@ -38,8 +44,8 @@ export interface Todo {
 }
 
 export interface Comment {
-  id: number
-  todo_id: number
+  id: string
+  todo_id: string
   by_name: string
   text: string
   at: string
@@ -67,7 +73,7 @@ export function splitNames(value: string) {
 
 // Mobile numbers are kept with their country code, like +919876543210.
 // Without a + (or 00) prefix a number is read as Indian. Mirrors cleanMobile
-// in functions/api/duties.js.
+// in backend/src/handlers/duties.js.
 export function cleanMobile(value: unknown) {
   const raw = String(value ?? '').trim()
   let digits = raw.replace(/\D/g, '')

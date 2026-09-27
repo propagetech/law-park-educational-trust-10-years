@@ -4,6 +4,8 @@ import Image from 'next/image'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { DUTY_SECTIONS, EVENT_FACTS, PILLAR_GROUPS, type Duty } from '@/data/eventDuties'
 import {
+  DUTIES_API as API,
+  NOT_CONNECTED,
   PeopleEditor,
   cleanMobile,
   formatMobile,
@@ -37,7 +39,7 @@ interface CustomDuty {
 }
 
 interface Activity {
-  id: number
+  id: string
   at: string
   by_name: string
   action: string
@@ -64,7 +66,6 @@ const VIEWS: View[] = ['mine', 'schedule', 'duties']
 const USER_KEY = 'lpet-duties-user'
 const VIEW_KEY = 'lpet-duties-view'
 const TOUR_KEY = 'lpet-duties-tour'
-const API = '/api/duties'
 const VERSION_URL = '/duties-version.json'
 const BUILD_ID = process.env.NEXT_PUBLIC_BUILD_ID || 'dev'
 const LOGO_ICON = '/images/event-duties/lawpark-trust-tree-icon.webp' // 252x256
@@ -164,7 +165,7 @@ interface DutyCardProps {
   custom?: CustomDuty
   people: Assignment[]
   todos: Todo[]
-  commentsByTodo: Map<number, Comment[]>
+  commentsByTodo: Map<string, Comment[]>
   members: Member[]
   phones: Map<string, string>
   me: string
@@ -400,7 +401,7 @@ function EventDutiesPage() {
   useEffect(() => {
     if (!('serviceWorker' in navigator) || BUILD_ID === 'dev') return
     navigator.serviceWorker
-      .register(`/event-duties-sw.js?v=${encodeURIComponent(BUILD_ID)}`, { scope: '/event-duties' })
+      .register(`/event-duties-sw.js?v=${encodeURIComponent(BUILD_ID)}&api=${encodeURIComponent(API)}`, { scope: '/event-duties' })
       .catch(() => {})
   }, [])
 
@@ -434,7 +435,7 @@ function EventDutiesPage() {
   // name changed from another phone.
   const userMobile = user?.mobile
   useEffect(() => {
-    if (!userMobile) return
+    if (!userMobile || !API) return
     const saved = readSavedUser()
     if (!saved || saved.mobile !== userMobile) return
     fetch(API, {
@@ -453,6 +454,10 @@ function EventDutiesPage() {
   }, [userMobile])
 
   const load = useCallback(async () => {
+    if (!API) {
+      setError(NOT_CONNECTED)
+      return
+    }
     try {
       const res = await fetch(API, { cache: 'no-store' })
       const body = await res.json()
@@ -480,6 +485,10 @@ function EventDutiesPage() {
 
   const post = useCallback<Post>(
     async (payload, busyKey) => {
+      if (!API) {
+        setError(NOT_CONNECTED)
+        return false
+      }
       setBusyDuty(busyKey ?? 'page')
       try {
         const res = await fetch(API, {
@@ -573,7 +582,7 @@ function EventDutiesPage() {
     return map
   }, [todos])
   const commentsByTodo = useMemo(() => {
-    const map = new Map<number, Comment[]>()
+    const map = new Map<string, Comment[]>()
     for (const c of state?.comments ?? []) {
       const list = map.get(c.todo_id) ?? []
       list.push(c)

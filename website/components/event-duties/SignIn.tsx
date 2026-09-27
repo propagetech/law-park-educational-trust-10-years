@@ -2,9 +2,8 @@
 
 import Image from 'next/image'
 import { useEffect, useId, useMemo, useRef, useState, type ReactNode } from 'react'
-import { cleanMobile, tidy, type Member } from './shared'
+import { DUTIES_API as API, NOT_CONNECTED, cleanMobile, tidy, type Member } from './shared'
 
-const API = '/api/duties'
 const LOGO_FULL = '/images/event-duties/lawpark-trust-logo.webp' // 480x545, white lettering
 
 function digitsOf(value: string) {
@@ -83,6 +82,11 @@ export function SignIn({ onSignedIn, toolbar }: { onSignedIn: (user: Member) => 
   const [busy, setBusy] = useState(false)
 
   useEffect(() => {
+    if (!API) {
+      setMembers([])
+      setError(NOT_CONNECTED)
+      return
+    }
     fetch(API, { cache: 'no-store' })
       .then(async (res) => {
         const body = await res.json()

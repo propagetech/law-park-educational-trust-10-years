@@ -1,0 +1,99 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Transform: AWS::Serverless-2016-10-31
+Description: >
+  Law Park 10 Years event duties API (/event-duties on journey.lawparkeducationaltrust.org).
+  HTTP API (API Gateway) -> Lambda (Node 24, arm64) -> DynamoDB. No passwords by design:
+  every change is logged with the name its author signed in with. Same shape as the
+  motorover and invoices backends, with its own stack and table.
+
+Parameters:
+  AllowedOrigins:
+    Type: CommaDelimitedList
+    Default: http://localhost:8789
+    Description: >
+      Comma-separated origins allowed to call the API, e.g.
+      "https://journey.lawparkeducationaltrust.org,http://localhost:8789".
+
+Globals:
+  Function:
+    Runtime: nodejs24.x             # supported until Apr 2028; AWS SDK v3 is built in
+    Architectures: [arm64]          # Graviton: cheaper, within free tier
+    MemorySize: 256
+    Timeout: 15                     # first request on a new table copies in the starting data
+    Environment:
+      Variables:
+        TABLE_NAME: !Ref DutiesTable
+        ALLOWED_ORIGINS: !Join [",", !Ref AllowedOrigins]
+
+Resources:
+  HttpApi:
+    Type: AWS::Serverless::HttpApi
+    Properties:
+      CorsConfiguration:
+        AllowOrigins: !Ref AllowedOrigins
+        AllowMethods: [GET, POST, OPTIONS]
+        AllowHeaders: [content-type]
+        MaxAge: 600
+      # Room for the whole team on the day (each open page polls every 20s),
+      # while still capping abuse.
+      DefaultRouteSettings:
+        ThrottlingBurstLimit: 50
+        ThrottlingRateLimit: 25
+
+  DutiesTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Retain          # the team's work survives even if the stack is removed
+    UpdateReplacePolicy: Retain
+    Properties:
+      TableName: lawpark-event-duties
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: pk         # kind of record: MEMBER, ASSIGN, EVENT, TODO, ...
+          AttributeType: S
+        - AttributeName: sk         # its id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: pk
+          KeyType: HASH
+        - AttributeName: sk
+          KeyType: RANGE
+      PointInTimeRecoverySpecification:
+        PointInTimeRecoveryEnabled: true
+
+  DutiesLogGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: /aws/lambda/lawpark-event-duties
+      RetentionInDays: 30
+
+  DutiesFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: lawpark-event-duties
+      Handler: handlers/duties.handler
+      CodeUri: src/
+      LoggingConfig:
+        LogGroup: !Ref DutiesLogGroup
+      Policies:
+        - DynamoDBCrudPolicy:
+            TableName: !Ref DutiesTable
+      Events:
+        Read:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /duties
+            Method: GET
+        Write:
+          Type: HttpApi
+          Properties:
+            ApiId: !Ref HttpApi
+            Path: /duties
+            Method: POST
+
+Outputs:
+  DutiesApiUrl:
+    Description: Put this in the website's NEXT_PUBLIC_DUTIES_API (Cloudflare Pages env var).
+    Value: !Sub "https://${HttpApi}.execute-api.${AWS::Region}.amazonaws.com/duties"
+  DutiesTableName:
+    Value: !Ref DutiesTable

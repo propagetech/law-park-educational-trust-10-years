@@ -147,49 +147,32 @@ it changes on every duty and activity they are on.
 | Piece | File |
 |-------|------|
 | Page | `website/app/event-duties/page.tsx`, `website/components/pages/EventDutiesPage.tsx` |
-| Duty list, pillar groups, starting schedule | `website/data/eventDuties.ts` |
+| Duty list and pillar groups | `website/data/eventDuties.ts` |
 | Sign-in screen | `website/components/event-duties/SignIn.tsx` |
 | Schedule tab | `website/components/event-duties/Schedule.tsx` |
 | Tasks, and the My tasks tab | `website/components/event-duties/Tasks.tsx`, `MyTasks.tsx` |
 | First-time tour; text size and theme | `website/components/event-duties/Tour.tsx`, `Preferences.tsx` |
-| API (Cloudflare Pages Function) | `website/functions/api/duties.js` |
-| Database schema (Cloudflare D1) | `website/migrations/0001_event_duties.sql` |
 | App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |
 | Build stamp for the refresh button | `website/scripts/write-build-version.mjs` (runs in prebuild) |
+| API (AWS SAM: HTTP API, Lambda, DynamoDB) | `backend/` (see `backend/DEPLOY.md`) |
+| Starting schedule and duty task lists | `backend/src/seed.js` |
 
-The starting schedule (`SEED_ACTIVITIES`) and duty task lists
-(`SEED_DUTY_TASKS`) are each copied into D1 once, on first use.
+The site stays on Cloudflare Pages; the API runs on AWS like the motorover and
+invoices backends. The page finds it through `NEXT_PUBLIC_DUTIES_API`, set in
+the Cloudflare Pages project at build time. The starting schedule and duty task
+lists are copied into DynamoDB once, on first use.
 
 The team roster is **not in this repo**, because the repo is public and the
-roster holds mobile numbers. It lives in `team-roster.sql` at the repo root,
-which git ignores; keep it somewhere private (it is also easy to rebuild).
-Load it once the database exists:
+roster holds mobile numbers. It lives in `team-roster.json` at the repo root,
+which git ignores; keep a private copy. Load it with `npm run load-roster` in
+`backend/` once the stack exists. Until then people add themselves at sign-in.
 
-```bash
-npx wrangler d1 execute lawpark-event-duties --remote --file team-roster.sql
-```
+**Going live:** follow `backend/DEPLOY.md` (deploy the stack, load the roster,
+set `NEXT_PUBLIC_DUTIES_API` in Cloudflare Pages, redeploy the site).
 
-Until then the sign-in list is empty and people add themselves. For local
-testing, open the page once (so the local database exists), then from the repo
-root: `sqlite3 "$(ls website/.wrangler/state/v3/d1/miniflare-D1DatabaseObject/[0-9a-f]*.sqlite)" < team-roster.sql`.
-After that the page is the only place to change it: editing the seed list does
-nothing to a database that already has a schedule.
-
-**One-time Cloudflare setup** (the function creates its tables on first use):
-
-1. Create the database: `npx wrangler d1 create lawpark-event-duties`
-   (or Cloudflare dashboard, Storage and Databases, D1).
-2. In the Pages project, Settings, Bindings, add a **D1 database** binding named
-   `DB` pointing at `lawpark-event-duties`, for Production (and Preview if wanted).
-3. Redeploy. Until the binding exists, the page shows "Database is not connected yet."
-
-**Local run with a local D1:**
-
-```bash
-cd website
-npm run build
-npm run preview:duties   # http://localhost:8789/event-duties
-```
+**Local run:** `npm run dev` in `backend/` (API in memory on port 8790), then
+in `website/` put `NEXT_PUBLIC_DUTIES_API=http://localhost:8790/duties` in
+`.env.local`, `npm run build` and `npm run preview:duties`.
 
 **New code on phones:** every build writes a new version. An open or installed
 copy checks for it every minute and shows "Update now"; the round refresh icon in

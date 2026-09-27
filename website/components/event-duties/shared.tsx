@@ -22,6 +22,8 @@ export interface EventActivity {
   updated_at: string
 }
 
+export type TodoStatus = 'todo' | 'doing' | 'stuck' | 'done'
+
 export interface Todo {
   id: number
   event_id: string
@@ -29,6 +31,18 @@ export interface Todo {
   done: number
   done_by: string | null
   added_by: string
+  assignee: string | null
+  status: TodoStatus
+  updated_by: string | null
+  updated_at: string | null
+}
+
+export interface Comment {
+  id: number
+  todo_id: number
+  by_name: string
+  text: string
+  at: string
 }
 
 export interface Member {

@@ -126,8 +126,15 @@ A team sign-up sheet for the celebration on 4 October 2026, installable as an
 app from the phone browser (Add to Home Screen). Visitors enter their name and
 mobile number once; the browser remembers both. They then add one or more names
 to each duty, or add a duty that is missing. The **Schedule** tab holds the event
-activities: anyone can add, edit or remove one (date, time, title, description),
-give it one or more owners, and add and tick off its to-dos. No passwords, by
+activities: anyone can add, edit or remove one (date, time, title, description)
+and put people in charge of it. Each activity has a task list at micro level
+(the starting schedule has 131 tasks). Any task can be given to a team member,
+moved through Not started, Working on it, Need help and Done, and commented on.
+**My tasks**, the first tab, shows each person only what is theirs, anyone who
+needs help, tasks on their activities with no one yet, and tasks they could
+pick up. A short tour is offered on a phone's first sign-in, and again from Help.
+A− and A+ enlarge all text (up to 150%), a moon or sun button switches dark
+mode, and pinch zoom stays available. No passwords, by
 design: every change is logged with the name of whoever made it.
 
 Sign-in is one search box: people type their name or any part of their mobile
@@ -143,6 +150,8 @@ it changes on every duty and activity they are on.
 | Starting team roster (server only) | `website/data/eventTeam.ts` |
 | Sign-in screen | `website/components/event-duties/SignIn.tsx` |
 | Schedule tab | `website/components/event-duties/Schedule.tsx` |
+| Tasks, and the My tasks tab | `website/components/event-duties/Tasks.tsx`, `MyTasks.tsx` |
+| First-time tour; text size and theme | `website/components/event-duties/Tour.tsx`, `Preferences.tsx` |
 | API (Cloudflare Pages Function) | `website/functions/api/duties.js` |
 | Database schema (Cloudflare D1) | `website/migrations/0001_event_duties.sql` |
 | App manifest and service worker | `website/public/event-duties.webmanifest`, `website/public/event-duties-sw.js` |

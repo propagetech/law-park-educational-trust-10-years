@@ -49,7 +49,18 @@ const SCHEMA = [
      done INTEGER NOT NULL DEFAULT 0,
      done_by TEXT,
      added_by TEXT NOT NULL,
-     added_at TEXT NOT NULL
+     added_at TEXT NOT NULL,
+     assignee TEXT,
+     status TEXT NOT NULL DEFAULT 'todo',
+     updated_by TEXT,
+     updated_at TEXT
+   )`,
+  `CREATE TABLE IF NOT EXISTS duty_comments (
+     id INTEGER PRIMARY KEY AUTOINCREMENT,
+     todo_id INTEGER NOT NULL,
+     by_name TEXT NOT NULL,
+     text TEXT NOT NULL,
+     at TEXT NOT NULL
    )`,
   `CREATE TABLE IF NOT EXISTS duty_meta (
      key TEXT PRIMARY KEY,
@@ -61,9 +72,41 @@ const SCHEMA = [
      by_name TEXT NOT NULL,
      action TEXT NOT NULL,
      duty_id TEXT,
-     person TEXT
+     person TEXT,
+     detail TEXT
    )`,
 ]
+
+// Columns added after the first release. CREATE TABLE above has them for a
+// new database; an older one gets them here. Each ALTER runs on its own, so
+// a second request racing to add the same column just fails harmlessly.
+const ADDED_COLUMNS = [
+  ['duty_todos', 'assignee', 'TEXT'],
+  ['duty_todos', 'status', "TEXT NOT NULL DEFAULT 'todo'"],
+  ['duty_todos', 'updated_by', 'TEXT'],
+  ['duty_todos', 'updated_at', 'TEXT'],
+  ['duty_activity', 'detail', 'TEXT'],
+]
+
+async function addMissingColumns(db) {
+  for (const table of new Set(ADDED_COLUMNS.map(([t]) => t))) {
+    const { results } = await db.prepare(`PRAGMA table_info(${table})`).all()
+    const have = new Set(results.map((c) => c.name))
+    for (const [t, column, type] of ADDED_COLUMNS) {
+      if (t !== table || have.has(column)) continue
+      try {
+        await db.prepare(`ALTER TABLE ${table} ADD COLUMN ${column} ${type}`).run()
+      } catch {
+        // Added by a concurrent request.
+      }
+    }
+  }
+  // Tasks ticked before statuses existed.
+  await db.prepare("UPDATE duty_todos SET status = 'done' WHERE done = 1 AND status != 'done'").run()
+}
+
+const STATUSES = new Set(['todo', 'doing', 'stuck', 'done'])
+const MAX_COMMENTS = 5000
 
 const MAX_MEMBERS = 500
 const MAX_EVENTS = 300
@@ -130,6 +173,7 @@ function ensureSchema(db) {
         // Numbers saved before country codes were kept were Indian 10-digit.
         db.prepare("UPDATE OR IGNORE duty_members SET mobile = '+91' || mobile WHERE mobile NOT LIKE '+%'"),
       ])
+      .then(() => addMissingColumns(db))
       .then(() => seedActivities(db))
       .then(() => seedMembers(db))
       .catch((err) => {
@@ -187,13 +231,14 @@ function cleanText(value, max) {
 }
 
 async function readState(db) {
-  const [assignments, custom, activity, members, events, todos] = await db.batch([
+  const [assignments, custom, activity, members, events, todos, comments] = await db.batch([
     db.prepare('SELECT id, duty_id, person, added_by, added_at FROM duty_assignments ORDER BY id'),
     db.prepare('SELECT id, section_id, title, detail, added_by, added_at FROM duty_custom WHERE removed_at IS NULL ORDER BY added_at'),
-    db.prepare('SELECT id, at, by_name, action, duty_id, person FROM duty_activity ORDER BY id DESC LIMIT 40'),
+    db.prepare('SELECT id, at, by_name, action, duty_id, person, detail FROM duty_activity ORDER BY id DESC LIMIT 40'),
     db.prepare('SELECT name, mobile FROM duty_members ORDER BY name'),
     db.prepare('SELECT id, date, time, title, description, updated_by, updated_at FROM duty_events WHERE removed_at IS NULL ORDER BY date, time'),
-    db.prepare('SELECT id, event_id, text, done, done_by, added_by FROM duty_todos ORDER BY id'),
+    db.prepare('SELECT id, event_id, text, done, done_by, added_by, assignee, status, updated_by, updated_at FROM duty_todos ORDER BY id'),
+    db.prepare('SELECT id, todo_id, by_name, text, at FROM duty_comments ORDER BY id'),
   ])
   return {
     assignments: assignments.results,
@@ -202,13 +247,18 @@ async function readState(db) {
     members: members.results,
     events: events.results,
     todos: todos.results,
+    comments: comments.results,
   }
 }
 
-function logActivity(db, at, by, action, dutyId, person) {
+function logActivity(db, at, by, action, dutyId, person, detail) {
   return db
-    .prepare('INSERT INTO duty_activity (at, by_name, action, duty_id, person) VALUES (?, ?, ?, ?, ?)')
-    .bind(at, by, action, dutyId ?? null, person ?? null)
+    .prepare('INSERT INTO duty_activity (at, by_name, action, duty_id, person, detail) VALUES (?, ?, ?, ?, ?, ?)')
+    .bind(at, by, action, dutyId ?? null, person ?? null, detail ?? null)
+}
+
+function getTodo(db, id) {
+  return db.prepare('SELECT event_id, text, assignee, status FROM duty_todos WHERE id = ?').bind(id).first()
 }
 
 export async function onRequestGet({ env }) {
@@ -294,6 +344,8 @@ export async function onRequestPost({ request, env }) {
           db.prepare('UPDATE OR IGNORE duty_assignments SET person = ? WHERE person = ? COLLATE NOCASE').bind(name, old),
           ...(caseOnly ? [] : [db.prepare('DELETE FROM duty_assignments WHERE person = ? COLLATE NOCASE').bind(old)]),
           db.prepare('UPDATE duty_todos SET done_by = ? WHERE done_by = ? COLLATE NOCASE').bind(name, old),
+          db.prepare('UPDATE duty_todos SET assignee = ? WHERE assignee = ? COLLATE NOCASE').bind(name, old),
+          db.prepare('UPDATE duty_comments SET by_name = ? WHERE by_name = ? COLLATE NOCASE').bind(name, old),
           logActivity(db, at, old, 'renamed', null, name),
         ])
       }
@@ -427,38 +479,96 @@ export async function onRequestPost({ request, env }) {
     case 'addTodo': {
       const eventId = String(body.eventId || '')
       const text = cleanName(body.text, 200)
+      const assignee = cleanName(body.assignee) || null
       if (!EVENT_ID.test(eventId)) return json(400, { error: 'Unknown activity.' })
-      if (text.length < 2) return json(400, { error: 'Write the to-do first.' })
+      if (text.length < 2) return json(400, { error: 'Write the task first.' })
       const { total } = await db.prepare('SELECT COUNT(*) AS total FROM duty_todos').first()
-      if (total >= MAX_TODOS) return json(429, { error: 'Too many to-dos.' })
+      if (total >= MAX_TODOS) return json(429, { error: 'Too many tasks.' })
       await db.batch([
-        db.prepare('INSERT INTO duty_todos (event_id, text, added_by, added_at) VALUES (?, ?, ?, ?)').bind(eventId, text, by, at),
-        logActivity(db, at, by, 'addTodo', eventId, text),
+        db
+          .prepare('INSERT INTO duty_todos (event_id, text, added_by, added_at, assignee, updated_by, updated_at) VALUES (?, ?, ?, ?, ?, ?, ?)')
+          .bind(eventId, text, by, at, assignee, by, at),
+        logActivity(db, at, by, 'addTodo', eventId, text, assignee),
       ])
       break
     }
 
-    case 'toggleTodo': {
+    case 'editTodo': {
       const id = Number(body.id)
-      if (!Number.isInteger(id)) return json(400, { error: 'Unknown to-do.' })
-      const done = body.done ? 1 : 0
-      const row = await db.prepare('SELECT event_id, text FROM duty_todos WHERE id = ?').bind(id).first()
-      if (row) {
+      const text = cleanName(body.text, 200)
+      if (!Number.isInteger(id)) return json(400, { error: 'Unknown task.' })
+      if (text.length < 2) return json(400, { error: 'Write the task first.' })
+      const row = await getTodo(db, id)
+      if (!row) return json(404, { error: 'That task was removed.' })
+      if (row.text !== text) {
         await db.batch([
-          db.prepare('UPDATE duty_todos SET done = ?, done_by = ? WHERE id = ?').bind(done, done ? by : null, id),
-          logActivity(db, at, by, done ? 'doneTodo' : 'undoTodo', row.event_id, row.text),
+          db.prepare('UPDATE duty_todos SET text = ?, updated_by = ?, updated_at = ? WHERE id = ?').bind(text, by, at, id),
+          logActivity(db, at, by, 'editTodo', row.event_id, text, row.text),
         ])
       }
       break
     }
 
+    // Kept for pages opened before task statuses existed.
+    case 'toggleTodo':
+    case 'setTodoStatus': {
+      const id = Number(body.id)
+      if (!Number.isInteger(id)) return json(400, { error: 'Unknown task.' })
+      const status = body.action === 'toggleTodo' ? (body.done ? 'done' : 'todo') : String(body.status || '')
+      if (!STATUSES.has(status)) return json(400, { error: 'Unknown status.' })
+      const row = await getTodo(db, id)
+      if (!row) return json(404, { error: 'That task was removed.' })
+      if (row.status !== status) {
+        const done = status === 'done' ? 1 : 0
+        await db.batch([
+          db
+            .prepare('UPDATE duty_todos SET status = ?, done = ?, done_by = ?, updated_by = ?, updated_at = ? WHERE id = ?')
+            .bind(status, done, done ? by : null, by, at, id),
+          logActivity(db, at, by, 'statusTodo', row.event_id, row.text, status),
+        ])
+      }
+      break
+    }
+
+    case 'assignTodo': {
+      const id = Number(body.id)
+      if (!Number.isInteger(id)) return json(400, { error: 'Unknown task.' })
+      const assignee = cleanName(body.assignee) || null
+      const row = await getTodo(db, id)
+      if (!row) return json(404, { error: 'That task was removed.' })
+      if ((row.assignee || null) !== assignee) {
+        await db.batch([
+          db.prepare('UPDATE duty_todos SET assignee = ?, updated_by = ?, updated_at = ? WHERE id = ?').bind(assignee, by, at, id),
+          logActivity(db, at, by, 'assignTodo', row.event_id, row.text, assignee),
+        ])
+      }
+      break
+    }
+
+    case 'addComment': {
+      const todoId = Number(body.todoId)
+      const text = cleanText(body.text, 500)
+      if (!Number.isInteger(todoId)) return json(400, { error: 'Unknown task.' })
+      if (text.length < 1) return json(400, { error: 'Write your comment first.' })
+      const row = await getTodo(db, todoId)
+      if (!row) return json(404, { error: 'That task was removed.' })
+      const { total } = await db.prepare('SELECT COUNT(*) AS total FROM duty_comments').first()
+      if (total >= MAX_COMMENTS) return json(429, { error: 'Too many comments.' })
+      await db.batch([
+        db.prepare('INSERT INTO duty_comments (todo_id, by_name, text, at) VALUES (?, ?, ?, ?)').bind(todoId, by, text, at),
+        logActivity(db, at, by, 'comment', row.event_id, row.text, text.slice(0, 120)),
+      ])
+      break
+    }
+
     case 'removeTodo': {
       const id = Number(body.id)
-      if (!Number.isInteger(id)) return json(400, { error: 'Unknown to-do.' })
-      const row = await db.prepare('SELECT event_id, text FROM duty_todos WHERE id = ?').bind(id).first()
+      if (!Number.isInteger(id)) return json(400, { error: 'Unknown task.' })
+      const row = await getTodo(db, id)
       if (row) {
         await db.batch([
           db.prepare('DELETE FROM duty_todos WHERE id = ?').bind(id),
+          db.prepare('DELETE FROM duty_comments WHERE todo_id = ?').bind(id),
           logActivity(db, at, by, 'removeTodo', row.event_id, row.text),
         ])
       }

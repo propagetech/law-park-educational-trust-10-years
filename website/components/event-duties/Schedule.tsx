@@ -9,11 +9,14 @@ import {
   tidy,
   timeAgo,
   type Assignment,
+  type Comment,
   type EventActivity,
+  type Member,
   type Filter,
   type Post,
   type Todo,
 } from './shared'
+import { TaskList } from './Tasks'
 
 const DEFAULT_DATE = '2026-10-04'
 
@@ -129,88 +132,19 @@ function EventForm({
 
 /* ------------------------------------------------------------------ */
 
-function TodoList({ event, todos, busy, post }: { event: EventActivity; todos: Todo[]; busy: boolean; post: Post }) {
-  const [draft, setDraft] = useState('')
-  const done = todos.filter((t) => t.done).length
-
-  return (
-    <div className="mt-5">
-      <h4 className="text-sm font-semibold text-ink">
-        To-dos{' '}
-        {todos.length > 0 && (
-          <span className="font-normal text-ink-muted">
-            ({done} of {todos.length} done)
-          </span>
-        )}
-      </h4>
-      {todos.length > 0 && (
-        <ul className="mt-2 space-y-1">
-          {todos.map((t) => (
-            <li key={t.id} className="group flex items-start gap-3 rounded-lg px-1 py-1.5 hover:bg-canvas">
-              <input
-                id={`todo-${t.id}`}
-                type="checkbox"
-                checked={Boolean(t.done)}
-                disabled={busy}
-                onChange={(e) => void post({ action: 'toggleTodo', id: t.id, done: e.target.checked }, event.id)}
-                className="h-6 w-6 shrink-0 rounded border-line-strong accent-action sm:mt-0.5 sm:h-5 sm:w-5"
-              />
-              <label htmlFor={`todo-${t.id}`} className="flex-1 text-sm leading-6">
-                <span className={t.done ? 'text-ink-muted line-through' : 'text-ink'}>{t.text}</span>
-                {t.done && t.done_by ? <span className="ml-2 text-xs text-success-ink">✓ {t.done_by}</span> : null}
-              </label>
-              <button
-                type="button"
-                onClick={() => void post({ action: 'removeTodo', id: t.id }, event.id)}
-                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-ink-muted hover:bg-muted-strong hover:text-danger-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-focus print:hidden"
-                aria-label={`Remove to-do: ${t.text}`}
-              >
-                ×
-              </button>
-            </li>
-          ))}
-        </ul>
-      )}
-      <form
-        className="mt-2 flex gap-2 print:hidden"
-        onSubmit={async (e) => {
-          e.preventDefault()
-          const text = tidy(draft)
-          if (text.length < 2) return
-          if (await post({ action: 'addTodo', eventId: event.id, text }, event.id)) setDraft('')
-        }}
-      >
-        <label htmlFor={`new-todo-${event.id}`} className="sr-only">
-          Add a to-do to {event.title}
-        </label>
-        <input
-          id={`new-todo-${event.id}`}
-          type="text"
-          maxLength={200}
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder="Add a to-do"
-          className={`min-w-0 flex-1 ${inputClass}`}
-        />
-        <button type="submit" disabled={busy || tidy(draft).length < 2} className={primaryButtonClass}>
-          Add
-        </button>
-      </form>
-    </div>
-  )
-}
-
 interface EventCardProps {
   event: EventActivity
   owners: Assignment[]
   todos: Todo[]
+  commentsByTodo: Map<number, Comment[]>
+  members: Member[]
   phones: Map<string, string>
   me: string
   busy: boolean
   post: Post
 }
 
-function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardProps) {
+function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, busy, post }: EventCardProps) {
   const [editing, setEditing] = useState(false)
 
   if (editing) {
@@ -232,8 +166,8 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
       <article className="grid gap-x-6 gap-y-2 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line grid-cols-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] print:break-inside-avoid print:shadow-none">
         <p className="font-semibold tabular-nums text-gold-ink">{formatTime(event.time)}</p>
         <div className="min-w-0">
-          <div className="flex items-start justify-between gap-3">
-            <h3 className="font-semibold leading-snug text-ink">{event.title}</h3>
+          <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+            <h3 className="min-w-0 break-words font-semibold leading-snug text-ink">{event.title}</h3>
             <div className="flex shrink-0 gap-1 print:hidden">
               <button
                 type="button"
@@ -257,7 +191,7 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
           </div>
           {event.description && <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-ink-soft">{event.description}</p>}
 
-          <h4 className="mt-5 text-sm font-semibold text-ink">Owner</h4>
+          <h4 className="mt-5 text-sm font-semibold text-ink">In charge</h4>
           <PeopleEditor
             id={event.id}
             label={event.title}
@@ -266,11 +200,11 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
             me={me}
             busy={busy}
             post={post}
-            emptyText="No owner yet"
+            emptyText="No one in charge yet"
             className="mt-2"
           />
 
-          <TodoList event={event} todos={todos} busy={busy} post={post} />
+          <TaskList event={event} todos={todos} commentsByTodo={commentsByTodo} members={members} me={me} busy={busy} post={post} />
 
           <p className="mt-4 text-xs text-ink-muted">
             Last edited by {event.updated_by}, {timeAgo(event.updated_at)}
@@ -286,6 +220,8 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
 interface ScheduleProps {
   events: EventActivity[]
   todos: Todo[]
+  comments: Comment[]
+  members: Member[]
   byDuty: Map<string, Assignment[]>
   phones: Map<string, string>
   me: string
@@ -296,7 +232,7 @@ interface ScheduleProps {
   post: Post
 }
 
-export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, query, loaded, post }: ScheduleProps) {
+export function Schedule({ events, todos, comments, members, byDuty, phones, me, busyKey, filter, query, loaded, post }: ScheduleProps) {
   const [adding, setAdding] = useState(false)
 
   const todosByEvent = new Map<string, Todo[]>()
@@ -304,6 +240,13 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
     const list = todosByEvent.get(t.event_id) ?? []
     list.push(t)
     todosByEvent.set(t.event_id, list)
+  }
+
+  const commentsByTodo = new Map<number, Comment[]>()
+  for (const c of comments) {
+    const list = commentsByTodo.get(c.todo_id) ?? []
+    list.push(c)
+    commentsByTodo.set(c.todo_id, list)
   }
 
   const q = query.trim().toLowerCase()
@@ -316,7 +259,7 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
       e.title.toLowerCase().includes(q) ||
       e.description.toLowerCase().includes(q) ||
       owners.some((p) => p.person.toLowerCase().includes(q)) ||
-      (todosByEvent.get(e.id) ?? []).some((t) => t.text.toLowerCase().includes(q))
+      (todosByEvent.get(e.id) ?? []).some((t) => t.text.toLowerCase().includes(q) || (t.assignee ?? '').toLowerCase().includes(q))
     )
   })
 
@@ -331,8 +274,8 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
     <div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
         <p className="max-w-xl text-sm text-ink-soft">
-          Anyone on the team can add, edit or remove an activity, give it an owner, and tick off its to-dos. Every change is
-          shown under Recent changes.
+          Everything happening on 3 and 4 October. Tap any task to say who is doing it, how it is going, or to leave a
+          comment.
         </p>
         {!adding && (
           <button type="button" onClick={() => setAdding(true)} className={`${primaryButtonClass} print:hidden`}>
@@ -372,6 +315,8 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
                 event={e}
                 owners={byDuty.get(e.id) ?? []}
                 todos={todosByEvent.get(e.id) ?? []}
+                commentsByTodo={commentsByTodo}
+                members={members}
                 phones={phones}
                 me={me}
                 busy={busyKey === e.id}

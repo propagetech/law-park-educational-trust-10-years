@@ -47,7 +47,19 @@ CREATE TABLE IF NOT EXISTS duty_todos (
   done INTEGER NOT NULL DEFAULT 0,
   done_by TEXT,
   added_by TEXT NOT NULL,
-  added_at TEXT NOT NULL
+  added_at TEXT NOT NULL,
+  assignee TEXT,                          -- who is doing it (a member's name)
+  status TEXT NOT NULL DEFAULT 'todo',    -- todo, doing, stuck, done
+  updated_by TEXT,
+  updated_at TEXT
+);
+
+CREATE TABLE IF NOT EXISTS duty_comments (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  todo_id INTEGER NOT NULL,
+  by_name TEXT NOT NULL,
+  text TEXT NOT NULL,
+  at TEXT NOT NULL
 );
 
 -- activities_seeded: set once the starting schedule has been copied in.
@@ -62,5 +74,6 @@ CREATE TABLE IF NOT EXISTS duty_activity (
   by_name TEXT NOT NULL,
   action TEXT NOT NULL,
   duty_id TEXT,
-  person TEXT
+  person TEXT,
+  detail TEXT
 );

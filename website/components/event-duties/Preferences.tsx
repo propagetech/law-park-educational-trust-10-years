@@ -125,7 +125,7 @@ export function PreferenceButtons({ prefs }: { prefs: Preferences }) {
   const atMax = prefs.textStep === TEXT_STEPS.length - 1
   return (
     <>
-      <div role="group" aria-label="Text size" className="flex gap-1">
+      <div role="group" aria-label="Text size" className="flex gap-1" data-tour="text-size">
         <button type="button" onClick={prefs.smaller} disabled={atMin} className={toolbarButtonClass} aria-label="Smaller text" title="Smaller text">
           <span aria-hidden className="text-sm font-bold">A−</span>
         </button>
@@ -139,6 +139,7 @@ export function PreferenceButtons({ prefs }: { prefs: Preferences }) {
       <button
         type="button"
         onClick={prefs.toggleTheme}
+        data-tour="theme"
         className={toolbarButtonClass}
         aria-label={prefs.theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
         title={prefs.theme === 'dark' ? 'Light theme' : 'Dark theme'}

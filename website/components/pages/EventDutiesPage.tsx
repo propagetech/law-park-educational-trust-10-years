@@ -13,15 +13,20 @@ import {
   tidy,
   timeAgo,
   type Assignment,
+  type Comment,
   type EventActivity,
   type Filter,
   type Member,
   type Post,
   type Todo,
+  type TodoStatus,
 } from '@/components/event-duties/shared'
 import { Schedule, formatTime, sortActivities } from '@/components/event-duties/Schedule'
 import { SignIn } from '@/components/event-duties/SignIn'
 import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
+import { MyTasks } from '@/components/event-duties/MyTasks'
+import { STATUS, statusOf } from '@/components/event-duties/Tasks'
+import { TOUR_STEPS, Tour, TourOffer } from '@/components/event-duties/Tour'
 
 interface CustomDuty {
   id: string
@@ -38,6 +43,7 @@ interface Activity {
   action: string
   duty_id: string | null
   person: string | null
+  detail: string | null
 }
 
 interface State {
@@ -47,14 +53,17 @@ interface State {
   members: Member[]
   events: EventActivity[]
   todos: Todo[]
+  comments: Comment[]
 }
 
 type User = Member
 
-type View = 'duties' | 'schedule'
+type View = 'mine' | 'schedule' | 'duties'
+const VIEWS: View[] = ['mine', 'schedule', 'duties']
 
 const USER_KEY = 'lpet-duties-user'
 const VIEW_KEY = 'lpet-duties-view'
+const TOUR_KEY = 'lpet-duties-tour'
 const API = '/api/duties'
 const VERSION_URL = '/duties-version.json'
 const BUILD_ID = process.env.NEXT_PUBLIC_BUILD_ID || 'dev'
@@ -111,9 +120,10 @@ function RefreshIcon({ className = '' }: { className?: string }) {
 
 function readSavedView(): View {
   try {
-    return localStorage.getItem(VIEW_KEY) === 'schedule' ? 'schedule' : 'duties'
+    const saved = localStorage.getItem(VIEW_KEY) as View | null
+    return saved && VIEWS.includes(saved) ? saved : 'mine'
   } catch {
-    return 'duties'
+    return 'mine'
   }
 }
 
@@ -163,8 +173,8 @@ interface DutyCardProps {
 function DutyCard({ duty, custom, people, phones, me, busy, post, onRemoveDuty }: DutyCardProps) {
   return (
     <article className="flex flex-col rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line print:break-inside-avoid print:shadow-none">
-      <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold text-ink leading-snug">{duty.title}</h3>
+      <div className="flex flex-wrap items-start justify-between gap-x-3 gap-y-1">
+        <h3 className="min-w-0 break-words font-semibold text-ink leading-snug">{duty.title}</h3>
         <div className="shrink-0">
           <StatusPill have={people.length} need={duty.need} />
         </div>
@@ -285,16 +295,36 @@ const ACTION_TEXT: Record<string, string> = {
   addEvent: 'added the activity',
   updateEvent: 'edited the activity',
   removeEvent: 'removed the activity',
-  addTodo: 'added the to-do',
+  addTodo: 'added the task',
   doneTodo: 'ticked',
   undoTodo: 'unticked',
-  removeTodo: 'removed the to-do',
+  removeTodo: 'removed the task',
+  editTodo: 'reworded the task',
+  statusTodo: 'marked',
+  assignTodo: 'gave',
+  comment: 'commented on',
+}
+
+function tourSeen() {
+  try {
+    return Boolean(localStorage.getItem(TOUR_KEY))
+  } catch {
+    return true // storage blocked: do not offer it on every visit
+  }
+}
+
+function markTourSeen(how: 'done' | 'skipped') {
+  try {
+    localStorage.setItem(TOUR_KEY, how)
+  } catch {
+    // Private mode: it may be offered again next visit.
+  }
 }
 
 const userBarButtonClass =
   'inline-flex min-h-9 items-center rounded-full px-3 font-semibold text-link hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-focus'
 
-const TODO_ACTIONS = new Set(['addTodo', 'doneTodo', 'undoTodo', 'removeTodo'])
+const TODO_ACTIONS = new Set(['addTodo', 'doneTodo', 'undoTodo', 'removeTodo', 'editTodo', 'comment'])
 
 function EventDutiesPage() {
   const [user, setUser] = useState<User | null | undefined>(undefined)
@@ -308,7 +338,9 @@ function EventDutiesPage() {
   const [busyDuty, setBusyDuty] = useState<string | null>(null)
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
-  const [view, setView] = useState<View>('duties')
+  const [view, setView] = useState<View>('mine')
+  const [touring, setTouring] = useState(false)
+  const [tourHandled, setTourHandled] = useState(false)
   const prefs = usePreferences()
 
   useEffect(() => {
@@ -492,7 +524,11 @@ function EventDutiesPage() {
   )
   const todos = state?.todos ?? []
   const liveEventIds = new Set(events.map((e) => e.id))
-  const openTodos = todos.filter((t) => !t.done && liveEventIds.has(t.event_id)).length
+  const openTodos = todos.filter((t) => statusOf(t) !== 'done' && liveEventIds.has(t.event_id)).length
+  const myOpenTasks = todos.filter(
+    (t) => statusOf(t) !== 'done' && liveEventIds.has(t.event_id) && t.assignee && sameName(t.assignee, me),
+  ).length
+  const myDuties = allItems.filter(({ duty }) => byDuty.get(duty.id)?.some((p) => sameName(p.person, me))).map(({ duty }) => duty.title)
   const ownerless = events.filter((e) => !byDuty.get(e.id)?.length).length
   const myEvents = events.filter((e) => byDuty.get(e.id)?.some((p) => sameName(p.person, me))).length
 
@@ -522,6 +558,13 @@ function EventDutiesPage() {
       people.some((p) => p.person.toLowerCase().includes(q))
     )
   }
+
+  const tabs: [View, string, number, string][] = [
+    ['mine', 'My tasks', myOpenTasks, 'to do'],
+    ['schedule', 'Schedule', openTodos, 'open tasks'],
+    ['duties', 'Duties', empty, 'with nobody'],
+  ]
+  const offerTour = !tourHandled && !touring && Boolean(state) && !tourSeen()
 
   const progress = allItems.length ? Math.round((covered / allItems.length) * 100) : 0
   const knownCounts = PILLAR_GROUPS.filter((g) => g.children !== undefined)
@@ -563,6 +606,7 @@ function EventDutiesPage() {
               className={toolbarButtonClass}
               aria-label="Reload the latest version"
               title="Reload the latest version"
+              data-tour="refresh"
             >
               <RefreshIcon className="h-5 w-5" />
               {updateReady && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-primary-700" aria-hidden />}
@@ -663,16 +707,12 @@ function EventDutiesPage() {
       <div className="z-30 border-b md:sticky md:top-0 border-line bg-surface/95 backdrop-blur print:static print:border-0">
         <div className="container-custom py-3">
           <div className="mb-3 hidden gap-1 border-b border-line md:flex print:hidden" role="group" aria-label="View">
-            {(
-              [
-                ['duties', 'Duties', empty],
-                ['schedule', 'Schedule', openTodos],
-              ] as [View, string, number][]
-            ).map(([key, label, count]) => (
+            {tabs.map(([key, label, count, countLabel]) => (
               <button
                 key={key}
                 type="button"
                 aria-pressed={view === key}
+                data-tour={`tab-${key}`}
                 onClick={() => switchView(key)}
                 className={`-mb-px border-b-2 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-focus ${
                   view === key ? 'border-heading text-heading' : 'border-transparent text-ink-soft hover:text-ink'
@@ -682,20 +722,20 @@ function EventDutiesPage() {
                 {count > 0 && (
                   <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-ink-soft">
                     {count}
-                    <span className="sr-only">{key === 'duties' ? ' with nobody' : ' open to-dos'}</span>
+                    <span className="sr-only"> {countLabel}</span>
                   </span>
                 )}
               </button>
             ))}
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
-            {view === 'schedule' ? (
+            {view === 'mine' ? null : view === 'schedule' ? (
               <p className="min-w-48 flex-1 text-sm text-ink-soft">
                 <strong className="text-ink">{events.length}</strong> activities
                 {' · '}
-                <strong className="text-danger-ink">{ownerless}</strong> without an owner
+                <strong className="text-danger-ink">{ownerless}</strong> with no one in charge
                 {' · '}
-                <strong className="text-ink">{openTodos}</strong> to-dos open
+                <strong className="text-ink">{openTodos}</strong> tasks open
               </p>
             ) : (
               <div className="min-w-48 flex-1">
@@ -718,11 +758,12 @@ function EventDutiesPage() {
                 </div>
               </div>
             )}
+            {view !== 'mine' && (
             <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto print:hidden" role="group" aria-label="Show">
               {(
                 [
                   ['all', 'All'],
-                  ['open', view === 'schedule' ? 'No owner' : 'Needs people'],
+                  ['open', view === 'schedule' ? 'No one in charge' : 'Needs people'],
                   ['mine', `Mine (${view === 'schedule' ? myEvents : mineCount})`],
                 ] as [Filter, string][]
               ).map(([key, label]) => (
@@ -739,7 +780,7 @@ function EventDutiesPage() {
                 </button>
               ))}
               <label htmlFor="duty-search" className="sr-only">
-                {view === 'schedule' ? 'Search activities, names or to-dos' : 'Search duties or names'}
+                {view === 'schedule' ? 'Search activities, names or tasks' : 'Search duties or names'}
               </label>
               <input
                 id="duty-search"
@@ -750,6 +791,7 @@ function EventDutiesPage() {
                 className="min-h-10 w-full rounded-full border border-line-strong bg-surface px-4 text-base focus:outline-none focus:ring-2 focus:ring-focus sm:w-44 sm:text-sm"
               />
             </div>
+            )}
             <div className="flex w-full flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-soft md:w-auto print:hidden">
               <p className="mr-1">
                 You are <strong className="text-ink">{me}</strong>
@@ -776,7 +818,10 @@ function EventDutiesPage() {
               >
                 Switch user
               </button>
-              <button type="button" onClick={() => window.print()} className={`${userBarButtonClass} hidden md:inline-flex`}>
+              <button type="button" data-tour="help" onClick={() => setTouring(true)} className={userBarButtonClass}>
+                Help
+              </button>
+              <button type="button" onClick={() => window.print()} className={userBarButtonClass.replace('inline-flex', 'hidden md:inline-flex')}>
                 Print
               </button>
             </div>
@@ -843,10 +888,27 @@ function EventDutiesPage() {
       </div>
 
       <div className="container-custom mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
-        {view === 'schedule' ? (
+        {view === 'mine' ? (
+          <MyTasks
+            events={events}
+            todos={todos}
+            comments={state?.comments ?? []}
+            members={state?.members ?? []}
+            byDuty={byDuty}
+            myDuties={myDuties}
+            me={me}
+            busyKey={busyDuty}
+            loaded={Boolean(state)}
+            post={post}
+            openSchedule={() => switchView('schedule')}
+            openDuties={() => switchView('duties')}
+          />
+        ) : view === 'schedule' ? (
           <Schedule
             events={events}
             todos={todos}
+            comments={state?.comments ?? []}
+            members={state?.members ?? []}
             byDuty={byDuty}
             phones={phones}
             me={me}
@@ -942,6 +1004,20 @@ function EventDutiesPage() {
                       <strong className="text-ink">{a.person}</strong> {a.action === 'assign' ? 'to' : 'from'}{' '}
                       {titleOf(a.duty_id) || 'a removed item'}
                     </>
+                  ) : a.action === 'statusTodo' ? (
+                    <>
+                      <strong className="text-ink">{a.person}</strong> as {STATUS[(a.detail as TodoStatus) || 'todo']?.label ?? a.detail}
+                    </>
+                  ) : a.action === 'assignTodo' ? (
+                    a.detail ? (
+                      <>
+                        <strong className="text-ink">{a.person}</strong> to <strong className="text-ink">{a.detail}</strong>
+                      </>
+                    ) : (
+                      <>
+                        no one <strong className="text-ink">{a.person}</strong>
+                      </>
+                    )
                   ) : TODO_ACTIONS.has(a.action) ? (
                     <>
                       <strong className="text-ink">{a.person}</strong> on {titleOf(a.duty_id) || 'a removed activity'}
@@ -1025,22 +1101,42 @@ function EventDutiesPage() {
         </aside>
       </div>
 
+      {offerTour && (
+        <TourOffer
+          name={me}
+          onStart={() => {
+            setTourHandled(true)
+            setTouring(true)
+          }}
+          onSkip={() => {
+            markTourSeen('skipped')
+            setTourHandled(true)
+          }}
+        />
+      )}
+      {touring && (
+        <Tour
+          steps={TOUR_STEPS}
+          onClose={() => {
+            markTourSeen('done')
+            setTourHandled(true)
+            setTouring(false)
+          }}
+        />
+      )}
+
       {/* Phones: the tabs sit at the bottom, in thumb reach, on every screen. */}
       <nav
         aria-label="View"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden print:hidden"
       >
-        <div className="grid grid-cols-2">
-          {(
-            [
-              ['duties', 'Duties', empty, 'with nobody'],
-              ['schedule', 'Schedule', openTodos, 'open to-dos'],
-            ] as [View, string, number, string][]
-          ).map(([key, label, count, countLabel]) => (
+        <div className="grid grid-cols-3">
+          {tabs.map(([key, label, count, countLabel]) => (
             <button
               key={key}
               type="button"
               aria-pressed={view === key}
+              data-tour={`tab-${key}`}
               onClick={() => switchView(key)}
               className={`flex min-h-16 flex-col items-center justify-center gap-0.5 border-t-2 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-focus ${
                 view === key ? 'border-heading text-heading' : 'border-transparent text-ink-muted'

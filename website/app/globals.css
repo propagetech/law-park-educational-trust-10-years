@@ -38,6 +38,37 @@
   --color-secondary-800: #9a3412;
   --color-secondary-900: #7c2d12;
   
+  /* Event duties app (/event-duties): colours by role, so the app can switch
+     to dark. Dark values are set below; only that app uses these names. */
+  --color-canvas: #f9fafb;
+  --color-surface: #ffffff;
+  --color-muted: #f3f4f6;
+  --color-muted-strong: #e5e7eb;
+  --color-line: #e5e7eb;
+  --color-line-strong: #d1d5db;
+  --color-ink: #111827;
+  --color-ink-soft: #4b5563;
+  --color-ink-muted: #6b7280;
+  --color-heading: #1c1c2e;
+  --color-link: #2d2d44;
+  --color-focus: #3d3d62;
+  --color-accent-soft: #eeeef3;
+  --color-mine: #f8e8c8;
+  --color-mine-ink: #4a2e0e;
+  --color-gold-ink: #6a4518;
+  --color-action: #1c1c2e;
+  --color-action-hover: #2d2d44;
+  --color-on-action: #ffffff;
+  --color-danger-soft: #fef2f2;
+  --color-danger-ink: #991b1b;
+  --color-danger-line: #fecaca;
+  --color-success-soft: #f0fdf4;
+  --color-success-ink: #166534;
+  --color-success-line: #bbf7d0;
+  --color-warn-soft: #fffbeb;
+  --color-warn-ink: #78350f;
+  --color-warn-line: #fde68a;
+
   /* Custom Fonts */
   --font-family-sans: 'Quicksand', sans-serif;
   --font-family-serif: 'Playfair Display', serif;
@@ -133,5 +164,86 @@
 
   .a4-letter-page {
     page-break-inside: avoid;
+  }
+}
+
+/* ---- Event duties app: dark theme ---------------------------------------
+   Follows the phone's setting unless the person picks one (data-theme on
+   <html>, set by the app). Scoped with :has() so no other page changes. */
+:root:has(.duties-app) body {
+  background-color: var(--color-canvas);
+}
+
+/* Phones: keep anything scrolled or tabbed into view clear of the fixed
+   bottom tab bar. */
+@media (max-width: 767px) {
+  :root:has(.duties-app) {
+    scroll-padding-bottom: 7rem;
+  }
+}
+
+:root[data-theme='dark']:has(.duties-app) {
+  color-scheme: dark;
+  --color-canvas: #0f1119;
+  --color-surface: #191c28;
+  --color-muted: #252a3a;
+  --color-muted-strong: #2f3548;
+  --color-line: #2c3144;
+  --color-line-strong: #4a5068;
+  --color-ink: #f1f2f6;
+  --color-ink-soft: #c3c7d4;
+  --color-ink-muted: #9ca2b5;
+  --color-heading: #ece9f8;
+  --color-link: #e8b460;
+  --color-focus: #e0b06a;
+  --color-accent-soft: #2a2e45;
+  --color-mine: #4a3515;
+  --color-mine-ink: #f8e8c8;
+  --color-gold-ink: #e8b460;
+  --color-action: #e0b06a;
+  --color-action-hover: #e8c07e;
+  --color-on-action: #1c1c2e;
+  --color-danger-soft: #3a1d22;
+  --color-danger-ink: #fca5a5;
+  --color-danger-line: #7f1d1d;
+  --color-success-soft: #16301f;
+  --color-success-ink: #86efac;
+  --color-success-line: #166534;
+  --color-warn-soft: #3a2e12;
+  --color-warn-ink: #fcd34d;
+  --color-warn-line: #78350f;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']):has(.duties-app) {
+    color-scheme: dark;
+    --color-canvas: #0f1119;
+    --color-surface: #191c28;
+    --color-muted: #252a3a;
+    --color-muted-strong: #2f3548;
+    --color-line: #2c3144;
+    --color-line-strong: #4a5068;
+    --color-ink: #f1f2f6;
+    --color-ink-soft: #c3c7d4;
+    --color-ink-muted: #9ca2b5;
+    --color-heading: #ece9f8;
+    --color-link: #e8b460;
+    --color-focus: #e0b06a;
+    --color-accent-soft: #2a2e45;
+    --color-mine: #4a3515;
+    --color-mine-ink: #f8e8c8;
+    --color-gold-ink: #e8b460;
+    --color-action: #e0b06a;
+    --color-action-hover: #e8c07e;
+    --color-on-action: #1c1c2e;
+    --color-danger-soft: #3a1d22;
+    --color-danger-ink: #fca5a5;
+    --color-danger-line: #7f1d1d;
+    --color-success-soft: #16301f;
+    --color-success-ink: #86efac;
+    --color-success-line: #166534;
+    --color-warn-soft: #3a2e12;
+    --color-warn-ink: #fcd34d;
+    --color-warn-line: #78350f;
   }
 }

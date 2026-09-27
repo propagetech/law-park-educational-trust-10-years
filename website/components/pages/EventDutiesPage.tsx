@@ -21,6 +21,7 @@ import {
 } from '@/components/event-duties/shared'
 import { Schedule, formatTime, sortActivities } from '@/components/event-duties/Schedule'
 import { SignIn } from '@/components/event-duties/SignIn'
+import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
 
 interface CustomDuty {
   id: string
@@ -129,20 +130,20 @@ function saveView(view: View) {
 function StatusPill({ have, need }: { have: number; need: number }) {
   if (have >= need) {
     return (
-      <span className="inline-flex items-center gap-1 rounded-full bg-green-50 px-2.5 py-0.5 text-xs font-semibold text-green-800 ring-1 ring-green-200">
+      <span className="inline-flex items-center gap-1 rounded-full bg-success-soft px-2.5 py-0.5 text-xs font-semibold text-success-ink ring-1 ring-success-line">
         <span aria-hidden>✓</span> Covered
       </span>
     )
   }
   if (have === 0) {
     return (
-      <span className="inline-flex items-center rounded-full bg-red-50 px-2.5 py-0.5 text-xs font-semibold text-red-800 ring-1 ring-red-200">
+      <span className="inline-flex items-center rounded-full bg-danger-soft px-2.5 py-0.5 text-xs font-semibold text-danger-ink ring-1 ring-danger-line">
         Needs {need}
       </span>
     )
   }
   return (
-    <span className="inline-flex items-center rounded-full bg-amber-50 px-2.5 py-0.5 text-xs font-semibold text-amber-900 ring-1 ring-amber-200">
+    <span className="inline-flex items-center rounded-full bg-warn-soft px-2.5 py-0.5 text-xs font-semibold text-warn-ink ring-1 ring-warn-line">
       {have} of {need}
     </span>
   )
@@ -161,23 +162,23 @@ interface DutyCardProps {
 
 function DutyCard({ duty, custom, people, phones, me, busy, post, onRemoveDuty }: DutyCardProps) {
   return (
-    <article className="flex flex-col rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-200 print:break-inside-avoid print:shadow-none">
+    <article className="flex flex-col rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line print:break-inside-avoid print:shadow-none">
       <div className="flex items-start justify-between gap-3">
-        <h3 className="font-semibold text-gray-900 leading-snug">{duty.title}</h3>
+        <h3 className="font-semibold text-ink leading-snug">{duty.title}</h3>
         <div className="shrink-0">
           <StatusPill have={people.length} need={duty.need} />
         </div>
       </div>
-      {duty.when && <p className="mt-1 text-sm font-medium text-gold-800">{duty.when}</p>}
-      {duty.detail && <p className="mt-2 text-sm text-gray-600 leading-relaxed">{duty.detail}</p>}
+      {duty.when && <p className="mt-1 text-sm font-medium text-gold-ink">{duty.when}</p>}
+      {duty.detail && <p className="mt-2 text-sm text-ink-soft leading-relaxed">{duty.detail}</p>}
       {custom && (
-        <p className="mt-2 text-xs text-gray-500">
+        <p className="mt-2 text-xs text-ink-muted">
           Added by {custom.added_by}
           {' · '}
           <button
             type="button"
             onClick={() => onRemoveDuty(custom.id)}
-            className="underline hover:text-red-700 print:hidden"
+            className="inline-flex min-h-9 items-center underline hover:text-danger-ink print:hidden"
           >
             remove duty
           </button>
@@ -213,7 +214,7 @@ function AddDutyForm({
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="flex min-h-32 items-center justify-center rounded-xl border-2 border-dashed border-gray-300 p-5 text-sm font-semibold text-gray-600 hover:border-primary-400 hover:text-primary-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 print:hidden"
+        className="flex min-h-32 items-center justify-center rounded-xl border-2 border-dashed border-line-strong p-5 text-sm font-semibold text-ink-soft hover:border-focus hover:text-heading focus:outline-none focus-visible:ring-2 focus-visible:ring-focus print:hidden"
       >
         + Add a duty we missed
       </button>
@@ -222,7 +223,7 @@ function AddDutyForm({
 
   return (
     <form
-      className="rounded-xl border-2 border-dashed border-primary-300 bg-white p-5 print:hidden"
+      className="rounded-xl border-2 border-dashed border-focus bg-surface p-5 print:hidden"
       onSubmit={async (e) => {
         e.preventDefault()
         if (tidy(title).length < 3) return
@@ -233,7 +234,7 @@ function AddDutyForm({
         }
       }}
     >
-      <label htmlFor={`new-title-${sectionId}`} className="block text-sm font-semibold text-gray-800">
+      <label htmlFor={`new-title-${sectionId}`} className="block text-sm font-semibold text-ink">
         Duty
       </label>
       <input
@@ -242,11 +243,11 @@ function AddDutyForm({
         maxLength={120}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
-        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className={`mt-1 w-full ${inputClass}`}
         autoFocus
       />
-      <label htmlFor={`new-detail-${sectionId}`} className="mt-3 block text-sm font-semibold text-gray-800">
-        What it involves <span className="font-normal text-gray-500">(optional)</span>
+      <label htmlFor={`new-detail-${sectionId}`} className="mt-3 block text-sm font-semibold text-ink">
+        What it involves <span className="font-normal text-ink-muted">(optional)</span>
       </label>
       <textarea
         id={`new-detail-${sectionId}`}
@@ -254,17 +255,17 @@ function AddDutyForm({
         rows={2}
         value={detail}
         onChange={(e) => setDetail(e.target.value)}
-        className="mt-1 w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+        className={`mt-1 w-full ${inputClass}`}
       />
       <div className="mt-3 flex gap-2">
         <button
           type="submit"
           disabled={tidy(title).length < 3}
-          className="rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-600 disabled:opacity-40"
+          className="rounded-lg bg-action px-4 py-2 text-sm font-semibold text-on-action hover:bg-action-hover disabled:opacity-40"
         >
           Add duty
         </button>
-        <button type="button" onClick={() => setOpen(false)} className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100">
+        <button type="button" onClick={() => setOpen(false)} className="rounded-lg px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-muted">
           Cancel
         </button>
       </div>
@@ -290,6 +291,9 @@ const ACTION_TEXT: Record<string, string> = {
   removeTodo: 'removed the to-do',
 }
 
+const userBarButtonClass =
+  'inline-flex min-h-9 items-center rounded-full px-3 font-semibold text-link hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-focus'
+
 const TODO_ACTIONS = new Set(['addTodo', 'doneTodo', 'undoTodo', 'removeTodo'])
 
 function EventDutiesPage() {
@@ -305,6 +309,7 @@ function EventDutiesPage() {
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
   const [view, setView] = useState<View>('duties')
+  const prefs = usePreferences()
 
   useEffect(() => {
     // localStorage only exists in the browser, after the static page loads.
@@ -491,10 +496,11 @@ function EventDutiesPage() {
   const ownerless = events.filter((e) => !byDuty.get(e.id)?.length).length
   const myEvents = events.filter((e) => byDuty.get(e.id)?.some((p) => sameName(p.person, me))).length
 
-  if (user === undefined) return <div className="min-h-screen bg-primary-700" />
+  if (user === undefined) return <div className="duties-app min-h-screen bg-primary-700" />
   if (!user || editing) {
     return (
       <SignIn
+        toolbar={<PreferenceButtons prefs={prefs} />}
         onSignedIn={(next) => {
           saveUser(next)
           setUser(next)
@@ -524,7 +530,7 @@ function EventDutiesPage() {
   const toppers = knownCounts.reduce((n, g) => n + (g.toppers ?? 0), 0)
 
   return (
-    <div className="min-h-screen bg-gray-50 pb-20 print:bg-white">
+    <div className="duties-app min-h-screen bg-canvas pb-28 text-ink md:pb-20 print:bg-white">
       <datalist id="known-names">
         {knownNames.map((n) => (
           <option key={n} value={n} />
@@ -532,13 +538,13 @@ function EventDutiesPage() {
       </datalist>
 
       {updateReady && (
-        <div className="bg-gold-100 text-gold-900 print:hidden" role="status">
+        <div className="bg-mine text-mine-ink print:hidden" role="status">
           <div className="container-custom flex flex-wrap items-center justify-between gap-3 py-3">
             <p className="text-sm font-semibold">A newer version of this page has been published.</p>
             <button
               type="button"
               onClick={() => void reloadLatest()}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-600"
+              className="inline-flex items-center gap-2 rounded-lg bg-action px-4 py-2 text-sm font-semibold text-on-action hover:bg-action-hover"
             >
               <RefreshIcon className="h-4 w-4" /> Update now
             </button>
@@ -547,21 +553,24 @@ function EventDutiesPage() {
       )}
 
       {/* Header */}
-      <header className="relative bg-primary-700 text-white print:bg-white print:text-black">
-        <button
-          type="button"
-          onClick={() => void reloadLatest()}
-          className="absolute right-4 top-4 inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 print:hidden"
-          aria-label="Reload the latest version"
-          title="Reload the latest version"
-        >
-          <RefreshIcon className="h-5 w-5" />
-          {updateReady && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-primary-700" aria-hidden />}
-        </button>
-        <div className="container-custom py-10 md:py-14">
-          <div className="flex items-center gap-4 pr-12">
+      <header className="bg-primary-700 text-white print:bg-white print:text-black">
+        <div className="container-custom pb-8 pt-4 md:pb-14">
+          <div className="flex flex-wrap justify-end gap-2 print:hidden">
+            <PreferenceButtons prefs={prefs} />
+            <button
+              type="button"
+              onClick={() => void reloadLatest()}
+              className={toolbarButtonClass}
+              aria-label="Reload the latest version"
+              title="Reload the latest version"
+            >
+              <RefreshIcon className="h-5 w-5" />
+              {updateReady && <span className="absolute right-1.5 top-1.5 h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-primary-700" aria-hidden />}
+            </button>
+          </div>
+          <div className="mt-4 flex items-center gap-4 md:mt-2">
             {/* Brown and green need a light tile to read on navy. */}
-            <span className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-md md:h-20 md:w-20 print:shadow-none">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white p-2 shadow-md sm:h-16 sm:w-16 md:h-20 md:w-20 print:shadow-none">
               <Image src={LOGO_ICON} alt="" width={252} height={256} priority className="h-full w-auto" />
             </span>
             <div className="min-w-0">
@@ -573,46 +582,87 @@ function EventDutiesPage() {
               </h1>
             </div>
           </div>
-          <p className="mt-3 max-w-2xl text-lg text-primary-100 print:text-black">
+          <p className="mt-3 hidden max-w-2xl text-lg text-primary-100 sm:block print:text-black">
             Pick up a duty, keep the schedule up to date, and tick off to-dos. Every duty needs a name before 3 October.
           </p>
-          <dl className="mt-8 grid gap-6 sm:grid-cols-3 text-sm">
-            <div>
-              <dt className="text-primary-200 print:text-black">Event</dt>
-              <dd className="mt-1 font-semibold">{EVENT_FACTS.eventDay}</dd>
-              <dd className="text-primary-100 print:text-black">Setup {EVENT_FACTS.setupDay}, from 3 PM</dd>
+          {/* Phones: event details fold into one line so the duties start sooner. */}
+          <details className="group mt-5 rounded-xl bg-white/10 sm:hidden print:hidden">
+            <summary className="flex min-h-12 cursor-pointer list-none items-center justify-between gap-3 px-4 text-sm font-semibold [&::-webkit-details-marker]:hidden">
+              <span>Sun 4 Oct · RV Auditorium · Event details</span>
+              <span aria-hidden className="transition-transform group-open:rotate-180">▾</span>
+            </summary>
+            <div className="px-4 pb-4">
+              <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3 text-sm">
+                <div>
+                  <dt className="text-primary-200 print:text-black">Event</dt>
+                  <dd className="mt-1 font-semibold">{EVENT_FACTS.eventDay}</dd>
+                  <dd className="text-primary-100 print:text-black">Setup {EVENT_FACTS.setupDay}, from 3 PM</dd>
+                </div>
+                <div>
+                  <dt className="text-primary-200 print:text-black">Venue</dt>
+                  <dd className="mt-1 font-semibold">{EVENT_FACTS.venue}</dd>
+                  <dd>
+                    <a
+                      href={EVENT_FACTS.mapUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex min-h-9 items-center text-gold-300 underline underline-offset-2 hover:text-gold-200 print:text-black"
+                    >
+                      Open in Google Maps
+                    </a>
+                  </dd>
+                </div>
+                <div>
+                  <dt className="text-primary-200 print:text-black">Chief guests</dt>
+                  {EVENT_FACTS.chiefGuests.map((g) => (
+                    <dd key={g} className="mt-1 text-primary-50 print:text-black">
+                      {g.split(',')[0]}
+                      {g.includes('IAS') ? ', IAS' : g.includes('IPS') ? ', IPS' : ''}
+                    </dd>
+                  ))}
+                </div>
+              </dl>
             </div>
-            <div>
-              <dt className="text-primary-200 print:text-black">Venue</dt>
-              <dd className="mt-1 font-semibold">{EVENT_FACTS.venue}</dd>
-              <dd>
-                <a
-                  href={EVENT_FACTS.mapUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gold-300 underline underline-offset-2 hover:text-gold-200 print:text-black"
-                >
-                  Open in Google Maps
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt className="text-primary-200 print:text-black">Chief guests</dt>
-              {EVENT_FACTS.chiefGuests.map((g) => (
-                <dd key={g} className="mt-1 text-primary-50 print:text-black">
-                  {g.split(',')[0]}
-                  {g.includes('IAS') ? ', IAS' : g.includes('IPS') ? ', IPS' : ''}
+          </details>
+          <div className="mt-8 hidden sm:block print:block">
+            <dl className="grid grid-cols-1 gap-6 sm:grid-cols-3 text-sm">
+              <div>
+                <dt className="text-primary-200 print:text-black">Event</dt>
+                <dd className="mt-1 font-semibold">{EVENT_FACTS.eventDay}</dd>
+                <dd className="text-primary-100 print:text-black">Setup {EVENT_FACTS.setupDay}, from 3 PM</dd>
+              </div>
+              <div>
+                <dt className="text-primary-200 print:text-black">Venue</dt>
+                <dd className="mt-1 font-semibold">{EVENT_FACTS.venue}</dd>
+                <dd>
+                  <a
+                    href={EVENT_FACTS.mapUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-9 items-center text-gold-300 underline underline-offset-2 hover:text-gold-200 print:text-black"
+                  >
+                    Open in Google Maps
+                  </a>
                 </dd>
-              ))}
-            </div>
-          </dl>
+              </div>
+              <div>
+                <dt className="text-primary-200 print:text-black">Chief guests</dt>
+                {EVENT_FACTS.chiefGuests.map((g) => (
+                  <dd key={g} className="mt-1 text-primary-50 print:text-black">
+                    {g.split(',')[0]}
+                    {g.includes('IAS') ? ', IAS' : g.includes('IPS') ? ', IPS' : ''}
+                  </dd>
+                ))}
+              </div>
+            </dl>
+          </div>
         </div>
       </header>
 
       {/* Progress + controls */}
-      <div className="z-30 border-b md:sticky md:top-0 border-gray-200 bg-white/95 backdrop-blur print:static print:border-0">
+      <div className="z-30 border-b md:sticky md:top-0 border-line bg-surface/95 backdrop-blur print:static print:border-0">
         <div className="container-custom py-3">
-          <div className="mb-3 flex gap-1 border-b border-gray-200 print:hidden" role="group" aria-label="View">
+          <div className="mb-3 hidden gap-1 border-b border-line md:flex print:hidden" role="group" aria-label="View">
             {(
               [
                 ['duties', 'Duties', empty],
@@ -624,13 +674,13 @@ function EventDutiesPage() {
                 type="button"
                 aria-pressed={view === key}
                 onClick={() => switchView(key)}
-                className={`-mb-px border-b-2 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${
-                  view === key ? 'border-primary-700 text-primary-700' : 'border-transparent text-gray-600 hover:text-gray-900'
+                className={`-mb-px border-b-2 px-4 py-2 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-focus ${
+                  view === key ? 'border-heading text-heading' : 'border-transparent text-ink-soft hover:text-ink'
                 }`}
               >
                 {label}
                 {count > 0 && (
-                  <span className="ml-2 rounded-full bg-gray-100 px-2 py-0.5 text-xs font-semibold text-gray-700">
+                  <span className="ml-2 rounded-full bg-muted px-2 py-0.5 text-xs font-semibold text-ink-soft">
                     {count}
                     <span className="sr-only">{key === 'duties' ? ' with nobody' : ' open to-dos'}</span>
                   </span>
@@ -640,24 +690,24 @@ function EventDutiesPage() {
           </div>
           <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
             {view === 'schedule' ? (
-              <p className="min-w-48 flex-1 text-sm text-gray-700">
-                <strong className="text-gray-900">{events.length}</strong> activities
+              <p className="min-w-48 flex-1 text-sm text-ink-soft">
+                <strong className="text-ink">{events.length}</strong> activities
                 {' · '}
-                <strong className="text-red-800">{ownerless}</strong> without an owner
+                <strong className="text-danger-ink">{ownerless}</strong> without an owner
                 {' · '}
-                <strong className="text-gray-900">{openTodos}</strong> to-dos open
+                <strong className="text-ink">{openTodos}</strong> to-dos open
               </p>
             ) : (
               <div className="min-w-48 flex-1">
-                <p className="text-sm text-gray-700">
-                  <strong className="text-gray-900">{covered}</strong> of {allItems.length} duties covered
+                <p className="text-sm text-ink-soft">
+                  <strong className="text-ink">{covered}</strong> of {allItems.length} duties covered
                   {' · '}
-                  <strong className="text-red-800">{empty}</strong> with nobody
+                  <strong className="text-danger-ink">{empty}</strong> with nobody
                   {' · '}
                   {everyone.length} people signed up
                 </p>
                 <div
-                  className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-gray-200"
+                  className="mt-1.5 h-2 w-full overflow-hidden rounded-full bg-line"
                   role="progressbar"
                   aria-valuenow={progress}
                   aria-valuemin={0}
@@ -668,7 +718,7 @@ function EventDutiesPage() {
                 </div>
               </div>
             )}
-            <div className="flex flex-wrap items-center gap-2 print:hidden" role="group" aria-label="Show">
+            <div className="flex w-full flex-wrap items-center gap-2 sm:w-auto print:hidden" role="group" aria-label="Show">
               {(
                 [
                   ['all', 'All'],
@@ -681,8 +731,8 @@ function EventDutiesPage() {
                   type="button"
                   aria-pressed={filter === key}
                   onClick={() => setFilter(key)}
-                  className={`rounded-full px-3 py-1.5 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 ${
-                    filter === key ? 'bg-primary-700 text-white' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                  className={`inline-flex min-h-10 items-center rounded-full px-4 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-focus ${
+                    filter === key ? 'bg-action text-on-action' : 'bg-muted text-ink-soft hover:bg-muted-strong'
                   }`}
                 >
                   {label}
@@ -697,24 +747,24 @@ function EventDutiesPage() {
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search"
-                className="w-44 rounded-full border border-gray-300 px-3 py-1.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+                className="min-h-10 w-full rounded-full border border-line-strong bg-surface px-4 text-base focus:outline-none focus:ring-2 focus:ring-focus sm:w-44 sm:text-sm"
               />
             </div>
-            <p className="text-sm text-gray-600 print:hidden">
-              You are <strong className="text-gray-900">{me}</strong>
-              <span className="text-gray-500"> ({formatMobile(user.mobile)})</span>
-              {' · '}
+            <div className="flex w-full flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-soft md:w-auto print:hidden">
+              <p className="mr-1">
+                You are <strong className="text-ink">{me}</strong>
+                <span className="text-ink-muted"> ({formatMobile(user.mobile)})</span>
+              </p>
               <button
                 type="button"
                 onClick={() => {
                   setNewName(me)
                   setRenaming(true)
                 }}
-                className="underline hover:text-primary-700"
+                className={userBarButtonClass}
               >
-                change name
+                Change name
               </button>
-              {' · '}
               <button
                 type="button"
                 onClick={() => {
@@ -722,15 +772,14 @@ function EventDutiesPage() {
                   setUser(null)
                   setRenaming(false)
                 }}
-                className="underline hover:text-primary-700"
+                className={userBarButtonClass}
               >
-                switch user
+                Switch user
               </button>
-              {' · '}
-              <button type="button" onClick={() => window.print()} className="underline hover:text-primary-700">
-                print
+              <button type="button" onClick={() => window.print()} className={`${userBarButtonClass} hidden md:inline-flex`}>
+                Print
               </button>
-            </p>
+            </div>
           </div>
           {renaming && (
             <form
@@ -760,8 +809,8 @@ function EventDutiesPage() {
                 setRenaming(false)
               }}
             >
-              <div>
-                <label htmlFor="rename-input" className="block text-sm font-semibold text-gray-800">
+              <div className="w-full sm:w-auto">
+                <label htmlFor="rename-input" className="block text-sm font-semibold text-ink">
                   Your name
                 </label>
                 <input
@@ -771,7 +820,7 @@ function EventDutiesPage() {
                   value={newName}
                   onChange={(e) => setNewName(e.target.value)}
                   autoFocus
-                  className={`mt-1 w-56 ${inputClass}`}
+                  className={`mt-1 w-full sm:w-56 ${inputClass}`}
                 />
               </div>
               <button type="submit" disabled={tidy(newName).length < 2} className={primaryButtonClass}>
@@ -780,20 +829,20 @@ function EventDutiesPage() {
               <button
                 type="button"
                 onClick={() => setRenaming(false)}
-                className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100"
+                className="rounded-lg px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-muted"
               >
                 Cancel
               </button>
-              <p className="basis-full text-xs text-gray-500">Your name also changes on every duty and activity you are on.</p>
+              <p className="basis-full text-xs text-ink-muted">Your name also changes on every duty and activity you are on.</p>
             </form>
           )}
-          <p role="status" aria-live="polite" className={error ? 'mt-2 text-sm font-semibold text-red-700' : 'sr-only'}>
+          <p role="status" aria-live="polite" className={error ? 'mt-2 text-sm font-semibold text-danger-ink' : 'sr-only'}>
             {error}
           </p>
         </div>
       </div>
 
-      <div className="container-custom mt-10 grid gap-10 lg:grid-cols-[1fr_20rem]">
+      <div className="container-custom mt-10 grid grid-cols-1 gap-10 lg:grid-cols-[minmax(0,1fr)_20rem]">
         {view === 'schedule' ? (
           <Schedule
             events={events}
@@ -809,18 +858,22 @@ function EventDutiesPage() {
           />
         ) : (
           <div>
-            {!state && !error && <p className="text-gray-600">Loading duties…</p>}
-            <nav aria-label="Sections" className="mb-8 flex flex-wrap gap-2 print:hidden">
+            {!state && !error && <p className="text-ink-soft">Loading duties…</p>}
+            {/* Phones: one row that scrolls sideways instead of five wrapped rows. */}
+            <nav
+              aria-label="Sections"
+              className="-mx-4 mb-8 flex snap-x gap-2 overflow-x-auto px-4 pb-2 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0 print:hidden"
+            >
               {sections.map((s) => {
                 const open = s.items.filter(({ duty }) => (byDuty.get(duty.id)?.length ?? 0) < duty.need).length
                 return (
                   <a
                     key={s.id}
                     href={`#${s.id}`}
-                    className="rounded-full bg-white px-3 py-1.5 text-sm font-medium text-gray-700 ring-1 ring-gray-200 hover:ring-primary-400"
+                    className="inline-flex min-h-10 shrink-0 snap-start items-center whitespace-nowrap rounded-full bg-surface px-4 text-sm font-medium text-ink-soft ring-1 ring-line hover:ring-focus"
                   >
                     {s.title}
-                    {open > 0 && <span className="ml-1.5 text-red-800">{open} open</span>}
+                    {open > 0 && <span className="ml-1.5 text-danger-ink">{open} open</span>}
                   </a>
                 )
               })}
@@ -832,11 +885,11 @@ function EventDutiesPage() {
               if (!items.length && !showAdd) return null
               return (
                 <section key={section.id} id={section.id} className="mb-14 scroll-mt-28" aria-labelledby={`h-${section.id}`}>
-                  <h2 id={`h-${section.id}`} className="font-serif text-2xl font-bold text-primary-700">
+                  <h2 id={`h-${section.id}`} className="font-serif text-2xl font-bold text-heading">
                     {section.title}
                   </h2>
-                  <p className="mt-1 text-sm font-medium text-gray-600">{section.when}</p>
-                  <div className="mt-5 grid gap-4 md:grid-cols-2">
+                  <p className="mt-1 text-sm font-medium text-ink-soft">{section.when}</p>
+                  <div className="mt-5 grid grid-cols-1 gap-4 md:grid-cols-2">
                     {items.map(({ duty, custom }) => (
                       <DutyCard
                         key={duty.id}
@@ -864,7 +917,7 @@ function EventDutiesPage() {
             })}
 
             {filter === 'mine' && mineCount === 0 && (
-              <p className="rounded-xl bg-white p-6 text-gray-700 ring-1 ring-gray-200">
+              <p className="rounded-xl bg-surface p-6 text-ink-soft ring-1 ring-line">
                 You are not on any duty yet. Switch to <strong>Needs people</strong> and pick one.
               </p>
             )}
@@ -873,56 +926,56 @@ function EventDutiesPage() {
 
         {/* Side panel */}
         <aside className="space-y-8 lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-y-auto print:hidden">
-          <section aria-labelledby="h-activity" className="rounded-xl bg-white p-5 ring-1 ring-gray-200">
-            <h2 id="h-activity" className="font-semibold text-gray-900">
+          <section aria-labelledby="h-activity" className="rounded-xl bg-surface p-5 ring-1 ring-line">
+            <h2 id="h-activity" className="font-semibold text-ink">
               Recent changes
             </h2>
-            {state && !state.activity.length && <p className="mt-2 text-sm text-gray-500">No changes yet.</p>}
+            {state && !state.activity.length && <p className="mt-2 text-sm text-ink-muted">No changes yet.</p>}
             <ol className="mt-3 space-y-3 text-sm">
               {state?.activity.slice(0, 15).map((a) => (
-                <li key={a.id} className="text-gray-700">
-                  <strong className="text-gray-900">{a.by_name}</strong> {ACTION_TEXT[a.action] ?? a.action}{' '}
+                <li key={a.id} className="text-ink-soft">
+                  <strong className="text-ink">{a.by_name}</strong> {ACTION_TEXT[a.action] ?? a.action}{' '}
                   {a.action === 'joined' ? null : a.action === 'renamed' ? (
-                    <strong className="text-gray-900">{a.person}</strong>
+                    <strong className="text-ink">{a.person}</strong>
                   ) : a.action === 'assign' || a.action === 'unassign' ? (
                     <>
-                      <strong className="text-gray-900">{a.person}</strong> {a.action === 'assign' ? 'to' : 'from'}{' '}
+                      <strong className="text-ink">{a.person}</strong> {a.action === 'assign' ? 'to' : 'from'}{' '}
                       {titleOf(a.duty_id) || 'a removed item'}
                     </>
                   ) : TODO_ACTIONS.has(a.action) ? (
                     <>
-                      <strong className="text-gray-900">{a.person}</strong> on {titleOf(a.duty_id) || 'a removed activity'}
+                      <strong className="text-ink">{a.person}</strong> on {titleOf(a.duty_id) || 'a removed activity'}
                     </>
                   ) : (
-                    <strong className="text-gray-900">{a.person}</strong>
+                    <strong className="text-ink">{a.person}</strong>
                   )}
-                  <span className="block text-xs text-gray-500">{timeAgo(a.at)}</span>
+                  <span className="block text-xs text-ink-muted">{timeAgo(a.at)}</span>
                 </li>
               ))}
             </ol>
           </section>
 
-          <section aria-labelledby="h-groups" className="rounded-xl bg-white p-5 ring-1 ring-gray-200">
-            <h2 id="h-groups" className="font-semibold text-gray-900">
+          <section aria-labelledby="h-groups" className="rounded-xl bg-surface p-5 ring-1 ring-line">
+            <h2 id="h-groups" className="font-semibold text-ink">
               Groups coming
             </h2>
-            <p className="mt-1 text-xs text-gray-500">
+            <p className="mt-1 text-xs text-ink-muted">
               Transport for the children is arranged. Team members come on their own.
             </p>
             <table className="mt-3 w-full text-sm">
               <thead>
-                <tr className="text-left text-xs text-gray-500">
+                <tr className="text-left text-xs text-ink-muted">
                   <th scope="col" className="pb-1 font-medium">Pillar</th>
                   <th scope="col" className="pb-1 text-right font-medium">Children</th>
                   <th scope="col" className="pb-1 text-right font-medium">Adults</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100">
+              <tbody className="divide-y divide-line">
                 {PILLAR_GROUPS.map((g) => (
                   <tr key={g.pillar}>
-                    <th scope="row" className="py-1.5 text-left font-medium text-gray-900">
+                    <th scope="row" className="py-1.5 text-left font-medium text-ink">
                       {g.pillar}
-                      <span className="block text-xs font-normal text-gray-500">{g.location}</span>
+                      <span className="block text-xs font-normal text-ink-muted">{g.location}</span>
                     </th>
                     <td className="py-1.5 text-right tabular-nums">{g.children ?? 'pending'}</td>
                     <td className="py-1.5 text-right tabular-nums">{g.adults ?? 'pending'}</td>
@@ -930,25 +983,25 @@ function EventDutiesPage() {
                 ))}
               </tbody>
               <tfoot>
-                <tr className="border-t border-gray-300 font-semibold">
+                <tr className="border-t border-line-strong font-semibold">
                   <th scope="row" className="pt-2 text-left">So far</th>
                   <td className="pt-2 text-right tabular-nums">{children}</td>
                   <td className="pt-2 text-right tabular-nums">{adults}</td>
                 </tr>
               </tfoot>
             </table>
-            <p className="mt-2 text-xs text-gray-500">
+            <p className="mt-2 text-xs text-ink-muted">
               {children + adults} people from the groups, {toppers} toppers among the children. Suma and Mangala Gowri still to confirm.
             </p>
           </section>
 
           {view === 'duties' && events.length > 0 && (
-            <section aria-labelledby="h-runsheet" className="rounded-xl bg-white p-5 ring-1 ring-gray-200">
+            <section aria-labelledby="h-runsheet" className="rounded-xl bg-surface p-5 ring-1 ring-line">
               <div className="flex items-baseline justify-between gap-2">
-                <h2 id="h-runsheet" className="font-semibold text-gray-900">
+                <h2 id="h-runsheet" className="font-semibold text-ink">
                   Run sheet
                 </h2>
-                <button type="button" onClick={() => switchView('schedule')} className="text-sm font-semibold text-primary-600 hover:underline">
+                <button type="button" onClick={() => switchView('schedule')} className="inline-flex min-h-9 items-center px-2 text-sm font-semibold text-link hover:underline">
                   Edit
                 </button>
               </div>
@@ -956,13 +1009,13 @@ function EventDutiesPage() {
                 {events.map((e, i) => (
                   <li key={e.id}>
                     {(i === 0 || events[i - 1].date !== e.date) && (
-                      <p className="mb-1.5 mt-3 text-xs font-semibold uppercase tracking-wide text-gray-500 first:mt-0">
+                      <p className="mb-1.5 mt-3 text-xs font-semibold uppercase tracking-wide text-ink-muted first:mt-0">
                         {new Date(`${e.date}T00:00:00`).toLocaleDateString('en-IN', { weekday: 'short', day: 'numeric', month: 'short' })}
                       </p>
                     )}
-                    <div className="grid grid-cols-[4.75rem_1fr] gap-2">
-                      <span className="font-semibold tabular-nums text-gold-800">{formatTime(e.time)}</span>
-                      <span className="text-gray-800">{e.title}</span>
+                    <div className="grid grid-cols-[4.75rem_minmax(0,1fr)] gap-2">
+                      <span className="font-semibold tabular-nums text-gold-ink">{formatTime(e.time)}</span>
+                      <span className="text-ink">{e.title}</span>
                     </div>
                   </li>
                 ))}
@@ -971,6 +1024,36 @@ function EventDutiesPage() {
           )}
         </aside>
       </div>
+
+      {/* Phones: the tabs sit at the bottom, in thumb reach, on every screen. */}
+      <nav
+        aria-label="View"
+        className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden print:hidden"
+      >
+        <div className="grid grid-cols-2">
+          {(
+            [
+              ['duties', 'Duties', empty, 'with nobody'],
+              ['schedule', 'Schedule', openTodos, 'open to-dos'],
+            ] as [View, string, number, string][]
+          ).map(([key, label, count, countLabel]) => (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={view === key}
+              onClick={() => switchView(key)}
+              className={`flex min-h-16 flex-col items-center justify-center gap-0.5 border-t-2 text-base font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-focus ${
+                view === key ? 'border-heading text-heading' : 'border-transparent text-ink-muted'
+              }`}
+            >
+              {label}
+              <span className="text-xs font-medium">
+                {count} {countLabel}
+              </span>
+            </button>
+          ))}
+        </div>
+      </nav>
     </div>
   )
 }

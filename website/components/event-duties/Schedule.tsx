@@ -67,7 +67,7 @@ function EventForm({
 
   return (
     <form
-      className="rounded-xl bg-white p-5 ring-2 ring-primary-300 print:hidden"
+      className="rounded-xl bg-surface p-5 ring-2 ring-focus print:hidden"
       onSubmit={async (e) => {
         e.preventDefault()
         if (!valid) return
@@ -77,21 +77,21 @@ function EventForm({
         if (ok) onCancel()
       }}
     >
-      <div className="grid gap-4 sm:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <div>
-          <label htmlFor={`${idPrefix}-date`} className="block text-sm font-semibold text-gray-800">
+          <label htmlFor={`${idPrefix}-date`} className="block text-sm font-semibold text-ink">
             Date
           </label>
           <input id={`${idPrefix}-date`} type="date" required value={draft.date} onChange={field('date')} className={`mt-1 w-full ${inputClass}`} />
         </div>
         <div>
-          <label htmlFor={`${idPrefix}-time`} className="block text-sm font-semibold text-gray-800">
-            Time <span className="font-normal text-gray-500">(optional)</span>
+          <label htmlFor={`${idPrefix}-time`} className="block text-sm font-semibold text-ink">
+            Time <span className="font-normal text-ink-muted">(optional)</span>
           </label>
           <input id={`${idPrefix}-time`} type="time" value={draft.time} onChange={field('time')} className={`mt-1 w-full ${inputClass}`} />
         </div>
       </div>
-      <label htmlFor={`${idPrefix}-title`} className="mt-4 block text-sm font-semibold text-gray-800">
+      <label htmlFor={`${idPrefix}-title`} className="mt-4 block text-sm font-semibold text-ink">
         Activity
       </label>
       <input
@@ -104,8 +104,8 @@ function EventForm({
         className={`mt-1 w-full ${inputClass}`}
         autoFocus
       />
-      <label htmlFor={`${idPrefix}-description`} className="mt-4 block text-sm font-semibold text-gray-800">
-        Description <span className="font-normal text-gray-500">(optional)</span>
+      <label htmlFor={`${idPrefix}-description`} className="mt-4 block text-sm font-semibold text-ink">
+        Description <span className="font-normal text-ink-muted">(optional)</span>
       </label>
       <textarea
         id={`${idPrefix}-description`}
@@ -119,7 +119,7 @@ function EventForm({
         <button type="submit" disabled={!valid || saving} className={primaryButtonClass}>
           {saving ? 'Saving…' : submitLabel}
         </button>
-        <button type="button" onClick={onCancel} className="rounded-lg px-4 py-2 text-sm font-semibold text-gray-700 hover:bg-gray-100">
+        <button type="button" onClick={onCancel} className="rounded-lg px-4 py-2 text-sm font-semibold text-ink-soft hover:bg-muted">
           Cancel
         </button>
       </div>
@@ -135,10 +135,10 @@ function TodoList({ event, todos, busy, post }: { event: EventActivity; todos: T
 
   return (
     <div className="mt-5">
-      <h4 className="text-sm font-semibold text-gray-800">
+      <h4 className="text-sm font-semibold text-ink">
         To-dos{' '}
         {todos.length > 0 && (
-          <span className="font-normal text-gray-500">
+          <span className="font-normal text-ink-muted">
             ({done} of {todos.length} done)
           </span>
         )}
@@ -146,23 +146,23 @@ function TodoList({ event, todos, busy, post }: { event: EventActivity; todos: T
       {todos.length > 0 && (
         <ul className="mt-2 space-y-1">
           {todos.map((t) => (
-            <li key={t.id} className="group flex items-start gap-3 rounded-lg px-1 py-1 hover:bg-gray-50">
+            <li key={t.id} className="group flex items-start gap-3 rounded-lg px-1 py-1.5 hover:bg-canvas">
               <input
                 id={`todo-${t.id}`}
                 type="checkbox"
                 checked={Boolean(t.done)}
                 disabled={busy}
                 onChange={(e) => void post({ action: 'toggleTodo', id: t.id, done: e.target.checked }, event.id)}
-                className="mt-0.5 h-5 w-5 shrink-0 rounded border-gray-300 accent-primary-700"
+                className="h-6 w-6 shrink-0 rounded border-line-strong accent-action sm:mt-0.5 sm:h-5 sm:w-5"
               />
               <label htmlFor={`todo-${t.id}`} className="flex-1 text-sm leading-6">
-                <span className={t.done ? 'text-gray-500 line-through' : 'text-gray-800'}>{t.text}</span>
-                {t.done && t.done_by ? <span className="ml-2 text-xs text-green-800">✓ {t.done_by}</span> : null}
+                <span className={t.done ? 'text-ink-muted line-through' : 'text-ink'}>{t.text}</span>
+                {t.done && t.done_by ? <span className="ml-2 text-xs text-success-ink">✓ {t.done_by}</span> : null}
               </label>
               <button
                 type="button"
                 onClick={() => void post({ action: 'removeTodo', id: t.id }, event.id)}
-                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-gray-500 hover:bg-gray-200 hover:text-red-700 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 print:hidden"
+                className="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-ink-muted hover:bg-muted-strong hover:text-danger-ink focus:outline-none focus-visible:ring-2 focus-visible:ring-focus print:hidden"
                 aria-label={`Remove to-do: ${t.text}`}
               >
                 ×
@@ -229,16 +229,16 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
 
   return (
     <li>
-      <article className="grid gap-x-6 gap-y-2 rounded-xl bg-white p-5 shadow-sm ring-1 ring-gray-200 sm:grid-cols-[6.5rem_1fr] print:break-inside-avoid print:shadow-none">
-        <p className="font-semibold tabular-nums text-gold-800">{formatTime(event.time)}</p>
+      <article className="grid gap-x-6 gap-y-2 rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line grid-cols-1 sm:grid-cols-[6.5rem_minmax(0,1fr)] print:break-inside-avoid print:shadow-none">
+        <p className="font-semibold tabular-nums text-gold-ink">{formatTime(event.time)}</p>
         <div className="min-w-0">
           <div className="flex items-start justify-between gap-3">
-            <h3 className="font-semibold leading-snug text-gray-900">{event.title}</h3>
+            <h3 className="font-semibold leading-snug text-ink">{event.title}</h3>
             <div className="flex shrink-0 gap-1 print:hidden">
               <button
                 type="button"
                 onClick={() => setEditing(true)}
-                className="rounded-md px-2 py-1 text-sm font-semibold text-primary-600 hover:bg-primary-50"
+                className="inline-flex min-h-9 items-center rounded-md px-3 text-sm font-semibold text-link hover:bg-accent-soft"
                 aria-label={`Edit ${event.title}`}
               >
                 Edit
@@ -248,16 +248,16 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
                 onClick={() => {
                   if (window.confirm(`Remove "${event.title}" from the schedule?`)) void post({ action: 'removeEvent', id: event.id })
                 }}
-                className="rounded-md px-2 py-1 text-sm font-semibold text-gray-500 hover:bg-red-50 hover:text-red-700"
+                className="inline-flex min-h-9 items-center rounded-md px-3 text-sm font-semibold text-ink-muted hover:bg-danger-soft hover:text-danger-ink"
                 aria-label={`Remove ${event.title}`}
               >
                 Remove
               </button>
             </div>
           </div>
-          {event.description && <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-gray-600">{event.description}</p>}
+          {event.description && <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-ink-soft">{event.description}</p>}
 
-          <h4 className="mt-5 text-sm font-semibold text-gray-800">Owner</h4>
+          <h4 className="mt-5 text-sm font-semibold text-ink">Owner</h4>
           <PeopleEditor
             id={event.id}
             label={event.title}
@@ -272,7 +272,7 @@ function EventCard({ event, owners, todos, phones, me, busy, post }: EventCardPr
 
           <TodoList event={event} todos={todos} busy={busy} post={post} />
 
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-ink-muted">
             Last edited by {event.updated_by}, {timeAgo(event.updated_at)}
           </p>
         </div>
@@ -330,7 +330,7 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
   return (
     <div>
       <div className="mb-8 flex flex-wrap items-center justify-between gap-3">
-        <p className="max-w-xl text-sm text-gray-600">
+        <p className="max-w-xl text-sm text-ink-soft">
           Anyone on the team can add, edit or remove an activity, give it an owner, and tick off its to-dos. Every change is
           shown under Recent changes.
         </p>
@@ -353,16 +353,16 @@ export function Schedule({ events, todos, byDuty, phones, me, busyKey, filter, q
         </div>
       )}
 
-      {!loaded && <p className="text-gray-600">Loading the schedule…</p>}
+      {!loaded && <p className="text-ink-soft">Loading the schedule…</p>}
       {loaded && !visible.length && (
-        <p className="rounded-xl bg-white p-6 text-gray-700 ring-1 ring-gray-200">
+        <p className="rounded-xl bg-surface p-6 text-ink-soft ring-1 ring-line">
           {events.length ? 'No activities match.' : 'The schedule is empty. Add the first activity.'}
         </p>
       )}
 
       {days.map(([date, items]) => (
         <section key={date} className="mb-12" aria-labelledby={`day-${date}`}>
-          <h2 id={`day-${date}`} className="font-serif text-2xl font-bold text-primary-700">
+          <h2 id={`day-${date}`} className="font-serif text-2xl font-bold text-heading">
             {formatDate(date)}
           </h2>
           <ol className="mt-5 space-y-4">

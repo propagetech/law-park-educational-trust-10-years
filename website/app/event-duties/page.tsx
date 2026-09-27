@@ -13,8 +13,11 @@ export const metadata: Metadata = {
   },
 }
 
+// No maximum-scale or user-scalable=no: pinch zoom must stay available.
+// viewport-fit=cover lets the bottom tab bar clear the iPhone home bar.
 export const viewport: Viewport = {
   themeColor: '#1c1c2e',
+  viewportFit: 'cover',
 }
 
 export default function EventDuties() {

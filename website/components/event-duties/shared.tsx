@@ -88,11 +88,12 @@ export function timeAgo(iso: string) {
   return new Date(iso).toLocaleDateString('en-IN', { day: 'numeric', month: 'short' })
 }
 
+// 16px text on phones: iOS Safari zooms the page into any smaller field.
 export const inputClass =
-  'rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-primary-500'
+  'rounded-lg border border-line-strong px-3 py-2 text-base sm:text-sm focus:outline-none focus:ring-2 focus:ring-focus focus:border-focus'
 
 export const primaryButtonClass =
-  'rounded-lg bg-primary-700 px-4 py-2 text-sm font-semibold text-white hover:bg-primary-600 disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2'
+  'rounded-lg bg-action px-4 py-2 text-sm font-semibold text-on-action hover:bg-action-hover disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-500 focus-visible:ring-offset-2'
 
 interface PeopleEditorProps {
   id: string
@@ -127,14 +128,14 @@ export function PeopleEditor({ id, label, people, phones, me, busy, post, emptyT
             <li
               key={p.id}
               className={`inline-flex items-center gap-1 rounded-full py-1 pl-3 pr-1 text-sm font-medium ${
-                sameName(p.person, me) ? 'bg-gold-100 text-gold-900' : 'bg-primary-50 text-primary-700'
+                sameName(p.person, me) ? 'bg-mine text-mine-ink' : 'bg-accent-soft text-heading'
               }`}
               title={`Added by ${p.added_by}, ${timeAgo(p.added_at)}`}
             >
               {phone ? (
                 <a
                   href={`tel:${phone}`}
-                  className="underline decoration-dotted underline-offset-2 hover:decoration-solid"
+                  className="inline-flex min-h-6 items-center underline decoration-dotted underline-offset-2 hover:decoration-solid"
                   aria-label={`Call ${p.person}`}
                 >
                   {p.person}
@@ -145,7 +146,7 @@ export function PeopleEditor({ id, label, people, phones, me, busy, post, emptyT
               <button
                 type="button"
                 onClick={() => void post({ action: 'unassign', id: p.id }, id)}
-                className="ml-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full text-base leading-none hover:bg-white/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary-500 print:hidden"
+                className="ml-0.5 inline-flex h-6 w-6 items-center justify-center rounded-full text-base leading-none hover:bg-surface/70 focus:outline-none focus-visible:ring-2 focus-visible:ring-focus print:hidden"
                 aria-label={`Remove ${p.person} from ${label}`}
               >
                 ×
@@ -153,7 +154,7 @@ export function PeopleEditor({ id, label, people, phones, me, busy, post, emptyT
             </li>
           )
         })}
-        {!people.length && <li className="text-sm italic text-gray-500">{emptyText}</li>}
+        {!people.length && <li className="text-sm italic text-ink-muted">{emptyText}</li>}
       </ul>
 
       <form
@@ -186,7 +187,7 @@ export function PeopleEditor({ id, label, people, phones, me, busy, post, emptyT
             type="button"
             disabled={busy}
             onClick={() => void add([me])}
-            className="mt-1 py-1.5 text-sm font-semibold text-primary-600 underline-offset-2 hover:underline disabled:opacity-40"
+            className="mt-1 inline-flex min-h-9 items-center text-sm font-semibold text-link underline-offset-2 hover:underline disabled:opacity-40"
           >
             + Add me ({me})
           </button>

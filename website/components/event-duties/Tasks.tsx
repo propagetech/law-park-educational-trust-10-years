@@ -7,6 +7,7 @@ import {
   sameName,
   tidy,
   timeAgo,
+  type Assignment,
   type Comment,
   type Member,
   type Post,
@@ -25,6 +26,46 @@ const STATUS_ORDER: TodoStatus[] = ['todo', 'doing', 'stuck', 'done']
 
 export function statusOf(t: Todo): TodoStatus {
   return (t.status in STATUS ? t.status : t.done ? 'done' : 'todo') as TodoStatus
+}
+
+/* Filters on the Schedule and Duties tabs: one person and one task status. */
+
+export type TaskStatusFilter = '' | TodoStatus | 'unassigned'
+
+export interface TaskFilter {
+  person: string // '' is everyone
+  status: TaskStatusFilter // '' is any status
+}
+
+export const STATUS_FILTERS: [TaskStatusFilter, string][] = [
+  ['', 'Any status'],
+  ['todo', STATUS.todo.label],
+  ['doing', STATUS.doing.label],
+  ['stuck', STATUS.stuck.label],
+  ['done', STATUS.done.label],
+  ['unassigned', 'No one doing it yet'],
+]
+
+export const isFiltering = (f?: TaskFilter) => Boolean(f && (f.person || f.status))
+
+// people: who is on the duty, or in charge of the activity, the task belongs to.
+export function taskMatches(t: Todo, f: TaskFilter, people: Assignment[]) {
+  if (f.status === 'unassigned') {
+    // With a person chosen: open tasks on what they are on, for them to share out.
+    if (t.assignee || statusOf(t) === 'done') return false
+    return !f.person || people.some((p) => sameName(p.person, f.person))
+  }
+  if (f.person && !(t.assignee && sameName(t.assignee, f.person))) return false
+  if (f.status && statusOf(t) !== f.status) return false
+  return true
+}
+
+// Whether a duty or activity shows under the filter: a status filter needs a
+// matching task; a person alone also matches being on it or in charge of it.
+export function parentMatches(people: Assignment[], todos: Todo[], f: TaskFilter) {
+  if (!isFiltering(f)) return true
+  if (todos.some((t) => taskMatches(t, f, people))) return true
+  return !f.status && people.some((p) => sameName(p.person, f.person))
 }
 
 function CheckIcon() {
@@ -282,12 +323,17 @@ interface TaskListProps {
   me: string
   busy: boolean
   post: Post
+  // With a filter on, only matching tasks are listed.
+  filter?: TaskFilter
+  people?: Assignment[]
 }
 
 // The task list inside an activity or a duty.
-export function TaskList({ parentId, parentTitle, todos, commentsByTodo, members, me, busy, post, heading = true }: TaskListProps & { heading?: boolean }) {
+export function TaskList({ parentId, parentTitle, todos, commentsByTodo, members, me, busy, post, filter, people = [], heading = true }: TaskListProps & { heading?: boolean }) {
   const [draft, setDraft] = useState('')
   const done = todos.filter((t) => statusOf(t) === 'done').length
+  const filtering = isFiltering(filter)
+  const shown = filtering ? todos.filter((t) => taskMatches(t, filter!, people)) : todos
 
   return (
     <div className={heading ? 'mt-5' : ''}>
@@ -301,9 +347,16 @@ export function TaskList({ parentId, parentTitle, todos, commentsByTodo, members
           )}
         </h4>
       )}
-      {todos.length > 0 && (
+      {filtering && todos.length > 0 && (
+        <p className="mt-1 text-sm text-ink-muted">
+          {shown.length
+            ? `Showing ${shown.length} of ${todos.length} tasks that match your filters.`
+            : `None of the ${todos.length} tasks match your filters.`}
+        </p>
+      )}
+      {shown.length > 0 && (
         <ul className="mt-2 space-y-2">
-          {todos.map((t) => (
+          {shown.map((t) => (
             <TaskRow
               key={t.id}
               todo={t}

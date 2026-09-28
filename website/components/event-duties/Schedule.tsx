@@ -16,7 +16,7 @@ import {
   type Post,
   type Todo,
 } from './shared'
-import { TaskList } from './Tasks'
+import { TaskList, parentMatches, type TaskFilter } from './Tasks'
 
 const DEFAULT_DATE = '2026-10-04'
 
@@ -147,9 +147,10 @@ interface EventCardProps {
   me: string
   busy: boolean
   post: Post
+  taskFilter: TaskFilter
 }
 
-function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, busy, post }: EventCardProps) {
+function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, busy, post, taskFilter }: EventCardProps) {
   const [editing, setEditing] = useState(false)
 
   if (editing) {
@@ -209,7 +210,18 @@ function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, 
             className="mt-2"
           />
 
-          <TaskList parentId={event.id} parentTitle={event.title} todos={todos} commentsByTodo={commentsByTodo} members={members} me={me} busy={busy} post={post} />
+          <TaskList
+            parentId={event.id}
+            parentTitle={event.title}
+            todos={todos}
+            commentsByTodo={commentsByTodo}
+            members={members}
+            me={me}
+            busy={busy}
+            post={post}
+            filter={taskFilter}
+            people={owners}
+          />
 
           <p className="mt-4 text-xs text-ink-muted">
             Last edited by {event.updated_by}, {timeAgo(event.updated_at)}
@@ -232,12 +244,14 @@ interface ScheduleProps {
   me: string
   busyKey: string | null
   filter: Filter
+  taskFilter: TaskFilter
   query: string
   loaded: boolean
   post: Post
+  clearFilters: () => void
 }
 
-export function Schedule({ events, todos, comments, members, byDuty, phones, me, busyKey, filter, query, loaded, post }: ScheduleProps) {
+export function Schedule({ events, todos, comments, members, byDuty, phones, me, busyKey, filter, taskFilter, query, loaded, post, clearFilters }: ScheduleProps) {
   const [adding, setAdding] = useState(false)
 
   const todosByEvent = new Map<string, Todo[]>()
@@ -259,6 +273,7 @@ export function Schedule({ events, todos, comments, members, byDuty, phones, me,
     const owners = byDuty.get(e.id) ?? []
     if (filter === 'open' && owners.length) return false
     if (filter === 'mine' && !owners.some((p) => sameName(p.person, me))) return false
+    if (!parentMatches(owners, todosByEvent.get(e.id) ?? [], taskFilter)) return false
     if (!q) return true
     return (
       e.title.toLowerCase().includes(q) ||
@@ -304,7 +319,12 @@ export function Schedule({ events, todos, comments, members, byDuty, phones, me,
       {!loaded && <p className="text-ink-soft">Loading the schedule…</p>}
       {loaded && !visible.length && (
         <p className="rounded-xl bg-surface p-6 text-ink-soft ring-1 ring-line">
-          {events.length ? 'No activities match.' : 'The schedule is empty. Add the first activity.'}
+          {events.length ? 'No activities match.' : 'The schedule is empty. Add the first activity.'}{' '}
+          {events.length > 0 && (
+            <button type="button" onClick={clearFilters} className="font-semibold text-link underline underline-offset-2">
+              Clear filters
+            </button>
+          )}
         </p>
       )}
 
@@ -326,6 +346,7 @@ export function Schedule({ events, todos, comments, members, byDuty, phones, me,
                 me={me}
                 busy={busyKey === e.id}
                 post={post}
+                taskFilter={taskFilter}
               />
             ))}
           </ol>

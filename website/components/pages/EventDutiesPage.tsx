@@ -27,7 +27,17 @@ import { Schedule, formatShortDate, formatTime, sortActivities } from '@/compone
 import { SignIn } from '@/components/event-duties/SignIn'
 import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
 import { MyTasks, type TaskParent } from '@/components/event-duties/MyTasks'
-import { STATUS, TaskList, statusOf } from '@/components/event-duties/Tasks'
+import {
+  STATUS,
+  STATUS_FILTERS,
+  TaskList,
+  isFiltering,
+  parentMatches,
+  statusOf,
+  taskMatches,
+  type TaskFilter,
+  type TaskStatusFilter,
+} from '@/components/event-duties/Tasks'
 import { TOUR_STEPS, Tour, TourOffer } from '@/components/event-duties/Tour'
 
 interface CustomDuty {
@@ -110,6 +120,14 @@ async function reloadLatest() {
   window.location.reload()
 }
 
+function FunnelIcon() {
+  return (
+    <svg className="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
+      <path d="M3 5h18l-7 8.5V19l-4 2v-7.5z" />
+    </svg>
+  )
+}
+
 function RefreshIcon({ className = '' }: { className?: string }) {
   return (
     <svg className={className} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" aria-hidden>
@@ -171,12 +189,17 @@ interface DutyCardProps {
   me: string
   busy: boolean
   post: Post
+  taskFilter: TaskFilter
   onRemoveDuty: (id: string) => void
 }
 
-function DutyCard({ duty, custom, people, todos, commentsByTodo, members, phones, me, busy, post, onRemoveDuty }: DutyCardProps) {
-  // Folded by default, so 82 cards stay easy to scan.
-  const [tasksOpen, setTasksOpen] = useState(false)
+function DutyCard({ duty, custom, people, todos, commentsByTodo, members, phones, me, busy, post, taskFilter, onRemoveDuty }: DutyCardProps) {
+  // Folded by default, so 82 cards stay easy to scan; opened by itself when
+  // a filter picks out some of its tasks, until the person folds it again.
+  const [manualOpen, setManualOpen] = useState<boolean | null>(null)
+  const autoOpen = isFiltering(taskFilter) && todos.some((t) => taskMatches(t, taskFilter, people))
+  const tasksOpen = manualOpen ?? autoOpen
+  const setTasksOpen = (open: boolean) => setManualOpen(open)
   const done = todos.filter((t) => statusOf(t) === 'done').length
   return (
     <article className="flex flex-col rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line print:break-inside-avoid print:shadow-none">
@@ -241,6 +264,8 @@ function DutyCard({ duty, custom, people, todos, commentsByTodo, members, phones
               busy={busy}
               post={post}
               heading={false}
+              filter={taskFilter}
+              people={people}
             />
           </div>
         )}
@@ -379,6 +404,9 @@ function EventDutiesPage() {
   const [busyDuty, setBusyDuty] = useState<string | null>(null)
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
+  const [taskFilter, setTaskFilter] = useState<TaskFilter>({ person: '', status: '' })
+  const [filterOpen, setFilterOpen] = useState(false)
+  const clearFilters = () => setTaskFilter({ person: '', status: '' })
   const [view, setView] = useState<View>('mine')
   const [touring, setTouring] = useState(false)
   const [tourHandled, setTourHandled] = useState(false)
@@ -629,6 +657,7 @@ function EventDutiesPage() {
     const people = byDuty.get(duty.id) ?? []
     if (filter === 'open' && people.length >= duty.need) return false
     if (filter === 'mine' && !people.some((p) => sameName(p.person, me))) return false
+    if (!parentMatches(people, todosByParent.get(duty.id) ?? [], taskFilter)) return false
     if (!q) return true
     return (
       duty.title.toLowerCase().includes(q) ||
@@ -637,6 +666,27 @@ function EventDutiesPage() {
       (todosByParent.get(duty.id) ?? []).some((t) => t.text.toLowerCase().includes(q) || (t.assignee ?? '').toLowerCase().includes(q))
     )
   }
+
+  const activeFilters = (taskFilter.person ? 1 : 0) + (taskFilter.status ? 1 : 0)
+  // Everyone on the team or named on anything, with what they have on.
+  const peopleSummary = (() => {
+    const names = new Map<string, string>()
+    for (const n of knownNames) names.set(n.toLowerCase(), n)
+    for (const t of todos) if (t.assignee) names.set(t.assignee.toLowerCase(), t.assignee)
+    return [...names.values()]
+      .sort((a, b) => a.localeCompare(b))
+      .map((name) => {
+        const duties = allItems.filter(({ duty }) => byDuty.get(duty.id)?.some((p) => sameName(p.person, name))).length
+        const leads = events.filter((e) => byDuty.get(e.id)?.some((p) => sameName(p.person, name))).length
+        const tasks = todos.filter((t) => parents.has(t.event_id) && t.assignee && sameName(t.assignee, name) && statusOf(t) !== 'done').length
+        const parts = [
+          duties ? `${duties} ${duties === 1 ? 'duty' : 'duties'}` : '',
+          leads ? `in charge of ${leads}` : '',
+          tasks ? `${tasks} open ${tasks === 1 ? 'task' : 'tasks'}` : '',
+        ].filter(Boolean)
+        return { name, label: `${name} · ${parts.length ? parts.join(', ') : 'nothing yet'}` }
+      })
+  })()
 
   const tabs: [View, string, number, string][] = [
     ['mine', 'My tasks', myOpenTasks, 'to do'],
@@ -869,7 +919,104 @@ function EventDutiesPage() {
                 placeholder="Search"
                 className="min-h-10 w-full rounded-full border border-line-strong bg-surface px-4 text-base focus:outline-none focus:ring-2 focus:ring-focus sm:w-44 sm:text-sm"
               />
+              <button
+                type="button"
+                aria-expanded={filterOpen}
+                aria-controls="filter-panel"
+                onClick={() => setFilterOpen(!filterOpen)}
+                className={`inline-flex min-h-10 items-center gap-2 rounded-full px-4 text-sm font-semibold focus:outline-none focus-visible:ring-2 focus-visible:ring-focus ${
+                  filterOpen || activeFilters ? 'bg-accent-soft text-heading ring-1 ring-focus' : 'bg-muted text-ink-soft hover:bg-muted-strong'
+                }`}
+              >
+                <FunnelIcon />
+                Filter
+                {activeFilters > 0 && (
+                  <span className="rounded-full bg-action px-1.5 text-xs text-on-action">
+                    {activeFilters}
+                    <span className="sr-only"> on</span>
+                  </span>
+                )}
+              </button>
             </div>
+            )}
+            {view !== 'mine' && (filterOpen || activeFilters > 0) && (
+              <div className="grid basis-full gap-3 print:hidden">
+                {filterOpen && (
+                  <div id="filter-panel" className="grid gap-3 rounded-xl bg-canvas p-3 ring-1 ring-line sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
+                    <div>
+                      <label htmlFor="filter-person" className="block text-sm font-semibold text-ink">
+                        Person
+                      </label>
+                      <select
+                        id="filter-person"
+                        value={taskFilter.person}
+                        onChange={(e) => setTaskFilter({ ...taskFilter, person: e.target.value })}
+                        className={`mt-1 min-h-11 w-full bg-surface ${inputClass}`}
+                      >
+                        <option value="">Everyone</option>
+                        {peopleSummary.map(({ name, label }) => (
+                          <option key={name} value={name}>
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div>
+                      <label htmlFor="filter-status" className="block text-sm font-semibold text-ink">
+                        Task status
+                      </label>
+                      <select
+                        id="filter-status"
+                        value={taskFilter.status}
+                        onChange={(e) => setTaskFilter({ ...taskFilter, status: e.target.value as TaskStatusFilter })}
+                        className={`mt-1 min-h-11 w-full bg-surface ${inputClass}`}
+                      >
+                        {STATUS_FILTERS.map(([value, label]) => (
+                          <option key={value} value={value}>
+                            {label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <button
+                      type="button"
+                      onClick={clearFilters}
+                      disabled={!activeFilters}
+                      className="min-h-11 rounded-lg px-4 text-sm font-semibold text-link hover:bg-muted disabled:opacity-40"
+                    >
+                      Clear filters
+                    </button>
+                  </div>
+                )}
+                {activeFilters > 0 && (
+                  <div className="flex flex-wrap items-center gap-2 text-sm" aria-live="polite">
+                    <span className="text-ink-muted">Showing</span>
+                    {taskFilter.person && (
+                      <button
+                        type="button"
+                        onClick={() => setTaskFilter({ ...taskFilter, person: '' })}
+                        className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-mine px-3 font-semibold text-mine-ink"
+                        aria-label={`Remove filter: ${taskFilter.person}`}
+                      >
+                        {taskFilter.person} <span aria-hidden>×</span>
+                      </button>
+                    )}
+                    {taskFilter.status && (
+                      <button
+                        type="button"
+                        onClick={() => setTaskFilter({ ...taskFilter, status: '' })}
+                        className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-mine px-3 font-semibold text-mine-ink"
+                        aria-label={`Remove filter: ${STATUS_FILTERS.find(([v]) => v === taskFilter.status)?.[1]}`}
+                      >
+                        {STATUS_FILTERS.find(([v]) => v === taskFilter.status)?.[1]} <span aria-hidden>×</span>
+                      </button>
+                    )}
+                    {taskFilter.person && taskFilter.status === 'unassigned' && (
+                      <span className="text-ink-muted">on what {taskFilter.person} is on or in charge of</span>
+                    )}
+                  </div>
+                )}
+              </div>
             )}
             <div className="flex w-full flex-wrap items-center gap-x-2 gap-y-1 text-sm text-ink-soft md:w-auto print:hidden">
               <p className="mr-1">
@@ -993,6 +1140,8 @@ function EventDutiesPage() {
             me={me}
             busyKey={busyDuty}
             filter={filter}
+            taskFilter={taskFilter}
+            clearFilters={clearFilters}
             query={query}
             loaded={Boolean(state)}
             post={post}
@@ -1022,7 +1171,7 @@ function EventDutiesPage() {
 
             {sections.map((section) => {
               const items = section.items.filter(({ duty }) => visible(duty))
-              const showAdd = filter === 'all' && !q
+              const showAdd = filter === 'all' && !q && !isFiltering(taskFilter)
               if (!items.length && !showAdd) return null
               return (
                 <section key={section.id} id={section.id} className="mb-14 scroll-mt-28" aria-labelledby={`h-${section.id}`}>
@@ -1044,6 +1193,7 @@ function EventDutiesPage() {
                         me={me}
                         busy={busyDuty === duty.id}
                         post={post}
+                        taskFilter={taskFilter}
                         onRemoveDuty={(id) => {
                           if (window.confirm(`Remove the duty "${duty.title}"?`)) void post({ action: 'removeDuty', id })
                         }}
@@ -1059,6 +1209,15 @@ function EventDutiesPage() {
                 </section>
               )
             })}
+
+            {isFiltering(taskFilter) && !allItems.some(({ duty }) => visible(duty)) && (
+              <p className="rounded-xl bg-surface p-6 text-ink-soft ring-1 ring-line">
+                No duties match these filters.{' '}
+                <button type="button" onClick={clearFilters} className="font-semibold text-link underline underline-offset-2">
+                  Clear filters
+                </button>
+              </p>
+            )}
 
             {filter === 'mine' && mineCount === 0 && (
               <p className="rounded-xl bg-surface p-6 text-ink-soft ring-1 ring-line">

@@ -133,8 +133,9 @@ duty's list is folded behind a Tasks button). Any task can be given to a team me
 moved through Not started, Working on it, Need help and Done, and commented on.
 **My tasks**, the first tab, shows each person only what is theirs, anyone who
 needs help, tasks on their activities with no one yet, and tasks they could
-pick up. A Filter button on the Schedule and Duties tabs narrows everything to one
-person (shown with what they have on) and/or one task status, including
+pick up. A Filter button on the Schedule and Duties tabs narrows everything to one or
+more people (type to find them; each is shown with what they have on) and/or
+one task status, including
 "No one doing it yet". A short tour is offered on a phone's first sign-in, and again from Help.
 A− and A+ enlarge all text (up to 150%), a moon or sun button switches dark
 mode, and pinch zoom stays available. No passwords, by

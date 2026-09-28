@@ -28,12 +28,12 @@ export function statusOf(t: Todo): TodoStatus {
   return (t.status in STATUS ? t.status : t.done ? 'done' : 'todo') as TodoStatus
 }
 
-/* Filters on the Schedule and Duties tabs: one person and one task status. */
+/* Filters on the Schedule and Duties tabs: any number of people, one task status. */
 
 export type TaskStatusFilter = '' | TodoStatus | 'unassigned'
 
 export interface TaskFilter {
-  person: string // '' is everyone
+  people: string[] // empty is everyone; otherwise any of these
   status: TaskStatusFilter // '' is any status
 }
 
@@ -46,26 +46,28 @@ export const STATUS_FILTERS: [TaskStatusFilter, string][] = [
   ['unassigned', 'No one doing it yet'],
 ]
 
-export const isFiltering = (f?: TaskFilter) => Boolean(f && (f.person || f.status))
+export const isFiltering = (f?: TaskFilter) => Boolean(f && (f.people.length || f.status))
+
+const chosen = (f: TaskFilter, name: string | null | undefined) => Boolean(name) && f.people.some((n) => sameName(n, name!))
 
 // people: who is on the duty, or in charge of the activity, the task belongs to.
 export function taskMatches(t: Todo, f: TaskFilter, people: Assignment[]) {
   if (f.status === 'unassigned') {
-    // With a person chosen: open tasks on what they are on, for them to share out.
+    // With people chosen: open tasks on what they are on, for them to share out.
     if (t.assignee || statusOf(t) === 'done') return false
-    return !f.person || people.some((p) => sameName(p.person, f.person))
+    return !f.people.length || people.some((p) => chosen(f, p.person))
   }
-  if (f.person && !(t.assignee && sameName(t.assignee, f.person))) return false
+  if (f.people.length && !chosen(f, t.assignee)) return false
   if (f.status && statusOf(t) !== f.status) return false
   return true
 }
 
 // Whether a duty or activity shows under the filter: a status filter needs a
-// matching task; a person alone also matches being on it or in charge of it.
+// matching task; people alone also match being on it or in charge of it.
 export function parentMatches(people: Assignment[], todos: Todo[], f: TaskFilter) {
   if (!isFiltering(f)) return true
   if (todos.some((t) => taskMatches(t, f, people))) return true
-  return !f.status && people.some((p) => sameName(p.person, f.person))
+  return !f.status && people.some((p) => chosen(f, p.person))
 }
 
 function CheckIcon() {

@@ -25,6 +25,7 @@ import {
 } from '@/components/event-duties/shared'
 import { Schedule, formatShortDate, formatTime, sortActivities } from '@/components/event-duties/Schedule'
 import { SignIn } from '@/components/event-duties/SignIn'
+import { PeoplePicker, type PersonOption } from '@/components/event-duties/PeoplePicker'
 import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
 import { MyTasks, type TaskParent } from '@/components/event-duties/MyTasks'
 import {
@@ -404,9 +405,9 @@ function EventDutiesPage() {
   const [busyDuty, setBusyDuty] = useState<string | null>(null)
   const [filter, setFilter] = useState<Filter>('all')
   const [query, setQuery] = useState('')
-  const [taskFilter, setTaskFilter] = useState<TaskFilter>({ person: '', status: '' })
+  const [taskFilter, setTaskFilter] = useState<TaskFilter>({ people: [], status: '' })
   const [filterOpen, setFilterOpen] = useState(false)
-  const clearFilters = () => setTaskFilter({ person: '', status: '' })
+  const clearFilters = () => setTaskFilter({ people: [], status: '' })
   const [view, setView] = useState<View>('mine')
   const [touring, setTouring] = useState(false)
   const [tourHandled, setTourHandled] = useState(false)
@@ -667,9 +668,9 @@ function EventDutiesPage() {
     )
   }
 
-  const activeFilters = (taskFilter.person ? 1 : 0) + (taskFilter.status ? 1 : 0)
+  const activeFilters = taskFilter.people.length + (taskFilter.status ? 1 : 0)
   // Everyone on the team or named on anything, with what they have on.
-  const peopleSummary = (() => {
+  const peopleSummary: PersonOption[] = (() => {
     const names = new Map<string, string>()
     for (const n of knownNames) names.set(n.toLowerCase(), n)
     for (const t of todos) if (t.assignee) names.set(t.assignee.toLowerCase(), t.assignee)
@@ -684,7 +685,7 @@ function EventDutiesPage() {
           leads ? `in charge of ${leads}` : '',
           tasks ? `${tasks} open ${tasks === 1 ? 'task' : 'tasks'}` : '',
         ].filter(Boolean)
-        return { name, label: `${name} · ${parts.length ? parts.join(', ') : 'nothing yet'}` }
+        return { name, detail: parts.length ? parts.join(', ') : 'nothing yet' }
       })
   })()
 
@@ -945,21 +946,14 @@ function EventDutiesPage() {
                   <div id="filter-panel" className="grid gap-3 rounded-xl bg-canvas p-3 ring-1 ring-line sm:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto] sm:items-end">
                     <div>
                       <label htmlFor="filter-person" className="block text-sm font-semibold text-ink">
-                        Person
+                        People <span className="font-normal text-ink-muted">(one or more)</span>
                       </label>
-                      <select
+                      <PeoplePicker
                         id="filter-person"
-                        value={taskFilter.person}
-                        onChange={(e) => setTaskFilter({ ...taskFilter, person: e.target.value })}
-                        className={`mt-1 min-h-11 w-full bg-surface ${inputClass}`}
-                      >
-                        <option value="">Everyone</option>
-                        {peopleSummary.map(({ name, label }) => (
-                          <option key={name} value={name}>
-                            {label}
-                          </option>
-                        ))}
-                      </select>
+                        options={peopleSummary}
+                        selected={taskFilter.people}
+                        onChange={(people) => setTaskFilter({ ...taskFilter, people })}
+                      />
                     </div>
                     <div>
                       <label htmlFor="filter-status" className="block text-sm font-semibold text-ink">
@@ -988,19 +982,21 @@ function EventDutiesPage() {
                     </button>
                   </div>
                 )}
-                {activeFilters > 0 && (
+                {/* With the panel folded, a line of chips says what is filtered. */}
+                {activeFilters > 0 && !filterOpen && (
                   <div className="flex flex-wrap items-center gap-2 text-sm" aria-live="polite">
                     <span className="text-ink-muted">Showing</span>
-                    {taskFilter.person && (
+                    {taskFilter.people.map((name) => (
                       <button
+                        key={name}
                         type="button"
-                        onClick={() => setTaskFilter({ ...taskFilter, person: '' })}
+                        onClick={() => setTaskFilter({ ...taskFilter, people: taskFilter.people.filter((n) => n !== name) })}
                         className="inline-flex min-h-9 items-center gap-1.5 rounded-full bg-mine px-3 font-semibold text-mine-ink"
-                        aria-label={`Remove filter: ${taskFilter.person}`}
+                        aria-label={`Remove filter: ${name}`}
                       >
-                        {taskFilter.person} <span aria-hidden>×</span>
+                        {name} <span aria-hidden>×</span>
                       </button>
-                    )}
+                    ))}
                     {taskFilter.status && (
                       <button
                         type="button"
@@ -1011,8 +1007,10 @@ function EventDutiesPage() {
                         {STATUS_FILTERS.find(([v]) => v === taskFilter.status)?.[1]} <span aria-hidden>×</span>
                       </button>
                     )}
-                    {taskFilter.person && taskFilter.status === 'unassigned' && (
-                      <span className="text-ink-muted">on what {taskFilter.person} is on or in charge of</span>
+                    {taskFilter.people.length > 0 && taskFilter.status === 'unassigned' && (
+                      <span className="text-ink-muted">
+                        on what {taskFilter.people.length === 1 ? `${taskFilter.people[0]} is` : 'they are'} on or in charge of
+                      </span>
                     )}
                   </div>
                 )}

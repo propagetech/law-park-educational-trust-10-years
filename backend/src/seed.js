@@ -524,3 +524,54 @@ export const SEED_DUTY_TASKS = {
     'Collect from the team\'s phones',
   ],
 }
+
+// Tasks added after the first release. Each batch is copied in once, into
+// new and existing databases alike, under its own key; its ids start with
+// its prefix, so batch tasks sort after the starting ones and before any the
+// team adds. Add a new batch (new key, next prefix) rather than editing one
+// that has already gone live.
+export const SEED_TASK_BATCHES = [
+  {
+    key: 'tasks_2026_09_28_cg_table_donations',
+    prefix: '0e',
+    tasks: {
+      'cg-table': [
+        'Name plate: Divya Prabhu G R J, IAS',
+        'Name plate: Bheemashankar S Guled, IPS',
+        'Name plate: the sitting judge (once confirmed)',
+        'Name plates: Charulatha M. R. and S. M. Manjunatha',
+        'Check the spelling and designation on every name plate',
+        'Tablecloth and skirting in the trust\'s colours',
+        'One low flower arrangement that does not block faces or mics',
+        'A glass, coaster and a jug of water for each seat',
+        'Printed programme with speaking times at each seat',
+        'Notepad and pen at each seat',
+        'Tissues on the table',
+        'One-page note about the trust for each chief guest',
+        'A copy of the 10-year magazine for each chief guest',
+        'Table mic, if guests will not speak from the podium',
+        'Keep mementos, shawls and bouquets on the side table, not here',
+        'Table set by 9:30 AM on 4 October',
+        'Refill water and clear the table during the programme',
+      ],
+      'donation-setup': [
+        'Standee: "Support the next 10 years", with what a donation does (use the trust\'s real figures)',
+        'Display the trust\'s registration, PAN and 12A/80G numbers',
+        'Card with bank transfer details, and cheque instructions ("Payable to Law Park Educational Trust")',
+        'Envelopes for cheques',
+        'Donor register: name, phone, email, amount, mode, PAN (for the 80G certificate), kept in a closed folder',
+        'Pledge cards for giving later or every year',
+        'Calculator, pen stand and small change',
+        'Magazine copies or brochures to hand out',
+        'QR code to the trust\'s website',
+        '"Thank you" sign',
+      ],
+      'donation-counter': [
+        'Keep the trust\'s phone at the counter with UPI alerts on',
+        'Confirm each payment on the phone before writing the receipt',
+        'Note the PAN of donors who want an 80G certificate',
+        'Closing tally sheet signed by two people',
+      ],
+    },
+  },
+]

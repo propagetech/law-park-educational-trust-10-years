@@ -12,7 +12,7 @@
  */
 import { randomBytes } from 'node:crypto'
 import { dynamoStore } from '../lib/store.js'
-import { SEED_ACTIVITIES, SEED_DUTY_TASKS } from '../seed.js'
+import { SEED_ACTIVITIES, SEED_DUTY_TASKS, SEED_TASK_BATCHES } from '../seed.js'
 
 const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS || '')
   .split(',')
@@ -150,6 +150,17 @@ async function seedAll() {
     }
     return items
   })
+  // Later additions reach databases that already have the starting data.
+  for (const batch of SEED_TASK_BATCHES) {
+    await seedOnce(batch.key, (at) => {
+      const items = []
+      let n = 0
+      for (const [parentId, tasks] of Object.entries(batch.tasks)) {
+        for (const text of tasks) items.push(seedTodo(`${batch.prefix}${String(n++).padStart(4, '0')}`, parentId, text, at))
+      }
+      return items
+    })
+  }
 }
 
 /* ---------------------------------------------------------------- read */

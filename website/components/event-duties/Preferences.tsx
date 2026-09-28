@@ -120,27 +120,35 @@ function MoonIcon() {
 export const toolbarButtonClass =
   'relative inline-flex h-11 w-11 items-center justify-center rounded-full bg-white/10 text-white hover:bg-white/20 disabled:opacity-40 focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300'
 
-export function PreferenceButtons({ prefs }: { prefs: Preferences }) {
+// The slim bar that slides in on scroll uses 40px buttons.
+export const compactToolbarButtonClass = toolbarButtonClass.replace('h-11 w-11', 'h-10 w-10')
+
+export function PreferenceButtons({ prefs, compact = false }: { prefs: Preferences; compact?: boolean }) {
   const atMin = prefs.textStep === 0
   const atMax = prefs.textStep === TEXT_STEPS.length - 1
+  const buttonClass = compact ? compactToolbarButtonClass : toolbarButtonClass
+  // Tour targets and the text-size announcement live on the full header only.
+  const tour = (name: string) => (compact ? {} : { 'data-tour': name })
   return (
     <>
-      <div role="group" aria-label="Text size" className="flex gap-1" data-tour="text-size">
-        <button type="button" onClick={prefs.smaller} disabled={atMin} className={toolbarButtonClass} aria-label="Smaller text" title="Smaller text">
+      <div role="group" aria-label="Text size" className="flex gap-1" {...tour('text-size')}>
+        <button type="button" onClick={prefs.smaller} disabled={atMin} className={buttonClass} aria-label="Smaller text" title="Smaller text">
           <span aria-hidden className="text-sm font-bold">A−</span>
         </button>
-        <button type="button" onClick={prefs.larger} disabled={atMax} className={toolbarButtonClass} aria-label="Larger text" title="Larger text">
+        <button type="button" onClick={prefs.larger} disabled={atMax} className={buttonClass} aria-label="Larger text" title="Larger text">
           <span aria-hidden className="text-lg font-bold">A+</span>
         </button>
       </div>
-      <span className="sr-only" role="status" aria-live="polite">
-        Text size {TEXT_STEPS[prefs.textStep]}%
-      </span>
+      {!compact && (
+        <span className="sr-only" role="status" aria-live="polite">
+          Text size {TEXT_STEPS[prefs.textStep]}%
+        </span>
+      )}
       <button
         type="button"
         onClick={prefs.toggleTheme}
-        data-tour="theme"
-        className={toolbarButtonClass}
+        {...tour('theme')}
+        className={buttonClass}
         aria-label={prefs.theme === 'dark' ? 'Switch to light theme' : 'Switch to dark theme'}
         title={prefs.theme === 'dark' ? 'Light theme' : 'Dark theme'}
       >

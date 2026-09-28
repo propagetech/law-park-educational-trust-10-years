@@ -1,7 +1,7 @@
 'use client'
 
 import Image from 'next/image'
-import { useCallback, useEffect, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DUTY_SECTIONS, EVENT_FACTS, PILLAR_GROUPS, type Duty } from '@/data/eventDuties'
 import {
   DUTIES_API as API,
@@ -26,7 +26,8 @@ import {
 import { Schedule, formatShortDate, formatTime, sortActivities } from '@/components/event-duties/Schedule'
 import { SignIn } from '@/components/event-duties/SignIn'
 import { PeoplePicker, type PersonOption } from '@/components/event-duties/PeoplePicker'
-import { PreferenceButtons, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
+import { PreferenceButtons, compactToolbarButtonClass, toolbarButtonClass, usePreferences } from '@/components/event-duties/Preferences'
+import { AppBar, useRevealOnScrollUp } from '@/components/event-duties/AppBar'
 import { MyTasks, type TaskParent } from '@/components/event-duties/MyTasks'
 import {
   STATUS,
@@ -412,6 +413,8 @@ function EventDutiesPage() {
   const [touring, setTouring] = useState(false)
   const [tourHandled, setTourHandled] = useState(false)
   const prefs = usePreferences()
+  const headerRef = useRef<HTMLElement>(null)
+  const barShown = useRevealOnScrollUp(headerRef)
 
   useEffect(() => {
     // localStorage only exists in the browser, after the static page loads.
@@ -710,6 +713,20 @@ function EventDutiesPage() {
         ))}
       </datalist>
 
+      <AppBar shown={barShown} icon={LOGO_ICON} title={tabs.find(([key]) => key === view)?.[1] ?? 'Event day duties'}>
+        <PreferenceButtons prefs={prefs} compact />
+        <button
+          type="button"
+          onClick={() => void reloadLatest()}
+          className={compactToolbarButtonClass}
+          aria-label="Reload the latest version"
+          title="Reload the latest version"
+        >
+          <RefreshIcon className="h-5 w-5" />
+          {updateReady && <span className="absolute right-1 top-1 h-2.5 w-2.5 rounded-full bg-gold-400 ring-2 ring-primary-700" aria-hidden />}
+        </button>
+      </AppBar>
+
       {updateReady && (
         <div className="bg-mine text-mine-ink print:hidden" role="status">
           <div className="container-custom flex flex-wrap items-center justify-between gap-3 py-3">
@@ -726,7 +743,7 @@ function EventDutiesPage() {
       )}
 
       {/* Header */}
-      <header className="bg-primary-700 text-white print:bg-white print:text-black">
+      <header ref={headerRef} className="bg-primary-700 text-white print:bg-white print:text-black">
         <div className="container-custom pb-8 pt-4 md:pb-14">
           <div className="flex flex-wrap justify-end gap-2 print:hidden">
             <PreferenceButtons prefs={prefs} />
@@ -834,7 +851,12 @@ function EventDutiesPage() {
       </header>
 
       {/* Progress + controls */}
-      <div className="z-30 border-b md:sticky md:top-0 border-line bg-surface/95 backdrop-blur print:static print:border-0">
+      {/* Computers: sticky, and moved down under the slim bar while it shows. */}
+      <div
+        className={`z-30 border-b border-line bg-surface/95 backdrop-blur transition-[top] duration-200 ease-out motion-reduce:transition-none md:sticky print:static print:border-0 ${
+          barShown ? 'md:top-14' : 'md:top-0'
+        }`}
+      >
         <div className="container-custom py-3">
           <div className="mb-3 hidden gap-1 border-b border-line md:flex print:hidden" role="group" aria-label="View">
             {tabs.map(([key, label, count, countLabel]) => (

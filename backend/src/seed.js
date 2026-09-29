@@ -155,12 +155,15 @@ export const SEED_ACTIVITIES = [
   },
   {
     id: 'e-seed-honour', date: '2026-10-04', time: '10:19', title: 'Welcoming and honouring the chief guests',
-    description: 'Shawl, bouquet or memento, by the trustees. Emcee reads a short introduction of each guest.',
+    description: 'Honour the chief guests in this order: 1. the sitting judge, 2. Divya Prabhu G R J, IAS, 3. Bheemashankar S Guled, IPS. Shawl, bouquet or memento, by the trustees. The emcee reads a short introduction of each guest, in the same order.',
     todos: [
-      'Shawls, bouquets and mementos in calling order on a side table',
+      'Shawls, bouquets and mementos on the side table in honouring order: judge, IAS, IPS',
       'One volunteer hands each item to the trustees',
       'Introductions printed for the emcee',
       'Check the spelling of every guest name on the mementos',
+      'Emcee script: introduce and honour the judge first, then the IAS officer, then the IPS officer',
+      'Tell the trustees and the volunteer the honouring order before 10 AM',
+      'If the judge is not confirmed, honour the IAS officer first, then the IPS officer',
     ],
   },
   {

@@ -26,10 +26,11 @@ export const EVENT_FACTS = {
   setupDay: 'Saturday 3 October 2026',
   eventDay: 'Sunday 4 October 2026',
   coreTeam: 'Core team assembles at the venue between 8 and 9 AM on 4 October',
+  // In protocol order, which is also the honouring order: judge, IAS, IPS.
   chiefGuests: [
+    'Sitting Judge (to be confirmed)',
     'Divya Prabhu G R J, IAS (2014 batch, Karnataka cadre)',
     'Bheemashankar S Guled, IPS (2012 batch, Karnataka cadre), DIG, CID Economic Offences, Bengaluru',
-    'Sitting Judge (to be confirmed)',
   ],
 }
 
@@ -159,9 +160,9 @@ export const DUTY_SECTIONS: DutySection[] = [
     when: 'Sunday 4 October, from arrival to send-off',
     sortKey: '2026-10-04 09:30',
     duties: [
+      { id: 'escort-judge', title: 'Escort for the sitting judge', detail: 'Name to be confirmed. Same duties as the other escorts.', need: 1 },
       { id: 'escort-divya', title: 'Escort for Divya Prabhu G R J, IAS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
       { id: 'escort-guled', title: 'Escort for Bheemashankar S Guled, IPS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
-      { id: 'escort-judge', title: 'Escort for the sitting judge', detail: 'Name to be confirmed. Same duties as the other escorts.', need: 1 },
       { id: 'cg-table', title: 'Chief guest table on stage', detail: 'Name plates, water, a programme sheet and notepad at each seat. Set by 9:30 AM and kept tidy through the programme.', need: 1 },
       { id: 'guard-of-honour', title: 'Guard of honour with the NCC cadets', detail: 'Places the 30 cadets at the entrance and gives the cue as each guest arrives.', need: 1 },
       { id: 'guest-lounge', title: 'Guest lounge', detail: 'A quiet room with water, tea and a washroom for the chief guests before and after the stage.', need: 1 },

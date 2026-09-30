@@ -27,8 +27,9 @@ export const EVENT_FACTS = {
   eventDay: 'Sunday 4 October 2026',
   coreTeam: 'Core team assembles at the venue between 8 and 9 AM on 4 October',
   // In protocol order, which is also the honouring order: judge, IAS, IPS.
+  // Justice Hethur Puttaswamygowda Sandesh, confirmed 30 Sep 2026.
   chiefGuests: [
-    'Sitting Judge (to be confirmed)',
+    'Justice H. P. Sandesh, Judge, High Court of Karnataka',
     'Divya Prabhu G R J, IAS (2014 batch, Karnataka cadre)',
     'Bheemashankar S Guled, IPS (2012 batch, Karnataka cadre), DIG, CID Economic Offences, Bengaluru',
   ],
@@ -64,7 +65,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     duties: [
       { id: 'event-lead', title: 'Overall event lead', detail: 'Has the final say on the day. Every problem that a duty owner cannot solve comes here.', need: 1 },
       { id: 'deputy-lead', title: 'Deputy event lead', detail: 'Runs the floor whenever the lead is on stage or with the chief guests.', need: 1 },
-      { id: 'judge-confirm', title: 'Confirm the sitting judge', detail: 'Get a yes, the exact name and designation, and arrival time. Then update the flex, emcee script and mementos.', need: 1 },
+      { id: 'judge-confirm', title: "Justice H. P. Sandesh's visit", detail: 'Confirmed: Judge, High Court of Karnataka. Get the name and designation in writing, the arrival time and car number, then update the flex, emcee script and memento.', need: 1 },
       { id: 'guest-brief', title: 'Send the chief guests a one-page note', detail: 'Founding year, districts, student count, the award and the website link, a few days ahead. Tell each guest they have about 15 to 20 minutes.', need: 1 },
       { id: 'venue-booking', title: 'Venue confirmation with RV Teachers College', detail: 'Hall access from 3 PM on 3 October, power backup, AC, parking for buses and guest cars, clean toilets, the venue contact person, payment done.', need: 1 },
       { id: 'invites-rsvp', title: 'Invitations and RSVP calls', detail: 'Donors, partners, headmasters, parents. Get a final number by 30 September so food and seating can be fixed.', need: 2 },
@@ -160,7 +161,7 @@ export const DUTY_SECTIONS: DutySection[] = [
     when: 'Sunday 4 October, from arrival to send-off',
     sortKey: '2026-10-04 09:30',
     duties: [
-      { id: 'escort-judge', title: 'Escort for the sitting judge', detail: 'Name to be confirmed. Same duties as the other escorts.', need: 1 },
+      { id: 'escort-judge', title: 'Escort for Justice H. P. Sandesh', detail: 'Judge, High Court of Karnataka. Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
       { id: 'escort-divya', title: 'Escort for Divya Prabhu G R J, IAS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
       { id: 'escort-guled', title: 'Escort for Bheemashankar S Guled, IPS', detail: 'Meets the car, walks through the guard of honour, seats, cues to stage, lunch, and sees off.', need: 1 },
       { id: 'cg-table', title: 'Chief guest table on stage', detail: 'Name plates, water, a programme sheet and notepad at each seat. Set by 9:30 AM and kept tidy through the programme.', need: 1 },

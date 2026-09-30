@@ -151,6 +151,7 @@ it changes on every duty and activity they are on.
 |-------|------|
 | Page | `website/app/event-duties/page.tsx`, `website/components/pages/EventDutiesPage.tsx` |
 | Duty list and pillar groups | `website/data/eventDuties.ts` |
+| Speeches, with blanks filled (`/event-duties/speeches/…`) | `website/data/speeches.ts`, `website/components/event-duties/SpeechView.tsx` |
 | Chief guest profiles (`/event-duties/guests/…`) | `website/data/chiefGuests.ts`, `website/components/event-duties/GuestProfile.tsx` |
 | Sign-in screen | `website/components/event-duties/SignIn.tsx` |
 | Schedule tab | `website/components/event-duties/Schedule.tsx` |

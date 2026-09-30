@@ -1,6 +1,8 @@
 'use client'
 
+import Link from 'next/link'
 import { useState } from 'react'
+import { SPEECH_FOR_ACTIVITY } from '@/data/speeches'
 import {
   PeopleEditor,
   inputClass,
@@ -196,6 +198,14 @@ function EventCard({ event, owners, todos, commentsByTodo, members, phones, me, 
             </div>
           </div>
           {event.description && <p className="mt-1 whitespace-pre-line text-sm leading-relaxed text-ink-soft">{event.description}</p>}
+          {SPEECH_FOR_ACTIVITY[event.id] && (
+            <Link
+              href={`/event-duties/speeches/${SPEECH_FOR_ACTIVITY[event.id]}`}
+              className="mt-3 inline-flex min-h-11 items-center gap-2 rounded-lg bg-accent-soft px-4 text-sm font-semibold text-heading ring-1 ring-focus hover:bg-muted focus:outline-none focus-visible:ring-2 focus-visible:ring-focus print:hidden"
+            >
+              Read the script
+            </Link>
+          )}
 
           <h4 className="mt-5 text-sm font-semibold text-ink">In charge</h4>
           <PeopleEditor

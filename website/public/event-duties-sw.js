@@ -36,14 +36,16 @@ self.addEventListener('activate', (event) => {
   )
 })
 
+// Each response is cached under its own address. fallbackUrl is only what to
+// show offline when that address was never cached (for pages: the app).
 async function networkFirst(request, fallbackUrl) {
   const cache = await caches.open(CACHE)
   try {
     const response = await fetch(request, { cache: 'no-store' })
-    if (response.ok) cache.put(fallbackUrl || request, response.clone())
+    if (response.ok) cache.put(request, response.clone())
     return response
   } catch (err) {
-    const cached = await cache.match(fallbackUrl || request)
+    const cached = (await cache.match(request)) || (fallbackUrl && (await cache.match(fallbackUrl)))
     if (cached) return cached
     throw err
   }

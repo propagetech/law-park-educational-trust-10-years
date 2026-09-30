@@ -155,7 +155,7 @@ export const SEED_ACTIVITIES = [
   },
   {
     id: 'e-seed-honour', date: '2026-10-04', time: '10:19', title: 'Welcoming and honouring the chief guests',
-    description: 'Honour the chief guests in this order: 1. Justice H. P. Sandesh, Judge, High Court of Karnataka, 2. Divya Prabhu G R J, IAS, 3. Bheemashankar S Guled, IPS. Shawl, bouquet or memento, by the trustees. The emcee reads a short introduction of each guest, in the same order.',
+    description: 'Honour the chief guests in this order: 1. Justice H. P. Sandesh, Judge, High Court of Karnataka, 2. Divya Prabhu G R J, IAS, 3. Dr. Bheemashankar S. Guled, IPS. Shawl, bouquet or memento, by the trustees. The emcee reads a short introduction of each guest, in the same order.',
     todos: [
       'Shawls, bouquets and mementos on the side table in honouring order: Justice Sandesh, then IAS, then IPS',
       'One volunteer hands each item to the trustees',
@@ -291,7 +291,7 @@ export const SEED_DUTY_TASKS = {
     'Write the one-page note about the trust',
     'A trustee checks the note',
     'Send it to Divya Prabhu G R J, IAS',
-    'Send it to Bheemashankar S Guled, IPS',
+    'Send it to Dr. Bheemashankar S. Guled, IPS',
     'Send it to Justice H. P. Sandesh',
     'Tell each guest they have 15 to 20 minutes to speak',
   ],
@@ -540,7 +540,7 @@ export const SEED_TASK_BATCHES = [
     tasks: {
       'cg-table': [
         'Name plate: Divya Prabhu G R J, IAS',
-        'Name plate: Bheemashankar S Guled, IPS',
+        'Name plate: Dr. Bheemashankar S. Guled, IPS',
         'Name plate: Justice H. P. Sandesh, Judge, High Court of Karnataka',
         'Name plates: Charulatha M. R. and S. M. Manjunatha',
         'Check the spelling and designation on every name plate',

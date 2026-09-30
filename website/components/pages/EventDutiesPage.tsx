@@ -1,8 +1,10 @@
 'use client'
 
 import Image from 'next/image'
+import Link from 'next/link'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { DUTY_SECTIONS, EVENT_FACTS, PILLAR_GROUPS, type Duty } from '@/data/eventDuties'
+import { CHIEF_GUESTS } from '@/data/chiefGuests'
 import {
   DUTIES_API as API,
   NOT_CONNECTED,
@@ -805,12 +807,17 @@ function EventDutiesPage() {
                 </div>
                 <div>
                   <dt className="text-primary-200 print:text-black">Chief guests</dt>
-                  {EVENT_FACTS.chiefGuests.map((g) => (
-                    <dd key={g} className="mt-1 text-primary-50 print:text-black">
-                      {g.split(',')[0]}
-                      {g.includes('IAS') ? ', IAS' : g.includes('IPS') ? ', IPS' : ''}
+                  {CHIEF_GUESTS.map((g) => (
+                    <dd key={g.slug} className="text-primary-50 print:text-black">
+                      <Link
+                        href={`/event-duties/guests/${g.slug}`}
+                        className="inline-flex min-h-9 items-center underline decoration-primary-200/60 decoration-dotted underline-offset-4 hover:decoration-solid focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 print:no-underline"
+                      >
+                        {g.short}
+                      </Link>
                     </dd>
                   ))}
+                  <dd className="mt-1 text-xs text-primary-200 print:hidden">Tap a name to read about them</dd>
                 </div>
               </dl>
             </div>
@@ -838,12 +845,17 @@ function EventDutiesPage() {
               </div>
               <div>
                 <dt className="text-primary-200 print:text-black">Chief guests</dt>
-                {EVENT_FACTS.chiefGuests.map((g) => (
-                  <dd key={g} className="mt-1 text-primary-50 print:text-black">
-                    {g.split(',')[0]}
-                    {g.includes('IAS') ? ', IAS' : g.includes('IPS') ? ', IPS' : ''}
+                {CHIEF_GUESTS.map((g) => (
+                  <dd key={g.slug} className="text-primary-50 print:text-black">
+                    <Link
+                      href={`/event-duties/guests/${g.slug}`}
+                      className="inline-flex min-h-9 items-center underline decoration-primary-200/60 decoration-dotted underline-offset-4 hover:decoration-solid focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-300 print:no-underline"
+                    >
+                      {g.short}
+                    </Link>
                   </dd>
                 ))}
+                <dd className="mt-1 text-xs text-primary-200 print:hidden">Tap a name to read about them</dd>
               </div>
             </dl>
           </div>
